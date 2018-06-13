@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "227163655886",
+    "firebase_url": "https://clubmanagement-98743.firebaseio.com",
+    "project_id": "clubmanagement-98743",
+    "storage_bucket": "clubmanagement-98743.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227163655886:android:6152b671e9399a28",
+        "android_client_info": {
+          "package_name": "ClubManagement.ClubManagement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "227163655886-ggsa44atv2cpfmmahv9c52mufb5o1q5t.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "227163655886-ggsa44atv2cpfmmahv9c52mufb5o1q5t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBukfMUIVL9TbkF60azC75gD9ZcqwVtQUM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
