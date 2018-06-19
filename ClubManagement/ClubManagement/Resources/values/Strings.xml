@@ -2,9 +2,19 @@
 <resources>
   <string name="app_name">ClubManagement</string>
   <string name="email_hint">Your email</string>
+  <string name="name_hint">Your name</string>
   <string name="password_hint">Your password</string>
   <string name="button_sign_in">Sign in</string>
   <string name="button_sign_up">Sign up</string>
   <string name="text_view_had_account">Have already an account?</string>
+  <string name="text_view_no_account">Don\'t have an account?</string>
   <string name="textview_welcome">Welcome back</string>
+  <string name="textview_create_account">Create new account</string>
+  <string name="textview_verify">Almost there</string>
+  <string name="textview_verify_note">You should have received a verify code in your inbox. Enter it to the textbox bellow to continue.</string>
+  <string name="verify_code_hint">Your verify code</string>
+  <string name="new_password_hint">New password</string>
+  <string name="confirm_password_hint">Re-enter new password</string>
+  <string name="button_save">Save</string>
+  <string name="textview_resend_code">Resend the code?</string>
 </resources>

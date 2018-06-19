@@ -177,6 +177,9 @@ namespace ClubManagement
 			// aapt resource value: 0x7f06000a
 			public const int edit_text_padding_top_bottom = 2131099658;
 			
+			// aapt resource value: 0x7f06000e
+			public const int text_title_size = 2131099662;
+			
 			// aapt resource value: 0x7f06000d
 			public const int text_welcome_size = 2131099661;
 			
@@ -250,7 +253,13 @@ namespace ClubManagement
 			public const int activity_login = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int Main = 2130903041;
+			public const int activity_register = 2130903041;
+			
+			// aapt resource value: 0x7f030002
+			public const int activity_verify_code = 2130903042;
+			
+			// aapt resource value: 0x7f030003
+			public const int Main = 2130903043;
 			
 			static Layout()
 			{
@@ -268,23 +277,53 @@ namespace ClubManagement
 			// aapt resource value: 0x7f070000
 			public const int app_name = 2131165184;
 			
-			// aapt resource value: 0x7f070003
-			public const int button_sign_in = 2131165187;
+			// aapt resource value: 0x7f07000f
+			public const int button_save = 2131165199;
 			
 			// aapt resource value: 0x7f070004
-			public const int button_sign_up = 2131165188;
+			public const int button_sign_in = 2131165188;
+			
+			// aapt resource value: 0x7f070005
+			public const int button_sign_up = 2131165189;
+			
+			// aapt resource value: 0x7f07000e
+			public const int confirm_password_hint = 2131165198;
 			
 			// aapt resource value: 0x7f070001
 			public const int email_hint = 2131165185;
 			
 			// aapt resource value: 0x7f070002
-			public const int password_hint = 2131165186;
+			public const int name_hint = 2131165186;
 			
-			// aapt resource value: 0x7f070005
-			public const int text_view_had_account = 2131165189;
+			// aapt resource value: 0x7f07000d
+			public const int new_password_hint = 2131165197;
+			
+			// aapt resource value: 0x7f070003
+			public const int password_hint = 2131165187;
 			
 			// aapt resource value: 0x7f070006
-			public const int textview_welcome = 2131165190;
+			public const int text_view_had_account = 2131165190;
+			
+			// aapt resource value: 0x7f070007
+			public const int text_view_no_account = 2131165191;
+			
+			// aapt resource value: 0x7f070009
+			public const int textview_create_account = 2131165193;
+			
+			// aapt resource value: 0x7f070010
+			public const int textview_resend_code = 2131165200;
+			
+			// aapt resource value: 0x7f07000a
+			public const int textview_verify = 2131165194;
+			
+			// aapt resource value: 0x7f07000b
+			public const int textview_verify_note = 2131165195;
+			
+			// aapt resource value: 0x7f070008
+			public const int textview_welcome = 2131165192;
+			
+			// aapt resource value: 0x7f07000c
+			public const int verify_code_hint = 2131165196;
 			
 			static String()
 			{
