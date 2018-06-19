@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">ClubManagement</string>
+  <string name="email_hint">Your email</string>
+  <string name="password_hint">Your password</string>
+  <string name="button_sign_in">Sign in</string>
+  <string name="button_sign_up">Sign up</string>
+  <string name="text_view_had_account">Have already an account?</string>
+  <string name="textview_welcome">Welcome back</string>
 </resources>

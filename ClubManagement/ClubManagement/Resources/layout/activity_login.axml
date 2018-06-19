@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cardView1"
+        android:layout_margin="@dimen/cardview_margin"
+        android:layout_centerInParent="true"
+        app:cardCornerRadius="@dimen/cardview_conner_radius">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/cardview_padding_left_right"
+            android:paddingRight="@dimen/cardview_padding_left_right"
+            android:paddingBottom="@dimen/carview_padding_top_bottom"
+            android:paddingTop="@dimen/carview_padding_top_bottom"
+            android:background="@color/cardview_background_color"
+            android:id="@+id/linearLayout1">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/edit_text_margin_bottom"
+                android:paddingBottom="@dimen/edit_text_padding_top_bottom"
+                android:paddingTop="@dimen/edit_text_padding_top_bottom"
+                android:paddingRight="@dimen/edit_text_padding_left_right"
+                android:paddingLeft="@dimen/edit_text_padding_left_right"
+                android:background="@drawable/edittext_states"
+                android:hint="@string/email_hint"
+                android:textColorHint="@color/text_hint_color"
+                android:textColor="@color/text_color_black" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/edit_text_margin_bottom"
+                android:paddingBottom="@dimen/edit_text_padding_top_bottom"
+                android:paddingTop="@dimen/edit_text_padding_top_bottom"
+                android:paddingRight="@dimen/edit_text_padding_left_right"
+                android:paddingLeft="@dimen/edit_text_padding_left_right"
+                android:background="@drawable/edittext_states"
+                android:hint="@string/password_hint"
+                android:textColor="@color/text_color_black"
+                android:textColorHint="@color/text_hint_color"
+                android:inputType="textPassword" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/button_margin_bottom"
+                android:background="@drawable/button_background"
+                android:text="@string/button_sign_in"
+                android:textColor="@color/text_color_white" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/edit_text_margin_bottom"
+                android:text="@string/text_view_had_account"
+                android:gravity="center"
+                android:textColor="@color/text_color_green"
+                android:textStyle="bold" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_background"
+                android:text="@string/button_sign_up"
+                android:textColor="@color/text_color_white" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/cardView1"
+        android:text="@string/textview_welcome"
+        android:textColor="@color/text_color_black"
+        android:textSize="@dimen/text_welcome_size"
+        android:gravity="center" />
+</RelativeLayout>
