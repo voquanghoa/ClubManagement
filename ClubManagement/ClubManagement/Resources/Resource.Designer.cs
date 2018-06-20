@@ -217,6 +217,9 @@ namespace ClubManagement
 			// aapt resource value: 0x7f020005
 			public const int edittext_states = 2130837509;
 			
+			// aapt resource value: 0x7f020006
+			public const int image_verify_ok = 2130837510;
+			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -259,7 +262,10 @@ namespace ClubManagement
 			public const int activity_verify_code = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int Main = 2130903043;
+			public const int activity_verify_ok = 2130903043;
+			
+			// aapt resource value: 0x7f030004
+			public const int Main = 2130903044;
 			
 			static Layout()
 			{
@@ -276,6 +282,9 @@ namespace ClubManagement
 			
 			// aapt resource value: 0x7f070000
 			public const int app_name = 2131165184;
+			
+			// aapt resource value: 0x7f070012
+			public const int button_ok = 2131165202;
 			
 			// aapt resource value: 0x7f07000f
 			public const int button_save = 2131165199;
@@ -318,6 +327,9 @@ namespace ClubManagement
 			
 			// aapt resource value: 0x7f07000b
 			public const int textview_verify_note = 2131165195;
+			
+			// aapt resource value: 0x7f070011
+			public const int textview_verify_ok_note = 2131165201;
 			
 			// aapt resource value: 0x7f070008
 			public const int textview_welcome = 2131165192;

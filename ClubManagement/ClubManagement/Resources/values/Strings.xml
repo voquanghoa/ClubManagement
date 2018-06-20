@@ -17,4 +17,6 @@
   <string name="confirm_password_hint">Re-enter new password</string>
   <string name="button_save">Save</string>
   <string name="textview_resend_code">Resend the code?</string>
+  <string name="textview_verify_ok_note">Done. Your account has been created successfully.You now can use all features of the app.</string>
+  <string name="button_ok">Ok</string>
 </resources>
