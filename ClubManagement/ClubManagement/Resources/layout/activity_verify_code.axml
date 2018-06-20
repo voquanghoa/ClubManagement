@@ -51,7 +51,8 @@
                 android:background="@drawable/edittext_states"
                 android:hint="@string/new_password_hint"
                 android:textColor="@color/text_color_black"
-                android:textColorHint="@color/text_hint_color" />
+                android:textColorHint="@color/text_hint_color"
+                android:inputType="textPassword" />
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -63,7 +64,8 @@
                 android:background="@drawable/edittext_states"
                 android:hint="@string/confirm_password_hint"
                 android:textColor="@color/text_color_black"
-                android:textColorHint="@color/text_hint_color" />
+                android:textColorHint="@color/text_hint_color"
+                android:inputType="textPassword" />
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
