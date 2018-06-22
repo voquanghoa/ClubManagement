@@ -1,6 +1,8 @@
 ﻿using Android.App;
 using Android.Widget;
 using Android.OS;
+using ClubManagement.Models;
+using System.Threading.Tasks;
 
 namespace ClubManagement
 {
