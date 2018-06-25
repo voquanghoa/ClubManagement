@@ -13,15 +13,26 @@ namespace ClubManagement.Activities
         [InjectView(Resource.Id.bottom_navigation_tabbar)]
         private BottomNavigationView bottomNavigationView;
 
-		private readonly Dictionary<int, Fragment> fragmentMapIds = new Dictionary<int, Fragment>()
+		private readonly Dictionary<int, Fragment> fragmentMapIds = new Dictionary<int, Fragment>
         {
-            {Resource.Id.dashboardTab, new DashboardFragment()},
-            {Resource.Id.eventTab, new EventFragment()},
-            {Resource.Id.moneyTab, new MoneyFragment()},
-            {Resource.Id.balanceTab, new BalanceFragment()},
+            {
+                Resource.Id.dashboardTab,
+                new DashboardFragment()
+            },
+            {
+                Resource.Id.eventTab,
+                new EventFragment()
+            },
+            {
+                Resource.Id.moneyTab,
+                new MoneyFragment()
+            },
+            {
+                Resource.Id.balanceTab,
+                new BalanceFragment()
+            },
 
         };
-
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -31,7 +42,6 @@ namespace ClubManagement.Activities
             BottomNavigationHelper.RemoveShiftMode(bottomNavigationView);
             bottomNavigationView.ItemIconTintList = null;
             bottomNavigationView.NavigationItemSelected += BottomNavigation_NavigationItemSelected;
-
 			DisplayFragment(Resource.Id.dashboardTab);
         }
         
@@ -39,7 +49,6 @@ namespace ClubManagement.Activities
         private void DisplayFragment(int fragmentMenuId)
         {
 			var fragment = fragmentMapIds[fragmentMenuId];
-
             FragmentManager.BeginTransaction()
                 .Replace(Resource.Id.content_frame, fragment)
                 .Commit();
