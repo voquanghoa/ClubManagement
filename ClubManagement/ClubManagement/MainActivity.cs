@@ -12,7 +12,7 @@ namespace ClubManagement
             base.OnCreate(savedInstanceState);
 
             // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.activity_verify_code);
+            SetContentView(Resource.Layout.activity_register);
         }
     }
 }
