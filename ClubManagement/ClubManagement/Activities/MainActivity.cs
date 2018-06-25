@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using System.Collections.Generic;
+using Android.App;
 using Android.OS;
 using Android.Support.Design.Widget;
 using ClubManagement.Fragments;
@@ -12,13 +13,15 @@ namespace ClubManagement.Activities
         [InjectView(Resource.Id.bottom_navigation_tabbar)]
         private BottomNavigationView bottomNavigationView;
 
-        private readonly DashboardFragment dashboardFragment = new DashboardFragment();
+		private readonly Dictionary<int, Fragment> fragmentMapIds = new Dictionary<int, Fragment>()
+        {
+            {Resource.Id.dashboardTab, new DashboardFragment()},
+            {Resource.Id.eventTab, new EventFragment()},
+            {Resource.Id.moneyTab, new MoneyFragment()},
+            {Resource.Id.balanceTab, new BalanceFragment()},
 
-        private readonly EventFragment eventFragment = new EventFragment();
+        };
 
-        private readonly MoneyFragment moneyFragment = new MoneyFragment();
-
-        private readonly BalanceFragment balanceFragment = new BalanceFragment();
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -28,26 +31,14 @@ namespace ClubManagement.Activities
             BottomNavigationHelper.RemoveShiftMode(bottomNavigationView);
             bottomNavigationView.ItemIconTintList = null;
             bottomNavigationView.NavigationItemSelected += BottomNavigation_NavigationItemSelected;
+
             LoadFragment(Resource.Id.dashboardTab);
         }
 
+
         private void LoadFragment(int id)
         {
-            switch (id)
-            {
-                case Resource.Id.dashboardTab:
-                    DisplayFragment(dashboardFragment);
-                    break;
-                case Resource.Id.eventTab:
-                    DisplayFragment(eventFragment);
-                    break;
-                case Resource.Id.moneyTab:
-                    DisplayFragment(moneyFragment);
-                    break;
-                case Resource.Id.balanceTab:
-                    DisplayFragment(balanceFragment);
-                    break;
-            }
+			DisplayFragment(fragmentMapIds[id]);
         }
 
         private void DisplayFragment(Fragment fragment)
