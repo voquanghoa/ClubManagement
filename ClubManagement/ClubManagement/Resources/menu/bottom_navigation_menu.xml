@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+  <item
+    android:id="@+id/dashboardTab"
+    android:enabled="true"
+    android:title="Dashboard"
+    android:icon="@drawable/icon_tab_dashboard"
+    app:showAsAction="ifRoom"/>
+  <item
+    android:id="@+id/eventTab"
+    android:enabled="true"
+    android:title="Event"
+    android:icon="@drawable/icon_tab_event"
+    app:showAsAction="ifRoom"/>
+  <item
+    android:id="@+id/moneyTab"
+    android:enabled="true"
+    android:title="Money"
+    android:icon="@drawable/icon_tab_money"
+    app:showAsAction="ifRoom"/>
+  <item
+    android:id="@+id/balanceTab"
+    android:enabled="true"
+    android:title="Balance"
+    android:icon="@drawable/icon_tab_balance"
+    app:showAsAction="ifRoom"/>
+</menu>
