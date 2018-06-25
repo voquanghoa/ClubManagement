@@ -32,14 +32,9 @@ namespace ClubManagement.Activities
             bottomNavigationView.ItemIconTintList = null;
             bottomNavigationView.NavigationItemSelected += BottomNavigation_NavigationItemSelected;
 
-            LoadFragment(Resource.Id.dashboardTab);
+			DisplayFragment(fragmentMapIds[Resource.Id.dashboardTab]);
         }
-
-
-        private void LoadFragment(int id)
-        {
-			DisplayFragment(fragmentMapIds[id]);
-        }
+        
 
         private void DisplayFragment(Fragment fragment)
         {
@@ -51,7 +46,7 @@ namespace ClubManagement.Activities
         private void BottomNavigation_NavigationItemSelected(object sender,
             BottomNavigationView.NavigationItemSelectedEventArgs e)
         {
-            LoadFragment(e.Item.ItemId);
+			DisplayFragment(fragmentMapIds[e.Item.ItemId]);
         }
     }
 }
