@@ -119,6 +119,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\Money.cs" />
+    <Compile Include="Models\OutCome.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserEvent.cs" />
+    <Compile Include="Models\UserMoney.cs" />
     <Compile Include="Cheeseknife.cs" />
     <Compile Include="Fragments\BalanceFragment.cs" />
     <Compile Include="Fragments\DashboardFragment.cs" />
@@ -134,7 +140,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
@@ -146,6 +154,7 @@
     <AndroidResource Include="Resources\values\Strings.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Controllers\" />
     <Folder Include="Resources\mipmap-hdpi\" />
     <Folder Include="Resources\mipmap-mdpi\" />
     <Folder Include="Resources\mipmap-xhdpi\" />
