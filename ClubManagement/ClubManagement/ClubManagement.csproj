@@ -119,12 +119,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Event.cs" />
-    <Compile Include="Models\Money.cs" />
-    <Compile Include="Models\OutCome.cs" />
-    <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UserEvent.cs" />
-    <Compile Include="Models\UserMoney.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
+    <Compile Include="Controllers\FirebaseController.cs" />
+    <Compile Include="Controllers\MoneysController.cs" />
+    <Compile Include="Controllers\OutComesController.cs" />
+    <Compile Include="Controllers\UserEventsController.cs" />
+    <Compile Include="Controllers\UserMoneysController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Models\EventModel.cs" />
+    <Compile Include="Models\FirebaseModel.cs" />
+    <Compile Include="Models\MoneyModel.cs" />
+    <Compile Include="Models\OutComeModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\UserEventModel.cs" />
+    <Compile Include="Models\UserMoneyModel.cs" />
     <Compile Include="Cheeseknife.cs" />
     <Compile Include="Fragments\BalanceFragment.cs" />
     <Compile Include="Fragments\DashboardFragment.cs" />
@@ -154,7 +162,6 @@
     <AndroidResource Include="Resources\values\Strings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="Resources\mipmap-hdpi\" />
     <Folder Include="Resources\mipmap-mdpi\" />
     <Folder Include="Resources\mipmap-xhdpi\" />

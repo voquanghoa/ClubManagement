@@ -2,11 +2,8 @@
 
 namespace ClubManagement.Models
 {
-    public class User
+    public class UserModel : FirebaseModel
     {
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
         [JsonProperty("email")]
         public string Email { get; set; }
 
