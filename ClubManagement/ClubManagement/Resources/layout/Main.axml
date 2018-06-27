@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/content_frame"
+        android:layout_weight="1" />
+    <android.support.design.widget.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tabbar_height"
+        android:background="@color/tabbar_background_color"
+        android:id="@+id/bottom_navigation_tabbar"
+        app:itemTextColor="@drawable/nav_item_colors"
+        app:menu="@menu/bottom_navigation_menu"
+        app:elevation="@dimen/tabbar_elevation" />
 </LinearLayout>
