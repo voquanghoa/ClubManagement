@@ -119,6 +119,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\LoginActivity.cs" />
+    <Compile Include="Activities\RegisterActivity.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\FirebaseController.cs" />
     <Compile Include="Controllers\MoneysController.cs" />

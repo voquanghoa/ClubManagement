@@ -8,7 +8,7 @@ using ClubManagement.Controllers;
 
 namespace ClubManagement.Activities
 {
-    [Activity(Label = "ClubManagement", MainLauncher = true, Theme = "@style/AppTheme")]
+    [Activity(Label = "ClubManagement", Theme = "@style/AppTheme")]
     public class MainActivity : Activity
     {
         [InjectView(Resource.Id.bottom_navigation_tabbar)]

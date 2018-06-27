@@ -5,13 +5,13 @@ namespace ClubManagement.Controllers
 {
     public class UserMoneysController : FirebaseController<UserMoneyModel>
     {
-        private const string KEY = "userMoneys";
+        private const string Key = "userMoneys";
 
         public static UserMoneysController Instance = new UserMoneysController();
 
         private UserMoneysController()
         {
-            firebaseClient = new FirebaseClient(LINK_FIREBASE).Child(KEY);
+            FirebaseClient = new FirebaseClient(LinkFirebase).Child(Key);
         }
     }
 }
