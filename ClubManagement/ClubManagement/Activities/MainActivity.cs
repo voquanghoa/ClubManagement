@@ -60,6 +60,10 @@ namespace ClubManagement.Activities
         {
 			DisplayFragment(e.Item.ItemId);
         }
+
+        public override void OnBackPressed()
+        {
+        }
     }
 }
 

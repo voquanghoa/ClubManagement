@@ -10,7 +10,7 @@ using ClubManagement.Models;
 
 namespace ClubManagement.Activities
 {
-    [Activity(Label = "LoginActivity", MainLauncher = true, Theme = "@style/AppTheme")]
+    [Activity(Label = "LoginActivity", Theme = "@style/AppTheme")]
     public class LoginActivity : Activity
     {
         private readonly UsersController usersController = UsersController.Instance;
@@ -39,7 +39,9 @@ namespace ClubManagement.Activities
             if (users.First(x => x.Email == edtEmail.Text).Password == edtPassword.Text)
             {
                 Toast.MakeText(this, "Login successfully!", ToastLength.Short).Show();
-                PreferenceManager.GetDefaultSharedPreferences(Application.Context).Edit().PutBoolean("IsLogged", true);
+                var preferencesEditor = PreferenceManager.GetDefaultSharedPreferences(Application.Context).Edit();
+                preferencesEditor.PutBoolean("IsLogged", true);
+                preferencesEditor.Commit();
                 StartActivity(typeof(MainActivity));
                 return;
             }

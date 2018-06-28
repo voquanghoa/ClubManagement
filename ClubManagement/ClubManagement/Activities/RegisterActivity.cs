@@ -8,7 +8,7 @@ using ClubManagement.Models;
 
 namespace ClubManagement.Activities
 {
-    [Activity(Label = "RegisterActivity")]
+    [Activity(Label = "RegisterActivity", Theme = "@style/AppTheme")]
     public class RegisterActivity : Activity
     {
         private readonly UsersController usersController = UsersController.Instance;
