@@ -16,9 +16,9 @@ namespace ClubManagement.Controllers
 
         }
 
-        public void Add(T t)
+        public async void Add(T t)
         {
-            FirebaseClient.PostAsync(t);
+            await FirebaseClient.PostAsync(t);
         }
 
         public List<T> Values
@@ -36,9 +36,9 @@ namespace ClubManagement.Controllers
             }
         }
 
-        public void Edit(T t)
+        public async void Edit(T t)
         {
-            FirebaseClient.Child(t.Id).PutAsync(t);
+            await FirebaseClient.Child(t.Id).PutAsync(t);
         }
     }
 }
