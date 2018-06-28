@@ -6,19 +6,43 @@ namespace ClubManagement.Fragments
 {
     public class EventFragment : Fragment
     {
-        public override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
-
-            // Create your fragment here
-        }
+        private View view;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            // Use this to return your custom view for this Fragment
-            // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
+            view = inflater.Inflate(Resource.Layout.Main, container, false);
 
-            return base.OnCreateView(inflater, container, savedInstanceState);
+            Activity.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
+
+            var allTab = Activity.ActionBar.NewTab();
+            allTab.SetText("All");
+            //tab.SetIcon(Resource.Drawable.tab1_icon);
+            allTab.TabSelected += (sender, args) =>
+            {
+                // Do something when tab is selected
+            };
+            Activity.ActionBar.AddTab(allTab);
+
+            var upcomingTab = Activity.ActionBar.NewTab();
+            upcomingTab.SetText("Upcoming");
+            //upcomingTab.cas
+            //tab.SetIcon(Resource.Drawable.tab1_icon);
+            upcomingTab.TabSelected += (sender, args) =>
+            {
+                // Do something when tab is selected
+            };
+            Activity.ActionBar.AddTab(upcomingTab);
+
+            var joinedTab = Activity.ActionBar.NewTab();
+            joinedTab.SetText("Joined");
+            //tab.SetIcon(Resource.Drawable.tab1_icon);
+            joinedTab.TabSelected += (sender, args) =>
+            {
+                // Do something when tab is selected
+            };
+            Activity.ActionBar.AddTab(joinedTab);
+
+            return view;//base.OnCreateView(inflater, container, savedInstanceState);
         }
     }
 }
