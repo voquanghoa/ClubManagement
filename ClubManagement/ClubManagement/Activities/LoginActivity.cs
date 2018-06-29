@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using Android.App;
-using Android.Content;
 using Android.OS;
 using Android.Preferences;
 using Android.Widget;
 using ClubManagement.Controllers;
-using ClubManagement.Models;
+using ClubManagement.Ultilities;
 
 namespace ClubManagement.Activities
 {
@@ -22,31 +22,49 @@ namespace ClubManagement.Activities
         [InjectOnClick(Resource.Id.btnSignIn)]
         private void SignIn(object s, EventArgs e)
         {
+            AppUltilities.HideKeyboard(this);
             if (string.IsNullOrEmpty(edtEmail.Text) || string.IsNullOrEmpty(edtPassword.Text))
             {
                 Toast.MakeText(this, "Please fill all the fields", ToastLength.Short).Show();
                 return;
             }
 
-            var users = usersController.Values;
-
-            if (!users.Select(x => x.Email).Contains(edtEmail.Text))
+            var dialog = DialogExtensions.CreateDialog("Sign in", "Please wait...", this);
+            dialog.Show();
+            new Thread(() =>
             {
-                Toast.MakeText(this, "Email not exist!", ToastLength.Short).Show();
-                return;
-            }
+                var users = usersController.Values;
 
-            if (users.First(x => x.Email == edtEmail.Text).Password == edtPassword.Text)
-            {
-                Toast.MakeText(this, "Login successfully!", ToastLength.Short).Show();
-                var preferencesEditor = PreferenceManager.GetDefaultSharedPreferences(Application.Context).Edit();
-                preferencesEditor.PutBoolean("IsLogged", true);
-                preferencesEditor.Commit();
-                StartActivity(typeof(MainActivity));
-                return;
-            }
+                if (!users.Select(x => x.Email).Contains(edtEmail.Text))
+                {
+                    RunOnUiThread(() =>
+                    {
+                        Toast.MakeText(this, "Email not exist!", ToastLength.Short).Show();
+                        dialog.Dismiss();
+                    });
+                    return;
+                }
 
-            Toast.MakeText(this, "Wrong email or password", ToastLength.Short).Show();
+                if (users.First(x => x.Email == edtEmail.Text).Password == edtPassword.Text)
+                {
+                    RunOnUiThread(() =>
+                    {
+                        Toast.MakeText(this, "Login successfully!", ToastLength.Short).Show();
+                        dialog.Dismiss();
+                    });
+                    var preferencesEditor = PreferenceManager.GetDefaultSharedPreferences(Application.Context).Edit();
+                    preferencesEditor.PutBoolean("IsLogged", true);
+                    preferencesEditor.Commit();
+                    StartActivity(typeof(MainActivity));
+                    return;
+                }
+
+                RunOnUiThread(() =>
+                {
+                    dialog.Dismiss();
+                    Toast.MakeText(this, "Wrong email or password", ToastLength.Short).Show();
+                });
+            }).Start();
         }
 
         [InjectOnClick(Resource.Id.btnSignUp)]

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using Android.App;
 using Android.OS;
 using Android.Widget;
 using ClubManagement.Controllers;
 using ClubManagement.Models;
+using ClubManagement.Ultilities;
 
 namespace ClubManagement.Activities
 {
@@ -31,6 +33,7 @@ namespace ClubManagement.Activities
         [InjectOnClick(Resource.Id.btnSignUp)]
         private void SignUp(object s, EventArgs e)
         {
+            AppUltilities.HideKeyboard(this);
             if (string.IsNullOrEmpty(edtEmail.Text) || string.IsNullOrEmpty(edtName.Text) ||
                 string.IsNullOrEmpty(edtPassword.Text) || string.IsNullOrEmpty(edtConfirmPassword.Text))
             {
@@ -42,24 +45,40 @@ namespace ClubManagement.Activities
                 Toast.MakeText(this, "Password does not match the confirm password, try again!", ToastLength.Short).Show();
                 return;
             }
-            var userEmails = usersController.Values.Select(x => x.Email).ToList();
 
-            if (userEmails.Contains(edtEmail.Text))
+            var dialog = DialogExtensions.CreateDialog("Sign up", "Please wait...", this);
+            dialog.Show();
+
+            new Thread(() =>
             {
-                Toast.MakeText(this, "Email is exist!", ToastLength.Short).Show();
-                return;
-            }
+                var userEmails = usersController.Values.Select(x => x.Email).ToList();
 
-            usersController.Add(new UserModel
-            {
-                Email = edtEmail.Text,
-                Name = edtName.Text,
-                Password = edtPassword.Text
-            });
+                if (userEmails.Contains(edtEmail.Text))
+                {
+                    RunOnUiThread(() =>
+                    {
+                        Toast.MakeText(this, "Email is exist!", ToastLength.Short).Show();
+                        dialog.Dismiss();
+                    });
+                    return;
+                }
 
-            Toast.MakeText(this, "Sign up successfully", ToastLength.Short).Show();
-            Finish();
+                usersController.Add(new UserModel
+                {
+                    Email = edtEmail.Text,
+                    Name = edtName.Text,
+                    Password = edtPassword.Text
+                });
+
+                RunOnUiThread(() =>
+                {
+                    Toast.MakeText(this, "Sign up successfully", ToastLength.Short).Show();
+                    dialog.Dismiss();
+                });
+                Finish();
+            }).Start();
         }
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
