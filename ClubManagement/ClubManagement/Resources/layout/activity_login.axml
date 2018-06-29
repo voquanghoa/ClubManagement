@@ -22,7 +22,6 @@
             android:background="@color/cardview_background_color"
             android:id="@+id/linearLayout1">
             <EditText
-                android:id="@+id/edtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/edit_text_margin_bottom"
@@ -35,7 +34,6 @@
                 android:textColorHint="@color/text_hint_color"
                 android:textColor="@color/text_color_black" />
             <EditText
-                android:id="@+id/edtPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/edit_text_margin_bottom"
@@ -49,7 +47,6 @@
                 android:textColorHint="@color/text_hint_color"
                 android:inputType="textPassword" />
             <Button
-                android:id="@+id/btnSignIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/button_margin_bottom"
@@ -65,7 +62,6 @@
                 android:textColor="@color/text_color_black"
                 android:textStyle="bold" />
             <Button
-                android:id="@+id/btnSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_background"

@@ -5,13 +5,13 @@ namespace ClubManagement.Controllers
 {
     public class UserEventsController : FirebaseController<UserEventModel>
     {
-        private const string Key = "userEvents";
+        private const string KEY = "userEvents";
 
         public static UserEventsController Instance = new UserEventsController();
 
         private UserEventsController()
         {
-            FirebaseClient = new FirebaseClient(LinkFirebase).Child(Key);
+            firebaseClient = new FirebaseClient(LINK_FIREBASE).Child(KEY);
         }
     }
 }
