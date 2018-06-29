@@ -7,25 +7,25 @@ namespace ClubManagement.Controllers
 {
     public class FirebaseController<T> where T : FirebaseModel
     {
-        protected const string LINK_FIREBASE = "https://clubmanagement-98743.firebaseio.com/";
+        protected const string LinkFirebase = "https://clubmanagement-98743.firebaseio.com/";
 
-        protected ChildQuery firebaseClient;
+        protected ChildQuery FirebaseClient;
 
         protected FirebaseController()
         {
 
         }
 
-        public void Add(T t)
+        public async void Add(T t)
         {
-            firebaseClient.PostAsync(t);
+            await FirebaseClient.PostAsync(t);
         }
 
         public List<T> Values
         {
             get
             {
-                var users = firebaseClient.OnceAsync<T>().Result;
+                var users = FirebaseClient.OnceAsync<T>().Result;
 
                 return users.Select(x =>
                 {
@@ -36,9 +36,9 @@ namespace ClubManagement.Controllers
             }
         }
 
-        public void Edit(T t)
+        public async void Edit(T t)
         {
-            firebaseClient.Child(t.Id).PutAsync(t);
+            await FirebaseClient.Child(t.Id).PutAsync(t);
         }
     }
 }
