@@ -41,7 +41,6 @@ namespace ClubManagement.Activities
             SetContentView(Resource.Layout.Main);
             Cheeseknife.Inject(this);
             BottomNavigationHelper.RemoveShiftMode(bottomNavigationView);
-            bottomNavigationView.ItemIconTintList = null;
             bottomNavigationView.NavigationItemSelected += BottomNavigation_NavigationItemSelected;
 			DisplayFragment(Resource.Id.dashboardTab);
         }
