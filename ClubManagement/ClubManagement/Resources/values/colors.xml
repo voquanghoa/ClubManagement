@@ -16,4 +16,6 @@
   <color name="text_tabbar_choose_color">#407fdc</color>
   <color name="text_tabbar_unchoose_color">#a3a3a3</color>
   <color name="tabbar_background_color">#317e41</color>
+  <color name="textview_dashboard_background_color">#a3a3a3</color>
+  <color name="text_color_blue">#3e7dde</color>
 </resources>
