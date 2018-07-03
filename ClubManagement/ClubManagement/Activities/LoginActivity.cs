@@ -6,6 +6,7 @@ using Android.OS;
 using Android.Preferences;
 using Android.Widget;
 using ClubManagement.Controllers;
+using ClubManagement.Models;
 using ClubManagement.Ultilities;
 
 namespace ClubManagement.Activities
@@ -44,16 +45,17 @@ namespace ClubManagement.Activities
                     });
                     return;
                 }
-
-                if (users.First(x => x.Email == edtEmail.Text).Password == edtPassword.Text)
+                if (users.Any(u => u.Email == edtEmail.Text && u.Password == edtPassword.Text))
                 {
                     RunOnUiThread(() =>
                     {
                         Toast.MakeText(this, "Login successfully!", ToastLength.Short).Show();
                         dialog.Dismiss();
                     });
+                    var user = users.First(u => u.Email == edtEmail.Text && u.Password == edtPassword.Text);
                     var preferencesEditor = PreferenceManager.GetDefaultSharedPreferences(Application.Context).Edit();
                     preferencesEditor.PutBoolean("IsLogged", true);
+                    preferencesEditor.PutString("UserId", user.Id);
                     preferencesEditor.Commit();
                     StartActivity(typeof(MainActivity));
                     return;

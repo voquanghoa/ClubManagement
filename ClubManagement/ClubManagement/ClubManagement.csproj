@@ -122,6 +122,7 @@
     <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Activities\RegisterActivity.cs" />
     <Compile Include="Activities\SplashActivity.cs" />
+    <Compile Include="Controllers\AppDataController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\FirebaseController.cs" />
     <Compile Include="Controllers\MoneysController.cs" />

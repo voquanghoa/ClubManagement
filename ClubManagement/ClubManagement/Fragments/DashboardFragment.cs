@@ -1,7 +1,10 @@
-﻿using Android.App;
+﻿using System;
+using System.Linq;
+using Android.App;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using ClubManagement.Controllers;
 
 namespace ClubManagement.Fragments
 {
@@ -12,6 +15,8 @@ namespace ClubManagement.Fragments
         private int upcomingEvents;
 
         private int timeToNextUpcomingEvent;
+        
+        private readonly AppDataController appDataController = AppDataController.Instance;
 
         [InjectView(Resource.Id.tvBudget)]
         private TextView tvBudget;
@@ -32,13 +37,14 @@ namespace ClubManagement.Fragments
 
         private void Init()
         {
-            unpaidBudgets = 2;
-            upcomingEvents = 3;
-            timeToNextUpcomingEvent = 1;
+            unpaidBudgets = appDataController.NumberOfUnpaidBudgets;
+            upcomingEvents = appDataController.UpcomingEvents.Count;
+            timeToNextUpcomingEvent = (appDataController.UpcomingEvents?.OrderBy(x => x.Time).First().Time - DateTime.Now).Value.Days;
 
             tvBudget.Text = $"You need to pay {unpaidBudgets} " + (unpaidBudgets > 1 ? "budgets" : "budget");
             tvEvents.Text = $"You have {upcomingEvents} upcoming " + (upcomingEvents > 1 ? "events" : "event");
             tvUpcomingEvent.Text = $"Your next event will be held in {timeToNextUpcomingEvent} " + (timeToNextUpcomingEvent > 1 ? "days" : "day");
+
         }
     }
 }
