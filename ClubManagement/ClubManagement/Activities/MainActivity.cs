@@ -4,10 +4,11 @@ using Android.OS;
 using Android.Support.Design.Widget;
 using ClubManagement.Fragments;
 using ClubManagement.Ultilities;
+using ClubManagement.Controllers;
 
 namespace ClubManagement.Activities
 {
-    [Activity(Label = "ClubManagement", MainLauncher = true, Theme = "@style/AppTheme")]
+    [Activity(Label = "ClubManagement", Theme = "@style/AppTheme")]
     public class MainActivity : Activity
     {
         [InjectView(Resource.Id.bottom_navigation_tabbar)]
@@ -58,6 +59,10 @@ namespace ClubManagement.Activities
             BottomNavigationView.NavigationItemSelectedEventArgs e)
         {
 			DisplayFragment(e.Item.ItemId);
+        }
+
+        public override void OnBackPressed()
+        {
         }
     }
 }

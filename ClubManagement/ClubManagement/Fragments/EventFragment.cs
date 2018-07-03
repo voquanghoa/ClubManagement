@@ -1,6 +1,16 @@
 ﻿using Android.App;
 using Android.OS;
+using Android.Support.Design.Widget;
+using Android.Support.V7.Widget;
 using Android.Views;
+using Android.Widget;
+using ClubManagement.Adapters;
+using ClubManagement.Models;
+using System.Collections.Generic;
+using System;
+using System.Linq;
+using ClubManagement.Controllers;
+using Android.Preferences;
 
 namespace ClubManagement.Fragments
 {
@@ -8,41 +18,54 @@ namespace ClubManagement.Fragments
     {
         private View view;
 
+        private const string AllTab = "All";
+
+        private const string UpcomingTab = "Upcoming";
+
+        private const string JoinedTab = "Joined";
+
+        private UserEventsController userEventsController = UserEventsController.Instance;
+
+        private EventsController eventsController = EventsController.Instance;
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            view = inflater.Inflate(Resource.Layout.Main, container, false);
+            view = inflater.Inflate(Resource.Layout.FragmentEvent, container, false);
 
-            Activity.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
+            var recyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerView1);
+            recyclerView.SetLayoutManager(new LinearLayoutManager(view.Context));
 
-            var allTab = Activity.ActionBar.NewTab();
-            allTab.SetText("All");
-            //tab.SetIcon(Resource.Drawable.tab1_icon);
-            allTab.TabSelected += (sender, args) =>
+            var events = eventsController.Values;
+
+            var adapter = new EventsAdapter(events);
+            recyclerView.SetAdapter(adapter);
+
+            var tabLayout = view.FindViewById<TabLayout>(Resource.Id.tabView1);
+
+            tabLayout.AddTab(tabLayout.NewTab().SetText(AllTab));
+            tabLayout.AddTab(tabLayout.NewTab().SetText(UpcomingTab));
+            tabLayout.AddTab(tabLayout.NewTab().SetText(JoinedTab));
+
+            var preferences = PreferenceManager.GetDefaultSharedPreferences(Application.Context);
+            var userId = preferences.GetString("UserId", string.Empty);
+
+            tabLayout.TabSelected += (s, e) =>
             {
-                // Do something when tab is selected
+                switch (e.Tab.Text)
+                {
+                    case AllTab:
+                        adapter.Events = events;   
+                        break;
+                    case UpcomingTab:
+                        adapter.Events = events.Where(x => userEventsController.Values.Where(y => y.EventId == x.Id).All(y => y.UserId != userId)).ToList();
+                        break;
+                    case JoinedTab:
+                        adapter.Events = events.Where(x => userEventsController.Values.Any(y => y.EventId == x.Id && y.UserId == userId)).ToList();
+                        break;
+                }
             };
-            Activity.ActionBar.AddTab(allTab);
 
-            var upcomingTab = Activity.ActionBar.NewTab();
-            upcomingTab.SetText("Upcoming");
-            //upcomingTab.cas
-            //tab.SetIcon(Resource.Drawable.tab1_icon);
-            upcomingTab.TabSelected += (sender, args) =>
-            {
-                // Do something when tab is selected
-            };
-            Activity.ActionBar.AddTab(upcomingTab);
-
-            var joinedTab = Activity.ActionBar.NewTab();
-            joinedTab.SetText("Joined");
-            //tab.SetIcon(Resource.Drawable.tab1_icon);
-            joinedTab.TabSelected += (sender, args) =>
-            {
-                // Do something when tab is selected
-            };
-            Activity.ActionBar.AddTab(joinedTab);
-
-            return view;//base.OnCreateView(inflater, container, savedInstanceState);
+            return view;
         }
     }
 }

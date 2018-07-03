@@ -11,9 +11,12 @@
   <color name="background_color">#f9f9f9</color>
   <color name="text_color_green">#317e41</color>
   <color name="text_color_black">#000000</color>
+  <color name="text_color_blue">#258de8</color>
   <color name="text_color_white">#ffffff</color>
   <color name="text_hint_color">#494963</color>
   <color name="text_tabbar_choose_color">#407fdc</color>
   <color name="text_tabbar_unchoose_color">#a3a3a3</color>
   <color name="tabbar_background_color">#317e41</color>
+  <color name="tabbar_indicator_color">#f6f916</color>
+  <color name="item_event_background_color">#c3cfdb</color>
 </resources>
