@@ -24,14 +24,9 @@ namespace ClubManagement.Controllers
         {
             get
             {
-                var result = 0;
-                new Thread(() =>
-                {
-                    var numberOfBudgets = MoneysController.Instance.Values.Count;
-                    var numberOfPaidBudgets = UserMoneysController.Instance.Values.Count(x => x.UserId == userId);
-                    result = numberOfBudgets - numberOfPaidBudgets;
-                }).Start();
-                return result;
+                var numberOfBudgets = MoneysController.Instance.Values.Count;
+                var numberOfPaidBudgets = UserMoneysController.Instance.Values.Count(x => x.UserId == userId);
+                return numberOfBudgets - numberOfPaidBudgets;
             }
         }
 
