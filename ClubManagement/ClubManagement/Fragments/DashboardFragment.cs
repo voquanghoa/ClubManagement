@@ -5,6 +5,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using ClubManagement.Controllers;
+using ClubManagement.Models;
 
 namespace ClubManagement.Fragments
 {
