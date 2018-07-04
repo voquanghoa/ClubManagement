@@ -4,7 +4,6 @@ using Android.OS;
 using Android.Support.Design.Widget;
 using ClubManagement.Fragments;
 using ClubManagement.Ultilities;
-using ClubManagement.Controllers;
 
 namespace ClubManagement.Activities
 {

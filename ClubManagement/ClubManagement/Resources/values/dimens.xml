@@ -16,4 +16,6 @@
   <dimen name="tabbar_elevation">16dp</dimen>
   <dimen name="item_event_padding">8dp</dimen>
   <dimen name="item_event_margin">8dp</dimen>
+  <dimen name="text_event_detail_margin">8dp</dimen>
+  <dimen name="text_event_detail_margin_large">24dp</dimen>
 </resources>

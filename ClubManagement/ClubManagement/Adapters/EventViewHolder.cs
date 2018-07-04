@@ -3,11 +3,9 @@ using Android.Views;
 using Android.Support.V7.Widget;
 using Android.Widget;
 using ClubManagement.Models;
-using ClubManagement.Controllers;
-using System.Linq;
 using Android.Preferences;
 using Android.App;
-using Android.Graphics;
+using ClubManagement.Ultilities;
 
 namespace ClubManagement.Adapters
 {
@@ -28,31 +26,22 @@ namespace ClubManagement.Adapters
         [InjectView(Resource.Id.btnJoin)]
         private Button btnJoin;
 
-        public event EventHandler ClickHander;
+        public event EventHandler<EventClickEventArgs> ClickHander;
 
-        public EventModel EventModel
+        public UserLoginEventModel EventModel
         {
             set
             {
                 tvTitle.Text = value.Title;
                 tvDescription.Text = value.Description;
                 tvTime.Text = value.Time.ToShortDateString();
-                tvPlace.Text = MapsController.Instance.GetAddress(value.Latitude, value.Longitude);
+                tvPlace.Text = value.Place;
                 var preferences = PreferenceManager.GetDefaultSharedPreferences(Application.Context);
                 var userId = preferences.GetString("UserId", string.Empty);
 
-                if (UserEventsController.Instance.Values.Where(x => x.EventId == value.Id).Any(x => x.UserId == userId)) 
-                {
-                    btnJoin.Text = "Joined";
-                    btnJoin.SetTextColor(Color.Green);
-                    btnJoin.SetBackgroundColor(Color.Gray);
-                }
-                else
-                {
-                    btnJoin.Text = "Join";
-                    btnJoin.SetTextColor(Color.White);
-                    btnJoin.SetBackgroundColor(Color.Green);
-                }
+                btnJoin.ChangeStatusButtonJoin(value.IsJoined);
+
+                btnJoin.Clickable = false;
             }
         }
 
@@ -62,7 +51,7 @@ namespace ClubManagement.Adapters
 
             itemView.Click += (s, e) =>
             {
-                ClickHander?.Invoke(s, e);
+                ClickHander?.Invoke(s, new EventClickEventArgs() { Position = AdapterPosition });
             };
         }
     }

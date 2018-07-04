@@ -1,7 +1,6 @@
 ﻿using Android.App;
 using Android.OS;
 using Android.Preferences;
-using ClubManagement.Controllers;
 
 namespace ClubManagement.Activities
 {

@@ -8,11 +8,11 @@ namespace ClubManagement.Adapters
 {
     public class EventsAdapter : RecyclerView.Adapter
     {
-        private List<EventModel> events;
+        private List<UserLoginEventModel> events;
 
-        public event EventHandler ItemClick;
+        public event EventHandler<EventClickEventArgs> ItemClick;
 
-        public List<EventModel> Events
+        public List<UserLoginEventModel> Events
         {
             set
             {
@@ -21,7 +21,7 @@ namespace ClubManagement.Adapters
             }
         }
 
-        public EventsAdapter(List<EventModel> events)
+        public EventsAdapter(List<UserLoginEventModel> events)
         {
             this.events = events;
         }

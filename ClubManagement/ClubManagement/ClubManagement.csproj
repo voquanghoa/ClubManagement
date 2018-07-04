@@ -122,9 +122,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\EventDetailActivity.cs" />
     <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Activities\RegisterActivity.cs" />
     <Compile Include="Activities\SplashActivity.cs" />
+    <Compile Include="Adapters\EventClickEventArgs.cs" />
     <Compile Include="Adapters\EventsAdapter.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\FirebaseController.cs" />
@@ -140,6 +142,7 @@
     <Compile Include="Models\MoneyModel.cs" />
     <Compile Include="Models\OutComeModel.cs" />
     <Compile Include="Models\Results.cs" />
+    <Compile Include="Models\UserLoginEventModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserEventModel.cs" />
     <Compile Include="Models\UserMoneyModel.cs" />
@@ -171,6 +174,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ItemEvent.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\EventDetail.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

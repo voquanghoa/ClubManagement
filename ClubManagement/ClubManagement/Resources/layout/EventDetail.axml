@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_margin="@dimen/text_event_detail_margin"
+        android:textColor="@color/text_color_blue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvTitle" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/item_event_margin"
+        android:background="@color/item_event_background_color"
+        android:id="@+id/linearLayout1">
+        <TextView
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_margin="@dimen/text_event_detail_margin"
+            android:textColor="@color/text_color_black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvDescription" />
+        <TextView
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_margin="@dimen/text_event_detail_margin"
+            android:textColor="@color/text_color_green"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvCreatedBy" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_event_detail_margin"
+            android:id="@+id/linearLayout2">
+            <TextView
+                android:text="Large Text"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_marginRight="@dimen/text_event_detail_margin_large"
+                android:textColor="@color/text_color_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/tvTime" />
+            <TextView
+                android:text="Large Text"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/text_color_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/tvPlace" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_event_detail_margin"
+            android:gravity="right"
+            android:id="@+id/linearLayout3">
+            <TextView
+                android:text="@string/willYouJoin"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:gravity="center_vertical"
+                android:textColor="@color/text_color_green"
+                android:layout_marginRight="@dimen/text_event_detail_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <Button
+                android:text="Button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/btnJoin" />
+        </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:text="@string/eventLocation"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/text_color_green"
+        android:layout_margin="@dimen/text_event_detail_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
