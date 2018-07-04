@@ -1,24 +1,33 @@
-﻿using Android.App;
-using Android.OS;
+﻿using Android.OS;
+using Android.Support.Design.Widget;
+using Android.Support.V4.App;
+using Android.Support.V4.View;
 using Android.Views;
 
 namespace ClubManagement.Fragments
 {
     public class MoneyFragment : Fragment
     {
-        public override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
+        [InjectView(Resource.Id.tlMoney)] private TabLayout tlMoney;
 
-            // Create your fragment here
-        }
+        [InjectView(Resource.Id.vpMoney)] private ViewPager vpMoney;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            // Use this to return your custom view for this Fragment
-            // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
+            var view = inflater.Inflate(Resource.Layout.fragment_money, container, false);
+            Cheeseknife.Inject(this, view);
+            Init();
+            return view;
+        }
 
-            return base.OnCreateView(inflater, container, savedInstanceState);
+        private void Init()
+        {
+            var adapter = new PagerAdapter(Activity.SupportFragmentManager);
+            adapter.AddFramgent(new ListMoneyFragment(), "All");
+            adapter.AddFramgent(new ListMoneyFragment(), "Already paid");
+            adapter.AddFramgent(new ListMoneyFragment(), "Unpaid");
+            vpMoney.Adapter = adapter;
+            tlMoney.SetupWithViewPager(vpMoney);
         }
     }
 }
