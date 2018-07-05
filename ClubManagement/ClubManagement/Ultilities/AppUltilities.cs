@@ -10,6 +10,7 @@ namespace ClubManagement.Ultilities
     {
         public static void HideKeyboard(this Activity activity)
         {
+            if (activity.CurrentFocus == null) return;
             var inputMethodManager = (InputMethodManager) activity.GetSystemService(Context.InputMethodService);
             inputMethodManager.HideSoftInputFromWindow(activity.CurrentFocus.WindowToken, 0);
         }
