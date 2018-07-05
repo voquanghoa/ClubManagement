@@ -5,6 +5,7 @@ using Android.Support.V4.App;
 using Android.Views;
 using Android.Widget;
 using ClubManagement.Controllers;
+using ClubManagement.Models;
 
 namespace ClubManagement.Fragments
 {
@@ -44,7 +45,6 @@ namespace ClubManagement.Fragments
             tvBudget.Text = $"You need to pay {unpaidBudgets} " + (unpaidBudgets > 1 ? "budgets" : "budget");
             tvEvents.Text = $"You have {upcomingEvents} upcoming " + (upcomingEvents > 1 ? "events" : "event");
             tvUpcomingEvent.Text = $"Your next event will be held in {timeToNextUpcomingEvent} " + (timeToNextUpcomingEvent > 1 ? "days" : "day");
-
         }
     }
 }

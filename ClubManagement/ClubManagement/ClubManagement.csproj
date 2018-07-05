@@ -136,6 +136,7 @@
     <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\FirebaseModel.cs" />
     <Compile Include="Models\MoneyModel.cs" />
+    <Compile Include="Models\MoneyState.cs" />
     <Compile Include="Models\OutComeModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserEventModel.cs" />

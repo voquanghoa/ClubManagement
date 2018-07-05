@@ -40,5 +40,16 @@ namespace ClubManagement.Controllers
                     .ToList();
             }
         }
+
+        public List<MoneyState> GetListMoneyState()
+        {
+            var moneyStates = new List<MoneyState>();
+            MoneysController.Instance.Values.ForEach(x => moneyStates.Add(new MoneyState
+            {
+                IsPaid = true,
+                MoneyModel = x
+            }));
+            return moneyStates;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace ClubManagement.Models
 {
@@ -6,5 +7,11 @@ namespace ClubManagement.Models
     {
         [JsonProperty("amount")]
         public int Amount { get; set; }
+
+        [JsonProperty("time")]
+        public DateTime Time { get; set; }
+
+        [JsonProperty("description")]
+        public string Description { get; set; }
     }
 }

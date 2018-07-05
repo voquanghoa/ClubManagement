@@ -2465,8 +2465,8 @@ namespace ClubManagement
 			// aapt resource value: 0x7f07002f
 			public const int auto = 2131165231;
 			
-			// aapt resource value: 0x7f0700ad
-			public const int balanceTab = 2131165357;
+			// aapt resource value: 0x7f0700b0
+			public const int balanceTab = 2131165360;
 			
 			// aapt resource value: 0x7f070020
 			public const int beginning = 2131165216;
@@ -2534,8 +2534,8 @@ namespace ClubManagement
 			// aapt resource value: 0x7f070054
 			public const int customPanel = 2131165268;
 			
-			// aapt resource value: 0x7f0700aa
-			public const int dashboardTab = 2131165354;
+			// aapt resource value: 0x7f0700ad
+			public const int dashboardTab = 2131165357;
 			
 			// aapt resource value: 0x7f070062
 			public const int decor_content_parent = 2131165282;
@@ -2588,8 +2588,8 @@ namespace ClubManagement
 			// aapt resource value: 0x7f07002b
 			public const int enterAlwaysCollapsed = 2131165227;
 			
-			// aapt resource value: 0x7f0700ab
-			public const int eventTab = 2131165355;
+			// aapt resource value: 0x7f0700ae
+			public const int eventTab = 2131165358;
 			
 			// aapt resource value: 0x7f07002c
 			public const int exitUntilCollapsed = 2131165228;
@@ -2630,6 +2630,9 @@ namespace ClubManagement
 			// aapt resource value: 0x7f070046
 			public const int image = 2131165254;
 			
+			// aapt resource value: 0x7f0700aa
+			public const int imgState = 2131165354;
+			
 			// aapt resource value: 0x7f07009e
 			public const int info = 2131165342;
 			
@@ -2657,8 +2660,8 @@ namespace ClubManagement
 			// aapt resource value: 0x7f070048
 			public const int list_item = 2131165256;
 			
-			// aapt resource value: 0x7f0700a9
-			public const int masked = 2131165353;
+			// aapt resource value: 0x7f0700ac
+			public const int masked = 2131165356;
 			
 			// aapt resource value: 0x7f070097
 			public const int media_actions = 2131165335;
@@ -2669,8 +2672,8 @@ namespace ClubManagement
 			// aapt resource value: 0x7f07003e
 			public const int mini = 2131165246;
 			
-			// aapt resource value: 0x7f0700ac
-			public const int moneyTab = 2131165356;
+			// aapt resource value: 0x7f0700af
+			public const int moneyTab = 2131165359;
 			
 			// aapt resource value: 0x7f070019
 			public const int multiply = 2131165209;
@@ -2885,8 +2888,14 @@ namespace ClubManagement
 			// aapt resource value: 0x7f070089
 			public const int tvBudget = 2131165321;
 			
+			// aapt resource value: 0x7f0700a9
+			public const int tvDescription = 2131165353;
+			
 			// aapt resource value: 0x7f07008a
 			public const int tvEvents = 2131165322;
+			
+			// aapt resource value: 0x7f0700a8
+			public const int tvTitle = 2131165352;
 			
 			// aapt resource value: 0x7f07008b
 			public const int tvUpcomingEvent = 2131165323;
@@ -2900,8 +2909,8 @@ namespace ClubManagement
 			// aapt resource value: 0x7f07000e
 			public const int view_offset_helper = 2131165198;
 			
-			// aapt resource value: 0x7f0700a8
-			public const int visible = 2131165352;
+			// aapt resource value: 0x7f0700ab
+			public const int visible = 2131165355;
 			
 			// aapt resource value: 0x7f07008d
 			public const int vpMoney = 2131165325;

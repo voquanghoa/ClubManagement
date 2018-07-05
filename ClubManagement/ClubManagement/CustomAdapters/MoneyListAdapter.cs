@@ -7,15 +7,16 @@ namespace ClubManagement.CustomAdapters
 {
     class MoneyListAdapter : RecyclerView.Adapter
     {
-        private readonly List<MoneyModel> moneyModels;
+        private readonly List<MoneyState> moneyStates;
 
-        public MoneyListAdapter(List<MoneyModel> moneyModels)
+        public MoneyListAdapter(List<MoneyState> moneyStates)
         {
-            this.moneyModels = moneyModels;
+            this.moneyStates = moneyStates;
         }
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
+            if (holder is MoneyViewHolder viewHolder) viewHolder.MoneyState = moneyStates[0];
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -25,6 +26,6 @@ namespace ClubManagement.CustomAdapters
             return new MoneyViewHolder(itemView);
         }
 
-        public override int ItemCount => moneyModels.Count;
+        public override int ItemCount => moneyStates.Count;
     }
 }
