@@ -22,7 +22,7 @@ namespace ClubManagement.Activities
         [InjectOnClick(Resource.Id.btnSignIn)]
         private void SignIn(object s, EventArgs e)
         {
-            AppUltilities.HideKeyboard(this);
+            this.HideKeyboard();
             if (string.IsNullOrEmpty(edtEmail.Text) || string.IsNullOrEmpty(edtPassword.Text))
             {
                 Toast.MakeText(this, "Please fill all the fields", ToastLength.Short).Show();
@@ -44,8 +44,8 @@ namespace ClubManagement.Activities
                     });
                     return;
                 }
-
-                if (users.First(x => x.Email == edtEmail.Text).Password == edtPassword.Text)
+                var user = users.First(u => u.Email == edtEmail.Text && u.Password == edtPassword.Text);
+                if (user != null)
                 {
                     RunOnUiThread(() =>
                     {
@@ -54,6 +54,7 @@ namespace ClubManagement.Activities
                     });
                     var preferencesEditor = PreferenceManager.GetDefaultSharedPreferences(Application.Context).Edit();
                     preferencesEditor.PutBoolean("IsLogged", true);
+                    preferencesEditor.PutString("UserId", user.Id);
                     preferencesEditor.Commit();
                     StartActivity(typeof(MainActivity));
                     return;

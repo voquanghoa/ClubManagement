@@ -5,9 +5,9 @@ namespace ClubManagement.Models
     public class UserEventModel : FirebaseModel
     {
         [JsonProperty("userId")]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         [JsonProperty("eventid")]
-        public int EventId { get; set; }
+        public string EventId { get; set; }
     }
 }
