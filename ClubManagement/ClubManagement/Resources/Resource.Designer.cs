@@ -1487,6 +1487,9 @@ namespace ClubManagement
 			// aapt resource value: 0x7f090059
 			public const int text_tabbar_unchoose_color = 2131296345;
 			
+			// aapt resource value: 0x7f09005a
+			public const int textview_dashboard_background_color = 2131296346;
+			
 			static Color()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -1965,6 +1968,11 @@ namespace ClubManagement
 			// aapt resource value: 0x7f06009a
 			public const int tabbar_height = 2131099802;
 			
+			// aapt resource value: 0x7f0600a0
+			public const int tabbar_text_size = 2131099808;
+			
+			// aapt resource value: 0x7f0600a1
+			public const int text_description_size = 2131099809;
 			// aapt resource value: 0x7f06009e
 			public const int text_event_detail_margin = 2131099806;
 			
@@ -1976,6 +1984,18 @@ namespace ClubManagement
 			
 			// aapt resource value: 0x7f060098
 			public const int text_welcome_size = 2131099800;
+			
+			// aapt resource value: 0x7f06009f
+			public const int textview_margin_left_right = 2131099807;
+			
+			// aapt resource value: 0x7f06009e
+			public const int textview_margin_top_bottom = 2131099806;
+			
+			// aapt resource value: 0x7f06009c
+			public const int textview_padding_left_right = 2131099804;
+			
+			// aapt resource value: 0x7f06009d
+			public const int textview_padding_top_bottom = 2131099805;
 			
 			// aapt resource value: 0x7f06008f
 			public const int view_conner_radius = 2131099791;
@@ -2245,26 +2265,26 @@ namespace ClubManagement
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
-			// aapt resource value: 0x7f020073
-			public const int avd_hide_password_1 = 2130837619;
+			// aapt resource value: 0x7f020076
+			public const int avd_hide_password_1 = 2130837622;
 			
-			// aapt resource value: 0x7f020074
-			public const int avd_hide_password_2 = 2130837620;
+			// aapt resource value: 0x7f020077
+			public const int avd_hide_password_2 = 2130837623;
 			
-			// aapt resource value: 0x7f020075
-			public const int avd_hide_password_3 = 2130837621;
+			// aapt resource value: 0x7f020078
+			public const int avd_hide_password_3 = 2130837624;
 			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
 			
-			// aapt resource value: 0x7f020076
-			public const int avd_show_password_1 = 2130837622;
+			// aapt resource value: 0x7f020079
+			public const int avd_show_password_1 = 2130837625;
 			
-			// aapt resource value: 0x7f020077
-			public const int avd_show_password_2 = 2130837623;
+			// aapt resource value: 0x7f02007a
+			public const int avd_show_password_2 = 2130837626;
 			
-			// aapt resource value: 0x7f020078
-			public const int avd_show_password_3 = 2130837624;
+			// aapt resource value: 0x7f02007b
+			public const int avd_show_password_3 = 2130837627;
 			
 			// aapt resource value: 0x7f020055
 			public const int button_background = 2130837589;
@@ -2315,46 +2335,55 @@ namespace ClubManagement
 			public const int icon_tab_money = 2130837604;
 			
 			// aapt resource value: 0x7f020065
-			public const int nav_item_colors = 2130837605;
+			public const int icon_textview_budget = 2130837605;
 			
 			// aapt resource value: 0x7f020066
-			public const int navigation_empty_icon = 2130837606;
+			public const int icon_textview_events = 2130837606;
 			
 			// aapt resource value: 0x7f020067
-			public const int notification_action_background = 2130837607;
+			public const int icon_textview_upcoming_event = 2130837607;
 			
 			// aapt resource value: 0x7f020068
-			public const int notification_bg = 2130837608;
+			public const int nav_item_colors = 2130837608;
 			
 			// aapt resource value: 0x7f020069
-			public const int notification_bg_low = 2130837609;
+			public const int navigation_empty_icon = 2130837609;
 			
 			// aapt resource value: 0x7f02006a
-			public const int notification_bg_low_normal = 2130837610;
+			public const int notification_action_background = 2130837610;
 			
 			// aapt resource value: 0x7f02006b
-			public const int notification_bg_low_pressed = 2130837611;
+			public const int notification_bg = 2130837611;
 			
 			// aapt resource value: 0x7f02006c
-			public const int notification_bg_normal = 2130837612;
+			public const int notification_bg_low = 2130837612;
 			
 			// aapt resource value: 0x7f02006d
-			public const int notification_bg_normal_pressed = 2130837613;
+			public const int notification_bg_low_normal = 2130837613;
 			
 			// aapt resource value: 0x7f02006e
-			public const int notification_icon_background = 2130837614;
-			
-			// aapt resource value: 0x7f020071
-			public const int notification_template_icon_bg = 2130837617;
-			
-			// aapt resource value: 0x7f020072
-			public const int notification_template_icon_low_bg = 2130837618;
+			public const int notification_bg_low_pressed = 2130837614;
 			
 			// aapt resource value: 0x7f02006f
-			public const int notification_tile_bg = 2130837615;
+			public const int notification_bg_normal = 2130837615;
 			
 			// aapt resource value: 0x7f020070
-			public const int notify_panel_notification_icon_bg = 2130837616;
+			public const int notification_bg_normal_pressed = 2130837616;
+			
+			// aapt resource value: 0x7f020071
+			public const int notification_icon_background = 2130837617;
+			
+			// aapt resource value: 0x7f020074
+			public const int notification_template_icon_bg = 2130837620;
+			
+			// aapt resource value: 0x7f020075
+			public const int notification_template_icon_low_bg = 2130837621;
+			
+			// aapt resource value: 0x7f020072
+			public const int notification_tile_bg = 2130837618;
+			
+			// aapt resource value: 0x7f020073
+			public const int notify_panel_notification_icon_bg = 2130837619;
 			
 			static Drawable()
 			{
@@ -2819,6 +2848,11 @@ namespace ClubManagement
 			// aapt resource value: 0x7f070011
 			public const int tabMode = 2131165201;
 			
+			// aapt resource value: 0x7f0700a3
+			public const int text = 2131165347;
+			
+			// aapt resource value: 0x7f0700a1
+			public const int text2 = 2131165345;
 			// aapt resource value: 0x7f070091
 			public const int tabView1 = 2131165329;
 			
@@ -2870,6 +2904,14 @@ namespace ClubManagement
 			// aapt resource value: 0x7f07000b
 			public const int transition_scene_layoutid_cache = 2131165195;
 			
+			// aapt resource value: 0x7f070089
+			public const int tvBudget = 2131165321;
+			
+			// aapt resource value: 0x7f07008a
+			public const int tvEvents = 2131165322;
+			
+			// aapt resource value: 0x7f07008b
+			public const int tvUpcomingEvent = 2131165323;
 			// aapt resource value: 0x7f07008b
 			public const int tvCreatedBy = 2131165323;
 			
@@ -3086,6 +3128,67 @@ namespace ClubManagement
 			public const int design_text_input_password_icon = 2130903082;
 			
 			// aapt resource value: 0x7f03002b
+			public const int fragment_dashboard = 2130903083;
+			
+			// aapt resource value: 0x7f03002c
+			public const int Main = 2130903084;
+			
+			// aapt resource value: 0x7f03002d
+			public const int notification_action = 2130903085;
+			
+			// aapt resource value: 0x7f03002e
+			public const int notification_action_tombstone = 2130903086;
+			
+			// aapt resource value: 0x7f03002f
+			public const int notification_media_action = 2130903087;
+			
+			// aapt resource value: 0x7f030030
+			public const int notification_media_cancel_action = 2130903088;
+			
+			// aapt resource value: 0x7f030031
+			public const int notification_template_big_media = 2130903089;
+			
+			// aapt resource value: 0x7f030032
+			public const int notification_template_big_media_custom = 2130903090;
+			
+			// aapt resource value: 0x7f030033
+			public const int notification_template_big_media_narrow = 2130903091;
+			
+			// aapt resource value: 0x7f030034
+			public const int notification_template_big_media_narrow_custom = 2130903092;
+			
+			// aapt resource value: 0x7f030035
+			public const int notification_template_custom_big = 2130903093;
+			
+			// aapt resource value: 0x7f030036
+			public const int notification_template_icon_group = 2130903094;
+			
+			// aapt resource value: 0x7f030037
+			public const int notification_template_lines_media = 2130903095;
+			
+			// aapt resource value: 0x7f030038
+			public const int notification_template_media = 2130903096;
+			
+			// aapt resource value: 0x7f030039
+			public const int notification_template_media_custom = 2130903097;
+			
+			// aapt resource value: 0x7f03003a
+			public const int notification_template_part_chronometer = 2130903098;
+			
+			// aapt resource value: 0x7f03003b
+			public const int notification_template_part_time = 2130903099;
+			
+			// aapt resource value: 0x7f03003c
+			public const int select_dialog_item_material = 2130903100;
+			
+			// aapt resource value: 0x7f03003d
+			public const int select_dialog_multichoice_material = 2130903101;
+			
+			// aapt resource value: 0x7f03003e
+			public const int select_dialog_singlechoice_material = 2130903102;
+			
+			// aapt resource value: 0x7f03003f
+			public const int support_simple_spinner_dropdown_item = 2130903103;
 			public const int EventDetail = 2130903083;
 			
 			// aapt resource value: 0x7f03002c
@@ -3347,6 +3450,9 @@ namespace ClubManagement
 			
 			// aapt resource value: 0x7f0a0032
 			public const int textview_create_account = 2131361842;
+			
+			// aapt resource value: 0x7f0a003c
+			public const int textview_dashboard_title = 2131361852;
 			
 			// aapt resource value: 0x7f0a0039
 			public const int textview_resend_code = 2131361849;

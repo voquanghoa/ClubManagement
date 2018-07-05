@@ -1,17 +1,19 @@
 ﻿using Android.App;
 using Android.Content;
+#pragma warning disable 618
 
 namespace ClubManagement.Ultilities
 {
     public static class DialogExtensions
     {
-        public static AlertDialog CreateDialog(string title, string message, Context context)
+        public static ProgressDialog CreateDialog(string title, string message, Context context)
         {
-            return new AlertDialog.Builder(context)
-                .SetCancelable(false)
-                .SetTitle(title)
-                .SetMessage(message)
-                .Create();
+            var progressDialog = new ProgressDialog(context);
+            progressDialog.SetTitle(title);
+            progressDialog.SetMessage(message);
+            progressDialog.SetCancelable(false);
+            progressDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
+            return progressDialog;
         }
     }
 }
