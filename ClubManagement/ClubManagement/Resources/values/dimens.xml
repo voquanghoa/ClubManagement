@@ -20,4 +20,8 @@
   <dimen name="textview_margin_left_right">20dp</dimen>
   <dimen name="tabbar_text_size">18sp</dimen>
   <dimen name="text_description_size">16sp</dimen>
+  <dimen name="item_event_padding">8dp</dimen>
+  <dimen name="item_event_margin">8dp</dimen>
+  <dimen name="text_event_detail_margin">8dp</dimen>
+  <dimen name="text_event_detail_margin_large">24dp</dimen>
 </resources>
