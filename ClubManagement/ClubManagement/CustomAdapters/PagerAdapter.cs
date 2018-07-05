@@ -4,7 +4,7 @@ using Java.Lang;
 using Fragment = Android.Support.V4.App.Fragment;
 using FragmentManager = Android.Support.V4.App.FragmentManager;
 
-namespace ClubManagement
+namespace ClubManagement.CustomAdapters
 {
     public class PagerAdapter : FragmentPagerAdapter
     {

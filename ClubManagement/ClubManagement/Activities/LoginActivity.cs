@@ -6,7 +6,6 @@ using Android.OS;
 using Android.Preferences;
 using Android.Widget;
 using ClubManagement.Controllers;
-using ClubManagement.Models;
 using ClubManagement.Ultilities;
 
 namespace ClubManagement.Activities

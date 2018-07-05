@@ -130,6 +130,8 @@
     <Compile Include="Controllers\UserEventsController.cs" />
     <Compile Include="Controllers\UserMoneysController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="CustomAdapters\MoneyListAdapter.cs" />
+    <Compile Include="CustomAdapters\MoneyViewHolder.cs" />
     <Compile Include="Fragments\ListMoneyFragment.cs" />
     <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\FirebaseModel.cs" />
@@ -144,7 +146,7 @@
     <Compile Include="Fragments\EventFragment.cs" />
     <Compile Include="Fragments\MoneyFragment.cs" />
     <Compile Include="Activities\MainActivity.cs" />
-    <Compile Include="PagerAdapter.cs" />
+    <Compile Include="CustomAdapters\PagerAdapter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ultilities\AppUltilities.cs" />
@@ -247,6 +249,22 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\fragment_money.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\fragment_money_list.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_unpaid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_paid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\recyclerview_money_list_item.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
