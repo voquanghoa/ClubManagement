@@ -85,4 +85,11 @@
         android:layout_margin="@dimen/text_event_detail_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/item_event_margin"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        class="com.google.android.gms.maps.MapFragment" />
 </LinearLayout>
