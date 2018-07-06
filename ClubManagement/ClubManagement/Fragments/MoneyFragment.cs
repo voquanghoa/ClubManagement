@@ -3,6 +3,7 @@ using Android.Support.Design.Widget;
 using Android.Support.V4.App;
 using Android.Support.V4.View;
 using Android.Views;
+using ClubManagement.Controllers;
 using PagerAdapter = ClubManagement.CustomAdapters.PagerAdapter;
 
 namespace ClubManagement.Fragments
@@ -12,6 +13,8 @@ namespace ClubManagement.Fragments
         [InjectView(Resource.Id.tlMoney)] private TabLayout tlMoney;
 
         [InjectView(Resource.Id.vpMoney)] private ViewPager vpMoney;
+
+        private readonly AppDataController appDataController = AppDataController.Instance;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -24,9 +27,9 @@ namespace ClubManagement.Fragments
         private void Init()
         {
             var adapter = new PagerAdapter(Activity.SupportFragmentManager);
-            adapter.AddFramgent(new ListMoneyFragment(), "All");
-            adapter.AddFramgent(new ListMoneyFragment(), "Already paid");
-            adapter.AddFramgent(new ListMoneyFragment(), "Unpaid");
+            adapter.AddFramgent(new ListMoneyFragment(appDataController.GetListMoneyState()), "All");
+            adapter.AddFramgent(new ListMoneyFragment(appDataController.GetListMoneyState()), "Already paid");
+            adapter.AddFramgent(new ListMoneyFragment(appDataController.GetListMoneyState()), "Unpaid");
             vpMoney.Adapter = adapter;
             tlMoney.SetupWithViewPager(vpMoney);
         }

@@ -46,17 +46,17 @@ namespace ClubManagement.Activities
                 }
                 if (users.Any(u => u.Email == edtEmail.Text && u.Password == edtPassword.Text))
                 {
-                    RunOnUiThread(() =>
-                    {
-                        Toast.MakeText(this, "Login successfully!", ToastLength.Short).Show();
-                        dialog.Dismiss();
-                    });
                     var user = users.First(u => u.Email == edtEmail.Text && u.Password == edtPassword.Text);
                     var preferencesEditor = PreferenceManager.GetDefaultSharedPreferences(Application.Context).Edit();
                     preferencesEditor.PutBoolean("IsLogged", true);
                     preferencesEditor.PutString("UserId", user.Id);
                     preferencesEditor.Commit();
                     StartActivity(typeof(MainActivity));
+                    RunOnUiThread(() =>
+                    {
+                        Toast.MakeText(this, "Login successfully!", ToastLength.Short).Show();
+                        dialog.Dismiss();
+                    });
                     return;
                 }
 

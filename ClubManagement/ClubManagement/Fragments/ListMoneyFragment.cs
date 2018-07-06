@@ -1,9 +1,11 @@
-﻿using Android.Support.V4.App;
+﻿using System.Collections.Generic;
+using Android.Support.V4.App;
 using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Views;
 using ClubManagement.Controllers;
 using ClubManagement.CustomAdapters;
+using ClubManagement.Models;
 
 namespace ClubManagement.Fragments
 {
@@ -14,6 +16,13 @@ namespace ClubManagement.Fragments
         [InjectView(Resource.Id.rvMoney)] private RecyclerView rvMoney;
 
         private MoneyListAdapter adapter;
+
+        private readonly List<MoneyState> moneyStates;
+
+        public ListMoneyFragment(List<MoneyState> moneyStates)
+        {
+            this.moneyStates = moneyStates;
+        }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -26,7 +35,7 @@ namespace ClubManagement.Fragments
         private void Init()
         {
             rvMoney.SetLayoutManager(new LinearLayoutManager(Context));
-            adapter = new MoneyListAdapter(appDataController.GetListMoneyState());
+            adapter = new MoneyListAdapter(moneyStates);
             rvMoney.SetAdapter(adapter);
         }
     }
