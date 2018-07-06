@@ -16,7 +16,7 @@ namespace ClubManagement.CustomAdapters
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
-            if (holder is MoneyViewHolder viewHolder) viewHolder.MoneyState = moneyStates[0];
+            if (holder is MoneyViewHolder viewHolder) viewHolder.MoneyState = moneyStates[position];
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)

@@ -3,11 +3,12 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/textview_dashboard_background_color">
+    android:paddingBottom="@dimen/textview_padding_top_bottom">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@color/textview_dashboard_background_color"
         android:layout_weight="1">
         <TextView
             android:id="@+id/tvTitle"
@@ -35,8 +36,9 @@
     <ImageView
         android:id="@+id/imgState"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
         android:src="@drawable/icon_unpaid"
-        android:layout_margin="@dimen/imageview_margin" />
+        android:background="@color/textview_dashboard_background_color"
+        android:padding="@dimen/imageview_margin" />
 </LinearLayout>

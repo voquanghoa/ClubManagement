@@ -1,4 +1,5 @@
-﻿using Android.OS;
+﻿using System.Linq;
+using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V4.App;
 using Android.Support.V4.View;
@@ -27,9 +28,10 @@ namespace ClubManagement.Fragments
         private void Init()
         {
             var adapter = new PagerAdapter(Activity.SupportFragmentManager);
-            adapter.AddFramgent(new ListMoneyFragment(appDataController.GetListMoneyState()), "All");
-            adapter.AddFramgent(new ListMoneyFragment(appDataController.GetListMoneyState()), "Already paid");
-            adapter.AddFramgent(new ListMoneyFragment(appDataController.GetListMoneyState()), "Unpaid");
+            var listMoneyStates = appDataController.GetListMoneyState();
+            adapter.AddFramgent(new ListMoneyFragment(listMoneyStates), "All");
+            adapter.AddFramgent(new ListMoneyFragment(listMoneyStates.Where(x => x.IsPaid).ToList()), "Already paid");
+            adapter.AddFramgent(new ListMoneyFragment(listMoneyStates.Where(x => !x.IsPaid).ToList()), "Unpaid");
             vpMoney.Adapter = adapter;
             tlMoney.SetupWithViewPager(vpMoney);
         }

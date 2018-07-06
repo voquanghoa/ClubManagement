@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Android.App;
 using Android.Preferences;
+using Android.Util;
 using ClubManagement.Models;
 
 namespace ClubManagement.Controllers
@@ -45,11 +46,18 @@ namespace ClubManagement.Controllers
         public List<MoneyState> GetListMoneyState()
         {
             var moneyStates = new List<MoneyState>();
-            MoneysController.Instance.Values.ForEach(x => moneyStates.Add(new MoneyState
+            var moneyList = MoneysController.Instance.Values ?? new List<MoneyModel>();
+            var paidMoneyIdList = (UserMoneysController.Instance.Values ?? new List<UserMoneyModel>())
+                .Where(x => x.UserId == userId)
+                .Select(x => x.MoneyId)
+                .ToList(); 
+            moneyList.ForEach(x => moneyStates.Add(new MoneyState
             {
-                IsPaid = true,
+                IsPaid = paidMoneyIdList.Contains(x.Id),
                 MoneyModel = x
             }));
+
+            Log.Info("asdbquibiuaf", moneyStates[0].IsPaid + "" + moneyStates[1].IsPaid);
             return moneyStates;
         }
     }
