@@ -40,5 +40,10 @@ namespace ClubManagement.Controllers
         {
             await FirebaseClient.Child(t.Id).PutAsync(t);
         }
+
+        public async void Delete(T t)
+        {
+            await FirebaseClient.Child(t.Id).DeleteAsync();
+        }
     }
 }

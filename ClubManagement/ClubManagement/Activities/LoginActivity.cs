@@ -22,7 +22,7 @@ namespace ClubManagement.Activities
         [InjectOnClick(Resource.Id.btnSignIn)]
         private void SignIn(object s, EventArgs e)
         {
-            AppUltilities.HideKeyboard(this);
+            this.HideKeyboard();
             if (string.IsNullOrEmpty(edtEmail.Text) || string.IsNullOrEmpty(edtPassword.Text))
             {
                 Toast.MakeText(this, "Please fill all the fields", ToastLength.Short).Show();

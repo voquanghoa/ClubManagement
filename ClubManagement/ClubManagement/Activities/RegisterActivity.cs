@@ -33,7 +33,7 @@ namespace ClubManagement.Activities
         [InjectOnClick(Resource.Id.btnSignUp)]
         private void SignUp(object s, EventArgs e)
         {
-            AppUltilities.HideKeyboard(this);
+            this.HideKeyboard();
             if (string.IsNullOrEmpty(edtEmail.Text) || string.IsNullOrEmpty(edtName.Text) ||
                 string.IsNullOrEmpty(edtPassword.Text) || string.IsNullOrEmpty(edtConfirmPassword.Text))
             {
