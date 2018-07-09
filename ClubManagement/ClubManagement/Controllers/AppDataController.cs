@@ -56,9 +56,24 @@ namespace ClubManagement.Controllers
                 IsPaid = paidMoneyIdList.Contains(x.Id),
                 MoneyModel = x
             }));
-
-            Log.Info("asdbquibiuaf", moneyStates[0].IsPaid + "" + moneyStates[1].IsPaid);
             return moneyStates;
+        }
+
+        public List<MoneyAdminState> GetMoneyAdminStates(string moneyId)
+        {
+            var moneyAdminStates = new List<MoneyAdminState>();
+            var userList = UsersController.Instance.Values ?? new List<UserModel>();
+            var paidUserIds = (UserMoneysController.Instance.Values ?? new List<UserMoneyModel>())
+                .Where(x => x.MoneyId == moneyId)
+                .Select(x => x.UserId)
+                .ToList();
+
+            userList.ForEach(x => moneyAdminStates.Add(new MoneyAdminState
+            {
+                User = x,
+                IsPaid = paidUserIds.Contains(x.Id)
+            }));
+            return moneyAdminStates;
         }
     }
 }

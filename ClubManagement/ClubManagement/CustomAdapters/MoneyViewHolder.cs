@@ -1,11 +1,12 @@
 ﻿using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
+using ClubManagement.Interfaces;
 using ClubManagement.Models;
 
 namespace ClubManagement.CustomAdapters
 {
-    class MoneyViewHolder : RecyclerView.ViewHolder
+    public class MoneyViewHolder : RecyclerView.ViewHolder, View.IOnClickListener
     {
         [InjectView(Resource.Id.tvTitle)]
         private TextView tvTitle;
@@ -15,6 +16,8 @@ namespace ClubManagement.CustomAdapters
 
         [InjectView(Resource.Id.imgState)]
         private ImageView imgState;
+
+        public IItemClickListener ItemClickListener { get; set; }
 
         public MoneyState MoneyState
         {
@@ -29,6 +32,12 @@ namespace ClubManagement.CustomAdapters
         public MoneyViewHolder(View itemView) : base(itemView)
         {
             Cheeseknife.Inject(this, itemView);
+            itemView.SetOnClickListener(this);
+        }
+
+        public void OnClick(View v)
+        {
+            ItemClickListener.OnClick(v, AdapterPosition);
         }
     }
 }

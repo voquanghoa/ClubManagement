@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tabbar_height"
+        android:background="@color/tabbar_background_color">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Money"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/textview_margin_left_right"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/tabbar_text_size"
+            android:textStyle="bold" />
+    </android.support.v7.widget.Toolbar>
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="aslkal saifnlkasflkasf"
+        android:textColor="@color/text_color_blue"
+        android:layout_marginBottom="@dimen/textview_margin_top_bottom"
+        android:layout_marginTop="@dimen/textview_margin_top_bottom"
+        android:textSize="@dimen/text_description_size"
+        android:gravity="center_vertical" />
+    <TextView
+        android:id="@+id/tvPayState"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="asndkjjasdk"
+        android:textColor="@color/text_color_blue"
+        android:layout_marginBottom="@dimen/textview_margin_top_bottom"
+        android:layout_marginTop="@dimen/textview_margin_top_bottom"
+        android:textSize="@dimen/text_description_size"
+        android:drawableLeft="@drawable/icon_paid"
+        android:gravity="center_vertical"
+        android:drawablePadding="@dimen/textview_padding_left_right" />
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rvUser" />
+</LinearLayout>
