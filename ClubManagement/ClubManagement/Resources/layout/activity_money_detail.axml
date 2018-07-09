@@ -25,6 +25,8 @@
         android:textColor="@color/text_color_blue"
         android:layout_marginBottom="@dimen/textview_margin_top_bottom"
         android:layout_marginTop="@dimen/textview_margin_top_bottom"
+        android:layout_marginRight="@dimen/textview_margin_left_right"
+        android:layout_marginLeft="@dimen/textview_margin_left_right"
         android:textSize="@dimen/text_description_size"
         android:gravity="center_vertical" />
     <TextView
@@ -34,7 +36,8 @@
         android:text="asndkjjasdk"
         android:textColor="@color/text_color_blue"
         android:layout_marginBottom="@dimen/textview_margin_top_bottom"
-        android:layout_marginTop="@dimen/textview_margin_top_bottom"
+        android:layout_marginRight="@dimen/textview_margin_left_right"
+        android:layout_marginLeft="@dimen/textview_margin_left_right"
         android:textSize="@dimen/text_description_size"
         android:drawableLeft="@drawable/icon_paid"
         android:gravity="center_vertical"

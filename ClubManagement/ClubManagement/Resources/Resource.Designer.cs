@@ -3375,6 +3375,9 @@ namespace ClubManagement
 			// aapt resource value: 0x7f0a003b
 			public const int button_ok = 2131361851;
 			
+			// aapt resource value: 0x7f0a003f
+			public const int button_pay = 2131361855;
+			
 			// aapt resource value: 0x7f0a0038
 			public const int button_save = 2131361848;
 			

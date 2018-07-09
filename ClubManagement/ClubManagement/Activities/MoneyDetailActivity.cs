@@ -40,6 +40,11 @@ namespace ClubManagement.Activities
             tvDescription.Text = $"{time} - Budget : {budget}$\n\n{description}";
             tvPayState.Visibility = ViewStates.Invisible;
 
+            RunOnUiThread(()=>
+            {
+                tvPayState.SetHeight(0);
+            });
+
             rvUser.SetLayoutManager(new LinearLayoutManager(this));
             adapter = new MoneyAdminListAdapter(appDataController.GetMoneyAdminStates(moneyId));
             rvUser.SetAdapter(adapter);
