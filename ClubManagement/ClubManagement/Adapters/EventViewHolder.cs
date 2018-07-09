@@ -26,7 +26,7 @@ namespace ClubManagement.Adapters
         [InjectView(Resource.Id.btnJoin)]
         private Button btnJoin;
 
-        public event EventHandler<EventClickEventArgs> ClickHander;
+        public event EventHandler<ClickEventArgs> ClickHander;
 
         public UserLoginEventModel EventModel
         {
@@ -51,7 +51,7 @@ namespace ClubManagement.Adapters
 
             itemView.Click += (s, e) =>
             {
-                ClickHander?.Invoke(s, new EventClickEventArgs() { Position = AdapterPosition });
+                ClickHander?.Invoke(s, new ClickEventArgs() { Position = AdapterPosition });
             };
         }
     }

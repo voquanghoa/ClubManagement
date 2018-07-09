@@ -49,10 +49,35 @@ namespace ClubManagement.Activities
                     .InvokeZoomControlsEnabled(false)
                     .InvokeCompassEnabled(true);*/
 
-            var markerOpt1 = new MarkerOptions();
-            markerOpt1.SetPosition(new LatLng(50.379444, 2.773611));
-            markerOpt1.SetTitle("Vimy Ridge");
-            googleMap.AddMarker(markerOpt1);
+            //var markerOpt1 = new MarkerOptions();
+            //markerOpt1.SetPosition(new LatLng(50.379444, 2.773611));
+            //markerOpt1.SetTitle("Vimy Ridge");
+            //googleMap.AddMarker(markerOpt1);
+            //16.066268, 108.214110
+            //16.050679, 108.216857
+            //16.062227, 108.233079
+            googleMap.AddMarker(new MarkerOptions()
+                .SetPosition(new LatLng(16.066268, 108.214110))
+                .SetTitle("1"));
+            googleMap.AddMarker(new MarkerOptions()
+                .SetPosition(new LatLng(16.050679, 108.216857))
+                .SetTitle("2"));
+
+            googleMap.AddMarker(new MarkerOptions()
+                .SetPosition(new LatLng(16.062227, 108.233079))
+                .SetTitle("3")
+                .SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.iconPerson)));
+
+            LatLng location = new LatLng(16.050679, 108.216857);
+            CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
+            builder.Target(location);
+            builder.Zoom(15);
+            //builder.Bearing(500);
+            //builder.Tilt(65);
+            CameraPosition cameraPosition = builder.Build();
+            CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
+
+            googleMap.MoveCamera(cameraUpdate);
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -61,7 +86,7 @@ namespace ClubManagement.Activities
 
             SetContentView(Resource.Layout.EventDetail);
 
-            var mapFragment = FragmentManager.FindFragmentById<MapFragment>(Resource.Id.map);
+            var mapFragment = FragmentManager.FindFragmentById<MapFragment>(Resource.Id.fragemtMap);
 
             mapFragment.GetMapAsync(this);
 

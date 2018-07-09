@@ -3,7 +3,7 @@ using Android.Views;
 
 namespace ClubManagement.Adapters
 {
-    public class EventClickEventArgs : EventArgs
+    public class ClickEventArgs : EventArgs
     {
         public int Position { get; set; }
     }

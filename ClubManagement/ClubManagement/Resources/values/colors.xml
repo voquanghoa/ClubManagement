@@ -19,4 +19,5 @@
   <color name="tabbar_background_color">#317e41</color>
   <color name="tabbar_indicator_color">#f6f916</color>
   <color name="item_event_background_color">#c3cfdb</color>
+  <color name="black_color">#000000</color>
 </resources>

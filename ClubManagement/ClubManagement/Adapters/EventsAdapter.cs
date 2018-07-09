@@ -10,7 +10,7 @@ namespace ClubManagement.Adapters
     {
         private List<UserLoginEventModel> events;
 
-        public event EventHandler<EventClickEventArgs> ItemClick;
+        public event EventHandler<ClickEventArgs> ItemClick;
 
         public List<UserLoginEventModel> Events
         {
