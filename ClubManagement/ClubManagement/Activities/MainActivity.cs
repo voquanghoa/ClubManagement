@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
 using Android.App;
+using Android.Support.V4.App;
 using Android.OS;
 using Android.Support.Design.Widget;
 using ClubManagement.Fragments;
 using ClubManagement.Ultilities;
+using Fragment = Android.Support.V4.App.Fragment;
 
 namespace ClubManagement.Activities
 {
     [Activity(Label = "ClubManagement", Theme = "@style/AppTheme")]
-    public class MainActivity : Activity
+    public class MainActivity : FragmentActivity
     {
         [InjectView(Resource.Id.bottom_navigation_tabbar)]
         private BottomNavigationView bottomNavigationView;
@@ -48,7 +50,7 @@ namespace ClubManagement.Activities
         private void DisplayFragment(int fragmentMenuId)
         {
 			var fragment = fragmentMapIds[fragmentMenuId];
-            FragmentManager.BeginTransaction()
+            SupportFragmentManager.BeginTransaction()
                 .Replace(Resource.Id.content_frame, fragment)
                 .Commit();
         }

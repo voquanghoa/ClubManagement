@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using Android.App;
 using Android.Preferences;
+using Android.Util;
 using ClubManagement.Models;
 
 namespace ClubManagement.Controllers
@@ -24,9 +24,9 @@ namespace ClubManagement.Controllers
         {
             get
             {
-                var numberOfBudgets = MoneysController.Instance.Values.Count;
-                var numberOfPaidBudgets = UserMoneysController.Instance.Values.Count(x => x.UserId == userId);
-                return numberOfBudgets - numberOfPaidBudgets;
+                var moneyList = MoneysController.Instance.Values ?? new List<MoneyModel>();
+                var userMoneyList = UserMoneysController.Instance.Values ?? new List<UserMoneyModel>();
+                return moneyList.Count - userMoneyList.Count(x => x.UserId == userId);
             }
         }
 
@@ -34,12 +34,31 @@ namespace ClubManagement.Controllers
         {
             get
             {
-                var joinedEvents = UserEventsController.Instance.Values.Where(x => x.UserId == userId);
-                return EventsController.Instance.Values
-                    .Join(joinedEvents, e => e.Id, j => j.EventId, (e, j) => e)
-                    .Where(e => e.Time > DateTime.Now)
-                    .ToList();
+                var joinedEvents = (UserEventsController.Instance.Values ??
+                                    new List<UserEventModel>()).Where(x => x.UserId == userId).ToList();
+
+                return joinedEvents.Join(EventsController.Instance.Values ?? new List<EventModel>(),
+                        j => j.EventId, e => e.Id, (j, e) => e)
+                    .Where(e => e.Time > DateTime.Now).ToList();
             }
+        }
+
+        public List<MoneyState> GetListMoneyState()
+        {
+            var moneyStates = new List<MoneyState>();
+            var moneyList = MoneysController.Instance.Values ?? new List<MoneyModel>();
+            var paidMoneyIdList = (UserMoneysController.Instance.Values ?? new List<UserMoneyModel>())
+                .Where(x => x.UserId == userId)
+                .Select(x => x.MoneyId)
+                .ToList(); 
+            moneyList.ForEach(x => moneyStates.Add(new MoneyState
+            {
+                IsPaid = paidMoneyIdList.Contains(x.Id),
+                MoneyModel = x
+            }));
+
+            Log.Info("asdbquibiuaf", moneyStates[0].IsPaid + "" + moneyStates[1].IsPaid);
+            return moneyStates;
         }
     }
 }
