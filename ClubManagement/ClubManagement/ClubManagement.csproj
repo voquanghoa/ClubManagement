@@ -144,6 +144,7 @@
     <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Adapters\PersonGoTimeClickEventArgs.cs" />
     <Compile Include="Adapters\ClickEventArgs.cs" />
+    <Compile Include="Controllers\AppDataController.cs" />
     <Compile Include="Adapters\EventsAdapter.cs" />
     <Compile Include="Adapters\PersonGoTimesAdapter.cs" />
     <Compile Include="Adapters\PersonsGoTimeAdapterViewHolder.cs" />
@@ -159,9 +160,13 @@
     <Compile Include="Models\AddressGeocodeAPIModel.cs" />
     <Compile Include="Models\DistanceMatrixDistanceAPIModel.cs" />
     <Compile Include="Models\ElementMatrixDistanceAPIModel.cs" />
+    <Compile Include="CustomAdapters\MoneyListAdapter.cs" />
+    <Compile Include="CustomAdapters\MoneyViewHolder.cs" />
+    <Compile Include="Fragments\ListMoneyFragment.cs" />
     <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\FirebaseModel.cs" />
     <Compile Include="Models\MoneyModel.cs" />
+    <Compile Include="Models\MoneyState.cs" />
     <Compile Include="Models\OutComeModel.cs" />
     <Compile Include="Models\PersonGoTimeModel.cs" />
     <Compile Include="Models\ResultsMatrixDistanceAPIModel.cs" />
@@ -178,6 +183,7 @@
     <Compile Include="Fragments\EventFragment.cs" />
     <Compile Include="Fragments\MoneyFragment.cs" />
     <Compile Include="Activities\MainActivity.cs" />
+    <Compile Include="CustomAdapters\PagerAdapter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ultilities\AppUltilities.cs" />
@@ -294,6 +300,39 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon_person.png" />
+    <AndroidResource Include="Resources\layout\fragment_dashboard.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_textview_upcoming_event.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_textview_budget.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_textview_events.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\fragment_money.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\fragment_money_list.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_unpaid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_paid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\recyclerview_money_list_item.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.v7.CardView.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.v7.CardView.targets" Condition="Exists('..\packages\Xamarin.Android.Support.v7.CardView.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.v7.CardView.targets')" />

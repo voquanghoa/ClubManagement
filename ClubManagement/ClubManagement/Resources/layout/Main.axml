@@ -15,6 +15,7 @@
         android:background="@color/tabbar_background_color"
         android:id="@+id/bottom_navigation_tabbar"
         app:itemTextColor="@drawable/nav_item_colors"
+        app:itemIconTint="@drawable/nav_item_colors"
         app:menu="@menu/bottom_navigation_menu"
         app:elevation="@dimen/tabbar_elevation" />
 </LinearLayout>

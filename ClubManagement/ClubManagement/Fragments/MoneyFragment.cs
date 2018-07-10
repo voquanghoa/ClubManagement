@@ -1,24 +1,39 @@
-﻿using Android.App;
+﻿using System.Linq;
 using Android.OS;
+using Android.Support.Design.Widget;
+using Android.Support.V4.App;
+using Android.Support.V4.View;
 using Android.Views;
+using ClubManagement.Controllers;
+using PagerAdapter = ClubManagement.CustomAdapters.PagerAdapter;
 
 namespace ClubManagement.Fragments
 {
     public class MoneyFragment : Fragment
     {
-        public override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
+        [InjectView(Resource.Id.tlMoney)] private TabLayout tlMoney;
 
-            // Create your fragment here
-        }
+        [InjectView(Resource.Id.vpMoney)] private ViewPager vpMoney;
+
+        private readonly AppDataController appDataController = AppDataController.Instance;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            // Use this to return your custom view for this Fragment
-            // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
+            var view = inflater.Inflate(Resource.Layout.fragment_money, container, false);
+            Cheeseknife.Inject(this, view);
+            Init();
+            return view;
+        }
 
-            return base.OnCreateView(inflater, container, savedInstanceState);
+        private void Init()
+        {
+            var adapter = new PagerAdapter(Activity.SupportFragmentManager);
+            var listMoneyStates = appDataController.GetListMoneyState();
+            adapter.AddFramgent(new ListMoneyFragment(listMoneyStates), "All");
+            adapter.AddFramgent(new ListMoneyFragment(listMoneyStates.Where(x => x.IsPaid).ToList()), "Already paid");
+            adapter.AddFramgent(new ListMoneyFragment(listMoneyStates.Where(x => !x.IsPaid).ToList()), "Unpaid");
+            vpMoney.Adapter = adapter;
+            tlMoney.SetupWithViewPager(vpMoney);
         }
     }
 }

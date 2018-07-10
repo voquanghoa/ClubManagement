@@ -1,5 +1,5 @@
-﻿using Android.App;
 using Android.OS;
+using Android.App;
 using Android.Support.Design.Widget;
 using Android.Support.V7.Widget;
 using Android.Views;
@@ -11,8 +11,8 @@ using Android.Preferences;
 using Android.Content;
 using ClubManagement.Activities;
 using Newtonsoft.Json;
-using Android.Runtime;
 using System.Collections.Generic;
+using Fragment = Android.Support.V4.App.Fragment;
 
 namespace ClubManagement.Fragments
 {
@@ -96,15 +96,15 @@ namespace ClubManagement.Fragments
             return view;
         }
 
-        public override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        public override void OnActivityResult(int requestCode, int resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
-
             if (requestCode == 0)
             {
                 UpdateRecyclerView();
             }
         }
+
 
         private void UpdateRecyclerView()
         {

@@ -7,7 +7,7 @@ namespace ClubManagement.Models
         [JsonProperty("userId")]
         public string UserId { get; set; }
 
-        [JsonProperty("eventid")]
+        [JsonProperty("eventId")]
         public string EventId { get; set; }
     }
 }
