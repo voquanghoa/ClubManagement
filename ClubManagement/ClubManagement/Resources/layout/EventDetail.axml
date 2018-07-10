@@ -85,4 +85,24 @@
         android:layout_margin="@dimen/text_event_detail_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/item_event_margin"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/relativeLayout1">
+      <fragment
+          android:id="@+id/fragemtMap"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          class="com.google.android.gms.maps.MapFragment" />
+      <FrameLayout
+          android:id="@+id/fragemtListPerson"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentRight="true"
+          android:layout_alignParentBottom="true" />
+    </RelativeLayout>
 </LinearLayout>

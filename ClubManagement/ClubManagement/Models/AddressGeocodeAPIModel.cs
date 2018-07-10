@@ -2,7 +2,7 @@
 
 namespace ClubManagement.Models
 {
-    public class Address
+    public class AddressGeocodeAPIModel
     {
         [JsonProperty("formatted_address")]
         public string FormattedAddress { get; set; }
