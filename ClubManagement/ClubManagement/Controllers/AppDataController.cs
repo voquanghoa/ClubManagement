@@ -36,9 +36,8 @@ namespace ClubManagement.Controllers
             {
                 var joinedEvents = (UserEventsController.Instance.Values ??
                                     new List<UserEventModel>()).Where(x => x.UserId == userId).ToList();
-
-                return joinedEvents.Join(EventsController.Instance.Values ?? new List<EventModel>(),
-                        j => j.EventId, e => e.Id, (j, e) => e)
+                var eventList = EventsController.Instance.Values ?? new List<EventModel>();
+                return joinedEvents.Join(eventList, j => j.EventId, e => e.Id, (j, e) => e)
                     .Where(e => e.Time > DateTime.Now).ToList();
             }
         }
