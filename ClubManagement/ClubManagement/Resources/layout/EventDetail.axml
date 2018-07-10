@@ -93,16 +93,16 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:id="@+id/relativeLayout1">
-        <FrameLayout
-            android:id="@+id/fragemtListPerson"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true" />
-        <fragment
-            android:id="@+id/fragemtMap"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            class="com.google.android.gms.maps.MapFragment" />
+      <fragment
+          android:id="@+id/fragemtMap"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          class="com.google.android.gms.maps.MapFragment" />
+      <FrameLayout
+          android:id="@+id/fragemtListPerson"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentRight="true"
+          android:layout_alignParentBottom="true" />
     </RelativeLayout>
 </LinearLayout>

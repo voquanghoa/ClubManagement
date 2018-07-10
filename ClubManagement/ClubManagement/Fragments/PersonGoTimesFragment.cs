@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Android.Support.V7.Widget;
 using ClubManagement.Controllers;
 using ClubManagement.Models;
-using Android.Preferences;
 using ClubManagement.Adapters;
 
 namespace ClubManagement.Fragments
@@ -24,44 +18,105 @@ namespace ClubManagement.Fragments
 
         private UserEventsController userEventsController = UserEventsController.Instance;
 
-        private string eventId;
+        private UsersController usersController = UsersController.Instance;
+
+        private MapsController mapsController = MapsController.Instance;
+
+        private EventModel eventDetail;
+
+        public bool displayPersons = true;
+
+        public event EventHandler<PersonGoTimeClickEventArgs> PersonGoTimeClick;
+
+        public event EventHandler DisplayPersonsClick;
 
         public PersonGoTimesFragment()
         {
             
         }
 
-        public PersonGoTimesFragment(string eventId)
+        public PersonGoTimesFragment(EventModel eventDetail)
         {
-            this.eventId = eventId;
+            this.eventDetail = eventDetail;
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            view = inflater.Inflate(Resource.Layout.FragmentPersonGoTimes, container, false);
+            if (displayPersons)
+            {
+                view = inflater.Inflate(Resource.Layout.FragmentPersonGoTimes, container, false);
 
-            Init();
+                InitDisplayPersons();
+            }
+            else
+            {
+                view = new ImageButton(this.Context);
+
+                view.SetBackgroundResource(Resource.Drawable.icon_list_person);
+
+                view.Click += DisplayPersons_Click;
+            }
 
             return view;
         }
 
-        private void Init()
+        private void InitDisplayPersons()
         {
             var recyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerViewPersonsGoTime);
 
             recyclerView.SetLayoutManager(new LinearLayoutManager(view.Context));
 
-            var personGoTimes = userEventsController.Values.Where(x => x.EventId == eventId).Select(x =>
-            {
-                var personGoTimeModel = new PersonGoTimeModel()
+            var q = userEventsController.Values.Where(x => x.EventId == eventDetail.Id).ToList();
+
+            var personGoTimes = userEventsController.Values.Where(x => x.EventId == eventDetail.Id)
+                .Join(usersController.Values,
+                    x => x.UserId,
+                    y => y.Id,
+                    (x, y) => y)
+                .Select(x =>
                 {
-                    //Name = 
-                };
+                    var personGoTimeModel = new PersonGoTimeModel()
+                    {
+                        Name = x.Name,
+                        GoTime = mapsController.GetGoTime(x.Latitude, x.Longitude, eventDetail.Latitude, eventDetail.Longitude),
+                        Selected = false,
+                        Latitude = x.Latitude,
+                        Longitude = x.Longitude
+                    };
 
-                return personGoTimeModel;
-            }).ToList();
+                    return personGoTimeModel;
+                }).ToList();
 
-            recyclerView.SetAdapter(new PersonGoTimesAdapter(personGoTimes));
+            var adapter = new PersonGoTimesAdapter(personGoTimes);
+
+            recyclerView.SetAdapter(adapter);
+
+            var previousPosition = 0;
+
+            adapter.ItemClick += (s, e) =>
+            {
+                personGoTimes[previousPosition].Selected = false;
+                personGoTimes[e.Position].Selected = true;
+                previousPosition = e.Position;
+                adapter.NotifyDataSetChanged();
+
+                PersonGoTimeClick.Invoke(s, new PersonGoTimeClickEventArgs()
+                {
+                    Latitude = personGoTimes[e.Position].Latitude,
+                    Longitude = personGoTimes[e.Position].Longitude,
+                });
+            };
+
+            view.FindViewById<ImageButton>(Resource.Id.imageButtonBack).Click += DisplayPersons_Click;
+
+            view.SetBackgroundColor(Android.Graphics.Color.Argb(200, 195, 207, 219));
+        }
+
+        private void DisplayPersons_Click(object sender, EventArgs e)
+        {
+            displayPersons = !displayPersons;
+
+            DisplayPersonsClick.Invoke(sender, e);
         }
     }
 }

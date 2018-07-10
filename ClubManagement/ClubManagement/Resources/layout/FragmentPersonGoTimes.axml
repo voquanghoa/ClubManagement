@@ -4,11 +4,11 @@
     android:layout_width="@dimen/recycler_view_persons_go_time_width"
     android:layout_height="@dimen/recycler_view_persons_go_time_height">
     <ImageButton
-        android:src="@android:drawable/ic_menu_gallery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:id="@+id/imageButtonBack" />
+        android:id="@+id/imageButtonBack"
+        android:background="@drawable/icon_arrow_right" />
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
