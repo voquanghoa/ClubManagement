@@ -3,9 +3,9 @@ using Newtonsoft.Json;
 
 namespace ClubManagement.Models
 {
-    public class Results
+    public class ResultsGeocodeAPIModel
     {
         [JsonProperty("results")]
-        public List<Address> Addresses { get; set; }
+        public List<AddressGeocodeAPIModel> Addresses { get; set; }
     }
 }
