@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Android.Support.V7.Widget;
 using Android.Views;
+using Android.Widget;
 using ClubManagement.Models;
 
 namespace ClubManagement.CustomAdapters
@@ -9,14 +10,25 @@ namespace ClubManagement.CustomAdapters
     {
         private readonly List<MoneyAdminState> moneyAdminStates;
 
-        public MoneyAdminListAdapter(List<MoneyAdminState> moneyAdminStates)
+        private readonly TextView tvState;
+
+        private readonly string moneyId;
+
+        public MoneyAdminListAdapter(List<MoneyAdminState> moneyAdminStates, TextView tvState, string moneyId)
         {
             this.moneyAdminStates = moneyAdminStates;
+            this.tvState = tvState;
+            this.moneyId = moneyId;
         }
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
-            if (holder is MoneyAdminViewHolder viewHolder) viewHolder.MoneyAdminState = moneyAdminStates[position];
+            if (holder is MoneyAdminViewHolder viewHolder)
+            {
+                viewHolder.MoneyAdminState = moneyAdminStates[position];
+                viewHolder.TvState = tvState;
+                viewHolder.MoneyId = moneyId;
+            }
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)

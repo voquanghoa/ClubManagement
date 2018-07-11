@@ -33,13 +33,12 @@
         android:id="@+id/tvPayState"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="asndkjjasdk"
+        android:text=""
         android:textColor="@color/text_color_blue"
         android:layout_marginBottom="@dimen/textview_margin_top_bottom"
         android:layout_marginRight="@dimen/textview_margin_left_right"
         android:layout_marginLeft="@dimen/textview_margin_left_right"
         android:textSize="@dimen/text_description_size"
-        android:drawableLeft="@drawable/icon_paid"
         android:gravity="center_vertical"
         android:drawablePadding="@dimen/textview_padding_left_right" />
     <android.support.v7.widget.RecyclerView

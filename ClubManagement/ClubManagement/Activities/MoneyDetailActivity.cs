@@ -5,6 +5,8 @@ using Android.Views;
 using Android.Widget;
 using ClubManagement.Controllers;
 using ClubManagement.CustomAdapters;
+using ClubManagement.Models;
+using System.Collections.Generic;
 
 namespace ClubManagement.Activities
 {
@@ -15,12 +17,17 @@ namespace ClubManagement.Activities
 
         private MoneyAdminListAdapter adapter;
 
+        private List<MoneyAdminState> moneyAdminStates;
+
+        private string moneyId;
+
         [InjectView(Resource.Id.tvDescription)]
         private TextView tvDescription;
 
         [InjectView(Resource.Id.tvPayState)] private TextView tvPayState;
 
         [InjectView(Resource.Id.rvUser)] private RecyclerView rvUser;
+
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -34,20 +41,21 @@ namespace ClubManagement.Activities
         {
             var description = Intent.GetStringExtra("Description");
             var budget = Intent.GetIntExtra("Budget", 0);
-            var moneyId = Intent.GetStringExtra("MoneyId");
+            moneyId = Intent.GetStringExtra("MoneyId");
             var time = Intent.GetStringExtra("Time");
 
             tvDescription.Text = $"{time} - Budget : {budget}$\n\n{description}";
-            tvPayState.Visibility = ViewStates.Invisible;
-
-            RunOnUiThread(()=>
-            {
-                tvPayState.SetHeight(0);
-            });
-
             rvUser.SetLayoutManager(new LinearLayoutManager(this));
-            adapter = new MoneyAdminListAdapter(appDataController.GetMoneyAdminStates(moneyId));
+            moneyAdminStates = appDataController.GetMoneyAdminStates(moneyId);
+            adapter = new MoneyAdminListAdapter(moneyAdminStates, tvPayState, moneyId);
             rvUser.SetAdapter(adapter);
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+            moneyAdminStates = appDataController.GetMoneyAdminStates(moneyId);
+            adapter.NotifyDataSetChanged();
         }
     }
 }
