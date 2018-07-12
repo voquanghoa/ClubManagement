@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Android.OS;
 using Android.Support.V4.App;
@@ -13,7 +14,7 @@ namespace ClubManagement.Fragments
     {
         private int unpaidBudgets;
 
-        private int upcomingEvents;
+        private List<EventModel> upcomingEvents;
 
         private int timeToNextUpcomingEvent;
         
@@ -39,12 +40,27 @@ namespace ClubManagement.Fragments
         private void Init()
         {
             unpaidBudgets = appDataController.NumberOfUnpaidBudgets;
-            upcomingEvents = appDataController.UpcomingEvents.Count;
-            timeToNextUpcomingEvent = (appDataController.UpcomingEvents?.OrderBy(x => x.Time).First().Time - DateTime.Now).Value.Days;
-
-            tvBudget.Text = $"You need to pay {unpaidBudgets} " + (unpaidBudgets > 1 ? "budgets" : "budget");
-            tvEvents.Text = $"You have {upcomingEvents} upcoming " + (upcomingEvents > 1 ? "events" : "event");
-            tvUpcomingEvent.Text = $"Your next event will be held in {timeToNextUpcomingEvent} " + (timeToNextUpcomingEvent > 1 ? "days" : "day");
+            if (unpaidBudgets == 0)
+            {
+                tvBudget.SetHeight(0);
+            }
+            else
+            {
+                tvBudget.Text = $"You need to pay {unpaidBudgets} " + (unpaidBudgets > 1 ? "budgets" : "budget");
+            }
+            
+            upcomingEvents = appDataController.UpcomingEvents;
+            if (upcomingEvents.Count == 0)
+            {
+                tvEvents.SetHeight(0);
+                tvUpcomingEvent.SetHeight(0);
+            }
+            else
+            {
+                timeToNextUpcomingEvent = (appDataController.UpcomingEvents.OrderBy(x => x.Time).First().Time - DateTime.Now).Days;
+                tvEvents.Text = $"You have {upcomingEvents} upcoming " + (upcomingEvents.Count > 1 ? "events" : "event");
+                tvUpcomingEvent.Text = $"Your next event will be held in {timeToNextUpcomingEvent} " + (timeToNextUpcomingEvent > 1 ? "days" : "day");
+            }
         }
     }
 }

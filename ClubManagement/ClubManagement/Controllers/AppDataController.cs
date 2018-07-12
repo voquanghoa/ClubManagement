@@ -36,9 +36,8 @@ namespace ClubManagement.Controllers
             {
                 var joinedEvents = (UserEventsController.Instance.Values ??
                                     new List<UserEventModel>()).Where(x => x.UserId == userId).ToList();
-
-                return joinedEvents.Join(EventsController.Instance.Values ?? new List<EventModel>(),
-                        j => j.EventId, e => e.Id, (j, e) => e)
+                var eventList = EventsController.Instance.Values ?? new List<EventModel>();
+                return joinedEvents.Join(eventList, j => j.EventId, e => e.Id, (j, e) => e)
                     .Where(e => e.Time > DateTime.Now).ToList();
             }
         }
@@ -56,9 +55,24 @@ namespace ClubManagement.Controllers
                 IsPaid = paidMoneyIdList.Contains(x.Id),
                 MoneyModel = x
             }));
-
-            Log.Info("asdbquibiuaf", moneyStates[0].IsPaid + "" + moneyStates[1].IsPaid);
             return moneyStates;
+        }
+
+        public List<MoneyAdminState> GetMoneyAdminStates(string moneyId)
+        {
+            var moneyAdminStates = new List<MoneyAdminState>();
+            var userList = UsersController.Instance.Values ?? new List<UserModel>();
+            var paidUserIds = (UserMoneysController.Instance.Values ?? new List<UserMoneyModel>())
+                .Where(x => x.MoneyId == moneyId)
+                .Select(x => x.UserId)
+                .ToList();
+
+            userList.ForEach(x => moneyAdminStates.Add(new MoneyAdminState
+            {
+                User = x,
+                IsPaid = paidUserIds.Contains(x.Id)
+            }));
+            return moneyAdminStates;
         }
     }
 }

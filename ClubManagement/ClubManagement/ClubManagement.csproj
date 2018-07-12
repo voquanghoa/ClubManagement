@@ -64,7 +64,7 @@
       <HintPath>..\packages\Firebase.Xamarin.0.3.6\lib\JWT.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Firebase.Xamarin.0.3.6\lib\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -140,6 +140,7 @@
   <ItemGroup>
     <Compile Include="Activities\EventDetailActivity.cs" />
     <Compile Include="Activities\LoginActivity.cs" />
+    <Compile Include="Activities\MoneyDetailActivity.cs" />
     <Compile Include="Activities\RegisterActivity.cs" />
     <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Adapters\PersonGoTimeClickEventArgs.cs" />
@@ -163,8 +164,12 @@
     <Compile Include="CustomAdapters\MoneyListAdapter.cs" />
     <Compile Include="CustomAdapters\MoneyViewHolder.cs" />
     <Compile Include="Fragments\ListMoneyFragment.cs" />
+    <Compile Include="CustomAdapters\MoneyAdminListAdapter.cs" />
+    <Compile Include="CustomAdapters\MoneyAdminViewHolder.cs" />
+    <Compile Include="Interfaces\IItemClickListener.cs" />
     <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\FirebaseModel.cs" />
+    <Compile Include="Models\MoneyAdminState.cs" />
     <Compile Include="Models\MoneyModel.cs" />
     <Compile Include="Models\MoneyState.cs" />
     <Compile Include="Models\OutComeModel.cs" />
@@ -331,6 +336,16 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\recyclerview_money_list_item.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\recyclerview_money_admin_item.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_money_detail.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

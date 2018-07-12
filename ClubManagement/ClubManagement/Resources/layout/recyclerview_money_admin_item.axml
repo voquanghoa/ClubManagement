@@ -7,31 +7,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:background="@color/textview_dashboard_background_color"
         android:layout_weight="1">
         <TextView
-            android:id="@+id/tvTitle"
+            android:id="@+id/tvUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/tabbar_text_size"
+            android:layout_gravity="center_vertical"
             android:text="July 2018 - Budget : 60$"
             android:layout_marginLeft="@dimen/textview_margin_left_right"
             android:layout_marginRight="@dimen/textview_margin_left_right"
             android:layout_marginTop="@dimen/textview_margin_top_bottom"
             android:layout_marginBottom="@dimen/textview_margin_top_bottom"
             android:textColor="@color/text_color_blue"
+            android:layout_weight="1"
             android:textStyle="bold" />
-        <TextView
-            android:id="@+id/tvDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_description_size"
-            android:layout_marginLeft="@dimen/textview_margin_left_right"
-            android:layout_marginRight="@dimen/textview_margin_left_right"
-            android:layout_marginBottom="@dimen/textview_margin_top_bottom"
-            android:textColor="@color/text_color_white"
-            android:text="Team build 2018 for all members." />
     </LinearLayout>
     <ImageView
         android:id="@+id/imgState"

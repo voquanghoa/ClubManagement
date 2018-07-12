@@ -28,6 +28,11 @@ namespace ClubManagement.CustomAdapters
             return new Java.Lang.String(titles[position]);
         }
 
+        public override int GetItemPosition(Object @object)
+        {
+            return PositionNone;
+        }
+
         public void AddFramgent(Fragment fragment, string title)
         {
             fragments.Add(fragment);

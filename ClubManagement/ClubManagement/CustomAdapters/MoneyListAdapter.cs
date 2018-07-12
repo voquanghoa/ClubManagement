@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
+using Android.Content;
 using Android.Support.V7.Widget;
 using Android.Views;
+using ClubManagement.Activities;
+using ClubManagement.Interfaces;
 using ClubManagement.Models;
 
 namespace ClubManagement.CustomAdapters
 {
-    class MoneyListAdapter : RecyclerView.Adapter
+    public class MoneyListAdapter : RecyclerView.Adapter, IItemClickListener
     {
         private readonly List<MoneyState> moneyStates;
 
@@ -16,7 +19,9 @@ namespace ClubManagement.CustomAdapters
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
-            if (holder is MoneyViewHolder viewHolder) viewHolder.MoneyState = moneyStates[position];
+            if (!(holder is MoneyViewHolder viewHolder)) return;
+            viewHolder.MoneyState = moneyStates[position];
+            viewHolder.ItemClickListener = this;
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -27,5 +32,16 @@ namespace ClubManagement.CustomAdapters
         }
 
         public override int ItemCount => moneyStates.Count;
+
+        public void OnClick(View view, int position)
+        {
+            var intent = new Intent(view.Context, typeof(MoneyDetailActivity));
+            var moneyState = moneyStates[position].MoneyModel;
+            intent.PutExtra("Budget", moneyState.Amount);
+            intent.PutExtra("Description", moneyState.Description);
+            intent.PutExtra("MoneyId", moneyState.Id);
+            intent.PutExtra("Time", moneyState.Time.ToShortDateString());
+            view.Context.StartActivity(intent);
+        }
     }
 }
