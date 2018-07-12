@@ -1,24 +1,40 @@
 ﻿using Android.OS;
+using Android.Support.Design.Widget;
+using Android.Support.V4.View;
 using Android.Support.V4.App;
 using Android.Views;
+using ClubManagement.Models;
+using System.Collections.Generic;
+using PagerAdapter = ClubManagement.CustomAdapters.PagerAdapter;
 
 namespace ClubManagement.Fragments
 {
     public class BalanceFragment : Fragment
     {
-        public override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
+        [InjectView(Resource.Id.tlBalance)] private TabLayout tlBalance;
 
-            // Create your fragment here
-        }
+        [InjectView(Resource.Id.vpBalance)] private ViewPager vpBalance;
+
+        private List<BalanceModel> balances;
+
+        private PagerAdapter adapter;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            // Use this to return your custom view for this Fragment
-            // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
+            var view = inflater.Inflate(Resource.Layout.FragmentBalance, container, false);
+            Cheeseknife.Inject(this, view);
+            Init();
+            return view;
+        }
 
-            return base.OnCreateView(inflater, container, savedInstanceState);
+        private void Init()
+        {
+            adapter = new PagerAdapter(Activity.SupportFragmentManager);
+            adapter.AddFramgent(new BalancesFragment(balances), "Summary");
+            adapter.AddFramgent(new BalancesFragment(balances), "Income");
+            adapter.AddFramgent(new BalancesFragment(balances), "Outcome");
+            vpBalance.Adapter = adapter;
+            tlBalance.SetupWithViewPager(vpBalance);
         }
     }
 }
