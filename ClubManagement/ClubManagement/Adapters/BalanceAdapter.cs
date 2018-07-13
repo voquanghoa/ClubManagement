@@ -2,16 +2,29 @@
 using Android.Support.V7.Widget;
 using System.Collections.Generic;
 using ClubManagement.Models;
+using ClubManagement.Fragments;
 
 namespace ClubManagement.Adapters
 {
     public class BalancesAdapter : RecyclerView.Adapter
     {
-        private List<BalanceModel> balances;
+        private List<OutcomeModel> balances;
 
-        public BalancesAdapter(List<BalanceModel> balances)
+        private BalancesFragment.Type type;
+
+        public List<OutcomeModel> Balances
+        {
+            set
+            {
+                balances = value;
+                NotifyDataSetChanged();
+            }
+        }
+
+        public BalancesAdapter(List<OutcomeModel> balances, BalancesFragment.Type type)
         {
             this.balances = balances;
+            this.type = type;
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -20,7 +33,7 @@ namespace ClubManagement.Adapters
             var itemView = LayoutInflater.From(parent.Context).
                    Inflate(id, parent, false);
 
-            return new BalanceAdapterViewHolder(itemView);
+            return new BalanceAdapterViewHolder(itemView, type);
         }
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder viewHolder, int position)

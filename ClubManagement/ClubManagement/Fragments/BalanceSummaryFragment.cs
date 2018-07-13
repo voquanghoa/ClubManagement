@@ -2,6 +2,8 @@
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using ClubManagement.Controllers;
+using System.Linq;
 
 namespace ClubManagement.Fragments
 {
@@ -22,7 +24,24 @@ namespace ClubManagement.Fragments
 
             Cheeseknife.Inject(this, view);
 
+            Init();
+
             return view;
+        }
+
+        private void Init()
+        {
+            var sumIncomes = AppDataController.Instance.Incomes.Sum(x => x.Amount);
+
+            var sumOutcomes = OutComesController.Instance.Values.Sum(x => x.Amount);
+
+            var finalBalance = sumIncomes - sumOutcomes;
+
+            var numberSign = finalBalance > 0 ? "+" : "";
+
+            tvFinalBalance.Text = $"Final balance: {numberSign}{finalBalance}$";
+            tvIncome.Text = $"Income total: +{sumIncomes}$";
+            tvOutcome.Text = $"Outcome total: +{sumOutcomes}$";
         }
     }
 }

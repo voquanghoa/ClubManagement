@@ -29,4 +29,5 @@
   <dimen name="recycler_view_persons_go_time_height">300dp</dimen>
   <dimen name="item_person_go_time_padding">16dp</dimen>
   <dimen name="line_black_height">2dp</dimen>
+  <dimen name="item_balance_padding">8dp</dimen>
 </resources>

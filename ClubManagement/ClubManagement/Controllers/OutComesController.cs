@@ -3,7 +3,7 @@ using Firebase.Xamarin.Database;
 
 namespace ClubManagement.Controllers
 {
-    public class OutComesController : FirebaseController<OutComeModel>
+    public class OutComesController : FirebaseController<OutcomeModel>
     {
         private const string Key = "outComes";
 

@@ -15,7 +15,7 @@ namespace ClubManagement.Fragments
 
         [InjectView(Resource.Id.vpBalance)] private ViewPager vpBalance;
 
-        private List<BalanceModel> balances;
+        private List<IncomeModel> balances;
 
         private PagerAdapter adapter;
 
@@ -30,9 +30,9 @@ namespace ClubManagement.Fragments
         private void Init()
         {
             adapter = new PagerAdapter(Activity.SupportFragmentManager);
-            adapter.AddFramgent(new BalancesFragment(balances), "Summary");
-            adapter.AddFramgent(new BalancesFragment(balances), "Income");
-            adapter.AddFramgent(new BalancesFragment(balances), "Outcome");
+            adapter.AddFramgent(new BalanceSummaryFragment(), "Summary");
+            adapter.AddFramgent(new BalancesFragment(BalancesFragment.Type.Income), "Income");
+            adapter.AddFramgent(new BalancesFragment(BalancesFragment.Type.Outcome), "Outcome");
             vpBalance.Adapter = adapter;
             tlBalance.SetupWithViewPager(vpBalance);
         }

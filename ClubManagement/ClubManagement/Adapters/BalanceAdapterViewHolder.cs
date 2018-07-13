@@ -1,6 +1,7 @@
 ﻿using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
+using ClubManagement.Fragments;
 using ClubManagement.Models;
 
 namespace ClubManagement.Adapters
@@ -19,19 +20,24 @@ namespace ClubManagement.Adapters
         [InjectView(Resource.Id.tvDate)]
         private TextView tvDate;
 
-        public BalanceModel BalanceModel
+        private BalancesFragment.Type type;
+
+        public OutcomeModel BalanceModel
         {
             set
             {
+                var numberSign = BalancesFragment.Type.Income == type ? "+" : "-";
+
                 tvTitle.Text = value.Title;
                 tvDescription.Text = value.Description;
-                tvMoney.Text = value.Money.ToString();
+                tvMoney.Text = numberSign + value.Amount.ToString();
                 tvDate.Text = value.Date.ToShortDateString();
             }
         }
 
-        public BalanceAdapterViewHolder(View itemView) : base(itemView)
+        public BalanceAdapterViewHolder(View itemView, BalancesFragment.Type type) : base(itemView)
         {
+            this.type = type;
             Cheeseknife.Inject(this, itemView);
         }
     }
