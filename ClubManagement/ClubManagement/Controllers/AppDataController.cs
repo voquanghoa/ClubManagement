@@ -14,6 +14,12 @@ namespace ClubManagement.Controllers
 
         private readonly string userId;
 
+        private MoneysController moneysController = MoneysController.Instance;
+
+        private UserMoneysController userMoneysController = UserMoneysController.Instance;
+
+        private UsersController usersController = UsersController.Instance;
+
         private AppDataController()
         {
             userId = PreferenceManager.GetDefaultSharedPreferences(Application.Context)
@@ -73,6 +79,36 @@ namespace ClubManagement.Controllers
                 IsPaid = paidUserIds.Contains(x.Id)
             }));
             return moneyAdminStates;
+        }
+
+        public List<IncomeModel> Incomes
+        {
+            get
+            {
+                return userMoneysController.Values.Join(moneysController.Values,
+                x => x.MoneyId,
+                y => y.Id,
+                (x, y) =>
+                {
+                    return new
+                    {
+                        x,
+                        y
+                    };
+                }).Join(usersController.Values,
+                    x => x.x.UserId,
+                    y => y.Id,
+                    (x, y) =>
+                    {
+                        return new IncomeModel()
+                        {
+                            Title = y.Name,
+                            Description = x.y.Description,
+                            Amount = x.y.Amount,
+                            Date = x.y.Time
+                        };
+                    }).ToList();
+            }
         }
     }
 }

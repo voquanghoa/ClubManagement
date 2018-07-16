@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace ClubManagement.Models
 {
-    public class OutComeModel : FirebaseModel
+    public class OutcomeModel : FirebaseModel
     {
         [JsonProperty("title")]
         public string Title { get; set; }
@@ -12,7 +12,7 @@ namespace ClubManagement.Models
         public string Description { get; set; }
 
         [JsonProperty("amount")]
-        public string Amount { get; set; }
+        public int Amount { get; set; }
 
         [JsonProperty("date")]
         public DateTime Date { get; set; }
