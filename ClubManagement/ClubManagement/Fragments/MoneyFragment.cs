@@ -23,6 +23,12 @@ namespace ClubManagement.Fragments
 
         private PagerAdapter adapter;
 
+        private readonly ListMoneyFragment allMoneyFragment = new ListMoneyFragment();
+
+        private readonly ListMoneyFragment paidMoneyFragment = new ListMoneyFragment();
+
+        private readonly ListMoneyFragment unpaidMoneyFragment = new ListMoneyFragment();
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.fragment_money, container, false);
@@ -34,12 +40,26 @@ namespace ClubManagement.Fragments
         private void Init()
         {
             adapter = new PagerAdapter(Activity.SupportFragmentManager);
-            listMoneyStates = appDataController.GetListMoneyState();
-            adapter.AddFramgent(new ListMoneyFragment(listMoneyStates), "All");
-            adapter.AddFramgent(new ListMoneyFragment(listMoneyStates.Where(x => x.IsPaid).ToList()), "Already paid");
-            adapter.AddFramgent(new ListMoneyFragment(listMoneyStates.Where(x => !x.IsPaid).ToList()), "Unpaid");
+            SetData();
+            adapter.AddFramgent(allMoneyFragment, "All");
+            adapter.AddFramgent(paidMoneyFragment, "Already paid");
+            adapter.AddFramgent(unpaidMoneyFragment, "Unpaid");
             vpMoney.Adapter = adapter;
             tlMoney.SetupWithViewPager(vpMoney);
+        }
+
+        public override void OnResume()
+        {
+            base.OnResume();
+            SetData();
+        }
+
+        private void SetData()
+        {
+            listMoneyStates = appDataController.GetListMoneyState();
+            allMoneyFragment.MoneyStates = listMoneyStates;
+            paidMoneyFragment.MoneyStates = listMoneyStates.Where(x => x.IsPaid).ToList();
+            unpaidMoneyFragment.MoneyStates = listMoneyStates.Where(x => !x.IsPaid).ToList();
         }
     }
 }

@@ -6,6 +6,20 @@
     android:orientation="vertical"
     android:minWidth="25px"
     android:minHeight="25px">
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tabbar_height"
+        android:background="@color/tabbar_background_color">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Event"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/textview_margin_left_right"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/tabbar_text_size"
+            android:textStyle="bold" />
+    </android.support.v7.widget.Toolbar>
     <android.support.design.widget.TabLayout
         android:minWidth="25px"
         android:minHeight="25px"
