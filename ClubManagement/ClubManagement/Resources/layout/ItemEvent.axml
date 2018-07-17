@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/text_color_blue"
+            android:textSize="@dimen/tabbar_text_size"
             android:id="@+id/tvTitle" />
         <TextView
             android:text="Medium Text"
@@ -29,6 +30,7 @@
             android:textColor="@color/text_color_black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/text_description_size"
             android:id="@+id/tvDescription" />
         <LinearLayout
             android:orientation="horizontal"
@@ -40,15 +42,17 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/text_color_blue"
                 android:id="@+id/tvTime"
-                android:layout_weight="1"
+                android:textSize="@dimen/text_description_size"
                 android:layout_width="wrap_content"
+                android:layout_marginRight="@dimen/textview_margin_left_right"
                 android:layout_height="match_parent" />
             <TextView
                 android:text="Large Text"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/text_color_blue"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:textSize="@dimen/text_description_size"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/tvPlace" />
         </LinearLayout>
@@ -58,5 +62,7 @@
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/text_description_size"
+        android:background="@drawable/button_background"
         android:id="@+id/btnJoin" />
 </LinearLayout>

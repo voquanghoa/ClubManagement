@@ -3,6 +3,20 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tabbar_height"
+        android:background="@color/tabbar_background_color">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Event"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/textview_margin_left_right"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/tabbar_text_size"
+            android:textStyle="bold" />
+    </android.support.v7.widget.Toolbar>
     <TextView
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -10,6 +24,7 @@
         android:textColor="@color/text_color_blue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/text_title_size"
         android:id="@+id/tvTitle" />
     <LinearLayout
         android:orientation="vertical"
@@ -25,6 +40,7 @@
             android:textColor="@color/text_color_black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/text_description_size"
             android:id="@+id/tvDescription" />
         <TextView
             android:text="Large Text"
@@ -33,6 +49,7 @@
             android:textColor="@color/text_color_green"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/text_description_size"
             android:id="@+id/tvCreatedBy" />
         <LinearLayout
             android:orientation="horizontal"
@@ -47,6 +64,7 @@
                 android:textColor="@color/text_color_blue"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:textSize="@dimen/text_description_size"
                 android:id="@+id/tvTime" />
             <TextView
                 android:text="Large Text"
@@ -54,6 +72,7 @@
                 android:textColor="@color/text_color_blue"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:textSize="@dimen/text_description_size"
                 android:id="@+id/tvPlace" />
         </LinearLayout>
         <LinearLayout
@@ -69,12 +88,15 @@
                 android:gravity="center_vertical"
                 android:textColor="@color/text_color_green"
                 android:layout_marginRight="@dimen/text_event_detail_margin"
-                android:layout_width="wrap_content"
+                android:textSize="@dimen/text_description_size"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent" />
             <Button
                 android:text="Button"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:textSize="@dimen/text_description_size"
                 android:id="@+id/btnJoin" />
         </LinearLayout>
     </LinearLayout>
@@ -83,6 +105,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/text_color_green"
         android:layout_margin="@dimen/text_event_detail_margin"
+        android:textSize="@dimen/text_title_size"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <RelativeLayout
@@ -93,16 +116,16 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:id="@+id/relativeLayout1">
-      <fragment
-          android:id="@+id/fragemtMap"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          class="com.google.android.gms.maps.MapFragment" />
-      <FrameLayout
-          android:id="@+id/fragemtListPerson"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignParentRight="true"
-          android:layout_alignParentBottom="true" />
+        <fragment
+            android:id="@+id/fragemtMap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            class="com.google.android.gms.maps.MapFragment" />
+        <FrameLayout
+            android:id="@+id/fragemtListPerson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true" />
     </RelativeLayout>
 </LinearLayout>
