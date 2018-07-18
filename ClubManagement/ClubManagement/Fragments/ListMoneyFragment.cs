@@ -26,14 +26,9 @@ namespace ClubManagement.Fragments
             get => moneyStates;
             set
             {
-                moneyStates = value;
-                new Thread(() =>
-                {
-                    Activity?.RunOnUiThread(() =>
-                    {
-                        adapter?.NotifyDataSetChanged();
-                    });
-                }).Start();
+				moneyStates.Clear();
+				moneyStates.AddRange(value);
+				adapter?.NotifyDataSetChanged();
             }
         }
 

@@ -14,6 +14,8 @@ namespace ClubManagement.Fragments.Bases
 
 		protected abstract SwipeRefreshLayout SwipeRefreshLayout { get; }
 
+		private object locker = new object();
+
 		public override void OnViewCreated(View view, Bundle savedInstanceState)
 		{
 			base.OnViewCreated(view, savedInstanceState);
@@ -32,11 +34,20 @@ namespace ClubManagement.Fragments.Bases
         {
 			this.data = await Task.Run(() => QueryData());
 
-            ((Activity)Context).RunOnUiThread(() =>
-            {
-				DisplayData(this.data);
-				SwipeRefreshLayout.Refreshing = false;
-            });
+			lock(locker){
+				if (Context is Activity activity)
+                {
+                    activity.RunOnUiThread(() =>
+                    {
+                        if (View != null)
+                        {
+                            DisplayData(this.data);
+                            SwipeRefreshLayout.Refreshing = false;
+                        }
+                    });
+                }
+			}
+
         }
 
 		protected abstract T QueryData();

@@ -2915,8 +2915,8 @@ namespace ClubManagement
 			// aapt resource value: 0x7f0a00d6
 			public const int imgState = 2131362006;
 			
-			// aapt resource value: 0x7f0a00af
-			public const int imgbtnAdd = 2131361967;
+			// aapt resource value: 0x7f0a00b0
+			public const int imgbtnAdd = 2131361968;
 			
 			// aapt resource value: 0x7f0a00cb
 			public const int info = 2131361995;
@@ -3017,8 +3017,8 @@ namespace ClubManagement
 			// aapt resource value: 0x7f0a00b7
 			public const int recyclerViewPersonsGoTime = 2131361975;
 			
-			// aapt resource value: 0x7f0a00b4
-			public const int refresher = 2131361972;
+			// aapt resource value: 0x7f0a00aa
+			public const int refresher = 2131361962;
 			
 			// aapt resource value: 0x7f0a00a3
 			public const int relativeLayout1 = 2131361955;
@@ -3032,11 +3032,11 @@ namespace ClubManagement
 			// aapt resource value: 0x7f0a00c8
 			public const int right_side = 2131361992;
 			
-			// aapt resource value: 0x7f0a00ae
-			public const int rvBalance = 2131361966;
+			// aapt resource value: 0x7f0a00af
+			public const int rvBalance = 2131361967;
 			
-			// aapt resource value: 0x7f0a00ab
-			public const int rvMoney = 2131361963;
+			// aapt resource value: 0x7f0a00ac
+			public const int rvMoney = 2131361964;
 			
 			// aapt resource value: 0x7f0a0085
 			public const int rvUser = 2131361925;
@@ -3152,8 +3152,8 @@ namespace ClubManagement
 			// aapt resource value: 0x7f0a001d
 			public const int tabMode = 2131361821;
 			
-			// aapt resource value: 0x7f0a00b3
-			public const int tabView1 = 2131361971;
+			// aapt resource value: 0x7f0a00b4
+			public const int tabView1 = 2131361972;
 			
 			// aapt resource value: 0x7f0a0013
 			public const int terrain = 2131361811;
@@ -3197,8 +3197,8 @@ namespace ClubManagement
 			// aapt resource value: 0x7f0a0061
 			public const int title_template = 2131361889;
 			
-			// aapt resource value: 0x7f0a00ac
-			public const int tlBalance = 2131361964;
+			// aapt resource value: 0x7f0a00ad
+			public const int tlBalance = 2131361965;
 			
 			// aapt resource value: 0x7f0a00a9
 			public const int tlMoney = 2131361961;
@@ -3233,17 +3233,17 @@ namespace ClubManagement
 			// aapt resource value: 0x7f0a00a7
 			public const int tvEvents = 2131361959;
 			
-			// aapt resource value: 0x7f0a00b0
-			public const int tvFinalBalance = 2131361968;
-			
 			// aapt resource value: 0x7f0a00b1
-			public const int tvIncome = 2131361969;
+			public const int tvFinalBalance = 2131361969;
+			
+			// aapt resource value: 0x7f0a00b2
+			public const int tvIncome = 2131361970;
 			
 			// aapt resource value: 0x7f0a00b8
 			public const int tvMoney = 2131361976;
 			
-			// aapt resource value: 0x7f0a00b2
-			public const int tvOutcome = 2131361970;
+			// aapt resource value: 0x7f0a00b3
+			public const int tvOutcome = 2131361971;
 			
 			// aapt resource value: 0x7f0a0084
 			public const int tvPayState = 2131361924;
@@ -3275,11 +3275,11 @@ namespace ClubManagement
 			// aapt resource value: 0x7f0a00d7
 			public const int visible = 2131362007;
 			
-			// aapt resource value: 0x7f0a00ad
-			public const int vpBalance = 2131361965;
+			// aapt resource value: 0x7f0a00ae
+			public const int vpBalance = 2131361966;
 			
-			// aapt resource value: 0x7f0a00aa
-			public const int vpMoney = 2131361962;
+			// aapt resource value: 0x7f0a00ab
+			public const int vpMoney = 2131361963;
 			
 			// aapt resource value: 0x7f0a0018
 			public const int wide = 2131361816;

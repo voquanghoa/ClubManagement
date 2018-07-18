@@ -4,14 +4,16 @@ using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V4.App;
 using Android.Support.V4.View;
+using Android.Support.V4.Widget;
 using Android.Views;
 using ClubManagement.Controllers;
+using ClubManagement.Fragments.Bases;
 using ClubManagement.Models;
 using PagerAdapter = ClubManagement.CustomAdapters.PagerAdapter;
 
 namespace ClubManagement.Fragments
 {
-    public class MoneyFragment : Fragment
+	public class MoneyFragment : SwipeToRefreshDataFragment<List<MoneyState>>
     {
         [InjectView(Resource.Id.tlMoney)] private TabLayout tlMoney;
 
@@ -29,13 +31,15 @@ namespace ClubManagement.Fragments
 
         private readonly ListMoneyFragment unpaidMoneyFragment = new ListMoneyFragment();
 
-        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+		protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
+
+		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.fragment_money, container, false);
             Cheeseknife.Inject(this, view);
             
 			adapter = new PagerAdapter(Activity.SupportFragmentManager);
-			UpdateViewData(false);
+
             adapter.AddFramgent(allMoneyFragment, "All");
             adapter.AddFramgent(paidMoneyFragment, "Already paid");
             adapter.AddFramgent(unpaidMoneyFragment, "Unpaid");
@@ -48,18 +52,17 @@ namespace ClubManagement.Fragments
         public override void OnResume()
         {
             base.OnResume();
-			UpdateViewData(true);
+			SwipeRefreshLayout.Refreshing = true;
+            UpdateViewData();
         }
 
-		private void UpdateViewData(bool force)
-        {
-			if(listMoneyStates == null || force)
-			{
-                listMoneyStates = appDataController.GetListMoneyState();
-                allMoneyFragment.MoneyStates = listMoneyStates;
-                paidMoneyFragment.MoneyStates = listMoneyStates.Where(x => x.IsPaid).ToList();
-                unpaidMoneyFragment.MoneyStates = listMoneyStates.Where(x => !x.IsPaid).ToList();
-			}         
-        }
-    }
+		protected override List<MoneyState> QueryData() => appDataController.GetListMoneyState();
+
+		protected override void DisplayData(List<MoneyState> data)
+		{
+			allMoneyFragment.MoneyStates = data;
+			paidMoneyFragment.MoneyStates = data.Where(x => x.IsPaid).ToList();
+			unpaidMoneyFragment.MoneyStates = data.Where(x => !x.IsPaid).ToList();
+		}
+	}
 }
