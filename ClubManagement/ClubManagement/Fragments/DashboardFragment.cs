@@ -33,7 +33,9 @@ namespace ClubManagement.Fragments
         {
             var view = inflater.Inflate(Resource.Layout.fragment_dashboard, container, false);
             Cheeseknife.Inject(this, view);
-            Init();
+
+            view.Post(Init);
+
             return view;
         }
 

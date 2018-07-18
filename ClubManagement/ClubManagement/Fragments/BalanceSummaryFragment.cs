@@ -41,7 +41,7 @@ namespace ClubManagement.Fragments
 
             tvFinalBalance.Text = $"Final balance: {numberSign}{finalBalance}$";
             tvIncome.Text = $"Income total: +{sumIncomes}$";
-            tvOutcome.Text = $"Outcome total: +{sumOutcomes}$";
+            tvOutcome.Text = $"Outcome total: -{sumOutcomes}$";
         }
     }
 }

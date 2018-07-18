@@ -27,7 +27,14 @@ namespace ClubManagement.Fragments
         {
             var view = inflater.Inflate(Resource.Layout.fragment_money, container, false);
             Cheeseknife.Inject(this, view);
-            Init();
+
+            if (adapter == null) view.Post(Init);
+            else
+            {
+                vpMoney.Adapter = adapter;
+                tlMoney.SetupWithViewPager(vpMoney);
+            }
+
             return view;
         }
 

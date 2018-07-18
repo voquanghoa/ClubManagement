@@ -51,7 +51,8 @@ namespace ClubManagement.Fragments
                 {
                     balances.Add((OutcomeModel)s);
 
-                    adapter.Balances = balances;
+                    adapter.NotifyDataSetChanged();
+                    //adapter.Balances = balances;
                 };
             }
 
