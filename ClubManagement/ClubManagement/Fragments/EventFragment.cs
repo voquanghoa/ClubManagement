@@ -1,3 +1,4 @@
+using System;
 using Android.OS;
 using Android.App;
 using Android.Support.Design.Widget;
@@ -12,12 +13,19 @@ using Android.Content;
 using ClubManagement.Activities;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using ClubManagement.Ultilities;
 using Fragment = Android.Support.V4.App.Fragment;
 
 namespace ClubManagement.Fragments
 {
     public class EventFragment : Fragment
     {
+        [InjectOnClick(Resource.Id.btnLogout)]
+        private void Logout(object s, EventArgs e)
+        {
+            DialogExtensions.ShowLogoutDialog(Context);
+        }
+
         private View view;
 
         private const string AllTab = "All";
@@ -39,7 +47,7 @@ namespace ClubManagement.Fragments
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             view = inflater.Inflate(Resource.Layout.FragmentEvent, container, false);
-
+            Cheeseknife.Inject(this, view);
             var recyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerView1);
             recyclerView.SetLayoutManager(new LinearLayoutManager(view.Context));
 

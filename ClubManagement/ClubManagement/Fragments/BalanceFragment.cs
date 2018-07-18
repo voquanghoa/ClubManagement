@@ -1,10 +1,12 @@
-﻿using Android.OS;
+﻿using System;
+using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V4.View;
 using Android.Support.V4.App;
 using Android.Views;
 using ClubManagement.Models;
 using System.Collections.Generic;
+using ClubManagement.Ultilities;
 using PagerAdapter = ClubManagement.CustomAdapters.PagerAdapter;
 
 namespace ClubManagement.Fragments
@@ -14,6 +16,12 @@ namespace ClubManagement.Fragments
         [InjectView(Resource.Id.tlBalance)] private TabLayout tlBalance;
 
         [InjectView(Resource.Id.vpBalance)] private ViewPager vpBalance;
+
+        [InjectOnClick(Resource.Id.btnLogout)]
+        private void Logout(object s, EventArgs e)
+        {
+            DialogExtensions.ShowLogoutDialog(Context);
+        }
 
         private List<IncomeModel> balances;
 
