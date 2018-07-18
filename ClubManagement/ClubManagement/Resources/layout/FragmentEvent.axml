@@ -29,10 +29,15 @@
         app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
         app:tabIndicatorColor="@color/tabbar_indicator_color"
         android:id="@+id/tabView1" />
-    <android.support.v7.widget.RecyclerView
-        android:minWidth="25px"
-        android:minHeight="25px"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresher"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/recyclerView1" />
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recyclerView1" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

@@ -13,10 +13,14 @@ using ClubManagement.Activities;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using Fragment = Android.Support.V4.App.Fragment;
+using System.Threading.Tasks;
+using Android.Support.V4.Widget;
+using System;
+using ClubManagement.Fragments.Bases;
 
 namespace ClubManagement.Fragments
 {
-    public class EventFragment : Fragment
+	public class EventFragment : SwipeToRefreshDataFragment<List<UserLoginEventModel>>
     {
         private View view;
 
@@ -32,11 +36,11 @@ namespace ClubManagement.Fragments
 
         private EventsAdapter adapter;
 
-        private List<UserLoginEventModel> events;
-
         private string userId;
 
-        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+		protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
+
+		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             view = inflater.Inflate(Resource.Layout.FragmentEvent, container, false);
 
@@ -53,7 +57,7 @@ namespace ClubManagement.Fragments
             {
                 var intent = new Intent(view.Context, typeof(EventDetailActivity));
 
-                var eventDetail = JsonConvert.SerializeObject(events[e.Position]);
+				var eventDetail = JsonConvert.SerializeObject(data[e.Position]);
 
                 intent.PutExtra("EventDetail", eventDetail);
 
@@ -71,18 +75,16 @@ namespace ClubManagement.Fragments
                 switch (e.Tab.Text)
                 {
                     case AllTab:
-                        adapter.Events = events;
+						adapter.Events = data;
                         break;
                     case UpcomingTab:
-                        adapter.Events = events.Where(x => x.IsJoined).ToList();
+						adapter.Events = data.Where(x => x.IsJoined).ToList();
                         break;
                     case JoinedTab:
-                        adapter.Events = events.Where(x => !x.IsJoined).ToList();
+						adapter.Events = data.Where(x => !x.IsJoined).ToList();
                         break;
                 }
             };
-
-			UpdateViewData(false);
 
             return view;
         }
@@ -92,28 +94,27 @@ namespace ClubManagement.Fragments
             base.OnActivityResult(requestCode, resultCode, data);
             if (requestCode == 0)
             {
-				UpdateViewData(true);
+				UpdateViewData();
 			}
         }
 
-
-		private void UpdateViewData(bool force)
-        {
-			if(events == null || force)
-			{
-				events = eventsController.Values.Select(x =>
+		protected override List<UserLoginEventModel> QueryData()
+		{
+			return eventsController.Values.Select(x =>
+            {
+                var userLoginEventModel = new UserLoginEventModel(x)
                 {
-                    var userLoginEventModel = new UserLoginEventModel(x)
-                    {
-                        Place = MapsController.Instance.GetAddress(x.Latitude, x.Longitude),
-                        IsJoined = userEventsController.Values.Any(y => y.EventId == x.Id && y.UserId == userId)
-                    };
+                    Place = MapsController.Instance.GetAddress(x.Latitude, x.Longitude),
+                    IsJoined = userEventsController.Values.Any(y => y.EventId == x.Id && y.UserId == userId)
+                };
 
-                    return userLoginEventModel;
-                }).ToList();
+                return userLoginEventModel;
+            }).ToList();
+		}
 
-                adapter.Events = events;
-			}
-        }
-    }
+		protected override void DisplayData(List<UserLoginEventModel> data)
+		{
+			adapter.Events = data;
+		}
+	}
 }
