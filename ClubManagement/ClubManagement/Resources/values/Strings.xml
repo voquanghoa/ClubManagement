@@ -31,4 +31,18 @@
   <string name="amount">Amount</string>
   <string name="cancel">Cancel</string>
   <string name="save">Save</string>
+  <string name="button_logout">Log out</string>
+  <string name="dialog_positive_button">Yes</string>
+  <string name="dialog_negative_button">No</string>
+  <string name="confirm_logout">Are you sure to log out?</string>
+  <string name="fill_all_fields">Please fill all the fields</string>
+  <string name="sign_in">Sign in</string>
+  <string name="wait">Please wait...</string>
+  <string name="not_exist_email">Email not exist!</string>
+  <string name="wrong_email">Wrong email or password!</string>
+  <string name="login_success">Login successfully!</string>
+  <string name="not_match_pass">Password does not match the confirm password, try again!</string>
+  <string name="sign_up">Sign up</string>
+  <string name="exist_email">Email is exist!</string>
+  <string name="signup_success">Sign up successfully!</string>
 </resources>

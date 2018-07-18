@@ -17,15 +17,6 @@
             android:textColor="@color/text_color_white"
             android:textSize="@dimen/tabbar_text_size"
             android:textStyle="bold" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Log out"
-            android:textColor="@color/text_color_white"
-            android:layout_gravity="right"
-            android:background="@null"
-            android:id="@+id/btnLogout"
-            android:textSize="@dimen/text_description_size" />
     </android.support.v7.widget.Toolbar>
     <android.support.design.widget.TabLayout
         android:id="@+id/tlMoney"

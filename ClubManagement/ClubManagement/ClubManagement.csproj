@@ -196,6 +196,7 @@
     <Compile Include="CustomAdapters\PagerAdapter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ultilities\AppConstantValues.cs" />
     <Compile Include="Ultilities\AppUltilities.cs" />
     <Compile Include="Ultilities\BottomNavigationHelper.cs" />
     <Compile Include="Ultilities\DialogExtensions.cs" />

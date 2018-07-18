@@ -3726,6 +3726,9 @@ namespace ClubManagement
 			// aapt resource value: 0x7f070036
 			public const int bottom_sheet_behavior = 2131165238;
 			
+			// aapt resource value: 0x7f070063
+			public const int button_logout = 2131165283;
+			
 			// aapt resource value: 0x7f070057
 			public const int button_ok = 2131165271;
 			
@@ -3807,6 +3810,9 @@ namespace ClubManagement
 			// aapt resource value: 0x7f070013
 			public const int common_signin_button_text_long = 2131165203;
 			
+			// aapt resource value: 0x7f070066
+			public const int confirm_logout = 2131165286;
+			
 			// aapt resource value: 0x7f070053
 			public const int confirm_password_hint = 2131165267;
 			
@@ -3819,11 +3825,23 @@ namespace ClubManagement
 			// aapt resource value: 0x7f07005e
 			public const int description = 2131165278;
 			
+			// aapt resource value: 0x7f070065
+			public const int dialog_negative_button = 2131165285;
+			
+			// aapt resource value: 0x7f070064
+			public const int dialog_positive_button = 2131165284;
+			
 			// aapt resource value: 0x7f070046
 			public const int email_hint = 2131165254;
 			
 			// aapt resource value: 0x7f07005a
 			public const int eventLocation = 2131165274;
+			
+			// aapt resource value: 0x7f07006f
+			public const int exist_email = 2131165295;
+			
+			// aapt resource value: 0x7f070067
+			public const int fill_all_fields = 2131165287;
 			
 			// aapt resource value: 0x7f070040
 			public const int firebase_database_url = 2131165248;
@@ -3843,11 +3861,20 @@ namespace ClubManagement
 			// aapt resource value: 0x7f070043
 			public const int google_storage_bucket = 2131165251;
 			
+			// aapt resource value: 0x7f07006c
+			public const int login_success = 2131165292;
+			
 			// aapt resource value: 0x7f070047
 			public const int name_hint = 2131165255;
 			
 			// aapt resource value: 0x7f070052
 			public const int new_password_hint = 2131165266;
+			
+			// aapt resource value: 0x7f07006a
+			public const int not_exist_email = 2131165290;
+			
+			// aapt resource value: 0x7f07006d
+			public const int not_match_pass = 2131165293;
 			
 			// aapt resource value: 0x7f070048
 			public const int password_hint = 2131165256;
@@ -3872,6 +3899,15 @@ namespace ClubManagement
 			
 			// aapt resource value: 0x7f070027
 			public const int search_menu_title = 2131165223;
+			
+			// aapt resource value: 0x7f070068
+			public const int sign_in = 2131165288;
+			
+			// aapt resource value: 0x7f07006e
+			public const int sign_up = 2131165294;
+			
+			// aapt resource value: 0x7f070070
+			public const int signup_success = 2131165296;
 			
 			// aapt resource value: 0x7f070028
 			public const int status_bar_notification_info_overflow = 2131165224;
@@ -3909,8 +3945,14 @@ namespace ClubManagement
 			// aapt resource value: 0x7f070051
 			public const int verify_code_hint = 2131165265;
 			
+			// aapt resource value: 0x7f070069
+			public const int wait = 2131165289;
+			
 			// aapt resource value: 0x7f070059
 			public const int willYouJoin = 2131165273;
+			
+			// aapt resource value: 0x7f07006b
+			public const int wrong_email = 2131165291;
 			
 			static String()
 			{

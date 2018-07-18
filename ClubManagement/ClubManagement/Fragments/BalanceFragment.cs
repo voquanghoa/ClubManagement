@@ -17,12 +17,6 @@ namespace ClubManagement.Fragments
 
         [InjectView(Resource.Id.vpBalance)] private ViewPager vpBalance;
 
-        [InjectOnClick(Resource.Id.btnLogout)]
-        private void Logout(object s, EventArgs e)
-        {
-            DialogExtensions.ShowLogoutDialog(Context);
-        }
-
         private List<IncomeModel> balances;
 
         private PagerAdapter adapter;
@@ -38,9 +32,9 @@ namespace ClubManagement.Fragments
         private void Init()
         {
             adapter = new PagerAdapter(Activity.SupportFragmentManager);
-            adapter.AddFramgent(new BalanceSummaryFragment(), "Summary");
-            adapter.AddFramgent(new BalancesFragment(BalancesFragment.Type.Income), "Income");
-            adapter.AddFramgent(new BalancesFragment(BalancesFragment.Type.Outcome), "Outcome");
+            adapter.AddFramgent(new BalanceSummaryFragment(), AppConstantValues.BalanceFragmentSummaryTab);
+            adapter.AddFramgent(new BalancesFragment(BalancesFragment.Type.Income), AppConstantValues.BalanceFragmentIncomeTab);
+            adapter.AddFramgent(new BalancesFragment(BalancesFragment.Type.Outcome), AppConstantValues.BalanceFragmentOutcomeTab);
             vpBalance.Adapter = adapter;
             tlBalance.SetupWithViewPager(vpBalance);
         }

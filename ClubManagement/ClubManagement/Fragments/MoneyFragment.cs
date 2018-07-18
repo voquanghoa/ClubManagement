@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V4.App;
-using Android.Support.V4.View;
 using Android.Support.V7.Widget;
 using Android.Views;
 using ClubManagement.Controllers;
@@ -19,18 +17,6 @@ namespace ClubManagement.Fragments
         [InjectView(Resource.Id.tlMoney)] private TabLayout tlMoney;
 
         [InjectView(Resource.Id.rvMoney)] private RecyclerView rvMoney;
-
-        [InjectOnClick(Resource.Id.btnLogout)]
-        private void Logout(object s, EventArgs e)
-        {
-            DialogExtensions.ShowLogoutDialog(Context);
-        }
-
-        private const string AllTabTitle = "All";
-
-        private const string PaidTabTitle = "Already paid";
-
-        private const string UnpaidTabTitle = "Unpaid";
 
         private readonly MoneyListAdapter adapter = new MoneyListAdapter();
 
@@ -52,20 +38,20 @@ namespace ClubManagement.Fragments
             adapter.MoneyStates = listMoneyStates;
             rvMoney.SetLayoutManager(new LinearLayoutManager(Context));
             rvMoney.SetAdapter(adapter);
-            tlMoney.AddTab(tlMoney.NewTab().SetText(AllTabTitle));
-            tlMoney.AddTab(tlMoney.NewTab().SetText(PaidTabTitle));
-            tlMoney.AddTab(tlMoney.NewTab().SetText(UnpaidTabTitle));
+            tlMoney.AddTab(tlMoney.NewTab().SetText(AppConstantValues.MoneyFragmentAllTabTitle));
+            tlMoney.AddTab(tlMoney.NewTab().SetText(AppConstantValues.MoneyFragmentPaidTabTitle));
+            tlMoney.AddTab(tlMoney.NewTab().SetText(AppConstantValues.MoneyFragmentUnpaidTabTitle));
             tlMoney.TabSelected += (s, e) =>
             {
                 switch (e.Tab.Text)
                 {
-                    case AllTabTitle:
+                    case AppConstantValues.MoneyFragmentAllTabTitle:
                         adapter.MoneyStates = listMoneyStates;
                         break;
-                    case PaidTabTitle:
+                    case AppConstantValues.MoneyFragmentPaidTabTitle:
                         adapter.MoneyStates = listMoneyStates.Where(x => x.IsPaid).ToList();
                         break;
-                    case UnpaidTabTitle:
+                    case AppConstantValues.MoneyFragmentUnpaidTabTitle:
                         adapter.MoneyStates = listMoneyStates.Where(x => !x.IsPaid).ToList();
                         break;
                 }

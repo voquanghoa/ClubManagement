@@ -24,15 +24,16 @@ namespace ClubManagement.Ultilities
             var preferencesEditor = PreferenceManager.GetDefaultSharedPreferences(Application.Context).Edit();
             new AlertDialog.Builder(context)
                 .SetCancelable(false)
-                .SetTitle("Are you sure to logout?")
-                .SetPositiveButton("Yes", (dce, e) =>
+                .SetTitle(context.Resources.GetString(Resource.String.confirm_logout))
+                .SetPositiveButton(context.Resources.GetString(Resource.String.dialog_positive_button), (dce, e) =>
                 {
-                    preferencesEditor.PutString("UserId", string.Empty);
-                    preferencesEditor.PutBoolean("IsLogged", false);
+                    preferencesEditor.PutString(AppConstantValues.UserIdPreferenceKey, string.Empty);
+                    preferencesEditor.PutBoolean(AppConstantValues.LogStatusPreferenceKey, false);
                     preferencesEditor.Commit();
+                    ((Activity)context).Finish();
                     context.StartActivity(typeof(LoginActivity));
                 })
-                .SetNegativeButton("No", (dce, e) => { }).Show();
+                .SetNegativeButton(context.Resources.GetString(Resource.String.dialog_negative_button), (dce, e) => { }).Show();
         }
     }
 }
