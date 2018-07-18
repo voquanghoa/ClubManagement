@@ -46,18 +46,7 @@ namespace ClubManagement.Fragments
             var preferences = PreferenceManager.GetDefaultSharedPreferences(Application.Context);
             userId = preferences.GetString("UserId", string.Empty);
 
-            events = eventsController.Values.Select(x =>
-            {
-                var userLoginEventModel = new UserLoginEventModel(x)
-                {
-                    Place = MapsController.Instance.GetAddress(x.Latitude, x.Longitude),
-                    IsJoined = userEventsController.Values.Any(y => y.EventId == x.Id && y.UserId == userId)
-                };
-
-                return userLoginEventModel;
-            }).ToList();
-
-            adapter = new EventsAdapter(events);
+            adapter = new EventsAdapter();
             recyclerView.SetAdapter(adapter);
 
             adapter.ItemClick += (s, e) =>
@@ -93,6 +82,8 @@ namespace ClubManagement.Fragments
                 }
             };
 
+			UpdateViewData(false);
+
             return view;
         }
 
@@ -101,25 +92,28 @@ namespace ClubManagement.Fragments
             base.OnActivityResult(requestCode, resultCode, data);
             if (requestCode == 0)
             {
-                UpdateRecyclerView();
-            }
+				UpdateViewData(true);
+			}
         }
 
 
-        private void UpdateRecyclerView()
+		private void UpdateViewData(bool force)
         {
-            events = eventsController.Values.Select(x =>
-            {
-                var userLoginEventModel = new UserLoginEventModel(x)
+			if(events == null || force)
+			{
+				events = eventsController.Values.Select(x =>
                 {
-                    Place = MapsController.Instance.GetAddress(x.Latitude, x.Longitude),
-                    IsJoined = userEventsController.Values.Any(y => y.EventId == x.Id && y.UserId == userId)
-                };
+                    var userLoginEventModel = new UserLoginEventModel(x)
+                    {
+                        Place = MapsController.Instance.GetAddress(x.Latitude, x.Longitude),
+                        IsJoined = userEventsController.Values.Any(y => y.EventId == x.Id && y.UserId == userId)
+                    };
 
-                return userLoginEventModel;
-            }).ToList();
+                    return userLoginEventModel;
+                }).ToList();
 
-            adapter.Events = events;
+                adapter.Events = events;
+			}
         }
     }
 }

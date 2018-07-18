@@ -33,33 +33,33 @@ namespace ClubManagement.Fragments
         {
             var view = inflater.Inflate(Resource.Layout.fragment_money, container, false);
             Cheeseknife.Inject(this, view);
-            Init();
-            return view;
-        }
-
-        private void Init()
-        {
-            adapter = new PagerAdapter(Activity.SupportFragmentManager);
-            SetData();
+            
+			adapter = new PagerAdapter(Activity.SupportFragmentManager);
+			UpdateViewData(false);
             adapter.AddFramgent(allMoneyFragment, "All");
             adapter.AddFramgent(paidMoneyFragment, "Already paid");
             adapter.AddFramgent(unpaidMoneyFragment, "Unpaid");
             vpMoney.Adapter = adapter;
             tlMoney.SetupWithViewPager(vpMoney);
+
+            return view;
         }
 
         public override void OnResume()
         {
             base.OnResume();
-            SetData();
+			UpdateViewData(true);
         }
 
-        private void SetData()
+		private void UpdateViewData(bool force)
         {
-            listMoneyStates = appDataController.GetListMoneyState();
-            allMoneyFragment.MoneyStates = listMoneyStates;
-            paidMoneyFragment.MoneyStates = listMoneyStates.Where(x => x.IsPaid).ToList();
-            unpaidMoneyFragment.MoneyStates = listMoneyStates.Where(x => !x.IsPaid).ToList();
+			if(listMoneyStates == null || force)
+			{
+                listMoneyStates = appDataController.GetListMoneyState();
+                allMoneyFragment.MoneyStates = listMoneyStates;
+                paidMoneyFragment.MoneyStates = listMoneyStates.Where(x => x.IsPaid).ToList();
+                unpaidMoneyFragment.MoneyStates = listMoneyStates.Where(x => !x.IsPaid).ToList();
+			}         
         }
     }
 }
