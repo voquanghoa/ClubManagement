@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.OS;
 using Android.Preferences;
+using ClubManagement.Ultilities;
 
 namespace ClubManagement.Activities
 {
@@ -11,7 +12,7 @@ namespace ClubManagement.Activities
         {
             base.OnCreate(savedInstanceState);
             var isLogged = PreferenceManager.GetDefaultSharedPreferences(Application.Context)
-                .GetBoolean("IsLogged", false);
+                .GetBoolean(AppConstantValues.LogStatusPreferenceKey, false);
             StartActivity(isLogged ? typeof(MainActivity) : typeof(LoginActivity));
             Finish();
         }

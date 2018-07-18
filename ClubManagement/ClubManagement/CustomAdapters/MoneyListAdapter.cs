@@ -10,11 +10,16 @@ namespace ClubManagement.CustomAdapters
 {
     public class MoneyListAdapter : RecyclerView.Adapter, IItemClickListener
     {
-        private readonly List<MoneyState> moneyStates;
+        private List<MoneyState> moneyStates = new List<MoneyState>();
 
-        public MoneyListAdapter(List<MoneyState> moneyStates)
+        public List<MoneyState> MoneyStates
         {
-            this.moneyStates = moneyStates;
+            get => moneyStates;
+            set
+            {
+                moneyStates = value;
+                NotifyDataSetChanged();
+            }
         }
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)

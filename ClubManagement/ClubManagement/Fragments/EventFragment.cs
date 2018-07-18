@@ -12,6 +12,7 @@ using Android.Content;
 using ClubManagement.Activities;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using ClubManagement.Ultilities;
 using Fragment = Android.Support.V4.App.Fragment;
 
 namespace ClubManagement.Fragments
@@ -19,12 +20,6 @@ namespace ClubManagement.Fragments
     public class EventFragment : Fragment
     {
         private View view;
-
-        private const string AllTab = "All";
-
-        private const string UpcomingTab = "Upcoming";
-
-        private const string JoinedTab = "Joined";
 
         private UserEventsController userEventsController = UserEventsController.Instance;
 
@@ -39,7 +34,6 @@ namespace ClubManagement.Fragments
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             view = inflater.Inflate(Resource.Layout.FragmentEvent, container, false);
-
             var recyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerView1);
             recyclerView.SetLayoutManager(new LinearLayoutManager(view.Context));
 
@@ -73,26 +67,25 @@ namespace ClubManagement.Fragments
 
             var tabLayout = view.FindViewById<TabLayout>(Resource.Id.tabView1);
 
-            tabLayout.AddTab(tabLayout.NewTab().SetText(AllTab));
-            tabLayout.AddTab(tabLayout.NewTab().SetText(UpcomingTab));
-            tabLayout.AddTab(tabLayout.NewTab().SetText(JoinedTab));
+            tabLayout.AddTab(tabLayout.NewTab().SetText(AppConstantValues.EventFragmentAllTab));
+            tabLayout.AddTab(tabLayout.NewTab().SetText(AppConstantValues.EventFragmentUpcomingTab));
+            tabLayout.AddTab(tabLayout.NewTab().SetText(AppConstantValues.EventFragmentJoinedTab));
 
             tabLayout.TabSelected += (s, e) =>
             {
                 switch (e.Tab.Text)
                 {
-                    case AllTab:
+                    case AppConstantValues.EventFragmentAllTab:
                         adapter.Events = events;
                         break;
-                    case UpcomingTab:
+                    case AppConstantValues.EventFragmentUpcomingTab:
                         adapter.Events = events.Where(x => x.IsJoined).ToList();
                         break;
-                    case JoinedTab:
+                    case AppConstantValues.EventFragmentJoinedTab:
                         adapter.Events = events.Where(x => !x.IsJoined).ToList();
                         break;
                 }
             };
-
             return view;
         }
 
