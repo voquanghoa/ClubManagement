@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Firebase.Xamarin.Database.Query;
 using ClubManagement.Models;
 
@@ -36,7 +37,7 @@ namespace ClubManagement.Controllers
             }
         }
 
-        public async void Edit(T t)
+        public async Task Edit(T t)
         {
             await FirebaseClient.Child(t.Id).PutAsync(t);
         }

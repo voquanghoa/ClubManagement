@@ -3729,6 +3729,9 @@ namespace ClubManagement
 			// aapt resource value: 0x7f070035
 			public const int appbar_scrolling_view_behavior = 2131165237;
 			
+			// aapt resource value: 0x7f070071
+			public const int back_to_exit = 2131165297;
+			
 			// aapt resource value: 0x7f070036
 			public const int bottom_sheet_behavior = 2131165238;
 			
