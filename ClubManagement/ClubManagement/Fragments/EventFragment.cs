@@ -1,5 +1,4 @@
 using Android.OS;
-using Android.App;
 using Android.Support.Design.Widget;
 using Android.Support.V7.Widget;
 using Android.Views;
@@ -7,86 +6,63 @@ using ClubManagement.Adapters;
 using ClubManagement.Models;
 using System.Linq;
 using ClubManagement.Controllers;
-using Android.Preferences;
 using Android.Content;
 using ClubManagement.Activities;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using ClubManagement.Ultilities;
-using Fragment = Android.Support.V4.App.Fragment;
+using Android.Support.V4.Widget;
+using ClubManagement.Fragments.Bases;
 
 namespace ClubManagement.Fragments
 {
-    public class EventFragment : Fragment
+    public class EventFragment : SwipeToRefreshDataFragment<List<UserLoginEventModel>>
     {
-        private View view;
+        private TabLayout tabLayout;
 
         private UserEventsController userEventsController = UserEventsController.Instance;
 
         private EventsController eventsController = EventsController.Instance;
 
-        private EventsAdapter adapter;
+        private EventsAdapter adapter = new EventsAdapter();
 
-        private List<UserLoginEventModel> events;
+        private string userId = AppDataController.Instance.UserId;
 
-        private string userId;
+        protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            view = inflater.Inflate(Resource.Layout.FragmentEvent, container, false);
+            var view = inflater.Inflate(Resource.Layout.FragmentEvent, container, false);
+
+            InitView(view);
+
+            return view;
+        }
+
+        private void InitView(View view)
+        {
             var recyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerView1);
             recyclerView.SetLayoutManager(new LinearLayoutManager(view.Context));
-
-            var preferences = PreferenceManager.GetDefaultSharedPreferences(Application.Context);
-            userId = preferences.GetString("UserId", string.Empty);
-
-            events = eventsController.Values.Select(x =>
-            {
-                var userLoginEventModel = new UserLoginEventModel(x)
-                {
-                    Place = MapsController.Instance.GetAddress(x.Latitude, x.Longitude),
-                    IsJoined = userEventsController.Values.Any(y => y.EventId == x.Id && y.UserId == userId)
-                };
-
-                return userLoginEventModel;
-            }).ToList();
-
-            adapter = new EventsAdapter(events);
             recyclerView.SetAdapter(adapter);
 
             adapter.ItemClick += (s, e) =>
             {
-                var intent = new Intent(view.Context, typeof(EventDetailActivity));
+                var intent = new Intent(Context, typeof(EventDetailActivity));
 
-                var eventDetail = JsonConvert.SerializeObject(events[e.Position]);
+                var eventDetail = JsonConvert.SerializeObject(data[e.Position]);
 
                 intent.PutExtra("EventDetail", eventDetail);
 
                 StartActivityForResult(intent, 0);
             };
 
-            var tabLayout = view.FindViewById<TabLayout>(Resource.Id.tabView1);
+            tabLayout = view.FindViewById<TabLayout>(Resource.Id.tabView1);
+            tabLayout.TabSelected += (s, e) => DisplayData(data);
+        }
 
-            tabLayout.AddTab(tabLayout.NewTab().SetText(AppConstantValues.EventFragmentAllTab));
-            tabLayout.AddTab(tabLayout.NewTab().SetText(AppConstantValues.EventFragmentUpcomingTab));
-            tabLayout.AddTab(tabLayout.NewTab().SetText(AppConstantValues.EventFragmentJoinedTab));
-
-            tabLayout.TabSelected += (s, e) =>
-            {
-                switch (e.Tab.Text)
-                {
-                    case AppConstantValues.EventFragmentAllTab:
-                        adapter.Events = events;
-                        break;
-                    case AppConstantValues.EventFragmentUpcomingTab:
-                        adapter.Events = events.Where(x => x.IsJoined).ToList();
-                        break;
-                    case AppConstantValues.EventFragmentJoinedTab:
-                        adapter.Events = events.Where(x => !x.IsJoined).ToList();
-                        break;
-                }
-            };
-            return view;
+        public override void OnResume()
+        {
+            base.OnResume();
+            UpdateViewData();
         }
 
         public override void OnActivityResult(int requestCode, int resultCode, Intent data)
@@ -94,14 +70,13 @@ namespace ClubManagement.Fragments
             base.OnActivityResult(requestCode, resultCode, data);
             if (requestCode == 0)
             {
-                UpdateRecyclerView();
+                UpdateViewData();
             }
         }
 
-
-        private void UpdateRecyclerView()
+        protected override List<UserLoginEventModel> QueryData()
         {
-            events = eventsController.Values.Select(x =>
+            return eventsController.Values.Select(x =>
             {
                 var userLoginEventModel = new UserLoginEventModel(x)
                 {
@@ -111,8 +86,25 @@ namespace ClubManagement.Fragments
 
                 return userLoginEventModel;
             }).ToList();
+        }
 
-            adapter.Events = events;
+        protected override void DisplayData(List<UserLoginEventModel> data)
+        {
+            if (data != null)
+            {
+                switch (tabLayout.SelectedTabPosition)
+                {
+                    case 0:
+                        adapter.Events = data;
+                        break;
+                    case 1:
+                        adapter.Events = data.Where(x => x.IsJoined).ToList();
+                        break;
+                    case 2:
+                        adapter.Events = data.Where(x => !x.IsJoined).ToList();
+                        break;
+                }
+            }
         }
     }
 }

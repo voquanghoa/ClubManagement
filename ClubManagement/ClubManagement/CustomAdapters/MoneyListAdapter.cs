@@ -17,7 +17,8 @@ namespace ClubManagement.CustomAdapters
             get => moneyStates;
             set
             {
-                moneyStates = value;
+                moneyStates.Clear();
+                moneyStates.AddRange(value);
                 NotifyDataSetChanged();
             }
         }

@@ -46,4 +46,9 @@
   <string name="exist_email">Email is exist!</string>
   <string name="signup_success">Sign up successfully!</string>
   <string name="back_to_exit">Press back again to exit!</string>
+  <string name="all">All</string>
+  <string name="paid">Already paid</string>
+  <string name="unpaid">Unpaid</string>
+  <string name="upcoming">Upcoming</string>
+  <string name="joined">Joined</string>
 </resources>

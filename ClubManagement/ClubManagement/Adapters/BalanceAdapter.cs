@@ -21,9 +21,8 @@ namespace ClubManagement.Adapters
             }
         }
 
-        public BalancesAdapter(List<OutcomeModel> balances, BalancesFragment.Type type)
+        public BalancesAdapter(BalancesFragment.Type type)
         {
-            this.balances = balances;
             this.type = type;
         }
 

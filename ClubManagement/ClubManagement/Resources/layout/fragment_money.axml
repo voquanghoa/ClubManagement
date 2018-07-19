@@ -26,9 +26,21 @@
         android:background="@color/tabbar_background_color"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        app:tabTextColor="@color/text_tabbar_unchoose_color" />
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvMoney"
+        app:tabTextColor="@color/text_tabbar_unchoose_color">
+        <android.support.design.widget.TabItem
+            android:text="@string/all" />
+        <android.support.design.widget.TabItem
+            android:text="@string/paid" />
+        <android.support.design.widget.TabItem
+            android:text="@string/unpaid" />
+    </android.support.design.widget.TabLayout>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresher"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvMoney"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

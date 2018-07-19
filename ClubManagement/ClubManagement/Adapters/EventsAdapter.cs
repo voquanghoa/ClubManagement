@@ -8,7 +8,7 @@ namespace ClubManagement.Adapters
 {
     public class EventsAdapter : RecyclerView.Adapter
     {
-        private List<UserLoginEventModel> events;
+        private List<UserLoginEventModel> events = new List<UserLoginEventModel>();
 
         public event EventHandler<ClickEventArgs> ItemClick;
 
@@ -19,11 +19,6 @@ namespace ClubManagement.Adapters
                 events = value;
                 NotifyDataSetChanged();
             }
-        }
-
-        public EventsAdapter(List<UserLoginEventModel> events)
-        {
-            this.events = events;
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
