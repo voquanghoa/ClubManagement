@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
 using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using Android.OS;
@@ -30,6 +31,12 @@ namespace ClubManagement.Activities
 
         [InjectView(Resource.Id.btnJoin)]
         private Button btnJoin;
+
+        [InjectOnClick(Resource.Id.btnBack)]
+        private void Back(object s, EventArgs e)
+        {
+            Finish();
+        }
 
         [InjectView(Resource.Id.tvCreatedBy)]
         private TextView tvCreatedBy;

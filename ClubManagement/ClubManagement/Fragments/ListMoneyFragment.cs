@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 using Android.Support.V4.App;
 using Android.OS;
 using Android.Support.V7.Widget;
@@ -17,11 +19,17 @@ namespace ClubManagement.Fragments
 
         private MoneyListAdapter adapter;
 
-        private readonly List<MoneyState> moneyStates;
+        private List<MoneyState> moneyStates = new List<MoneyState>();
 
-        public ListMoneyFragment(List<MoneyState> moneyStates)
+        public List<MoneyState> MoneyStates
         {
-            this.moneyStates = moneyStates;
+            get => moneyStates;
+            set
+            {
+				moneyStates.Clear();
+				moneyStates.AddRange(value);
+				adapter?.NotifyDataSetChanged();
+            }
         }
 
         public override void OnCreate(Bundle savedInstanceState)

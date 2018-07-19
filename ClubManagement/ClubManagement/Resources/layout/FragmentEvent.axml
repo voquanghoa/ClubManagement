@@ -6,6 +6,20 @@
     android:orientation="vertical"
     android:minWidth="25px"
     android:minHeight="25px">
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tabbar_height"
+        android:background="@color/tabbar_background_color">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Event"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/textview_margin_left_right"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/tabbar_text_size"
+            android:textStyle="bold" />
+    </android.support.v7.widget.Toolbar>
     <android.support.design.widget.TabLayout
         android:minWidth="25px"
         android:minHeight="25px"
@@ -14,11 +28,23 @@
         android:background="@color/tabbar_background_color"
         app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
         app:tabIndicatorColor="@color/tabbar_indicator_color"
-        android:id="@+id/tabView1" />
-    <android.support.v7.widget.RecyclerView
-        android:minWidth="25px"
-        android:minHeight="25px"
+        android:id="@+id/tabView1">
+        <android.support.design.widget.TabItem
+            android:text="@string/all" />
+        <android.support.design.widget.TabItem
+            android:text="@string/upcoming" />
+        <android.support.design.widget.TabItem
+            android:text="@string/joined" />
+    </android.support.design.widget.TabLayout>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresher"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/recyclerView1" />
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recyclerView1" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

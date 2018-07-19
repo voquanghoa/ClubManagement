@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using ClubManagement.Controllers;
 using ClubManagement.Models;
+using ClubManagement.Ultilities;
 
 namespace ClubManagement.Fragments
 {
@@ -28,6 +29,12 @@ namespace ClubManagement.Fragments
 
         [InjectView(Resource.Id.tvUpcomingEvent)]
         private TextView tvUpcomingEvent;
+
+        [InjectOnClick(Resource.Id.btnLogout)]
+        private void Logout(object s, EventArgs e)
+        {
+            DialogExtensions.ShowLogoutDialog(Context);
+        }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {

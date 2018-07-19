@@ -25,11 +25,11 @@ namespace ClubManagement.Activities
             this.HideKeyboard();
             if (string.IsNullOrEmpty(edtEmail.Text) || string.IsNullOrEmpty(edtPassword.Text))
             {
-                Toast.MakeText(this, "Please fill all the fields", ToastLength.Short).Show();
+                Toast.MakeText(this, Resources.GetString(Resource.String.fill_all_fields), ToastLength.Short).Show();
                 return;
             }
 
-            var dialog = DialogExtensions.CreateDialog("Sign in", "Please wait...", this);
+            var dialog = DialogExtensions.CreateDialog(Resources.GetString(Resource.String.sign_in), Resources.GetString(Resource.String.wait), this);
             dialog.Show();
             new Thread(() =>
             {
@@ -39,7 +39,7 @@ namespace ClubManagement.Activities
                 {
                     RunOnUiThread(() =>
                     {
-                        Toast.MakeText(this, "Email not exist!", ToastLength.Short).Show();
+                        Toast.MakeText(this, Resources.GetString(Resource.String.not_exist_email), ToastLength.Short).Show();
                         dialog.Dismiss();
                     });
                     return;
@@ -48,13 +48,13 @@ namespace ClubManagement.Activities
                 {
                     var user = users.First(u => u.Email == edtEmail.Text && u.Password == edtPassword.Text);
                     var preferencesEditor = PreferenceManager.GetDefaultSharedPreferences(Application.Context).Edit();
-                    preferencesEditor.PutBoolean("IsLogged", true);
-                    preferencesEditor.PutString("UserId", user.Id);
+                    preferencesEditor.PutBoolean(AppConstantValues.LogStatusPreferenceKey, true);
+                    preferencesEditor.PutString(AppConstantValues.UserIdPreferenceKey, user.Id);
                     preferencesEditor.Commit();
                     StartActivity(typeof(MainActivity));
                     RunOnUiThread(() =>
                     {
-                        Toast.MakeText(this, "Login successfully!", ToastLength.Short).Show();
+                        Toast.MakeText(this, Resources.GetString(Resource.String.login_success), ToastLength.Short).Show();
                         dialog.Dismiss();
                     });
                     return;
@@ -63,7 +63,7 @@ namespace ClubManagement.Activities
                 RunOnUiThread(() =>
                 {
                     dialog.Dismiss();
-                    Toast.MakeText(this, "Wrong email or password", ToastLength.Short).Show();
+                    Toast.MakeText(this, Resources.GetString(Resource.String.wrong_email), ToastLength.Short).Show();
                 });
             }).Start();
         }

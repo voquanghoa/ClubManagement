@@ -12,7 +12,7 @@ namespace ClubManagement.Controllers
     {
         public static AppDataController Instance = new AppDataController();
 
-        private readonly string userId;
+        public readonly string UserId;
 
         private MoneysController moneysController = MoneysController.Instance;
 

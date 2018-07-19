@@ -32,11 +32,11 @@ namespace ClubManagement.Activities
             },
             {
                 Resource.Id.eventTab,
-                new EventFragment()
+                new DashboardFragment()
             },
             {
                 Resource.Id.moneyTab,
-                new MoneyFragment()
+                new DashboardFragment()
             },
             {
                 Resource.Id.balanceTab,

@@ -17,7 +17,9 @@ namespace ClubManagement.Fragments
 
         private BalancesAdapter adapter;
 
-        private  List<OutcomeModel> balances;
+        private List<OutcomeModel> incomes;
+
+        private List<OutcomeModel> outcomes;
 
         public enum Type { Income, Outcome};
 
@@ -35,29 +37,32 @@ namespace ClubManagement.Fragments
             var view = inflater.Inflate(Resource.Layout.FragmentBalances, container, false);
             Cheeseknife.Inject(this, view);
 
+            if (incomes == null || outcomes == null) InitAdapter();
+
+            InitView(view);
+
+            return view;
+        }
+        
+        private void InitView(View view)
+        {
             if (type == Type.Income)
             {
-                balances = AppDataController.Instance.Incomes.Select(x => (OutcomeModel)x).ToList();
-
                 view.FindViewById<ImageButton>(Resource.Id.imgbtnAdd).Visibility = ViewStates.Gone;
+
+                adapter.Balances = incomes;
             }
             else
             {
-                balances = OutComesController.Instance.Values;
-
                 view.FindViewById<ImageButton>(Resource.Id.imgbtnAdd).Click += AddOutcome_Click;
 
                 outcomeDialogFragment.SaveClick += (s, ne) =>
                 {
-                    balances.Add((OutcomeModel)s);
+                    outcomes.Add((OutcomeModel)s);
 
-                    adapter.NotifyDataSetChanged();
-                    //adapter.Balances = balances;
+                    adapter.Balances = outcomes;
                 };
             }
-
-            Init();
-            return view;
         }
 
         private void AddOutcome_Click(object sender, System.EventArgs e)
@@ -65,10 +70,12 @@ namespace ClubManagement.Fragments
             outcomeDialogFragment.Show(FragmentManager, null);
         }
 
-        private void Init()
+        private void InitAdapter()
         {
             rvBalance.SetLayoutManager(new LinearLayoutManager(this.Context));
-            adapter = new BalancesAdapter(balances, type);
+            adapter = new BalancesAdapter(type);
+            incomes = AppDataController.Instance.Incomes.Select(x => (OutcomeModel)x).ToList();
+            outcomes = OutComesController.Instance.Values;
             rvBalance.SetAdapter(adapter);
         }
     }

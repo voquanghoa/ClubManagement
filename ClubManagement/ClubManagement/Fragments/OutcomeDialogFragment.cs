@@ -33,18 +33,19 @@ namespace ClubManagement.Fragments
         [InjectOnClick(Resource.Id.btnSave)]
         private void OnClickSave(object sender, EventArgs e)
         {
-            var outcomeModel = new OutcomeModel()
+            if (int.TryParse(edtAmount.Text, out var amount) && amount > 0
+                && DateTime.TryParse(edtDate.Text, out var date))
             {
-                Title = edtTitle.Text,
-                Description = edtDescription.Text,
-                Amount = int.Parse(edtAmount.Text),
-                Date = DateTime.Parse(edtDate.Text)
-            };
-
-            OutComesController.Instance.Add(outcomeModel);
-
-            SaveClick.Invoke(outcomeModel, e);
-
+                var outcomeModel = new OutcomeModel()
+                {
+                    Title = edtTitle.Text,
+                    Description = edtDescription.Text,
+                    Amount = amount,
+                    Date = date
+                };
+                OutComesController.Instance.Add(outcomeModel);
+                SaveClick?.Invoke(outcomeModel, e);
+            }
             Dismiss();
         }
 
