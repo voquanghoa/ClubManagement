@@ -16,14 +16,6 @@ namespace ClubManagement.Activities
         [InjectView(Resource.Id.bottom_navigation_tabbar)]
         private BottomNavigationView bottomNavigationView;
 
-        private DashboardFragment dashboardFragment = new DashboardFragment();
-
-        private EventFragment eventFragment = new EventFragment();
-
-        private MoneyFragment moneyFragment = new MoneyFragment();
-
-        private BalanceFragment balanceFragment = new BalanceFragment();
-
         private readonly Dictionary<int, Fragment> fragmentMapIds = new Dictionary<int, Fragment>
         {
             {
@@ -32,11 +24,11 @@ namespace ClubManagement.Activities
             },
             {
                 Resource.Id.eventTab,
-                new DashboardFragment()
+                new EventFragment()
             },
             {
                 Resource.Id.moneyTab,
-                new DashboardFragment()
+                new MoneyFragment()
             },
             {
                 Resource.Id.balanceTab,
@@ -84,9 +76,10 @@ namespace ClubManagement.Activities
 			DisplayFragment(e.Item.ItemId);
         }
 
-        //public override void OnBackPressed()
-        //{
-        //}
+        public override void OnBackPressed()
+        {
+
+        }
     }
 }
 

@@ -1,5 +1,4 @@
 using Android.OS;
-using Android.App;
 using Android.Support.Design.Widget;
 using Android.Support.V7.Widget;
 using Android.Views;
@@ -7,37 +6,32 @@ using ClubManagement.Adapters;
 using ClubManagement.Models;
 using System.Linq;
 using ClubManagement.Controllers;
-using Android.Preferences;
 using Android.Content;
 using ClubManagement.Activities;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using ClubManagement.Ultilities;
-using Fragment = Android.Support.V4.App.Fragment;
-using System.Threading.Tasks;
 using Android.Support.V4.Widget;
-using System;
 using ClubManagement.Fragments.Bases;
 
 namespace ClubManagement.Fragments
 {
-	public class EventFragment : SwipeToRefreshDataFragment<List<UserLoginEventModel>>
-	{
-		private TabLayout tabLayout;
+    public class EventFragment : SwipeToRefreshDataFragment<List<UserLoginEventModel>>
+    {
+        private TabLayout tabLayout;
 
         private UserEventsController userEventsController = UserEventsController.Instance;
 
         private EventsController eventsController = EventsController.Instance;
 
-        private EventsAdapter adapter;
+        private EventsAdapter adapter = new EventsAdapter();
 
-        private string userId;
+        private string userId = AppDataController.Instance.UserId;
 
-		protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
+        protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
 
-		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-			var view = inflater.Inflate(Resource.Layout.FragmentEvent, container, false);
+            var view = inflater.Inflate(Resource.Layout.FragmentEvent, container, false);
 
             InitView(view);
 
@@ -48,10 +42,6 @@ namespace ClubManagement.Fragments
         {
             var recyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerView1);
             recyclerView.SetLayoutManager(new LinearLayoutManager(view.Context));
-
-            userId = AppDataController.Instance.UserId;
-
-            adapter = new EventsAdapter();
             recyclerView.SetAdapter(adapter);
 
             adapter.ItemClick += (s, e) =>
@@ -65,10 +55,14 @@ namespace ClubManagement.Fragments
                 StartActivityForResult(intent, 0);
             };
 
-
             tabLayout = view.FindViewById<TabLayout>(Resource.Id.tabView1);
-
             tabLayout.TabSelected += (s, e) => DisplayData(data);
+        }
+
+        public override void OnResume()
+        {
+            base.OnResume();
+            UpdateViewData();
         }
 
         public override void OnActivityResult(int requestCode, int resultCode, Intent data)
@@ -76,13 +70,13 @@ namespace ClubManagement.Fragments
             base.OnActivityResult(requestCode, resultCode, data);
             if (requestCode == 0)
             {
-				UpdateViewData();
-			}
+                UpdateViewData();
+            }
         }
 
-		protected override List<UserLoginEventModel> QueryData()
-		{
-			return eventsController.Values.Select(x =>
+        protected override List<UserLoginEventModel> QueryData()
+        {
+            return eventsController.Values.Select(x =>
             {
                 var userLoginEventModel = new UserLoginEventModel(x)
                 {
@@ -92,22 +86,25 @@ namespace ClubManagement.Fragments
 
                 return userLoginEventModel;
             }).ToList();
-		}
+        }
 
-		protected override void DisplayData(List<UserLoginEventModel> data)
-		{
-			switch (tabLayout.SelectedTabPosition)
+        protected override void DisplayData(List<UserLoginEventModel> data)
+        {
+            if (data != null)
             {
-                case 0:
-                    adapter.Events = data;
-                    break;
-                case 1:
-                    adapter.Events = data.Where(x => x.IsJoined).ToList();
-                    break;
-                case 2:
-                    adapter.Events = data.Where(x => !x.IsJoined).ToList();
-                    break;
+                switch (tabLayout.SelectedTabPosition)
+                {
+                    case 0:
+                        adapter.Events = data;
+                        break;
+                    case 1:
+                        adapter.Events = data.Where(x => x.IsJoined).ToList();
+                        break;
+                    case 2:
+                        adapter.Events = data.Where(x => !x.IsJoined).ToList();
+                        break;
+                }
             }
-		}
-	}
+        }
+    }
 }

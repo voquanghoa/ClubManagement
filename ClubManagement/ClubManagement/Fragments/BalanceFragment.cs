@@ -10,10 +10,12 @@ using ClubManagement.Ultilities;
 using PagerAdapter = ClubManagement.CustomAdapters.PagerAdapter;
 using ClubManagement.Fragments.Bases;
 using Android.Support.V4.Widget;
+using ClubManagement.Controllers;
+using System.Linq;
 
 namespace ClubManagement.Fragments
 {
-	public class BalanceFragment : Fragment
+    public class BalanceFragment : SwipeToRefreshDataFragment<List<OutcomeModel>>
     {
         [InjectView(Resource.Id.tlBalance)] private TabLayout tlBalance;
 
@@ -23,7 +25,33 @@ namespace ClubManagement.Fragments
 
         private PagerAdapter adapter;
 
-		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
+
+        private BalanceSummaryFragment balanceSummaryFragment = new BalanceSummaryFragment();
+
+        private BalancesFragment IncomesFragment = new BalancesFragment(BalancesFragment.Type.Income);
+
+        private BalancesFragment OutcomesFragment = new BalancesFragment(BalancesFragment.Type.Outcome);
+
+        private List<OutcomeModel> incomes;
+
+        private List<OutcomeModel> outcomes;
+
+        private int sumIncomes;
+
+        private int sumOutcomes;
+
+        public override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+
+            adapter = new PagerAdapter(Activity.SupportFragmentManager);
+            adapter.AddFramgent(balanceSummaryFragment, AppConstantValues.BalanceFragmentSummaryTab);
+            adapter.AddFramgent(IncomesFragment, AppConstantValues.BalanceFragmentIncomeTab);
+            adapter.AddFramgent(OutcomesFragment, AppConstantValues.BalanceFragmentOutcomeTab);
+        }
+
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.FragmentBalance, container, false);
             Cheeseknife.Inject(this, view);
@@ -31,12 +59,35 @@ namespace ClubManagement.Fragments
             return view;
         }
 
-		private void Init()
+        public override void OnResume()
         {
-            adapter = new PagerAdapter(Activity.SupportFragmentManager);
-            adapter.AddFramgent(new BalanceSummaryFragment(), AppConstantValues.BalanceFragmentSummaryTab);
-            adapter.AddFramgent(new BalancesFragment(BalancesFragment.Type.Income), AppConstantValues.BalanceFragmentIncomeTab);
-            adapter.AddFramgent(new BalancesFragment(BalancesFragment.Type.Outcome), AppConstantValues.BalanceFragmentOutcomeTab);
+            base.OnResume();
+
+            UpdateViewData();
+        }
+
+        protected override void DisplayData(List<OutcomeModel> data)
+        {
+            IncomesFragment.Incomes = incomes;
+            OutcomesFragment.Outcomes = outcomes;
+            balanceSummaryFragment.SumIncomes = sumIncomes;
+            balanceSummaryFragment.SumOutcomes = sumOutcomes;
+
+            adapter.NotifyDataSetChanged();
+        }
+
+        protected override List<OutcomeModel> QueryData()
+        {
+            incomes = AppDataController.Instance.Incomes.Select(x => (OutcomeModel)x).ToList();
+            outcomes = OutComesController.Instance.Values;
+            sumIncomes = AppDataController.Instance.Incomes.Sum(x => x.Amount);
+            sumOutcomes = OutComesController.Instance.Values.Sum(x => x.Amount);
+
+            return null;
+        }
+
+        private void Init()
+        {
             vpBalance.Adapter = adapter;
             tlBalance.SetupWithViewPager(vpBalance);
         }

@@ -17,9 +17,9 @@ namespace ClubManagement.Fragments
 
         private BalancesAdapter adapter;
 
-        private List<OutcomeModel> incomes;
+        public List<OutcomeModel> Incomes = new List<OutcomeModel>();
 
-        private List<OutcomeModel> outcomes;
+        public List<OutcomeModel> Outcomes = new List<OutcomeModel>();
 
         public enum Type { Income, Outcome};
 
@@ -30,37 +30,40 @@ namespace ClubManagement.Fragments
         public BalancesFragment(Type type)
         {
             this.type = type;
+
+            adapter = new BalancesAdapter(type);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.FragmentBalances, container, false);
             Cheeseknife.Inject(this, view);
-
-            if (incomes == null || outcomes == null) InitAdapter();
-
-            InitView(view);
-
+            Init(view);
             return view;
         }
         
-        private void InitView(View view)
+        private void Init(View view)
         {
+            rvBalance.SetLayoutManager(new LinearLayoutManager(this.Context));
+            rvBalance.SetAdapter(adapter);
+
             if (type == Type.Income)
             {
                 view.FindViewById<ImageButton>(Resource.Id.imgbtnAdd).Visibility = ViewStates.Gone;
 
-                adapter.Balances = incomes;
+                adapter.Balances = Incomes;
             }
             else
             {
                 view.FindViewById<ImageButton>(Resource.Id.imgbtnAdd).Click += AddOutcome_Click;
 
+                adapter.Balances = Outcomes;
+
                 outcomeDialogFragment.SaveClick += (s, ne) =>
                 {
-                    outcomes.Add((OutcomeModel)s);
+                    Outcomes.Add((OutcomeModel)s);
 
-                    adapter.Balances = outcomes;
+                    adapter.Balances = Outcomes;
                 };
             }
         }
@@ -68,15 +71,6 @@ namespace ClubManagement.Fragments
         private void AddOutcome_Click(object sender, System.EventArgs e)
         {
             outcomeDialogFragment.Show(FragmentManager, null);
-        }
-
-        private void InitAdapter()
-        {
-            rvBalance.SetLayoutManager(new LinearLayoutManager(this.Context));
-            adapter = new BalancesAdapter(type);
-            incomes = AppDataController.Instance.Incomes.Select(x => (OutcomeModel)x).ToList();
-            outcomes = OutComesController.Instance.Values;
-            rvBalance.SetAdapter(adapter);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace ClubManagement.Controllers
 
         private AppDataController()
         {
-            userId = PreferenceManager.GetDefaultSharedPreferences(Application.Context)
+            UserId = PreferenceManager.GetDefaultSharedPreferences(Application.Context)
                 .GetString("UserId", string.Empty);
         }
 
@@ -32,7 +32,7 @@ namespace ClubManagement.Controllers
             {
                 var moneyList = MoneysController.Instance.Values ?? new List<MoneyModel>();
                 var userMoneyList = UserMoneysController.Instance.Values ?? new List<UserMoneyModel>();
-                return moneyList.Count - userMoneyList.Count(x => x.UserId == userId);
+                return moneyList.Count - userMoneyList.Count(x => x.UserId == UserId);
             }
         }
 
@@ -41,7 +41,7 @@ namespace ClubManagement.Controllers
             get
             {
                 var joinedEvents = (UserEventsController.Instance.Values ??
-                                    new List<UserEventModel>()).Where(x => x.UserId == userId).ToList();
+                                    new List<UserEventModel>()).Where(x => x.UserId == UserId).ToList();
                 var eventList = EventsController.Instance.Values ?? new List<EventModel>();
                 return joinedEvents.Join(eventList, j => j.EventId, e => e.Id, (j, e) => e)
                     .Where(e => e.Time > DateTime.Now).ToList();
@@ -53,7 +53,7 @@ namespace ClubManagement.Controllers
             var moneyStates = new List<MoneyState>();
             var moneyList = MoneysController.Instance.Values ?? new List<MoneyModel>();
             var paidMoneyIdList = (UserMoneysController.Instance.Values ?? new List<UserMoneyModel>())
-                .Where(x => x.UserId == userId)
+                .Where(x => x.UserId == UserId)
                 .Select(x => x.MoneyId)
                 .ToList(); 
             moneyList.ForEach(x => moneyStates.Add(new MoneyState

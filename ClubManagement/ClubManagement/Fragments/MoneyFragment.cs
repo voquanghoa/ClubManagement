@@ -4,13 +4,13 @@ using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V4.App;
 using Android.Support.V4.Widget;
-using Android.Support.V7.Widget;
 using Android.Views;
 using ClubManagement.Controllers;
 using ClubManagement.CustomAdapters;
 using ClubManagement.Fragments.Bases;
 using ClubManagement.Models;
 using ClubManagement.Ultilities;
+using Android.Support.V7.Widget;
 
 namespace ClubManagement.Fragments
 {
@@ -30,7 +30,7 @@ namespace ClubManagement.Fragments
         {
             var view = inflater.Inflate(Resource.Layout.fragment_money, container, false);
 
-            //Cheeseknife.Inject(this, view);
+            Cheeseknife.Inject(this, view);
 
             SetupTabView();
 
@@ -41,9 +41,6 @@ namespace ClubManagement.Fragments
         {
             rvMoney.SetLayoutManager(new LinearLayoutManager(Context));
             rvMoney.SetAdapter(adapter);
-
-            
-
             tlMoney.TabSelected += (s, e) => DisplayData(data);
         }
 

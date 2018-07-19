@@ -21,13 +21,13 @@
             android:textStyle="bold" />
     </android.support.v7.widget.Toolbar>
     <android.support.design.widget.TabLayout
-        android:minWidth="25px"
-        android:minHeight="25px"
+        style="@style/TabLayoutThemes"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/tabbar_height"
         android:background="@color/tabbar_background_color"
-        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
-        app:tabIndicatorColor="@color/tabbar_indicator_color"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
+        app:tabTextColor="@color/text_tabbar_unchoose_color"
         android:id="@+id/tabView1">
         <android.support.design.widget.TabItem
             android:text="@string/all" />

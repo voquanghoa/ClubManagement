@@ -4,10 +4,12 @@ using Android.Views;
 using Android.Widget;
 using ClubManagement.Controllers;
 using System.Linq;
+using System.Threading.Tasks;
+using Android.App;
 
 namespace ClubManagement.Fragments
 {
-    public class BalanceSummaryFragment : Fragment
+    public class BalanceSummaryFragment : Android.Support.V4.App.Fragment
     {
         [InjectView(Resource.Id.tvFinalBalance)]
         private TextView tvFinalBalance;
@@ -18,30 +20,33 @@ namespace ClubManagement.Fragments
         [InjectView(Resource.Id.tvOutcome)]
         private TextView tvOutcome;
 
+        public int SumIncomes;
+
+        public int SumOutcomes;
+
+        private int finalBalance;
+
+        private string numberSign;
+
+        private object locker = new object();
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.FragmentBalanceSummary, container, false);
-
             Cheeseknife.Inject(this, view);
-
-            UpdateViewData();
-
+            Init();
             return view;
         }
 
-		private void UpdateViewData()
+        private void Init()
         {
-            var sumIncomes = AppDataController.Instance.Incomes.Sum(x => x.Amount);
+            finalBalance = SumIncomes - SumOutcomes;
 
-            var sumOutcomes = OutComesController.Instance.Values.Sum(x => x.Amount);
-
-            var finalBalance = sumIncomes - sumOutcomes;
-
-            var numberSign = finalBalance > 0 ? "+" : "";
+            numberSign = finalBalance > 0 ? "+" : "";
 
             tvFinalBalance.Text = $"Final balance: {numberSign}{finalBalance}$";
-            tvIncome.Text = $"Income total: +{sumIncomes}$";
-            tvOutcome.Text = $"Outcome total: -{sumOutcomes}$";
+            tvIncome.Text = $"Income total: +{SumIncomes}$";
+            tvOutcome.Text = $"Outcome total: -{SumOutcomes}$";
         }
     }
 }
