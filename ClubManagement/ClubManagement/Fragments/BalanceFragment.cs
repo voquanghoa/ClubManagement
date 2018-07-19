@@ -8,10 +8,12 @@ using ClubManagement.Models;
 using System.Collections.Generic;
 using ClubManagement.Ultilities;
 using PagerAdapter = ClubManagement.CustomAdapters.PagerAdapter;
+using ClubManagement.Fragments.Bases;
+using Android.Support.V4.Widget;
 
 namespace ClubManagement.Fragments
 {
-    public class BalanceFragment : Fragment
+	public class BalanceFragment : Fragment
     {
         [InjectView(Resource.Id.tlBalance)] private TabLayout tlBalance;
 
@@ -21,7 +23,7 @@ namespace ClubManagement.Fragments
 
         private PagerAdapter adapter;
 
-        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.FragmentBalance, container, false);
             Cheeseknife.Inject(this, view);
@@ -29,7 +31,7 @@ namespace ClubManagement.Fragments
             return view;
         }
 
-        private void Init()
+		private void Init()
         {
             adapter = new PagerAdapter(Activity.SupportFragmentManager);
             adapter.AddFramgent(new BalanceSummaryFragment(), AppConstantValues.BalanceFragmentSummaryTab);

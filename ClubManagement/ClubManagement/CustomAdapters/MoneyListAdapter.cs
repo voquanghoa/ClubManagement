@@ -17,9 +17,10 @@ namespace ClubManagement.CustomAdapters
             get => moneyStates;
             set
             {
-                moneyStates = value;
+				moneyStates.Clear();
+				moneyStates.AddRange(value);
                 NotifyDataSetChanged();
-            }
+			}
         }
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)

@@ -3,16 +3,18 @@ using System.Linq;
 using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V4.App;
+using Android.Support.V4.Widget;
 using Android.Support.V7.Widget;
 using Android.Views;
 using ClubManagement.Controllers;
 using ClubManagement.CustomAdapters;
+using ClubManagement.Fragments.Bases;
 using ClubManagement.Models;
 using ClubManagement.Ultilities;
 
 namespace ClubManagement.Fragments
 {
-    public class MoneyFragment : Fragment
+	public class MoneyFragment : SwipeToRefreshDataFragment<List<MoneyState>>
     {
         [InjectView(Resource.Id.tlMoney)] private TabLayout tlMoney;
 
@@ -21,48 +23,56 @@ namespace ClubManagement.Fragments
         private readonly MoneyListAdapter adapter = new MoneyListAdapter();
 
         private readonly AppDataController appDataController = AppDataController.Instance;
+      
+		protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
 
-        private List<MoneyState> listMoneyStates;
-
-        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.fragment_money, container, false);
+            
             Cheeseknife.Inject(this, view);
-            Init();
-            return view;
+
+			SetupTabView();
+
+			return view;
         }
 
-        private void Init()
+        private void SetupTabView()
         {
-            listMoneyStates = appDataController.GetListMoneyState();
-            adapter.MoneyStates = listMoneyStates;
             rvMoney.SetLayoutManager(new LinearLayoutManager(Context));
             rvMoney.SetAdapter(adapter);
-            tlMoney.AddTab(tlMoney.NewTab().SetText(AppConstantValues.MoneyFragmentAllTabTitle));
-            tlMoney.AddTab(tlMoney.NewTab().SetText(AppConstantValues.MoneyFragmentPaidTabTitle));
-            tlMoney.AddTab(tlMoney.NewTab().SetText(AppConstantValues.MoneyFragmentUnpaidTabTitle));
-            tlMoney.TabSelected += (s, e) =>
-            {
-                switch (e.Tab.Text)
-                {
-                    case AppConstantValues.MoneyFragmentAllTabTitle:
-                        adapter.MoneyStates = listMoneyStates;
-                        break;
-                    case AppConstantValues.MoneyFragmentPaidTabTitle:
-                        adapter.MoneyStates = listMoneyStates.Where(x => x.IsPaid).ToList();
-                        break;
-                    case AppConstantValues.MoneyFragmentUnpaidTabTitle:
-                        adapter.MoneyStates = listMoneyStates.Where(x => !x.IsPaid).ToList();
-                        break;
-                }
-            };
+			tlMoney.TabSelected += (s, e) => DisplayData(data);
         }
 
         public override void OnResume()
         {
             base.OnResume();
-            listMoneyStates = appDataController.GetListMoneyState();
-            adapter.MoneyStates = listMoneyStates;
+            UpdateViewData();
         }
-    }
+
+		protected override List<MoneyState> QueryData()
+		{
+			return appDataController.GetListMoneyState();
+		}
+
+		protected override void DisplayData(List<MoneyState> data)
+		{
+			if(data != null)
+			{
+				switch (tlMoney.SelectedTabPosition)
+                {
+                    case 0:
+                        adapter.MoneyStates = data;
+                        break;
+                    case 1:
+                        adapter.MoneyStates = data.Where(x => x.IsPaid).ToList();
+                        break;
+                    case 2:
+                        adapter.MoneyStates = data.Where(x => !x.IsPaid).ToList();
+                        break;
+                }
+			}
+
+		}
+	}
 }

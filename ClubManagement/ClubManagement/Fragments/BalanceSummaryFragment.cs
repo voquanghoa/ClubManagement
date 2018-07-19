@@ -24,12 +24,12 @@ namespace ClubManagement.Fragments
 
             Cheeseknife.Inject(this, view);
 
-            Init();
+            UpdateViewData();
 
             return view;
         }
 
-        private void Init()
+		private void UpdateViewData()
         {
             var sumIncomes = AppDataController.Instance.Incomes.Sum(x => x.Amount);
 
