@@ -3,6 +3,7 @@ using Android.App;
 using Android.Support.V4.App;
 using Android.OS;
 using Android.Support.Design.Widget;
+using Android.Widget;
 using ClubManagement.Fragments;
 using ClubManagement.Ultilities;
 using Fragment = Android.Support.V4.App.Fragment;
@@ -12,6 +13,8 @@ namespace ClubManagement.Activities
     [Activity(Label = "ClubManagement", Theme = "@style/AppTheme")]
     public class MainActivity : FragmentActivity
     {
+        private bool doubleBackpress = false;
+
         [InjectView(Resource.Id.bottom_navigation_tabbar)]
         private BottomNavigationView bottomNavigationView;
 
@@ -63,6 +66,14 @@ namespace ClubManagement.Activities
 
         public override void OnBackPressed()
         {
+            if (doubleBackpress)
+            {
+                Finish();
+                return;
+            }
+            doubleBackpress = true;
+            Toast.MakeText(this, Resources.GetString(Resource.String.back_to_exit), ToastLength.Short).Show();
+            new Handler().PostDelayed(() => { doubleBackpress = false; }, 2000);
         }
     }
 }

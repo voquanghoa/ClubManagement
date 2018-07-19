@@ -45,4 +45,5 @@
   <string name="sign_up">Sign up</string>
   <string name="exist_email">Email is exist!</string>
   <string name="signup_success">Sign up successfully!</string>
+  <string name="back_to_exit">Press back again to exit!</string>
 </resources>
