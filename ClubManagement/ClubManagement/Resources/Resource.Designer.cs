@@ -3717,6 +3717,9 @@ namespace ClubManagement
 			// aapt resource value: 0x7f07005c
 			public const int addOutcome = 2131165276;
 			
+			// aapt resource value: 0x7f070071
+			public const int all = 2131165297;
+			
 			// aapt resource value: 0x7f070060
 			public const int amount = 2131165280;
 			
@@ -3864,6 +3867,9 @@ namespace ClubManagement
 			// aapt resource value: 0x7f070043
 			public const int google_storage_bucket = 2131165251;
 			
+			// aapt resource value: 0x7f070075
+			public const int joined = 2131165301;
+			
 			// aapt resource value: 0x7f07006c
 			public const int login_success = 2131165292;
 			
@@ -3878,6 +3884,9 @@ namespace ClubManagement
 			
 			// aapt resource value: 0x7f07006d
 			public const int not_match_pass = 2131165293;
+			
+			// aapt resource value: 0x7f070072
+			public const int paid = 2131165298;
 			
 			// aapt resource value: 0x7f070048
 			public const int password_hint = 2131165256;
@@ -3944,6 +3953,12 @@ namespace ClubManagement
 			
 			// aapt resource value: 0x7f07005d
 			public const int title = 2131165277;
+			
+			// aapt resource value: 0x7f070073
+			public const int unpaid = 2131165299;
+			
+			// aapt resource value: 0x7f070074
+			public const int upcoming = 2131165300;
 			
 			// aapt resource value: 0x7f070051
 			public const int verify_code_hint = 2131165265;

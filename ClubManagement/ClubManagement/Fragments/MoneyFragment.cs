@@ -41,13 +41,7 @@ namespace ClubManagement.Fragments
         {
             rvMoney.SetLayoutManager(new LinearLayoutManager(Context));
             rvMoney.SetAdapter(adapter);
-            tlMoney.AddTab(tlMoney.NewTab().SetText(AppConstantValues.MoneyFragmentAllTabTitle));
-            tlMoney.AddTab(tlMoney.NewTab().SetText(AppConstantValues.MoneyFragmentPaidTabTitle));
-            tlMoney.AddTab(tlMoney.NewTab().SetText(AppConstantValues.MoneyFragmentUnpaidTabTitle));
-            tlMoney.TabSelected += (s, e) =>
-            {
-				DisplayData(data);
-            };
+			tlMoney.TabSelected += (s, e) => DisplayData(data);
         }
 
         public override void OnResume()

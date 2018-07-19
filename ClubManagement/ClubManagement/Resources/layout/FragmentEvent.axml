@@ -28,7 +28,14 @@
         android:background="@color/tabbar_background_color"
         app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
         app:tabIndicatorColor="@color/tabbar_indicator_color"
-        android:id="@+id/tabView1" />
+        android:id="@+id/tabView1">
+        <android.support.design.widget.TabItem
+            android:text="@string/all" />
+        <android.support.design.widget.TabItem
+            android:text="@string/upcoming" />
+        <android.support.design.widget.TabItem
+            android:text="@string/joined" />
+    </android.support.design.widget.TabLayout>
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/refresher"
         android:layout_width="match_parent"
