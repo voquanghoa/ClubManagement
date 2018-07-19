@@ -6,6 +6,7 @@ using Android.Support.Design.Widget;
 using ClubManagement.Fragments;
 using ClubManagement.Ultilities;
 using Fragment = Android.Support.V4.App.Fragment;
+using System;
 
 namespace ClubManagement.Activities
 {
@@ -15,7 +16,7 @@ namespace ClubManagement.Activities
         [InjectView(Resource.Id.bottom_navigation_tabbar)]
         private BottomNavigationView bottomNavigationView;
 
-		private readonly Dictionary<int, Fragment> fragmentMapIds = new Dictionary<int, Fragment>
+        private readonly Dictionary<int, Fragment> fragmentMapIds = new Dictionary<int, Fragment>
         {
             {
                 Resource.Id.dashboardTab,
@@ -33,7 +34,6 @@ namespace ClubManagement.Activities
                 Resource.Id.balanceTab,
                 new BalanceFragment()
             },
-
         };
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -43,16 +43,31 @@ namespace ClubManagement.Activities
             Cheeseknife.Inject(this);
             BottomNavigationHelper.RemoveShiftMode(bottomNavigationView);
             bottomNavigationView.NavigationItemSelected += BottomNavigation_NavigationItemSelected;
-			DisplayFragment(Resource.Id.dashboardTab);
+            DisplayFragment(Resource.Id.dashboardTab);
         }
         
 
-        private void DisplayFragment(int fragmentMenuId)
+        private void DisplayFragment(int tag)
         {
-			var fragment = fragmentMapIds[fragmentMenuId];
-            SupportFragmentManager.BeginTransaction()
-                .Replace(Resource.Id.content_frame, fragment)
-                .Commit();
+            var fragmentTransaction = SupportFragmentManager.BeginTransaction();
+            var fragment = SupportFragmentManager.FindFragmentByTag(tag.ToString());
+
+            var addToStack = true;
+
+            if (fragment == null)
+            {
+                fragment = fragmentMapIds[tag];
+            }
+            else
+            {
+                addToStack = false;
+            }
+
+            fragmentTransaction.Replace(Resource.Id.content_frame, fragment, tag.ToString());
+
+            if (addToStack) fragmentTransaction.AddToBackStack(null);
+
+            fragmentTransaction.Commit();
         }
 
         private void BottomNavigation_NavigationItemSelected(object sender,
@@ -63,6 +78,7 @@ namespace ClubManagement.Activities
 
         public override void OnBackPressed()
         {
+
         }
     }
 }

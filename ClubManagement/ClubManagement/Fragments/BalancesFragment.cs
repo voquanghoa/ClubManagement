@@ -17,7 +17,9 @@ namespace ClubManagement.Fragments
 
         private BalancesAdapter adapter;
 
-        private  List<OutcomeModel> balances;
+        public List<OutcomeModel> Incomes = new List<OutcomeModel>();
+
+        public List<OutcomeModel> Outcomes = new List<OutcomeModel>();
 
         public enum Type { Income, Outcome};
 
@@ -28,47 +30,47 @@ namespace ClubManagement.Fragments
         public BalancesFragment(Type type)
         {
             this.type = type;
+
+            adapter = new BalancesAdapter(type);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.FragmentBalances, container, false);
             Cheeseknife.Inject(this, view);
+            Init(view);
+            return view;
+        }
+        
+        private void Init(View view)
+        {
+            rvBalance.SetLayoutManager(new LinearLayoutManager(this.Context));
+            rvBalance.SetAdapter(adapter);
 
             if (type == Type.Income)
             {
-                balances = AppDataController.Instance.Incomes.Select(x => (OutcomeModel)x).ToList();
-
                 view.FindViewById<ImageButton>(Resource.Id.imgbtnAdd).Visibility = ViewStates.Gone;
+
+                adapter.Balances = Incomes;
             }
             else
             {
-                balances = OutComesController.Instance.Values;
-
                 view.FindViewById<ImageButton>(Resource.Id.imgbtnAdd).Click += AddOutcome_Click;
+
+                adapter.Balances = Outcomes;
 
                 outcomeDialogFragment.SaveClick += (s, ne) =>
                 {
-                    balances.Add((OutcomeModel)s);
+                    Outcomes.Add((OutcomeModel)s);
 
-                    adapter.Balances = balances;
+                    adapter.Balances = Outcomes;
                 };
             }
-
-            Init();
-            return view;
         }
 
         private void AddOutcome_Click(object sender, System.EventArgs e)
         {
             outcomeDialogFragment.Show(FragmentManager, null);
-        }
-
-        private void Init()
-        {
-            rvBalance.SetLayoutManager(new LinearLayoutManager(this.Context));
-            adapter = new BalancesAdapter(balances, type);
-            rvBalance.SetAdapter(adapter);
         }
     }
 }

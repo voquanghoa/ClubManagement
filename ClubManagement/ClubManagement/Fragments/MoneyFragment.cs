@@ -4,17 +4,17 @@ using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V4.App;
 using Android.Support.V4.Widget;
-using Android.Support.V7.Widget;
 using Android.Views;
 using ClubManagement.Controllers;
 using ClubManagement.CustomAdapters;
 using ClubManagement.Fragments.Bases;
 using ClubManagement.Models;
 using ClubManagement.Ultilities;
+using Android.Support.V7.Widget;
 
 namespace ClubManagement.Fragments
 {
-	public class MoneyFragment : SwipeToRefreshDataFragment<List<MoneyState>>
+    public class MoneyFragment : SwipeToRefreshDataFragment<List<MoneyState>>
     {
         [InjectView(Resource.Id.tlMoney)] private TabLayout tlMoney;
 
@@ -23,25 +23,25 @@ namespace ClubManagement.Fragments
         private readonly MoneyListAdapter adapter = new MoneyListAdapter();
 
         private readonly AppDataController appDataController = AppDataController.Instance;
-      
-		protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
 
-		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
+
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.fragment_money, container, false);
-            
+
             Cheeseknife.Inject(this, view);
 
-			SetupTabView();
+            SetupTabView();
 
-			return view;
+            return view;
         }
 
         private void SetupTabView()
         {
             rvMoney.SetLayoutManager(new LinearLayoutManager(Context));
             rvMoney.SetAdapter(adapter);
-			tlMoney.TabSelected += (s, e) => DisplayData(data);
+            tlMoney.TabSelected += (s, e) => DisplayData(data);
         }
 
         public override void OnResume()
@@ -50,16 +50,16 @@ namespace ClubManagement.Fragments
             UpdateViewData();
         }
 
-		protected override List<MoneyState> QueryData()
-		{
-			return appDataController.GetListMoneyState();
-		}
+        protected override List<MoneyState> QueryData()
+        {
+            return appDataController.GetListMoneyState();
+        }
 
-		protected override void DisplayData(List<MoneyState> data)
-		{
-			if(data != null)
-			{
-				switch (tlMoney.SelectedTabPosition)
+        protected override void DisplayData(List<MoneyState> data)
+        {
+            if (data != null)
+            {
+                switch (tlMoney.SelectedTabPosition)
                 {
                     case 0:
                         adapter.MoneyStates = data;
@@ -71,8 +71,7 @@ namespace ClubManagement.Fragments
                         adapter.MoneyStates = data.Where(x => !x.IsPaid).ToList();
                         break;
                 }
-			}
-
-		}
-	}
+            }
+        }
+    }
 }
