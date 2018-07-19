@@ -165,7 +165,6 @@
     <Compile Include="Models\ElementMatrixDistanceAPIModel.cs" />
     <Compile Include="CustomAdapters\MoneyListAdapter.cs" />
     <Compile Include="CustomAdapters\MoneyViewHolder.cs" />
-    <Compile Include="Fragments\ListMoneyFragment.cs" />
     <Compile Include="CustomAdapters\MoneyAdminListAdapter.cs" />
     <Compile Include="CustomAdapters\MoneyAdminViewHolder.cs" />
     <Compile Include="Interfaces\IItemClickListener.cs" />
@@ -194,6 +193,7 @@
     <Compile Include="CustomAdapters\PagerAdapter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ultilities\AppConstantValues.cs" />
     <Compile Include="Ultilities\AppUltilities.cs" />
     <Compile Include="Ultilities\BottomNavigationHelper.cs" />
     <Compile Include="Ultilities\DialogExtensions.cs" />
@@ -371,6 +371,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_back.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.v7.CardView.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.v7.CardView.targets" Condition="Exists('..\packages\Xamarin.Android.Support.v7.CardView.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.v7.CardView.targets')" />

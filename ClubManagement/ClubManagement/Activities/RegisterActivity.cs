@@ -37,16 +37,16 @@ namespace ClubManagement.Activities
             if (string.IsNullOrEmpty(edtEmail.Text) || string.IsNullOrEmpty(edtName.Text) ||
                 string.IsNullOrEmpty(edtPassword.Text) || string.IsNullOrEmpty(edtConfirmPassword.Text))
             {
-                Toast.MakeText(this, "Please fill all the fields", ToastLength.Short).Show();
+                Toast.MakeText(this, Resources.GetString(Resource.String.fill_all_fields), ToastLength.Short).Show();
                 return;
             }
             if (edtConfirmPassword.Text != edtPassword.Text)
             {
-                Toast.MakeText(this, "Password does not match the confirm password, try again!", ToastLength.Short).Show();
+                Toast.MakeText(this, Resources.GetString(Resource.String.not_match_pass), ToastLength.Short).Show();
                 return;
             }
 
-            var dialog = DialogExtensions.CreateDialog("Sign up", "Please wait...", this);
+            var dialog = DialogExtensions.CreateDialog(Resources.GetString(Resource.String.sign_up), Resources.GetString(Resource.String.wait), this);
             dialog.Show();
 
             new Thread(() =>
@@ -57,7 +57,7 @@ namespace ClubManagement.Activities
                 {
                     RunOnUiThread(() =>
                     {
-                        Toast.MakeText(this, "Email is exist!", ToastLength.Short).Show();
+                        Toast.MakeText(this, Resources.GetString(Resource.String.exist_email), ToastLength.Short).Show();
                         dialog.Dismiss();
                     });
                     return;
@@ -72,7 +72,7 @@ namespace ClubManagement.Activities
 
                 RunOnUiThread(() =>
                 {
-                    Toast.MakeText(this, "Sign up successfully", ToastLength.Short).Show();
+                    Toast.MakeText(this, Resources.GetString(Resource.String.signup_success), ToastLength.Short).Show();
                     dialog.Dismiss();
                 });
                 Finish();

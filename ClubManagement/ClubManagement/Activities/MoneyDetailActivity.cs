@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
 using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Views;
@@ -28,6 +29,11 @@ namespace ClubManagement.Activities
 
         [InjectView(Resource.Id.rvUser)] private RecyclerView rvUser;
 
+        [InjectOnClick(Resource.Id.btnBack)]
+        private void Back(object s, EventArgs e)
+        {
+            Finish();
+        }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -49,13 +55,6 @@ namespace ClubManagement.Activities
             moneyAdminStates = appDataController.GetMoneyAdminStates(moneyId);
             adapter = new MoneyAdminListAdapter(moneyAdminStates, tvPayState, moneyId);
             rvUser.SetAdapter(adapter);
-        }
-
-        protected override void OnResume()
-        {
-            base.OnResume();
-            moneyAdminStates = appDataController.GetMoneyAdminStates(moneyId);
-            adapter.NotifyDataSetChanged();
         }
     }
 }
