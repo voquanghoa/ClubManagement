@@ -1,6 +1,8 @@
-﻿using Android.App;
+﻿using System.Linq;
+using Android.App;
 using Android.OS;
 using Android.Preferences;
+using ClubManagement.Controllers;
 using ClubManagement.Ultilities;
 
 namespace ClubManagement.Activities
@@ -11,10 +13,20 @@ namespace ClubManagement.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            var isLogged = PreferenceManager.GetDefaultSharedPreferences(Application.Context)
-                .GetBoolean(AppConstantValues.LogStatusPreferenceKey, false);
-            StartActivity(isLogged ? typeof(MainActivity) : typeof(LoginActivity));
-            Finish();
+            var preferences = PreferenceManager.GetDefaultSharedPreferences(Application.Context);
+            var isLogged = preferences.GetBoolean(AppConstantValues.LogStatusPreferenceKey, false);
+            if (isLogged)
+            {
+                StartActivity(typeof(MainActivity));
+                Finish();
+                var userId = preferences.GetString(AppConstantValues.UserIdPreferenceKey, string.Empty);
+                var currentUser = UsersController.Instance.Values.First(u => u.Id == userId);
+                UsersController.Instance.UpdateUserLocation(currentUser);
+            }
+            else
+            {
+                StartActivity(typeof(LoginActivity));
+            }
         }
     }
 }
