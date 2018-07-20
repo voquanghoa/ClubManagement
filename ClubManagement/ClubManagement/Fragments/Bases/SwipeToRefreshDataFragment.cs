@@ -16,6 +16,8 @@ namespace ClubManagement.Fragments.Bases
 
         private object locker = new object();
 
+		private bool isLoadingData = false;
+
         public override void OnViewCreated(View view, Bundle savedInstanceState)
         {
             base.OnViewCreated(view, savedInstanceState);
@@ -30,25 +32,29 @@ namespace ClubManagement.Fragments.Bases
             UpdateViewData();
         }
 
-        protected async void UpdateViewData()
-        {
-            this.data = await Task.Run(() => QueryData());
-
-            lock (locker)
-            {
-                if (Context is Activity activity)
-                {
-                    activity.RunOnUiThread(() =>
-                    {
-                        if (View != null)
-                        {
-                            DisplayData(this.data);
-                            SwipeRefreshLayout.Refreshing = false;
-                        }
-                    });
-                }
-            }
-        }
+		protected async void UpdateViewData()
+		{
+			if (!isLoadingData)
+			{
+				isLoadingData = true;
+				this.data = await Task.Run(() => QueryData());
+				isLoadingData = false;
+				lock (locker)
+				{
+					if (Context is Activity activity)
+					{
+						activity.RunOnUiThread(() =>
+						{
+							if (View != null)
+							{
+								DisplayData(this.data);
+								SwipeRefreshLayout.Refreshing = false;
+							}
+						});
+					}
+				}
+			}
+		}
 
         protected abstract T QueryData();
 
