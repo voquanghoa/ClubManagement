@@ -3026,8 +3026,8 @@ namespace ClubManagement
 			// aapt resource value: 0x7f0a00b8
 			public const int recyclerViewPersonsGoTime = 2131361976;
 			
-			// aapt resource value: 0x7f0a00ac
-			public const int refresher = 2131361964;
+			// aapt resource value: 0x7f0a00a8
+			public const int refresher = 2131361960;
 			
 			// aapt resource value: 0x7f0a00a4
 			public const int relativeLayout1 = 2131361956;
@@ -3209,8 +3209,8 @@ namespace ClubManagement
 			// aapt resource value: 0x7f0a00ae
 			public const int tlBalance = 2131361966;
 			
-			// aapt resource value: 0x7f0a00ab
-			public const int tlMoney = 2131361963;
+			// aapt resource value: 0x7f0a00ac
+			public const int tlMoney = 2131361964;
 			
 			// aapt resource value: 0x7f0a0034
 			public const int top = 2131361844;
@@ -3227,8 +3227,8 @@ namespace ClubManagement
 			// aapt resource value: 0x7f0a000b
 			public const int transition_scene_layoutid_cache = 2131361803;
 			
-			// aapt resource value: 0x7f0a00a8
-			public const int tvBudget = 2131361960;
+			// aapt resource value: 0x7f0a00a9
+			public const int tvBudget = 2131361961;
 			
 			// aapt resource value: 0x7f0a009e
 			public const int tvCreatedBy = 2131361950;
@@ -3239,8 +3239,8 @@ namespace ClubManagement
 			// aapt resource value: 0x7f0a0084
 			public const int tvDescription = 2131361924;
 			
-			// aapt resource value: 0x7f0a00a9
-			public const int tvEvents = 2131361961;
+			// aapt resource value: 0x7f0a00aa
+			public const int tvEvents = 2131361962;
 			
 			// aapt resource value: 0x7f0a00b2
 			public const int tvFinalBalance = 2131361970;
@@ -3266,8 +3266,8 @@ namespace ClubManagement
 			// aapt resource value: 0x7f0a009d
 			public const int tvTitle = 2131361949;
 			
-			// aapt resource value: 0x7f0a00aa
-			public const int tvUpcomingEvent = 2131361962;
+			// aapt resource value: 0x7f0a00ab
+			public const int tvUpcomingEvent = 2131361963;
 			
 			// aapt resource value: 0x7f0a00d6
 			public const int tvUser = 2131362006;
@@ -3728,6 +3728,9 @@ namespace ClubManagement
 			
 			// aapt resource value: 0x7f070035
 			public const int appbar_scrolling_view_behavior = 2131165237;
+			
+			// aapt resource value: 0x7f070071
+			public const int back_to_exit = 2131165297;
 			
 			// aapt resource value: 0x7f070036
 			public const int bottom_sheet_behavior = 2131165238;

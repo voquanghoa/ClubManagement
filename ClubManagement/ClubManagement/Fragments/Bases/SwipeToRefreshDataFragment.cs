@@ -8,50 +8,56 @@ using Fragment = Android.Support.V4.App.Fragment;
 
 namespace ClubManagement.Fragments.Bases
 {
-	public abstract class SwipeToRefreshDataFragment<T>: Fragment
+    public abstract class SwipeToRefreshDataFragment<T> : Fragment
     {
-		protected T data;
+        protected T data;
 
-		protected abstract SwipeRefreshLayout SwipeRefreshLayout { get; }
+        protected abstract SwipeRefreshLayout SwipeRefreshLayout { get; }
 
-		private object locker = new object();
+        private object locker = new object();
 
-		public override void OnViewCreated(View view, Bundle savedInstanceState)
-		{
-			base.OnViewCreated(view, savedInstanceState);
+		private bool isLoadingData = false;
 
-			SwipeRefreshLayout.Refresh += HandleRefresh;
-			SwipeRefreshLayout.Refreshing = true;
-			UpdateViewData();
-		}
-
-		private void HandleRefresh(object sender, EventArgs e)
-		{
-			UpdateViewData();
-		}
-
-		protected async void UpdateViewData()
+        public override void OnViewCreated(View view, Bundle savedInstanceState)
         {
-			this.data = await Task.Run(() => QueryData());
+            base.OnViewCreated(view, savedInstanceState);
 
-			lock(locker){
-				if (Context is Activity activity)
-                {
-                    activity.RunOnUiThread(() =>
-                    {
-                        if (View != null)
-                        {
-                            DisplayData(this.data);
-                            SwipeRefreshLayout.Refreshing = false;
-                        }
-                    });
-                }
-			}
-
+            SwipeRefreshLayout.Refresh += HandleRefresh;
+            SwipeRefreshLayout.Refreshing = true;
+            UpdateViewData();
         }
 
-		protected abstract T QueryData();
+        private void HandleRefresh(object sender, EventArgs e)
+        {
+            UpdateViewData();
+        }
 
-		protected abstract void DisplayData(T data);
-	}
+		protected async void UpdateViewData()
+		{
+			if (!isLoadingData)
+			{
+				isLoadingData = true;
+				this.data = await Task.Run(() => QueryData());
+				isLoadingData = false;
+				lock (locker)
+				{
+					if (Context is Activity activity)
+					{
+						activity.RunOnUiThread(() =>
+						{
+							if (View != null)
+							{
+								DisplayData(this.data);
+								SwipeRefreshLayout.Refreshing = false;
+							}
+						});
+					}
+				}
+			}
+		}
+
+        protected abstract T QueryData();
+
+        protected abstract void DisplayData(T data);
+    }
 }

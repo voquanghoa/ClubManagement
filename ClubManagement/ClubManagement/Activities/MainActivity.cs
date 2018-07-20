@@ -3,19 +3,23 @@ using Android.App;
 using Android.Support.V4.App;
 using Android.OS;
 using Android.Support.Design.Widget;
+using Android.Widget;
 using ClubManagement.Fragments;
 using ClubManagement.Ultilities;
 using Fragment = Android.Support.V4.App.Fragment;
+using System;
 
 namespace ClubManagement.Activities
 {
     [Activity(Label = "ClubManagement", Theme = "@style/AppTheme")]
     public class MainActivity : FragmentActivity
     {
+        private bool doubleBackpress = false;
+
         [InjectView(Resource.Id.bottom_navigation_tabbar)]
         private BottomNavigationView bottomNavigationView;
 
-		private readonly Dictionary<int, Fragment> fragmentMapIds = new Dictionary<int, Fragment>
+        private readonly Dictionary<int, Fragment> fragmentMapIds = new Dictionary<int, Fragment>
         {
             {
                 Resource.Id.dashboardTab,
@@ -33,7 +37,6 @@ namespace ClubManagement.Activities
                 Resource.Id.balanceTab,
                 new BalanceFragment()
             },
-
         };
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -43,16 +46,31 @@ namespace ClubManagement.Activities
             Cheeseknife.Inject(this);
             BottomNavigationHelper.RemoveShiftMode(bottomNavigationView);
             bottomNavigationView.NavigationItemSelected += BottomNavigation_NavigationItemSelected;
-			DisplayFragment(Resource.Id.dashboardTab);
+            DisplayFragment(Resource.Id.dashboardTab);
         }
         
 
-        private void DisplayFragment(int fragmentMenuId)
+        private void DisplayFragment(int tag)
         {
-			var fragment = fragmentMapIds[fragmentMenuId];
-            SupportFragmentManager.BeginTransaction()
-                .Replace(Resource.Id.content_frame, fragment)
-                .Commit();
+            var fragmentTransaction = SupportFragmentManager.BeginTransaction();
+            var fragment = SupportFragmentManager.FindFragmentByTag(tag.ToString());
+
+            var addToStack = true;
+
+            if (fragment == null)
+            {
+                fragment = fragmentMapIds[tag];
+            }
+            else
+            {
+                addToStack = false;
+            }
+
+            fragmentTransaction.Replace(Resource.Id.content_frame, fragment, tag.ToString());
+
+            if (addToStack) fragmentTransaction.AddToBackStack(null);
+
+            fragmentTransaction.Commit();
         }
 
         private void BottomNavigation_NavigationItemSelected(object sender,
@@ -63,6 +81,14 @@ namespace ClubManagement.Activities
 
         public override void OnBackPressed()
         {
+            if (doubleBackpress)
+            {
+                Finish();
+                return;
+            }
+            doubleBackpress = true;
+            Toast.MakeText(this, Resources.GetString(Resource.String.back_to_exit), ToastLength.Short).Show();
+            new Handler().PostDelayed(() => { doubleBackpress = false; }, 2000);
         }
     }
 }

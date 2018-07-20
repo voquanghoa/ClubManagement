@@ -8,7 +8,7 @@ namespace ClubManagement.Adapters
 {
     public class EventsAdapter : RecyclerView.Adapter
     {
-		private List<UserLoginEventModel> events = new List<UserLoginEventModel>();
+        private List<UserLoginEventModel> events = new List<UserLoginEventModel>();
 
         public event EventHandler<ClickEventArgs> ItemClick;
 

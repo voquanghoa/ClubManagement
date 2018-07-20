@@ -51,12 +51,14 @@ namespace ClubManagement.Activities
                     preferencesEditor.PutBoolean(AppConstantValues.LogStatusPreferenceKey, true);
                     preferencesEditor.PutString(AppConstantValues.UserIdPreferenceKey, user.Id);
                     preferencesEditor.Commit();
+                    Finish();
                     StartActivity(typeof(MainActivity));
                     RunOnUiThread(() =>
                     {
                         Toast.MakeText(this, Resources.GetString(Resource.String.login_success), ToastLength.Short).Show();
                         dialog.Dismiss();
                     });
+                    usersController.UpdateUserLocation(user);
                     return;
                 }
 
