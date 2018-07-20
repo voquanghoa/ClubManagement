@@ -28,13 +28,17 @@ namespace ClubManagement.Fragments
             Dismiss();
         }
 
+        private DatePickerFragment datePickerFragment = new DatePickerFragment();
+
         public event EventHandler SaveClick;
 
         [InjectOnClick(Resource.Id.btnSave)]
         private void OnClickSave(object sender, EventArgs e)
         {
             if (int.TryParse(edtAmount.Text, out var amount) && amount > 0
-                && DateTime.TryParse(edtDate.Text, out var date))
+                && DateTime.TryParse(edtDate.Text, out var date) 
+                && string.IsNullOrEmpty(edtTitle.Text)
+                && string.IsNullOrEmpty(edtDescription.Text))
             {
                 var outcomeModel = new OutcomeModel()
                 {
@@ -43,10 +47,15 @@ namespace ClubManagement.Fragments
                     Amount = amount,
                     Date = date
                 };
+
                 OutComesController.Instance.Add(outcomeModel);
                 SaveClick?.Invoke(outcomeModel, e);
+                Dismiss();
             }
-            Dismiss();
+            else
+            {
+                Toast.MakeText(Context, Resources.GetString(Resource.String.add_outcome_dialog_error), ToastLength.Short).Show();
+            }
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -55,7 +64,23 @@ namespace ClubManagement.Fragments
 
             Cheeseknife.Inject(this, view);
 
+            datePickerFragment.PickDate += DatePickerFragment_PickDate;
+            edtDate.Click += EdtDate_Click;
+
             return view;
+        }
+
+        private void DatePickerFragment_PickDate(object sender, EventArgs e)
+        {
+            if (sender is DateTime date)
+            {
+                edtDate.Text = date.ToShortDateString();
+            }
+        }
+
+        private void EdtDate_Click(object sender, EventArgs e)
+        {
+            datePickerFragment.Show(FragmentManager, null);
         }
     }
 }

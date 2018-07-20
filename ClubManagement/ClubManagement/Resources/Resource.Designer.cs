@@ -1986,11 +1986,8 @@ namespace ClubManagement
 			// aapt resource value: 0x7f09008d
 			public const int design_tab_text_size_2line = 2131296397;
 			
-			// aapt resource value: 0x7f0900ad
-			public const int dialog_padding = 2131296429;
-			
 			// aapt resource value: 0x7f0900ac
-			public const int dialog_width = 2131296428;
+			public const int dialog_margin = 2131296428;
 			
 			// aapt resource value: 0x7f090054
 			public const int disabled_alpha_material_dark = 2131296340;
@@ -3725,6 +3722,9 @@ namespace ClubManagement
 			
 			// aapt resource value: 0x7f07005c
 			public const int addOutcome = 2131165276;
+			
+			// aapt resource value: 0x7f070077
+			public const int add_outcome_dialog_error = 2131165303;
 			
 			// aapt resource value: 0x7f070072
 			public const int all = 2131165298;

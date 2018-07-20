@@ -172,6 +172,7 @@
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Fragments\BalancesFragment.cs" />
     <Compile Include="Fragments\BalanceSummaryFragment.cs" />
+    <Compile Include="Fragments\DatePickerFragment.cs" />
     <Compile Include="Fragments\OutcomeDialogFragment.cs" />
     <Compile Include="Fragments\PersonGoTimesFragment.cs" />
     <Compile Include="Models\AddressGeocodeAPIModel.cs" />
