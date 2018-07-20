@@ -52,4 +52,6 @@
   <string name="upcoming">Upcoming</string>
   <string name="joined">Joined</string>
   <string name="add_outcome_dialog_error">Input Empty!\nPlease fill in all fields</string>
+  <string name="eventDetail">Event detail</string>
+  <string name="memberLocation">Member location</string>
 </resources>
