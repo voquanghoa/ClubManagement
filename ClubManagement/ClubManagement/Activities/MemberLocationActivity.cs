@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using ClubManagement.Controllers;
@@ -64,10 +59,10 @@ namespace ClubManagement.Activities
 
         private void AddMarkerMap(double lat, double lng, string title, int iconResourceId)
         {
-            googleMap.AddMarker(new MarkerOptions()
-                .SetPosition(new LatLng(lat, lng))
-                .SetTitle(title)
-                .SetIcon(BitmapDescriptorFactory.FromResource(iconResourceId)));
+            googleMap?.AddMarker(new MarkerOptions()
+                ?.SetPosition(new LatLng(lat, lng))
+                ?.SetTitle(title)
+                ?.SetIcon(BitmapDescriptorFactory.FromResource(iconResourceId)));
         }
 
         private void MoveCameraMap(double lat, double lng)

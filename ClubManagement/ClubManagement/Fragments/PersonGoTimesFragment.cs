@@ -115,7 +115,7 @@ namespace ClubManagement.Fragments
                     return personGoTimeModel;
                 }).ToList();
 
-                this.Activity.RunOnUiThread(() =>
+                this?.Activity?.RunOnUiThread(() =>
                 {
                     adapter.PersonGoTimes = personGoTimes;
                 });

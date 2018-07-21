@@ -62,7 +62,6 @@ namespace ClubManagement.Fragments
         public override void OnResume()
         {
             base.OnResume();
-
             UpdateViewData();
         }
 

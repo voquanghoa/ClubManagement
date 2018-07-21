@@ -14,6 +14,8 @@ namespace ClubManagement.Controllers
 
         public readonly string UserId;
 
+        public readonly string UserName;
+
         private MoneysController moneysController = MoneysController.Instance;
 
         private UserMoneysController userMoneysController = UserMoneysController.Instance;
@@ -24,6 +26,8 @@ namespace ClubManagement.Controllers
         {
             UserId = PreferenceManager.GetDefaultSharedPreferences(Application.Context)
                 .GetString("UserId", string.Empty);
+
+            UserName = usersController.Values.FirstOrDefault(x => x.Id == UserId)?.Name;
         }
 
         public int NumberOfUnpaidBudgets

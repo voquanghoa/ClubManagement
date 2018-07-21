@@ -54,4 +54,6 @@
   <string name="add_outcome_dialog_error">Input Empty!\nPlease fill in all fields</string>
   <string name="eventDetail">Event detail</string>
   <string name="memberLocation">Member location</string>
+  <string name="location">Location</string>
+  <string name="addEvent">Add event</string>
 </resources>

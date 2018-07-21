@@ -141,8 +141,14 @@
     <Reference Include="Xamarin.GooglePlayServices.Basement, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.GooglePlayServices.Basement.32.961.0\lib\MonoAndroid70\Xamarin.GooglePlayServices.Basement.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.GooglePlayServices.Location, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.GooglePlayServices.Location.32.961.0\lib\MonoAndroid70\Xamarin.GooglePlayServices.Location.dll</HintPath>
+    </Reference>
     <Reference Include="Xamarin.GooglePlayServices.Maps, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.GooglePlayServices.Maps.32.961.0\lib\MonoAndroid70\Xamarin.GooglePlayServices.Maps.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.GooglePlayServices.Places, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.GooglePlayServices.Places.32.961.0\lib\MonoAndroid70\Xamarin.GooglePlayServices.Places.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.GooglePlayServices.Tasks, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.GooglePlayServices.Tasks.32.961.0\lib\MonoAndroid70\Xamarin.GooglePlayServices.Tasks.dll</HintPath>
@@ -174,6 +180,7 @@
     <Compile Include="Fragments\BalancesFragment.cs" />
     <Compile Include="Fragments\BalanceSummaryFragment.cs" />
     <Compile Include="Fragments\DatePickerFragment.cs" />
+    <Compile Include="Fragments\EventDialogFragment.cs" />
     <Compile Include="Fragments\OutcomeDialogFragment.cs" />
     <Compile Include="Fragments\PersonGoTimesFragment.cs" />
     <Compile Include="Models\AddressGeocodeAPIModel.cs" />
@@ -259,6 +266,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ActivityMemberLocation.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\DialogFragmentEvent.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

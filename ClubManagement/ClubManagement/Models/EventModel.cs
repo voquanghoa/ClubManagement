@@ -18,7 +18,10 @@ namespace ClubManagement.Models
         public string CreatedBy { get; set; } = "";
 
         [JsonProperty("createdTime")]
-        public string CreatedTime { get; set; } = "";
+        public DateTime CreatedTime { get; set; } = new DateTime();
+
+        [JsonProperty("place")]
+        public string Place { get; set; } = "";
 
         [JsonProperty("latitude")]
         public double Latitude { get; set; }
