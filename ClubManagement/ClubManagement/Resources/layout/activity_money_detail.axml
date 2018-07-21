@@ -57,8 +57,13 @@
         android:textSize="@dimen/text_description_size"
         android:gravity="center_vertical"
         android:drawablePadding="@dimen/textview_padding_left_right" />
-    <android.support.v7.widget.RecyclerView
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresher"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/rvUser" />
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/rvUser" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

@@ -16,14 +16,13 @@ namespace ClubManagement.Fragments.Bases
 
         private object locker = new object();
 
-		private bool isLoadingData = false;
+        private bool isLoadingData = false;
 
         public override void OnViewCreated(View view, Bundle savedInstanceState)
         {
             base.OnViewCreated(view, savedInstanceState);
 
             SwipeRefreshLayout.Refresh += HandleRefresh;
-            SwipeRefreshLayout.Refreshing = true;
             UpdateViewData();
         }
 
@@ -32,29 +31,30 @@ namespace ClubManagement.Fragments.Bases
             UpdateViewData();
         }
 
-		protected async void UpdateViewData()
-		{
-			if (!isLoadingData)
-			{
-				isLoadingData = true;
-				this.data = await Task.Run(() => QueryData());
-				isLoadingData = false;
-				lock (locker)
-				{
-					if (Context is Activity activity)
-					{
-						activity.RunOnUiThread(() =>
-						{
-							if (View != null)
-							{
-								DisplayData(this.data);
-								SwipeRefreshLayout.Refreshing = false;
-							}
-						});
-					}
-				}
-			}
-		}
+        protected async void UpdateViewData()
+        {
+            if (!isLoadingData)
+            {
+                SwipeRefreshLayout.Refreshing = true;
+                isLoadingData = true;
+                this.data = await Task.Run(() => QueryData());
+                isLoadingData = false;
+                lock (locker)
+                {
+                    if (Context is Activity activity)
+                    {
+                        activity.RunOnUiThread(() =>
+                        {
+                            if (View != null)
+                            {
+                                DisplayData(this.data);
+                                SwipeRefreshLayout.Refreshing = false;
+                            }
+                        });
+                    }
+                }
+            }
+        }
 
         protected abstract T QueryData();
 

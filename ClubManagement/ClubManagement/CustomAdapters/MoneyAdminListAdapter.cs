@@ -8,15 +8,23 @@ namespace ClubManagement.CustomAdapters
 {
     public class MoneyAdminListAdapter : RecyclerView.Adapter
     {
-        private readonly List<MoneyAdminState> moneyAdminStates;
+        private List<MoneyAdminState> moneyAdminStates;
+
+        public List<MoneyAdminState> MoneyAdminStates
+        {
+            set
+            {
+                moneyAdminStates = value;
+                NotifyDataSetChanged();
+            }
+        }
 
         private readonly TextView tvState;
 
         private readonly string moneyId;
 
-        public MoneyAdminListAdapter(List<MoneyAdminState> moneyAdminStates, TextView tvState, string moneyId)
+        public MoneyAdminListAdapter(TextView tvState, string moneyId)
         {
-            this.moneyAdminStates = moneyAdminStates;
             this.tvState = tvState;
             this.moneyId = moneyId;
         }

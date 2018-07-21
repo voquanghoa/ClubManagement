@@ -52,6 +52,17 @@ namespace ClubManagement.Fragments
                     adapter.Events = data;
                 }
             };
+
+            adapter.ItemClick += (s, e) =>
+            {
+                var intent = new Intent(Context, typeof(EventDetailActivity));
+
+                var eventDetail = JsonConvert.SerializeObject(data[e.Position]);
+
+                intent.PutExtra("EventDetail", eventDetail);
+
+                StartActivity(intent);
+            };
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -68,17 +79,6 @@ namespace ClubManagement.Fragments
             var recyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerView1);
             recyclerView.SetLayoutManager(new LinearLayoutManager(view.Context));
             recyclerView.SetAdapter(adapter);
-
-            adapter.ItemClick += (s, e) =>
-            {
-                var intent = new Intent(Context, typeof(EventDetailActivity));
-
-                var eventDetail = JsonConvert.SerializeObject(data[e.Position]);
-
-                intent.PutExtra("EventDetail", eventDetail);
-
-                StartActivityForResult(intent, 0);
-            };
 
             tabLayout = view.FindViewById<TabLayout>(Resource.Id.tabView1);
             tabLayout.TabSelected += (s, e) => DisplayData(data);
@@ -98,18 +98,9 @@ namespace ClubManagement.Fragments
             UpdateViewData();
         }
 
-        public override void OnActivityResult(int requestCode, int resultCode, Intent data)
-        {
-            base.OnActivityResult(requestCode, resultCode, data);
-            if (requestCode == 0)
-            {
-                UpdateViewData();
-            }
-        }
-
         protected override List<UserLoginEventModel> QueryData()
         {
-            return eventsController.Values.Count > data.Count
+            return eventsController.Values.Count >= data.Count
                 ? eventsController.Values.Select(x =>
                 {
                     var userLoginEventModel = new UserLoginEventModel(x)

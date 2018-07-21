@@ -2,12 +2,13 @@
 using Android.App;
 using Android.OS;
 using Android.Support.V7.Widget;
-using Android.Views;
 using Android.Widget;
 using ClubManagement.Controllers;
 using ClubManagement.CustomAdapters;
 using ClubManagement.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Android.Support.V4.Widget;
 
 namespace ClubManagement.Activities
 {
@@ -51,10 +52,29 @@ namespace ClubManagement.Activities
             var time = Intent.GetStringExtra("Time");
 
             tvDescription.Text = $"{time} - Budget : {budget}$\n\n{description}";
+
+            adapter = new MoneyAdminListAdapter(tvPayState, moneyId)
+            {
+                MoneyAdminStates = new List<MoneyAdminState>()
+            };
+
             rvUser.SetLayoutManager(new LinearLayoutManager(this));
-            moneyAdminStates = appDataController.GetMoneyAdminStates(moneyId);
-            adapter = new MoneyAdminListAdapter(moneyAdminStates, tvPayState, moneyId);
             rvUser.SetAdapter(adapter);
+
+            var refresh = FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
+            refresh.Refreshing = true;
+
+            Task.Run(() =>
+            {
+                moneyAdminStates = appDataController.GetMoneyAdminStates(moneyId);
+
+                RunOnUiThread(() =>
+                {
+                    adapter.MoneyAdminStates = moneyAdminStates;
+
+                    refresh.Refreshing = false;
+                });
+            });
         }
     }
 }
