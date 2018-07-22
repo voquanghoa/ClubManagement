@@ -12,12 +12,16 @@ namespace ClubManagement.Adapters
     {
         private List<PersonGoTimeModel> personGoTimes;
 
-        public event EventHandler<ClickEventArgs> ItemClick;
-
-        public PersonGoTimesAdapter(List<PersonGoTimeModel> personGoTimes)
+        public List<PersonGoTimeModel> PersonGoTimes
         {
-            this.personGoTimes = personGoTimes;
+            set
+            {
+                personGoTimes = value;
+                NotifyDataSetChanged();
+            }
         }
+
+        public event EventHandler<ClickEventArgs> ItemClick;
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {

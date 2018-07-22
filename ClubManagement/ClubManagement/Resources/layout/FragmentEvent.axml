@@ -39,7 +39,8 @@
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/refresher"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
         <android.support.v7.widget.RecyclerView
             android:minWidth="25px"
             android:minHeight="25px"
@@ -47,4 +48,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/recyclerView1" />
     </android.support.v4.widget.SwipeRefreshLayout>
+    <ImageButton
+        android:src="@drawable/icon_add"
+        android:background="@null"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:id="@+id/imgbtnAdd" />
 </LinearLayout>

@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using Android.Support.V4.Widget;
 using ClubManagement.Fragments.Bases;
+using Android.Widget;
 
 namespace ClubManagement.Fragments
 {
@@ -27,7 +28,31 @@ namespace ClubManagement.Fragments
 
         private string userId = AppDataController.Instance.UserId;
 
+        private EventDialogFragment eventDialogFragment = new EventDialogFragment();
+
+        private ImageButton imgbtnAdd;
+
         protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
+
+        public EventFragment()
+        {
+            data = new List<UserLoginEventModel>();
+
+            eventDialogFragment.SaveClick += (s, e) =>
+            {
+                if (s is EventModel eventModel)
+                {
+                    var userLoginEventModel = new UserLoginEventModel(eventModel)
+                    {
+                        IsJoined = false
+                    };
+
+                    data.Add(userLoginEventModel);
+
+                    adapter.Events = data;
+                }
+            };
+        }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -57,6 +82,14 @@ namespace ClubManagement.Fragments
 
             tabLayout = view.FindViewById<TabLayout>(Resource.Id.tabView1);
             tabLayout.TabSelected += (s, e) => DisplayData(data);
+
+            imgbtnAdd = view.FindViewById<ImageButton>(Resource.Id.imgbtnAdd);
+            imgbtnAdd.Click += AddEvent_Click;
+        }
+
+        private void AddEvent_Click(object sender, System.EventArgs e)
+        {
+            eventDialogFragment.Show(FragmentManager, null);
         }
 
         public override void OnResume()
@@ -76,16 +109,18 @@ namespace ClubManagement.Fragments
 
         protected override List<UserLoginEventModel> QueryData()
         {
-            return eventsController.Values.Select(x =>
-            {
-                var userLoginEventModel = new UserLoginEventModel(x)
+            return eventsController.Values.Count > data.Count
+                ? eventsController.Values.Select(x =>
                 {
-                    Place = MapsController.Instance.GetAddress(x.Latitude, x.Longitude),
-                    IsJoined = userEventsController.Values.Any(y => y.EventId == x.Id && y.UserId == userId)
-                };
+                    var userLoginEventModel = new UserLoginEventModel(x)
+                    {
+                        IsJoined = userEventsController.Values
+                            .Any(y => y.EventId == x.Id && y.UserId == userId)
+                    };
 
-                return userLoginEventModel;
-            }).ToList();
+                    return userLoginEventModel;
+                }).ToList()
+                : data;
         }
 
         protected override void DisplayData(List<UserLoginEventModel> data)
@@ -96,12 +131,15 @@ namespace ClubManagement.Fragments
                 {
                     case 0:
                         adapter.Events = data;
+                        imgbtnAdd.Visibility = ViewStates.Visible;
                         break;
                     case 1:
                         adapter.Events = data.Where(x => x.IsJoined).ToList();
+                        imgbtnAdd.Visibility = ViewStates.Gone;
                         break;
                     case 2:
                         adapter.Events = data.Where(x => !x.IsJoined).ToList();
+                        imgbtnAdd.Visibility = ViewStates.Gone;
                         break;
                 }
             }

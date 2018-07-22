@@ -9,6 +9,8 @@ using Android.Support.V7.Widget;
 using ClubManagement.Controllers;
 using ClubManagement.Models;
 using ClubManagement.Adapters;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace ClubManagement.Fragments
 {
@@ -22,7 +24,9 @@ namespace ClubManagement.Fragments
 
         private MapsController mapsController = MapsController.Instance;
 
-        private EventModel eventDetail;
+        private PersonGoTimesAdapter adapter = new PersonGoTimesAdapter();
+
+        private List<PersonGoTimeModel> personGoTimes = new List<PersonGoTimeModel>();
 
         public bool displayPersons = true;
 
@@ -30,15 +34,7 @@ namespace ClubManagement.Fragments
 
         public event EventHandler DisplayPersonsClick;
 
-        public PersonGoTimesFragment()
-        {
-            
-        }
-
-        public PersonGoTimesFragment(EventModel eventDetail)
-        {
-            this.eventDetail = eventDetail;
-        }
+        public EventModel EventDetail { set; get; }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -66,32 +62,13 @@ namespace ClubManagement.Fragments
 
             recyclerView.SetLayoutManager(new LinearLayoutManager(view.Context));
 
-            var q = userEventsController.Values.Where(x => x.EventId == eventDetail.Id).ToList();
-
-            var personGoTimes = userEventsController.Values.Where(x => x.EventId == eventDetail.Id)
-                .Join(usersController.Values,
-                    x => x.UserId,
-                    y => y.Id,
-                    (x, y) => y)
-                .Select(x =>
-                {
-                    var personGoTimeModel = new PersonGoTimeModel()
-                    {
-                        Name = x.Name,
-                        GoTime = mapsController.GetGoTime(x.Latitude, x.Longitude, eventDetail.Latitude, eventDetail.Longitude),
-                        Selected = false,
-                        Latitude = x.Latitude,
-                        Longitude = x.Longitude
-                    };
-
-                    return personGoTimeModel;
-                }).ToList();
-
-            var adapter = new PersonGoTimesAdapter(personGoTimes);
+            adapter.PersonGoTimes = personGoTimes;
 
             recyclerView.SetAdapter(adapter);
 
             var previousPosition = 0;
+
+            UpdateData();
 
             adapter.ItemClick += (s, e) =>
             {
@@ -110,6 +87,39 @@ namespace ClubManagement.Fragments
             view.FindViewById<ImageButton>(Resource.Id.imageButtonBack).Click += DisplayPersons_Click;
 
             view.SetBackgroundColor(Android.Graphics.Color.Argb(200, 195, 207, 219));
+        }
+
+        private async void UpdateData()
+        {
+            await Task.Run(() =>
+            {
+                personGoTimes = userEventsController.Values.Where(x => x.EventId == EventDetail.Id)
+                .Join(usersController.Values,
+                    x => x.UserId,
+                    y => y.Id,
+                    (x, y) => y)
+                .Select(x =>
+                {
+                    var personGoTimeModel = new PersonGoTimeModel()
+                    {
+                        Name = x.Name,
+                        GoTime = mapsController.GetGoTime(x.Latitude,
+                            x.Longitude,
+                            EventDetail.Latitude,
+                            EventDetail.Longitude),
+                        Selected = false,
+                        Latitude = x.Latitude,
+                        Longitude = x.Longitude
+                    };
+
+                    return personGoTimeModel;
+                }).ToList();
+
+                this?.Activity?.RunOnUiThread(() =>
+                {
+                    adapter.PersonGoTimes = personGoTimes;
+                });
+            });
         }
 
         private void DisplayPersons_Click(object sender, EventArgs e)

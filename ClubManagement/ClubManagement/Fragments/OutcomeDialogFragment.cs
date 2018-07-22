@@ -37,8 +37,8 @@ namespace ClubManagement.Fragments
         {
             if (int.TryParse(edtAmount.Text, out var amount) && amount > 0
                 && DateTime.TryParse(edtDate.Text, out var date) 
-                && string.IsNullOrEmpty(edtTitle.Text)
-                && string.IsNullOrEmpty(edtDescription.Text))
+                && !string.IsNullOrEmpty(edtTitle.Text)
+                && !string.IsNullOrEmpty(edtDescription.Text))
             {
                 var outcomeModel = new OutcomeModel()
                 {

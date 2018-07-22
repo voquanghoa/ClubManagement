@@ -19,12 +19,10 @@ namespace ClubManagement.Models
             base.CreatedTime = eventModel.CreatedTime;
             base.Latitude = eventModel.Latitude;
             base.Longitude = eventModel.Longitude;
+            base.Place = eventModel.Place;
         }
 
         [JsonProperty("isJoined")]
         public bool IsJoined { get; set; }
-
-        [JsonProperty("place")]
-        public string Place { get; set; }
     }
 }

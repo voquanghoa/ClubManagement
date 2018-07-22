@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tabbar_height"
+        android:background="@color/tabbar_background_color"
+        android:contentInsetLeft="0dp"
+        android:contentInsetStart="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        android:contentInsetRight="0dp"
+        android:contentInsetEnd="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_back"
+            android:background="@null"
+            android:paddingLeft="@dimen/textview_padding_left_right"
+            android:paddingRight="@dimen/textview_padding_left_right"
+            android:id="@+id/btnBack" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/memberLocation"
+            android:gravity="center_vertical"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/tabbar_text_size"
+            android:textStyle="bold" />
+    </android.support.v7.widget.Toolbar>
+    <RelativeLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/item_event_margin"
+        android:id="@+id/relativeLayout1">
+        <fragment
+            android:id="@+id/fragemtMap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            class="com.google.android.gms.maps.MapFragment" />
+        <FrameLayout
+            android:id="@+id/fragemtListPerson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+</LinearLayout>

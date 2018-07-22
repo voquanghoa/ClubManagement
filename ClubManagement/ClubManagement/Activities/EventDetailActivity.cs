@@ -11,11 +11,12 @@ using ClubManagement.Models;
 using ClubManagement.Ultilities;
 using Newtonsoft.Json;
 using System.Linq;
+using Android.Content;
 
 namespace ClubManagement.Activities
 {
     [Activity(Label = "EventDetailActivity", Theme = "@style/AppTheme")]
-    public class EventDetailActivity : Activity, IOnMapReadyCallback
+    public class EventDetailActivity : Activity
     {
         [InjectView(Resource.Id.tvTitle)]
         private TextView tvTitle;
@@ -41,64 +42,19 @@ namespace ClubManagement.Activities
         [InjectView(Resource.Id.tvCreatedBy)]
         private TextView tvCreatedBy;
 
+        private UserEventsController userEventsController = UserEventsController.Instance;
+
+        private string userId = AppDataController.Instance.UserId;
+
         private UserLoginEventModel eventDetail;
 
         private bool currentIsJoined;
-
-        private UserEventsController userEventsController = UserEventsController.Instance;
-
-        private UsersController usersController = UsersController.Instance;
-
-        private GoogleMap googleMap;
-
-        public void OnMapReady(GoogleMap googleMap)
-        {
-            this.googleMap = googleMap;
-
-            userEventsController.Values.Where(x => x.EventId == eventDetail.Id)
-                .Join(usersController.Values,
-                    x => x.UserId,
-                    y => y.Id,
-                    (x, y) => y)
-                .ToList()
-                .ForEach(x => AddMarkerMap(x.Latitude, x.Longitude, x.Name, Resource.Drawable.icon_person));
-
-            AddMarkerMap(eventDetail.Latitude, eventDetail.Longitude, eventDetail.Title, Resource.Drawable.icon_event);
-
-            MoveCameraMap(eventDetail.Latitude, eventDetail.Longitude);
-        }
-
-        private void AddMarkerMap(double lat, double lng, string title, int iconResourceId)
-        {
-            googleMap.AddMarker(new MarkerOptions()
-                .SetPosition(new LatLng(lat, lng))
-                .SetTitle(title)
-                .SetIcon(BitmapDescriptorFactory.FromResource(iconResourceId)));
-        }
-
-        private void MoveCameraMap(double lat, double lng)
-        {
-            var builder = CameraPosition.InvokeBuilder();
-            builder.Target(new LatLng(lat, lng));
-            builder.Zoom(15);
-
-            var cameraPosition = builder.Build();
-            var cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
-
-            googleMap.MoveCamera(cameraUpdate);
-        }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.EventDetail);
-
-            var fragemtListPerson = FragmentManager.FindFragmentById<Fragment>(Resource.Id.fragemtListPerson);
-
-            var mapFragment = FragmentManager.FindFragmentById<MapFragment>(Resource.Id.fragemtMap);
-
-            mapFragment.GetMapAsync(this);
 
             Cheeseknife.Inject(this);
 
@@ -123,31 +79,18 @@ namespace ClubManagement.Activities
                 UpdateUserEvents(currentIsJoined);
             };
 
-            var personGoTimesFragment = new PersonGoTimesFragment(eventDetail);
-
-            FragmentManager.BeginTransaction()
-                .Replace(Resource.Id.fragemtListPerson, personGoTimesFragment)
-                .Commit();
-
-            personGoTimesFragment.PersonGoTimeClick += (s, e) =>
+            FindViewById<ImageButton>(Resource.Id.imageButtonMemberLocation).Click += (s, e) =>
             {
-                MoveCameraMap(e.Latitude, e.Longitude);
-            };
+                var intent = new Intent(this, typeof(MemberLocationActivity));
 
-            personGoTimesFragment.DisplayPersonsClick += (s, e) =>
-            {
-                FragmentManager.BeginTransaction()
-                .Detach(personGoTimesFragment)
-                .Attach(personGoTimesFragment)
-                .Commit();
+                intent.PutExtra("EventDetail", content);
+
+                StartActivity(intent);
             };
         }
 
         private void UpdateUserEvents(bool isJoined)
         {
-            var preferences = PreferenceManager.GetDefaultSharedPreferences(Application.Context);
-            var userId = preferences.GetString("UserId", string.Empty);
-
             if (isJoined)
             {
                 userEventsController.Add(new UserEventModel()
