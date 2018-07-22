@@ -32,6 +32,13 @@ namespace ClubManagement.Fragments
             this.type = type;
 
             adapter = new BalancesAdapter(type);
+
+            outcomeDialogFragment.SaveClick += (s, e) =>
+            {
+                Outcomes.Add((OutcomeModel)s);
+
+                adapter.Balances = Outcomes;
+            };
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -58,13 +65,6 @@ namespace ClubManagement.Fragments
                 view.FindViewById<ImageButton>(Resource.Id.imgbtnAdd).Click += AddOutcome_Click;
 
                 adapter.Balances = Outcomes;
-
-                outcomeDialogFragment.SaveClick += (s, ne) =>
-                {
-                    Outcomes.Add((OutcomeModel)s);
-
-                    adapter.Balances = Outcomes;
-                };
             }
         }
 

@@ -3723,6 +3723,9 @@ namespace ClubManagement
 			// aapt resource value: 0x7f07005c
 			public const int addOutcome = 2131165276;
 			
+			// aapt resource value: 0x7f070077
+			public const int add_outcome_dialog_error = 2131165303;
+			
 			// aapt resource value: 0x7f070072
 			public const int all = 2131165298;
 			
