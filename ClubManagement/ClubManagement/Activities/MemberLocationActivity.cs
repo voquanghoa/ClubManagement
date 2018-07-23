@@ -5,17 +5,17 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Gms.Maps;
-using Android.Gms.Maps.Model;
 using ClubManagement.Controllers;
 using ClubManagement.Models;
 using ClubManagement.Fragments;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using ClubManagement.Activities.Base;
 
 namespace ClubManagement.Activities
 {
-    [Activity(Label = "MapActivity")]
-    public class MemberLocationActivity : Activity, IOnMapReadyCallback
+	[Activity(Label = "MapActivity")]
+    public class MemberLocationActivity : MapAbstractActivity
     {
         [InjectOnClick(Resource.Id.btnBack)]
         private void Back(object s, EventArgs e)
@@ -29,15 +29,11 @@ namespace ClubManagement.Activities
 
         private UserLoginEventModel eventDetail;
 
-        private GoogleMap googleMap;
-
         private PersonGoTimesFragment personGoTimesFragment = new PersonGoTimesFragment();
-
-        public void OnMapReady(GoogleMap googleMap)
-        {
-            this.googleMap = googleMap;
-
-            Task.Run(() =>
+        
+		private void MemberLocationActivity_MapReady(object sender, EventArgs e)
+		{
+			Task.Run(() =>
             {
                 var user = userEventsController.Values.Where(x => x.EventId == eventDetail.Id)
                .Join(usersController.Values,
@@ -48,34 +44,14 @@ namespace ClubManagement.Activities
 
                 RunOnUiThread(() =>
                 {
-                    user.ForEach(x => AddMarkerMap(x.Latitude, x.Longitude, x.Name, Resource.Drawable.icon_person));
+					user.ForEach(x => AddMapMarker(x.Latitude, x.Longitude, x.Name, Resource.Drawable.icon_person));
                 });
             });
 
-            AddMarkerMap(eventDetail.Latitude, eventDetail.Longitude, eventDetail.Title, Resource.Drawable.icon_event);
+			AddMapMarker(eventDetail.Latitude, eventDetail.Longitude, eventDetail.Title, Resource.Drawable.icon_event);
 
-            MoveCameraMap(eventDetail.Latitude, eventDetail.Longitude);
-        }
-
-        private void AddMarkerMap(double lat, double lng, string title, int iconResourceId)
-        {
-            googleMap?.AddMarker(new MarkerOptions()
-                ?.SetPosition(new LatLng(lat, lng))
-                ?.SetTitle(title)
-                ?.SetIcon(BitmapDescriptorFactory.FromResource(iconResourceId)));
-        }
-
-        private void MoveCameraMap(double lat, double lng)
-        {
-            var builder = CameraPosition.InvokeBuilder();
-            builder.Target(new LatLng(lat, lng));
-            builder.Zoom(12);
-
-            var cameraPosition = builder.Build();
-            var cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
-
-            googleMap.MoveCamera(cameraUpdate);
-        }
+            MoveMapCamera(eventDetail.Latitude, eventDetail.Longitude);
+		}
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -85,11 +61,9 @@ namespace ClubManagement.Activities
 
             Cheeseknife.Inject(this);
 
-            var fragemtListPerson = FragmentManager.FindFragmentById<Fragment>(Resource.Id.fragemtListPerson);
-
-            var mapFragment = FragmentManager.FindFragmentById<MapFragment>(Resource.Id.fragemtMap);
-
-            mapFragment.GetMapAsync(this);
+            FragmentManager.BeginTransaction()
+			               .Replace(Resource.Id.memberFrament, personGoTimesFragment)
+                .Commit();
 
             var content = Intent.GetStringExtra("EventDetail");
 
@@ -97,22 +71,22 @@ namespace ClubManagement.Activities
 
             personGoTimesFragment.EventDetail = eventDetail;
 
-            FragmentManager.BeginTransaction()
-                .Replace(Resource.Id.fragemtListPerson, personGoTimesFragment)
-                .Commit();
-
             personGoTimesFragment.PersonGoTimeClick += (s, e) =>
             {
-                MoveCameraMap(e.Latitude, e.Longitude);
+                MoveMapCamera(e.Latitude, e.Longitude);
             };
 
             personGoTimesFragment.DisplayPersonsClick += (s, e) =>
             {
                 FragmentManager.BeginTransaction()
-                .Detach(personGoTimesFragment)
-                .Attach(personGoTimesFragment)
-                .Commit();
+                    .Detach(personGoTimesFragment)
+                    .Attach(personGoTimesFragment)
+                    .Commit();
             };
+
+            FragmentManager.FindFragmentById<MapFragment>(Resource.Id.mapFragment).GetMapAsync(this);
+
+			MapReady += MemberLocationActivity_MapReady;
         }
     }
 }
