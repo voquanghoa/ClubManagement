@@ -23,5 +23,7 @@
         public const string EventFragmentUpcomingTab = "Upcoming";
 
         public const string EventFragmentJoinedTab = "Joined";
+
+		public const float DefaultMapZoomLevel = 12f;
     }
 }
