@@ -82,7 +82,7 @@ namespace ClubManagement.Activities
                 UpdateUserEvents(currentIsJoined);
             };
 
-            FragmentManager.FindFragmentById<MapFragment>(Resource.Id.fragemtMap).GetMapAsync(this);
+			FragmentManager.FindFragmentById<MapFragment>(Resource.Id.mapFragment).GetMapAsync(this);
 
 			MapReady += EventDetailActivity_MapReady;
         }

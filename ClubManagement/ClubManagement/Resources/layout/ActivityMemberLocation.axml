@@ -41,7 +41,7 @@
         android:layout_margin="@dimen/item_event_margin"
         android:id="@+id/relativeLayout1">
         <fragment
-            android:id="@+id/fragemtMap"
+            android:id="@+id/mapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             class="com.google.android.gms.maps.MapFragment" />
