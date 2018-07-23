@@ -125,7 +125,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <fragment
-        android:id="@+id/fragemtMap"
+        android:id="@+id/mapFragment"
         android:layout_margin="@dimen/item_event_margin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

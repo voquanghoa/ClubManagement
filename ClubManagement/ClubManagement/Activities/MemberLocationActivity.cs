@@ -61,10 +61,8 @@ namespace ClubManagement.Activities
 
             Cheeseknife.Inject(this);
 
-            var fragemtListPerson = FragmentManager.FindFragmentById<Fragment>(Resource.Id.fragemtListPerson);
-
             FragmentManager.BeginTransaction()
-                .Replace(Resource.Id.fragemtListPerson, personGoTimesFragment)
+			               .Replace(Resource.Id.memberFrament, personGoTimesFragment)
                 .Commit();
 
             var content = Intent.GetStringExtra("EventDetail");
@@ -86,7 +84,7 @@ namespace ClubManagement.Activities
                     .Commit();
             };
 
-            FragmentManager.FindFragmentById<MapFragment>(Resource.Id.fragemtMap).GetMapAsync(this);
+            FragmentManager.FindFragmentById<MapFragment>(Resource.Id.mapFragment).GetMapAsync(this);
 
 			MapReady += MemberLocationActivity_MapReady;
         }
