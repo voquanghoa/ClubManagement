@@ -12,11 +12,12 @@ using ClubManagement.Ultilities;
 using Newtonsoft.Json;
 using System.Linq;
 using Android.Content;
+using ClubManagement.Activities.Base;
 
 namespace ClubManagement.Activities
 {
     [Activity(Label = "EventDetailActivity", Theme = "@style/AppTheme")]
-    public class EventDetailActivity : Activity
+    public class EventDetailActivity : MapAbstractActivity
     {
         [InjectView(Resource.Id.tvTitle)]
         private TextView tvTitle;
@@ -50,6 +51,8 @@ namespace ClubManagement.Activities
 
         private bool currentIsJoined;
 
+        private string content;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -58,7 +61,7 @@ namespace ClubManagement.Activities
 
             Cheeseknife.Inject(this);
 
-            var content = Intent.GetStringExtra("EventDetail");
+            content = Intent.GetStringExtra("EventDetail");
 
             eventDetail = JsonConvert.DeserializeObject<UserLoginEventModel>(content);
             
@@ -79,14 +82,9 @@ namespace ClubManagement.Activities
                 UpdateUserEvents(currentIsJoined);
             };
 
-            FindViewById<ImageButton>(Resource.Id.imageButtonMemberLocation).Click += (s, e) =>
-            {
-                var intent = new Intent(this, typeof(MemberLocationActivity));
+			FragmentManager.FindFragmentById<MapFragment>(Resource.Id.mapFragment).GetMapAsync(this);
 
-                intent.PutExtra("EventDetail", content);
-
-                StartActivity(intent);
-            };
+			MapReady += EventDetailActivity_MapReady;
         }
 
         private void UpdateUserEvents(bool isJoined)
@@ -107,5 +105,24 @@ namespace ClubManagement.Activities
                 userEventsController.Delete(userEvent);
             }
         }
+
+		private void EventDetailActivity_MapReady(object sender, EventArgs e)
+		{
+			googleMap.MapClick += GoogleMap_MapClick;
+
+            AddMapMarker(eventDetail.Latitude, eventDetail.Longitude, eventDetail.Title, Resource.Drawable.icon_event);
+
+            MoveMapCamera(eventDetail.Latitude, eventDetail.Longitude);
+		}
+
+		private void GoogleMap_MapClick(object sender, GoogleMap.MapClickEventArgs e)
+		{
+			var intent = new Intent(this, typeof(MemberLocationActivity));
+
+            intent.PutExtra("EventDetail", content);
+
+            StartActivity(intent);
+		}
+
     }
 }
