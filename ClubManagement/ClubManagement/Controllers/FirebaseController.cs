@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Firebase.Xamarin.Database.Query;
 using ClubManagement.Models;
@@ -19,32 +21,50 @@ namespace ClubManagement.Controllers
 
         public async void Add(T t)
         {
-            await FirebaseClient.PostAsync(t);
+            try
+            {
+                await FirebaseClient.PostAsync(t);
+            }
+            catch { }
         }
 
         public List<T> Values
         {
             get
             {
-                var users = FirebaseClient.OnceAsync<T>().Result;
-
-                return users.Select(x =>
+                try
                 {
-                    x.Object.Id = x.Key;
+                    var users = FirebaseClient.OnceAsync<T>().Result.Select(x =>
+                    {
+                        x.Object.Id = x.Key;
 
-                    return x.Object;
-                }).ToList();
+                        return x.Object;
+                    }).ToList();
+                    return users;
+                }
+                catch (Exception)
+                {
+                    return new List<T>();
+                }
             }
         }
 
         public async Task Edit(T t)
         {
-            await FirebaseClient.Child(t.Id).PutAsync(t);
+            try
+            {
+                await FirebaseClient.Child(t.Id).PutAsync(t);
+            }
+            catch { }
         }
 
         public async void Delete(T t)
         {
-            await FirebaseClient.Child(t.Id).DeleteAsync();
+            try
+            {
+                await FirebaseClient.Child(t.Id).DeleteAsync();
+            }
+            catch (WebException) { }
         }
     }
 }
