@@ -124,11 +124,10 @@
         android:textSize="@dimen/text_title_size"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <ImageButton
-        android:src="@drawable/icon_google_maps"
+    <fragment
+        android:id="@+id/fragemtMap"
+        android:layout_margin="@dimen/item_event_margin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:scaleType="fitCenter"
-        android:id="@+id/imageButtonMemberLocation" />
+        android:layout_height="match_parent"
+        class="com.google.android.gms.maps.MapFragment" />
 </LinearLayout>

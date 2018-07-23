@@ -11,11 +11,12 @@ using ClubManagement.Models;
 using ClubManagement.Fragments;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using ClubManagement.Activities.Base;
 
 namespace ClubManagement.Activities
 {
     [Activity(Label = "MapActivity")]
-    public class MemberLocationActivity : Activity, IOnMapReadyCallback
+    public class MemberLocationActivity : MapAbstractActivity
     {
         [InjectOnClick(Resource.Id.btnBack)]
         private void Back(object s, EventArgs e)
@@ -29,14 +30,10 @@ namespace ClubManagement.Activities
 
         private UserLoginEventModel eventDetail;
 
-        private GoogleMap googleMap;
-
         private PersonGoTimesFragment personGoTimesFragment = new PersonGoTimesFragment();
 
-        public void OnMapReady(GoogleMap googleMap)
+        protected override void HandleWhenMapReady(GoogleMap googleMap)
         {
-            this.googleMap = googleMap;
-
             Task.Run(() =>
             {
                 var user = userEventsController.Values.Where(x => x.EventId == eventDetail.Id)
@@ -57,26 +54,6 @@ namespace ClubManagement.Activities
             MoveCameraMap(eventDetail.Latitude, eventDetail.Longitude);
         }
 
-        private void AddMarkerMap(double lat, double lng, string title, int iconResourceId)
-        {
-            googleMap?.AddMarker(new MarkerOptions()
-                ?.SetPosition(new LatLng(lat, lng))
-                ?.SetTitle(title)
-                ?.SetIcon(BitmapDescriptorFactory.FromResource(iconResourceId)));
-        }
-
-        private void MoveCameraMap(double lat, double lng)
-        {
-            var builder = CameraPosition.InvokeBuilder();
-            builder.Target(new LatLng(lat, lng));
-            builder.Zoom(12);
-
-            var cameraPosition = builder.Build();
-            var cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
-
-            googleMap.MoveCamera(cameraUpdate);
-        }
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -87,19 +64,15 @@ namespace ClubManagement.Activities
 
             var fragemtListPerson = FragmentManager.FindFragmentById<Fragment>(Resource.Id.fragemtListPerson);
 
-            var mapFragment = FragmentManager.FindFragmentById<MapFragment>(Resource.Id.fragemtMap);
-
-            mapFragment.GetMapAsync(this);
+            FragmentManager.BeginTransaction()
+                .Replace(Resource.Id.fragemtListPerson, personGoTimesFragment)
+                .Commit();
 
             var content = Intent.GetStringExtra("EventDetail");
 
             eventDetail = JsonConvert.DeserializeObject<UserLoginEventModel>(content);
 
             personGoTimesFragment.EventDetail = eventDetail;
-
-            FragmentManager.BeginTransaction()
-                .Replace(Resource.Id.fragemtListPerson, personGoTimesFragment)
-                .Commit();
 
             personGoTimesFragment.PersonGoTimeClick += (s, e) =>
             {
@@ -109,10 +82,12 @@ namespace ClubManagement.Activities
             personGoTimesFragment.DisplayPersonsClick += (s, e) =>
             {
                 FragmentManager.BeginTransaction()
-                .Detach(personGoTimesFragment)
-                .Attach(personGoTimesFragment)
-                .Commit();
+                    .Detach(personGoTimesFragment)
+                    .Attach(personGoTimesFragment)
+                    .Commit();
             };
+
+            FragmentManager.FindFragmentById<MapFragment>(Resource.Id.fragemtMap).GetMapAsync(this);
         }
     }
 }
