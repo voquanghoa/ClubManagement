@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System.Linq;
 using System.Net;
+using Android.Util;
 
 namespace ClubManagement.Controllers
 {
@@ -33,8 +34,9 @@ namespace ClubManagement.Controllers
 
                 return goTime;
             }
-            catch (WebException)
+            catch (WebException e)
             {
+                Log.Error("no_internet_connection", e.Message);
                 return string.Empty;
             }
         }

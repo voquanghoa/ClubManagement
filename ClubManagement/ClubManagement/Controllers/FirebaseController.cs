@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Android.Util;
 using Firebase.Xamarin.Database.Query;
 using ClubManagement.Models;
 
@@ -25,7 +26,10 @@ namespace ClubManagement.Controllers
             {
                 await FirebaseClient.PostAsync(t);
             }
-            catch { }
+            catch (Exception e)
+            {
+                Log.Error("no_internet_connection", e.Message);
+            }
         }
 
         public List<T> Values
@@ -42,8 +46,9 @@ namespace ClubManagement.Controllers
                     }).ToList();
                     return users;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    Log.Error("no_internet_connection", e.Message);
                     return new List<T>();
                 }
             }
@@ -55,7 +60,10 @@ namespace ClubManagement.Controllers
             {
                 await FirebaseClient.Child(t.Id).PutAsync(t);
             }
-            catch { }
+            catch (Exception e)
+            {
+                Log.Error("no_internet_connection", e.Message);
+            }
         }
 
         public async void Delete(T t)
@@ -64,7 +72,10 @@ namespace ClubManagement.Controllers
             {
                 await FirebaseClient.Child(t.Id).DeleteAsync();
             }
-            catch (WebException) { }
+            catch (Exception e)
+            {
+                Log.Error("no_internet_connection", e.Message);
+            }
         }
     }
 }
