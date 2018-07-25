@@ -77,7 +77,7 @@ namespace ClubManagement.Fragments
 
         protected override List<OutcomeModel> QueryData()
         {
-            incomes = AppDataController.Instance.Incomes.Select(x => (OutcomeModel)x).ToList();
+            incomes = AppDataController.Instance.Incomes.Select(x => (OutcomeModel)x).OrderByDescending(x => x.Date).ToList();
             outcomes = OutComesController.Instance.Values;
             sumIncomes = AppDataController.Instance.Incomes.Sum(x => x.Amount);
             sumOutcomes = OutComesController.Instance.Values.Sum(x => x.Amount);
