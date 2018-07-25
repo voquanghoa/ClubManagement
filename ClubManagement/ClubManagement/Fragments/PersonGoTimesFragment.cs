@@ -11,6 +11,7 @@ using ClubManagement.Models;
 using ClubManagement.Adapters;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Android.Views.Animations;
 
 namespace ClubManagement.Fragments
 {
@@ -25,6 +26,8 @@ namespace ClubManagement.Fragments
         private MapsController mapsController = MapsController.Instance;
 
         private PersonGoTimesAdapter adapter = new PersonGoTimesAdapter();
+
+        private RecyclerView recyclerView;
 
         private List<PersonGoTimeModel> personGoTimes = new List<PersonGoTimeModel>();
 
@@ -60,13 +63,17 @@ namespace ClubManagement.Fragments
 
         private void InitDisplayPersons()
         {
-            var recyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerViewPersonsGoTime);
-
+            recyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerViewPersonsGoTime);
+            
             recyclerView.SetLayoutManager(new LinearLayoutManager(view.Context));
 
             adapter.PersonGoTimes = personGoTimes;
 
             recyclerView.SetAdapter(adapter);
+
+            var layoutAnimation = AnimationUtils.LoadLayoutAnimation(Context, Resource.Animation.layout_animation_fall_down);
+
+            recyclerView.LayoutAnimation = layoutAnimation;
 
             var previousPosition = 0;
 
@@ -122,6 +129,7 @@ namespace ClubManagement.Fragments
                 this?.Activity?.RunOnUiThread(() =>
                 {
                     adapter.PersonGoTimes = personGoTimes;
+                    recyclerView.ScheduleLayoutAnimation();
                 });
             });
         }

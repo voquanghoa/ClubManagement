@@ -79,6 +79,12 @@ namespace ClubManagement
 			// aapt resource value: 0x7f04000f
 			public const int design_snackbar_out = 2130968591;
 			
+			// aapt resource value: 0x7f040010
+			public const int item_animation_fall_down = 2130968592;
+			
+			// aapt resource value: 0x7f040011
+			public const int layout_animation_fall_down = 2130968593;
+			
 			static Animation()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
