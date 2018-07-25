@@ -41,18 +41,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
-        <android.support.v7.widget.RecyclerView
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/recyclerView1" />
+        <RelativeLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/recyclerView1" />
+            <android.support.design.widget.FloatingActionButton
+                android:src="@drawable/icon_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/fabAdd"
+                android:layout_margin="@dimen/textview_margin_top_bottom"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                app:backgroundTint="@color/tabbar_background_color" />
+        </RelativeLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
-    <ImageButton
-        android:src="@drawable/icon_add"
-        android:background="@null"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:id="@+id/imgbtnAdd" />
 </LinearLayout>
