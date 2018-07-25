@@ -5,7 +5,6 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Gms.Maps;
-using Android.Gms.Maps.Model;
 using ClubManagement.Controllers;
 using ClubManagement.Models;
 using ClubManagement.Fragments;
@@ -15,7 +14,7 @@ using ClubManagement.Activities.Base;
 
 namespace ClubManagement.Activities
 {
-    [Activity(Label = "MapActivity")]
+	[Activity(Label = "MapActivity")]
     public class MemberLocationActivity : MapAbstractActivity
     {
         [InjectOnClick(Resource.Id.btnBack)]
@@ -31,10 +30,10 @@ namespace ClubManagement.Activities
         private UserLoginEventModel eventDetail;
 
         private PersonGoTimesFragment personGoTimesFragment = new PersonGoTimesFragment();
-
-        protected override void HandleWhenMapReady(GoogleMap googleMap)
-        {
-            Task.Run(() =>
+        
+		private void MemberLocationActivity_MapReady(object sender, EventArgs e)
+		{
+			Task.Run(() =>
             {
                 var user = userEventsController.Values.Where(x => x.EventId == eventDetail.Id)
                .Join(usersController.Values,
@@ -45,14 +44,14 @@ namespace ClubManagement.Activities
 
                 RunOnUiThread(() =>
                 {
-                    user.ForEach(x => AddMarkerMap(x.Latitude, x.Longitude, x.Name, Resource.Drawable.icon_person));
+					user.ForEach(x => AddMapMarker(x.Latitude, x.Longitude, x.Name, Resource.Drawable.icon_person));
                 });
             });
 
-            AddMarkerMap(eventDetail.Latitude, eventDetail.Longitude, eventDetail.Title, Resource.Drawable.icon_event);
+			AddMapMarker(eventDetail.Latitude, eventDetail.Longitude, eventDetail.Title, Resource.Drawable.icon_event);
 
-            MoveCameraMap(eventDetail.Latitude, eventDetail.Longitude);
-        }
+            MoveMapCamera(eventDetail.Latitude, eventDetail.Longitude);
+		}
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -62,10 +61,8 @@ namespace ClubManagement.Activities
 
             Cheeseknife.Inject(this);
 
-            var fragemtListPerson = FragmentManager.FindFragmentById<Fragment>(Resource.Id.fragemtListPerson);
-
             FragmentManager.BeginTransaction()
-                .Replace(Resource.Id.fragemtListPerson, personGoTimesFragment)
+			               .Replace(Resource.Id.memberFrament, personGoTimesFragment)
                 .Commit();
 
             var content = Intent.GetStringExtra("EventDetail");
@@ -76,7 +73,7 @@ namespace ClubManagement.Activities
 
             personGoTimesFragment.PersonGoTimeClick += (s, e) =>
             {
-                MoveCameraMap(e.Latitude, e.Longitude);
+                MoveMapCamera(e.Latitude, e.Longitude);
             };
 
             personGoTimesFragment.DisplayPersonsClick += (s, e) =>
@@ -87,7 +84,9 @@ namespace ClubManagement.Activities
                     .Commit();
             };
 
-            FragmentManager.FindFragmentById<MapFragment>(Resource.Id.fragemtMap).GetMapAsync(this);
+            FragmentManager.FindFragmentById<MapFragment>(Resource.Id.mapFragment).GetMapAsync(this);
+
+			MapReady += MemberLocationActivity_MapReady;
         }
     }
 }

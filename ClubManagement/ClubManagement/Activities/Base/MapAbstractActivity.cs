@@ -11,26 +11,31 @@ using Android.Views;
 using Android.Widget;
 using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
+using ClubManagement.Ultilities;
 
 namespace ClubManagement.Activities.Base
 {
     public abstract class MapAbstractActivity : Activity, IOnMapReadyCallback
     {
-        private GoogleMap googleMap;
+		protected GoogleMap googleMap;
 
-        protected void AddMarkerMap(double lat, double lng, string title, int iconResourceId)
+		protected event EventHandler MapReady;
+
+		protected void AddMapMarker(double lat, double lng, string title, int iconResourceId)
         {
-            googleMap?.AddMarker(new MarkerOptions()
-                ?.SetPosition(new LatLng(lat, lng))
-                ?.SetTitle(title)
-                ?.SetIcon(BitmapDescriptorFactory.FromResource(iconResourceId)));
+			var markerOption = new MarkerOptions()
+				.SetPosition(new LatLng(lat, lng))
+				.SetTitle(title)
+				.SetIcon(BitmapDescriptorFactory.FromResource(iconResourceId));
+            
+			googleMap.AddMarker(markerOption);
         }
 
-        protected void MoveCameraMap(double lat, double lng)
+        protected void MoveMapCamera(double lat, double lng)
         {
             var builder = CameraPosition.InvokeBuilder();
             builder.Target(new LatLng(lat, lng));
-            builder.Zoom(12);
+			builder.Zoom(AppConstantValues.DefaultMapZoomLevel);
 
             var cameraPosition = builder.Build();
             var cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
@@ -38,13 +43,10 @@ namespace ClubManagement.Activities.Base
             googleMap.MoveCamera(cameraUpdate);
         }
 
-        protected abstract void HandleWhenMapReady(GoogleMap googleMap);
-
-        public void OnMapReady(GoogleMap googleMap)
+		public void OnMapReady(GoogleMap googleMap)
         {
-            this.googleMap = googleMap;
-
-            HandleWhenMapReady(googleMap);
+			this.googleMap = googleMap;
+			MapReady?.Invoke(googleMap, EventArgs.Empty);
         }
     }
 }

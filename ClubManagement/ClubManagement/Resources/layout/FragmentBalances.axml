@@ -6,12 +6,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/rvBalance" />
-    <ImageButton
+    <android.support.design.widget.FloatingActionButton xmlns:app="http://schemas.android.com/apk/res-auto"
         android:src="@drawable/icon_add"
-        android:background="@null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imgbtnAdd"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/textview_margin_left_right"
+        app:backgroundTint="@color/tabbar_background_color" />
 </RelativeLayout>

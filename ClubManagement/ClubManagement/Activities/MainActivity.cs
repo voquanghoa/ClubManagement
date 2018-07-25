@@ -54,21 +54,17 @@ namespace ClubManagement.Activities
         {
             var fragmentTransaction = SupportFragmentManager.BeginTransaction();
             var fragment = SupportFragmentManager.FindFragmentByTag(tag.ToString());
-
-            var addToStack = true;
-
+                     
             if (fragment == null)
             {
                 fragment = fragmentMapIds[tag];
+				fragmentTransaction.Replace(Resource.Id.content_frame, fragment, tag.ToString());
+				fragmentTransaction.AddToBackStack(null);
             }
             else
             {
-                addToStack = false;
+				fragmentTransaction.Replace(Resource.Id.content_frame, fragment, tag.ToString());
             }
-
-            fragmentTransaction.Replace(Resource.Id.content_frame, fragment, tag.ToString());
-
-            if (addToStack) fragmentTransaction.AddToBackStack(null);
 
             fragmentTransaction.Commit();
         }
@@ -86,6 +82,7 @@ namespace ClubManagement.Activities
                 Finish();
                 return;
             }
+
             doubleBackpress = true;
             Toast.MakeText(this, Resources.GetString(Resource.String.back_to_exit), ToastLength.Short).Show();
             new Handler().PostDelayed(() => { doubleBackpress = false; }, 2000);

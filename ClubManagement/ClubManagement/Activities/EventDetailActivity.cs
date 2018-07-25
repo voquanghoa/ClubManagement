@@ -82,7 +82,9 @@ namespace ClubManagement.Activities
                 UpdateUserEvents(currentIsJoined);
             };
 
-            FragmentManager.FindFragmentById<MapFragment>(Resource.Id.fragemtMap).GetMapAsync(this);
+			FragmentManager.FindFragmentById<MapFragment>(Resource.Id.mapFragment).GetMapAsync(this);
+
+			MapReady += EventDetailActivity_MapReady;
         }
 
         private void UpdateUserEvents(bool isJoined)
@@ -104,20 +106,23 @@ namespace ClubManagement.Activities
             }
         }
 
-        protected override void HandleWhenMapReady(GoogleMap googleMap)
-        {
-            googleMap.MapClick += (s, e) =>
-            {
-                var intent = new Intent(this, typeof(MemberLocationActivity));
+		private void EventDetailActivity_MapReady(object sender, EventArgs e)
+		{
+			googleMap.MapClick += GoogleMap_MapClick;
 
-                intent.PutExtra("EventDetail", content);
+            AddMapMarker(eventDetail.Latitude, eventDetail.Longitude, eventDetail.Title, Resource.Drawable.icon_event);
 
-                StartActivity(intent);
-            };
+            MoveMapCamera(eventDetail.Latitude, eventDetail.Longitude);
+		}
 
-            AddMarkerMap(eventDetail.Latitude, eventDetail.Longitude, eventDetail.Title, Resource.Drawable.icon_event);
+		private void GoogleMap_MapClick(object sender, GoogleMap.MapClickEventArgs e)
+		{
+			var intent = new Intent(this, typeof(MemberLocationActivity));
 
-            MoveCameraMap(eventDetail.Latitude, eventDetail.Longitude);
-        }
+            intent.PutExtra("EventDetail", content);
+
+            StartActivity(intent);
+		}
+
     }
 }
