@@ -34,6 +34,8 @@ namespace ClubManagement.Fragments
 
         public event EventHandler DisplayPersonsClick;
 
+        public event EventHandler<ClickEventArgs> ItemClick;
+
         public EventModel EventDetail { set; get; }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -82,6 +84,8 @@ namespace ClubManagement.Fragments
                     Latitude = personGoTimes[e.Position].Latitude,
                     Longitude = personGoTimes[e.Position].Longitude,
                 });
+
+                ItemClick.Invoke(s, e);
             };
 
             view.FindViewById<ImageButton>(Resource.Id.imageButtonBack).Click += DisplayPersons_Click;

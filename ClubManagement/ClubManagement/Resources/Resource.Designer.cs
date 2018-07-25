@@ -2606,7 +2606,7 @@ namespace ClubManagement
 			public const int icon_person = 2130837630;
 			
 			// aapt resource value: 0x7f02007f
-			public const int icon_person_sslected = 2130837631;
+			public const int icon_person_selected = 2130837631;
 			
 			// aapt resource value: 0x7f020080
 			public const int icon_tab_balance = 2130837632;
