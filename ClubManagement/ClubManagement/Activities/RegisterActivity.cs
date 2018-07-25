@@ -51,24 +51,34 @@ namespace ClubManagement.Activities
 
             new Thread(() =>
             {
-                var userEmails = usersController.Values.Select(x => x.Email).ToList();
-
-                if (userEmails.Contains(edtEmail.Text))
+                try
                 {
-                    RunOnUiThread(() =>
+                    var userEmails = usersController.Values.Select(x => x.Email).ToList();
+
+                    if (userEmails.Contains(edtEmail.Text))
                     {
-                        Toast.MakeText(this, Resources.GetString(Resource.String.exist_email), ToastLength.Short).Show();
-                        dialog.Dismiss();
+                        RunOnUiThread(() =>
+                        {
+                            Toast.MakeText(this, Resources.GetString(Resource.String.exist_email), ToastLength.Short)
+                                .Show();
+                            dialog.Dismiss();
+                        });
+                        return;
+                    }
+
+                    usersController.Add(new UserModel
+                    {
+                        Email = edtEmail.Text,
+                        Name = edtName.Text,
+                        Password = edtPassword.Text
                     });
+                }
+                catch (Exception)
+                {
+                    Toast.MakeText(this, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short)
+                        .Show();
                     return;
                 }
-
-                usersController.Add(new UserModel
-                {
-                    Email = edtEmail.Text,
-                    Name = edtName.Text,
-                    Password = edtPassword.Text
-                });
 
                 RunOnUiThread(() =>
                 {

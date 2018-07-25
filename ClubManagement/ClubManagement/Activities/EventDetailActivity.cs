@@ -89,20 +89,27 @@ namespace ClubManagement.Activities
 
         private void UpdateUserEvents(bool isJoined)
         {
-            if (isJoined)
+            try
             {
-                userEventsController.Add(new UserEventModel()
+                if (isJoined)
                 {
-                    EventId = eventDetail.Id,
-                    UserId = userId
-                });
-            }
-            else
-            {
-                var userEvent = userEventsController.Values
-                    .First(x => x.EventId == eventDetail.Id && x.UserId == userId);
+                    userEventsController.Add(new UserEventModel()
+                    {
+                        EventId = eventDetail.Id,
+                        UserId = userId
+                    });
+                }
+                else
+                {
+                    var userEvent = userEventsController.Values
+                        .First(x => x.EventId == eventDetail.Id && x.UserId == userId);
 
-                userEventsController.Delete(userEvent);
+                    userEventsController.Delete(userEvent);
+                }
+            }
+            catch (Exception)
+            {
+                Toast.MakeText(this, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
             }
         }
 

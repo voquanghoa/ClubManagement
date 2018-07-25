@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Android.App;
+using Android.Content.Res;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
@@ -49,15 +50,22 @@ namespace ClubManagement.CustomAdapters
                     .SetTitle("Do you want to pay this budget?")
                     .SetPositiveButton("Yes", (s, dce) =>
                     {
-                        moneyUserController.Add(new UserMoneyModel
+                        try
                         {
-                            UserId = MoneyAdminState.User.Id,
-                            MoneyId = MoneyId
-                        });
-                        MoneyAdminState.IsPaid = !MoneyAdminState.IsPaid;
-                        TvState.Text = "You have just paid this budget!";
-                        imgState.SetImageResource(Resource.Drawable.icon_paid);
-                        Toast.MakeText(ItemView.Context, "Pay successfully!", ToastLength.Short).Show();
+                            moneyUserController.Add(new UserMoneyModel
+                            {
+                                UserId = MoneyAdminState.User.Id,
+                                MoneyId = MoneyId
+                            });
+                            MoneyAdminState.IsPaid = !MoneyAdminState.IsPaid;
+                            TvState.Text = "You have just paid this budget!";
+                            imgState.SetImageResource(Resource.Drawable.icon_paid);
+                            Toast.MakeText(ItemView.Context, "Pay successfully!", ToastLength.Short).Show();
+                        }
+                        catch (Exception)
+                        {
+                            Toast.MakeText(ItemView.Context, ItemView.Context.Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
+                        }
                     })
                     .Show();
             }
@@ -66,15 +74,24 @@ namespace ClubManagement.CustomAdapters
                 builder.SetTitle("Do you want to unpay this budget?")
                     .SetPositiveButton("Yes", (s, dce) =>
                     {
-                        var moneyUserList = moneyUserController.Values ?? new List<UserMoneyModel>();
-                        var moneyUser = moneyUserList.First(x =>
-                            x.MoneyId == MoneyId && x.UserId == MoneyAdminState.User.Id);
-                        if (moneyUser == null) return;
-                        moneyUserController.Delete(moneyUser);
-                        MoneyAdminState.IsPaid = !MoneyAdminState.IsPaid;
-                        Toast.MakeText(ItemView.Context, "Unpay successfully!", ToastLength.Short).Show();
-                        TvState.Text = "You have just unpaid this budget!";
-                        imgState.SetImageResource(Resource.Drawable.icon_unpaid);
+                        try
+                        {
+                            var moneyUserList = moneyUserController.Values ?? new List<UserMoneyModel>();
+                            var moneyUser = moneyUserList.First(x =>
+                                x.MoneyId == MoneyId && x.UserId == MoneyAdminState.User.Id);
+                            if (moneyUser == null) return;
+                            moneyUserController.Delete(moneyUser);
+                            MoneyAdminState.IsPaid = !MoneyAdminState.IsPaid;
+                            Toast.MakeText(ItemView.Context, "Unpay successfully!", ToastLength.Short).Show();
+                            TvState.Text = "You have just unpaid this budget!";
+                            imgState.SetImageResource(Resource.Drawable.icon_unpaid);
+                        }
+                        catch (Exception)
+                        {
+                            Toast.MakeText(ItemView.Context,
+                                ItemView.Context.Resources.GetString(Resource.String.no_internet_connection),
+                                ToastLength.Short).Show();
+                        }
                     })
                     .Show();
             }

@@ -76,11 +76,16 @@ namespace ClubManagement.Fragments
                     CreatedTime = DateTime.Now,
                     CreatedBy = AppDataController.Instance.UserName
                 };
-
-                EventsController.Instance.Add(eventModel);
-                SaveClick?.Invoke(eventModel, e);
-
-                Dismiss();
+                try
+                {
+                    EventsController.Instance.Add(eventModel);
+                    SaveClick?.Invoke(eventModel, e);
+                    Dismiss();
+                }
+                catch (Exception)
+                {
+                    Toast.MakeText(Context, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
+                }
             }
             else
             {

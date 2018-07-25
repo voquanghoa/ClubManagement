@@ -47,10 +47,16 @@ namespace ClubManagement.Fragments
                     Amount = amount,
                     Date = date
                 };
-
-                OutComesController.Instance.Add(outcomeModel);
-                SaveClick?.Invoke(outcomeModel, e);
-                Dismiss();
+                try
+                {
+                    OutComesController.Instance.Add(outcomeModel);
+                    SaveClick?.Invoke(outcomeModel, e);
+                    Dismiss();
+                }
+                catch (Exception)
+                {
+                    Toast.MakeText(Context, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
+                }
             }
             else
             {

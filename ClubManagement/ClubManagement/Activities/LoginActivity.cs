@@ -33,33 +33,40 @@ namespace ClubManagement.Activities
             dialog.Show();
             new Thread(() =>
             {
-                var users = usersController.Values;
+                try
+                {
+                    var users = usersController.Values;
 
-                if (!users.Select(x => x.Email).Contains(edtEmail.Text))
-                {
-                    RunOnUiThread(() =>
+                    if (!users.Select(x => x.Email).Contains(edtEmail.Text))
                     {
-                        Toast.MakeText(this, Resources.GetString(Resource.String.not_exist_email), ToastLength.Short).Show();
-                        dialog.Dismiss();
-                    });
-                    return;
+                        RunOnUiThread(() =>
+                        {
+                            Toast.MakeText(this, Resources.GetString(Resource.String.not_exist_email), ToastLength.Short).Show();
+                            dialog.Dismiss();
+                        });
+                        return;
+                    }
+                    if (users.Any(u => u.Email == edtEmail.Text && u.Password == edtPassword.Text))
+                    {
+                        var user = users.First(u => u.Email == edtEmail.Text && u.Password == edtPassword.Text);
+                        var preferencesEditor = PreferenceManager.GetDefaultSharedPreferences(Application.Context).Edit();
+                        preferencesEditor.PutBoolean(AppConstantValues.LogStatusPreferenceKey, true);
+                        preferencesEditor.PutString(AppConstantValues.UserIdPreferenceKey, user.Id);
+                        preferencesEditor.Commit();
+                        Finish();
+                        StartActivity(typeof(MainActivity));
+                        RunOnUiThread(() =>
+                        {
+                            Toast.MakeText(this, Resources.GetString(Resource.String.login_success), ToastLength.Short).Show();
+                            dialog.Dismiss();
+                        });
+                        usersController.UpdateUserLocation(user);
+                        return;
+                    }
                 }
-                if (users.Any(u => u.Email == edtEmail.Text && u.Password == edtPassword.Text))
+                catch (Exception)
                 {
-                    var user = users.First(u => u.Email == edtEmail.Text && u.Password == edtPassword.Text);
-                    var preferencesEditor = PreferenceManager.GetDefaultSharedPreferences(Application.Context).Edit();
-                    preferencesEditor.PutBoolean(AppConstantValues.LogStatusPreferenceKey, true);
-                    preferencesEditor.PutString(AppConstantValues.UserIdPreferenceKey, user.Id);
-                    preferencesEditor.Commit();
-                    Finish();
-                    StartActivity(typeof(MainActivity));
-                    RunOnUiThread(() =>
-                    {
-                        Toast.MakeText(this, Resources.GetString(Resource.String.login_success), ToastLength.Short).Show();
-                        dialog.Dismiss();
-                    });
-                    usersController.UpdateUserLocation(user);
-                    return;
+                    Toast.MakeText(this, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
                 }
 
                 RunOnUiThread(() =>
