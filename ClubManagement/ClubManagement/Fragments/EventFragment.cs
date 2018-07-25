@@ -30,7 +30,7 @@ namespace ClubManagement.Fragments
 
         private EventDialogFragment eventDialogFragment = new EventDialogFragment();
 
-        private ImageButton imgbtnAdd;
+        private FloatingActionButton fabAdd;
 
         protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
 
@@ -83,8 +83,8 @@ namespace ClubManagement.Fragments
             tabLayout = view.FindViewById<TabLayout>(Resource.Id.tabView1);
             tabLayout.TabSelected += (s, e) => DisplayData(data);
 
-            imgbtnAdd = view.FindViewById<ImageButton>(Resource.Id.imgbtnAdd);
-            imgbtnAdd.Click += AddEvent_Click;
+            fabAdd = view.FindViewById<FloatingActionButton>(Resource.Id.fabAdd);
+            fabAdd.Click += AddEvent_Click;
         }
 
         private void AddEvent_Click(object sender, System.EventArgs e)
@@ -122,15 +122,15 @@ namespace ClubManagement.Fragments
                 {
                     case 0:
                         adapter.Events = data;
-                        imgbtnAdd.Visibility = ViewStates.Visible;
+                        fabAdd.Visibility = ViewStates.Visible;
                         break;
                     case 1:
                         adapter.Events = data.Where(x => x.IsJoined).ToList();
-                        imgbtnAdd.Visibility = ViewStates.Gone;
+                        fabAdd.Visibility = ViewStates.Gone;
                         break;
                     case 2:
                         adapter.Events = data.Where(x => !x.IsJoined).ToList();
-                        imgbtnAdd.Visibility = ViewStates.Gone;
+                        fabAdd.Visibility = ViewStates.Gone;
                         break;
                 }
             }
