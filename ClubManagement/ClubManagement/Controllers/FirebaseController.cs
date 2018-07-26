@@ -22,60 +22,31 @@ namespace ClubManagement.Controllers
 
         public async void Add(T t)
         {
-            try
-            {
-                await FirebaseClient.PostAsync(t);
-            }
-            catch (Exception e)
-            {
-                Log.Error("no_internet_connection", e.Message);
-            }
+            await FirebaseClient.PostAsync(t);
         }
 
         public List<T> Values
         {
             get
             {
-                try
+                var users = FirebaseClient.OnceAsync<T>().Result.Select(x =>
                 {
-                    var users = FirebaseClient.OnceAsync<T>().Result.Select(x =>
-                    {
-                        x.Object.Id = x.Key;
+                    x.Object.Id = x.Key;
 
-                        return x.Object;
-                    }).ToList();
-                    return users;
-                }
-                catch (Exception e)
-                {
-                    Log.Error("no_internet_connection", e.Message);
-                    return new List<T>();
-                }
+                    return x.Object;
+                }).ToList();
+                return users;
             }
         }
 
         public async Task Edit(T t)
         {
-            try
-            {
-                await FirebaseClient.Child(t.Id).PutAsync(t);
-            }
-            catch (Exception e)
-            {
-                Log.Error("no_internet_connection", e.Message);
-            }
+            await FirebaseClient.Child(t.Id).PutAsync(t);
         }
 
         public async void Delete(T t)
         {
-            try
-            {
-                await FirebaseClient.Child(t.Id).DeleteAsync();
-            }
-            catch (Exception e)
-            {
-                Log.Error("no_internet_connection", e.Message);
-            }
+            await FirebaseClient.Child(t.Id).DeleteAsync();
         }
     }
 }

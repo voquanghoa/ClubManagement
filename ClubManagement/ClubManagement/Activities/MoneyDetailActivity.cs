@@ -66,7 +66,15 @@ namespace ClubManagement.Activities
 
             Task.Run(() =>
             {
-                moneyAdminStates = appDataController.GetMoneyAdminStates(moneyId);
+                try
+                {
+                    moneyAdminStates = appDataController.GetMoneyAdminStates(moneyId);
+                }
+                catch (Exception)
+                {
+                    Toast.MakeText(this, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
+                    moneyAdminStates = new List<MoneyAdminState>();
+                }
 
                 RunOnUiThread(() =>
                 {

@@ -17,28 +17,20 @@ namespace ClubManagement.Controllers
 
         public string GetGoTime(double fromLat, double fromLng, double toLat, double toLng)
         {
-            try
-            {
-                var webclient = new WebClient();
+            var webclient = new WebClient();
 
-                var content = webclient.DownloadString(
-                    $"https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins={fromLat},{fromLng}&destinations={toLat},{toLng}&key=AIzaSyDOpe15Np8iCzvlVpqzDo83RIVL_eHd-Mo");
+            var content = webclient.DownloadString(
+                $"https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins={fromLat},{fromLng}&destinations={toLat},{toLng}&key=AIzaSyDOpe15Np8iCzvlVpqzDo83RIVL_eHd-Mo");
 
-                var result = JsonConvert.DeserializeObject<ResultsMatrixDistanceAPIModel>(content);
+            var result = JsonConvert.DeserializeObject<ResultsMatrixDistanceAPIModel>(content);
 
-                var duration = result.Rows.First().Elements.Last().Duration;
+            var duration = result.Rows.First().Elements.Last().Duration;
 
-                var goTime = duration == null
-                    ? "0m"
-                    : duration.Text.Replace("hours", "h").Replace("mins", "m").Replace(" ", "");
+            var goTime = duration == null
+                ? "0m"
+                : duration.Text.Replace("hours", "h").Replace("mins", "m").Replace(" ", "");
 
-                return goTime;
-            }
-            catch (WebException e)
-            {
-                Log.Error("no_internet_connection", e.Message);
-                return string.Empty;
-            }
+            return goTime;
         }
     }
 }

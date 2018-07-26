@@ -92,25 +92,19 @@ namespace ClubManagement.Controllers
                 return userMoneysController.Values.Join(moneysController.Values,
                 x => x.MoneyId,
                 y => y.Id,
-                (x, y) =>
+                (x, y) => new
                 {
-                    return new
-                    {
-                        x,
-                        y
-                    };
+                    x,
+                    y
                 }).Join(usersController.Values,
                     x => x.x.UserId,
                     y => y.Id,
-                    (x, y) =>
+                    (x, y) => new IncomeModel()
                     {
-                        return new IncomeModel()
-                        {
-                            Title = y.Name,
-                            Description = x.y.Description,
-                            Amount = x.y.Amount,
-                            Date = x.y.Time
-                        };
+                        Title = y.Name,
+                        Description = x.y.Description,
+                        Amount = x.y.Amount,
+                        Date = x.y.Time
                     }).ToList();
             }
         }
