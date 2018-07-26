@@ -11,10 +11,12 @@ using ClubManagement.Fragments;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using ClubManagement.Activities.Base;
+using System.Collections.Generic;
+using Android.Gms.Maps.Model;
 
 namespace ClubManagement.Activities
 {
-	[Activity(Label = "MapActivity")]
+    [Activity(Label = "MapActivity")]
     public class MemberLocationActivity : MapAbstractActivity
     {
         [InjectOnClick(Resource.Id.btnBack)]
@@ -30,10 +32,12 @@ namespace ClubManagement.Activities
         private UserLoginEventModel eventDetail;
 
         private PersonGoTimesFragment personGoTimesFragment = new PersonGoTimesFragment();
-        
-		private void MemberLocationActivity_MapReady(object sender, EventArgs e)
-		{
-			Task.Run(() =>
+
+        private List<Marker> markers = new List<Marker>();
+
+        private void MemberLocationActivity_MapReady(object sender, EventArgs e)
+        {
+            Task.Run(() =>
             {
                 var user = userEventsController.Values.Where(x => x.EventId == eventDetail.Id)
                .Join(usersController.Values,
@@ -44,14 +48,14 @@ namespace ClubManagement.Activities
 
                 RunOnUiThread(() =>
                 {
-					user.ForEach(x => AddMapMarker(x.Latitude, x.Longitude, x.Name, Resource.Drawable.icon_person));
+                    user.ForEach(x => markers.Add(AddMapMarker(x.Latitude, x.Longitude, x.Name, Resource.Drawable.icon_person)));
                 });
             });
 
-			AddMapMarker(eventDetail.Latitude, eventDetail.Longitude, eventDetail.Title, Resource.Drawable.icon_event);
+            AddMapMarker(eventDetail.Latitude, eventDetail.Longitude, eventDetail.Title, Resource.Drawable.icon_event);
 
             MoveMapCamera(eventDetail.Latitude, eventDetail.Longitude);
-		}
+        }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -62,7 +66,7 @@ namespace ClubManagement.Activities
             Cheeseknife.Inject(this);
 
             FragmentManager.BeginTransaction()
-			               .Replace(Resource.Id.memberFrament, personGoTimesFragment)
+                           .Replace(Resource.Id.memberFrament, personGoTimesFragment)
                 .Commit();
 
             var content = Intent.GetStringExtra("EventDetail");
@@ -86,7 +90,21 @@ namespace ClubManagement.Activities
 
             FragmentManager.FindFragmentById<MapFragment>(Resource.Id.mapFragment).GetMapAsync(this);
 
-			MapReady += MemberLocationActivity_MapReady;
+            MapReady += MemberLocationActivity_MapReady;
+
+            var previousPosition = 0;
+
+            personGoTimesFragment.ItemClick += (s, e) =>
+            {
+                markers[previousPosition].SetIcon(BitmapDescriptorFactory
+                    .FromResource(Resource.Drawable.icon_person));
+
+                markers[e.Position].SetIcon(BitmapDescriptorFactory
+                    .FromResource(Resource.Drawable.icon_person_selected));
+                markers[e.Position].ShowInfoWindow();
+
+                previousPosition = e.Position;
+            };
         }
     }
 }
