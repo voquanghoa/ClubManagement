@@ -11,6 +11,7 @@ using ClubManagement.Models;
 using ClubManagement.Adapters;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Android.Views.Animations;
 
 namespace ClubManagement.Fragments
 {
@@ -26,6 +27,8 @@ namespace ClubManagement.Fragments
 
         private PersonGoTimesAdapter adapter = new PersonGoTimesAdapter();
 
+        private RecyclerView recyclerView;
+
         private List<PersonGoTimeModel> personGoTimes = new List<PersonGoTimeModel>();
 
         public bool displayPersons = true;
@@ -33,6 +36,8 @@ namespace ClubManagement.Fragments
         public event EventHandler<PersonGoTimeClickEventArgs> PersonGoTimeClick;
 
         public event EventHandler DisplayPersonsClick;
+
+        public event EventHandler<ClickEventArgs> ItemClick;
 
         public EventModel EventDetail { set; get; }
 
@@ -58,13 +63,17 @@ namespace ClubManagement.Fragments
 
         private void InitDisplayPersons()
         {
-            var recyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerViewPersonsGoTime);
-
+            recyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerViewPersonsGoTime);
+            
             recyclerView.SetLayoutManager(new LinearLayoutManager(view.Context));
 
             adapter.PersonGoTimes = personGoTimes;
 
             recyclerView.SetAdapter(adapter);
+
+            var layoutAnimation = AnimationUtils.LoadLayoutAnimation(Context, Resource.Animation.layout_animation_fall_down);
+
+            recyclerView.LayoutAnimation = layoutAnimation;
 
             var previousPosition = 0;
 
@@ -82,6 +91,8 @@ namespace ClubManagement.Fragments
                     Latitude = personGoTimes[e.Position].Latitude,
                     Longitude = personGoTimes[e.Position].Longitude,
                 });
+
+                ItemClick.Invoke(s, e);
             };
 
             view.FindViewById<ImageButton>(Resource.Id.imageButtonBack).Click += DisplayPersons_Click;
@@ -118,6 +129,7 @@ namespace ClubManagement.Fragments
                 this?.Activity?.RunOnUiThread(() =>
                 {
                     adapter.PersonGoTimes = personGoTimes;
+                    recyclerView.ScheduleLayoutAnimation();
                 });
             });
         }
