@@ -51,7 +51,7 @@ namespace ClubManagement.Activities
 
                     RunOnUiThread(() =>
                     {
-                        user.ForEach(x => AddMapMarker(x.Latitude, x.Longitude, x.Name, Resource.Drawable.icon_person));
+                        user.ForEach(x => markers.Add(AddMapMarker(x.Latitude, x.Longitude, x.Name, Resource.Drawable.icon_person)));
                     });
                 }
                 catch (Exception)
