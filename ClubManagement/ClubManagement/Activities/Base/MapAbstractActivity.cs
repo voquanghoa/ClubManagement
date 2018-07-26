@@ -21,14 +21,14 @@ namespace ClubManagement.Activities.Base
 
 		protected event EventHandler MapReady;
 
-		protected void AddMapMarker(double lat, double lng, string title, int iconResourceId)
+		protected Marker AddMapMarker(double lat, double lng, string title, int iconResourceId)
         {
 			var markerOption = new MarkerOptions()
 				.SetPosition(new LatLng(lat, lng))
 				.SetTitle(title)
 				.SetIcon(BitmapDescriptorFactory.FromResource(iconResourceId));
             
-			googleMap.AddMarker(markerOption);
+            return googleMap.AddMarker(markerOption);
         }
 
         protected void MoveMapCamera(double lat, double lng)
