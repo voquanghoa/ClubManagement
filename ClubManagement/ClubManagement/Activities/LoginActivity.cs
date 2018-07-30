@@ -23,6 +23,9 @@ namespace ClubManagement.Activities
         private void SignIn(object s, EventArgs e)
         {
             this.HideKeyboard();
+
+
+
             if (string.IsNullOrEmpty(edtEmail.Text) || string.IsNullOrEmpty(edtPassword.Text))
             {
                 Toast.MakeText(this, Resources.GetString(Resource.String.fill_all_fields), ToastLength.Short).Show();
@@ -35,7 +38,7 @@ namespace ClubManagement.Activities
             {
                 var users = usersController.Values;
 
-                if (!users.Select(x => x.Email).Contains(edtEmail.Text))
+                if (!users.Select(x => x.Email.ToLower()).Contains(edtEmail.Text.ToLower()))
                 {
                     RunOnUiThread(() =>
                     {
@@ -44,9 +47,9 @@ namespace ClubManagement.Activities
                     });
                     return;
                 }
-                if (users.Any(u => u.Email == edtEmail.Text && u.Password == edtPassword.Text))
+                if (users.Any(u => u.Email.ToLower() == edtEmail.Text.ToLower() && u.Password == edtPassword.Text))
                 {
-                    var user = users.First(u => u.Email == edtEmail.Text && u.Password == edtPassword.Text);
+                    var user = users.First(u => u.Email.ToLower() == edtEmail.Text.ToLower() && u.Password == edtPassword.Text);
                     var preferencesEditor = PreferenceManager.GetDefaultSharedPreferences(Application.Context).Edit();
                     preferencesEditor.PutBoolean(AppConstantValues.LogStatusPreferenceKey, true);
                     preferencesEditor.PutString(AppConstantValues.UserIdPreferenceKey, user.Id);

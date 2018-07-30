@@ -56,4 +56,6 @@
   <string name="memberLocation">Member location</string>
   <string name="location">Location</string>
   <string name="addEvent">Add event</string>
+  <string name="password_too_short">Password is at least 6 characters</string>
+  <string name="invalid_email_format">Invalid email format</string>
 </resources>
