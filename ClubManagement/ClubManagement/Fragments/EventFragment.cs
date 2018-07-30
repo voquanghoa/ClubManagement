@@ -133,11 +133,11 @@ namespace ClubManagement.Fragments
                         fabAdd.Visibility = ViewStates.Visible;
                         break;
                     case 1:
-                        adapter.Events = data.Where(x => x.IsJoined).ToList();
+                        adapter.Events = data.Where(x => x.Time > DateTime.Now).ToList();
                         fabAdd.Visibility = ViewStates.Gone;
                         break;
                     case 2:
-                        adapter.Events = data.Where(x => !x.IsJoined).ToList();
+                        adapter.Events = data.Where(x => x.IsJoined).ToList();
                         fabAdd.Visibility = ViewStates.Gone;
                         break;
                 }

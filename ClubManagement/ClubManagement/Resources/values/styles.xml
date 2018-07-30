@@ -9,6 +9,6 @@
   <style name="TabLayoutThemes" parent="Widget.Design.TabLayout">
     <item name="tabIndicatorColor">#ffffff</item>
     <item name="tabIndicatorHeight">2dp</item> 
-    <item name="tabSelectedTextColor">@color/text_color_white</item> 
-    </style>
+    <item name="tabSelectedTextColor">@color/text_color_white</item>
+  </style>
 </resources>

@@ -23,6 +23,7 @@ namespace ClubManagement.Activities
         private void SignIn(object s, EventArgs e)
         {
             this.HideKeyboard();
+
             if (string.IsNullOrEmpty(edtEmail.Text) || string.IsNullOrEmpty(edtPassword.Text))
             {
                 Toast.MakeText(this, Resources.GetString(Resource.String.fill_all_fields), ToastLength.Short).Show();
@@ -31,27 +32,29 @@ namespace ClubManagement.Activities
 
             var dialog = DialogExtensions.CreateDialog(Resources.GetString(Resource.String.sign_in), Resources.GetString(Resource.String.wait), this);
             dialog.Show();
+			var activity = this;
+
             new Thread(() =>
             {
-                try
-                {
+                try{
                     var users = usersController.Values;
 
-                    if (!users.Select(x => x.Email).Contains(edtEmail.Text))
+					var loginUser = users.FirstOrDefault(x => string.Equals(x.Email, edtEmail.Text, StringComparison.CurrentCultureIgnoreCase));
+
+					if (loginUser == null)
                     {
                         RunOnUiThread(() =>
                         {
-                            Toast.MakeText(this, Resources.GetString(Resource.String.not_exist_email), ToastLength.Short).Show();
+							Toast.MakeText(activity, Resources.GetString(Resource.String.not_exist_email), ToastLength.Short).Show();
                             dialog.Dismiss();
                         });
                         return;
                     }
-                    if (users.Any(u => u.Email == edtEmail.Text && u.Password == edtPassword.Text))
+					if (loginUser.Password == edtPassword.Text)
                     {
-                        var user = users.First(u => u.Email == edtEmail.Text && u.Password == edtPassword.Text);
                         var preferencesEditor = PreferenceManager.GetDefaultSharedPreferences(Application.Context).Edit();
                         preferencesEditor.PutBoolean(AppConstantValues.LogStatusPreferenceKey, true);
-                        preferencesEditor.PutString(AppConstantValues.UserIdPreferenceKey, user.Id);
+						preferencesEditor.PutString(AppConstantValues.UserIdPreferenceKey, loginUser.Id);
                         preferencesEditor.Commit();
                         Finish();
                         StartActivity(typeof(MainActivity));
@@ -60,18 +63,18 @@ namespace ClubManagement.Activities
                             Toast.MakeText(this, Resources.GetString(Resource.String.login_success), ToastLength.Short).Show();
                             dialog.Dismiss();
                         });
-                        usersController.UpdateUserLocation(user);
+						usersController.UpdateUserLocation(loginUser);
                         return;
                     }
                     RunOnUiThread(() =>
                     {
                         dialog.Dismiss();
-                        Toast.MakeText(this, Resources.GetString(Resource.String.wrong_email), ToastLength.Short).Show();
+						Toast.MakeText(activity, Resources.GetString(Resource.String.wrong_email), ToastLength.Short).Show();
                     });
                 }
                 catch (Exception)
                 {
-                    Toast.MakeText(this, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
+					Toast.MakeText(activity, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
                 }
             }).Start();
         }

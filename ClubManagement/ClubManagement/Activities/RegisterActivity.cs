@@ -34,12 +34,31 @@ namespace ClubManagement.Activities
         private void SignUp(object s, EventArgs e)
         {
             this.HideKeyboard();
+
+            edtEmail.Text = edtEmail.Text.ToLower().Trim();
+            edtName.Text = edtName.Text.Trim();
+            edtPassword.Text = edtPassword.Text.Trim();
+            edtConfirmPassword.Text = edtConfirmPassword.Text.Trim();
+
             if (string.IsNullOrEmpty(edtEmail.Text) || string.IsNullOrEmpty(edtName.Text) ||
                 string.IsNullOrEmpty(edtPassword.Text) || string.IsNullOrEmpty(edtConfirmPassword.Text))
             {
                 Toast.MakeText(this, Resources.GetString(Resource.String.fill_all_fields), ToastLength.Short).Show();
                 return;
             }
+
+            if (edtPassword.Text.Length < 6)
+            {
+                Toast.MakeText(this, Resources.GetString(Resource.String.password_too_short), ToastLength.Short).Show();
+                return;
+            }
+
+            if (!edtEmail.Text.IsValidEmailFormat())
+            {
+                Toast.MakeText(this, Resources.GetString(Resource.String.invalid_email_format), ToastLength.Short).Show();
+                return;
+            }
+
             if (edtConfirmPassword.Text != edtPassword.Text)
             {
                 Toast.MakeText(this, Resources.GetString(Resource.String.not_match_pass), ToastLength.Short).Show();
