@@ -36,43 +36,39 @@ namespace ClubManagement.Activities
             dialog.Show();
 			var activity = this;
 
-            new Thread(() =>
+            var users = new List<UserModel>();
+            this.DoRequest(() => users = usersController.Values, () =>
             {
-                var users = new List<UserModel>();
-                this.DoRequest(() => users = usersController.Values, () =>
+                var loginUser = users.FirstOrDefault(x =>
+                    string.Equals(x.Email, edtEmail.Text, StringComparison.CurrentCultureIgnoreCase));
+
+                if (loginUser == null)
                 {
-                    var loginUser = users.FirstOrDefault(x =>
-                        string.Equals(x.Email, edtEmail.Text, StringComparison.CurrentCultureIgnoreCase));
-
-                    if (loginUser == null)
-                    {
-                        Toast.MakeText(activity, Resources.GetString(Resource.String.not_exist_email),
-                            ToastLength.Short).Show();
-                        dialog.Dismiss();
-                        return;
-                    }
-
-                    if (loginUser.Password == edtPassword.Text)
-                    {
-                        var preferencesEditor =
-                            PreferenceManager.GetDefaultSharedPreferences(Application.Context).Edit();
-                        preferencesEditor.PutBoolean(AppConstantValues.LogStatusPreferenceKey, true);
-                        preferencesEditor.PutString(AppConstantValues.UserIdPreferenceKey, loginUser.Id);
-                        preferencesEditor.Commit();
-                        Finish();
-                        StartActivity(typeof(MainActivity));
-                        Toast.MakeText(this, Resources.GetString(Resource.String.login_success), ToastLength.Short)
-                            .Show();
-                        dialog.Dismiss();
-                        this.DoRequest(() => usersController.UpdateUserLocation(loginUser));
-                        return;
-                    }
-
+                    Toast.MakeText(activity, Resources.GetString(Resource.String.not_exist_email),
+                        ToastLength.Short).Show();
                     dialog.Dismiss();
-                    Toast.MakeText(activity, Resources.GetString(Resource.String.wrong_email), ToastLength.Short)
+                    return;
+                }
+
+                if (loginUser.Password == edtPassword.Text)
+                {
+                    var preferencesEditor =
+                        PreferenceManager.GetDefaultSharedPreferences(Application.Context).Edit();
+                    preferencesEditor.PutBoolean(AppConstantValues.LogStatusPreferenceKey, true);
+                    preferencesEditor.PutString(AppConstantValues.UserIdPreferenceKey, loginUser.Id);
+                    preferencesEditor.Commit();
+                    Finish();
+                    StartActivity(typeof(MainActivity));
+                    Toast.MakeText(this, Resources.GetString(Resource.String.login_success), ToastLength.Short)
                         .Show();
-                });
-            }).Start();
+                    dialog.Dismiss();
+                    this.DoRequest(() => usersController.UpdateUserLocation(loginUser));
+                    return;
+                }
+
+                Toast.MakeText(activity, Resources.GetString(Resource.String.wrong_email), ToastLength.Short)
+                    .Show();
+            }, () => dialog.Dismiss());
         }
 
         [InjectOnClick(Resource.Id.btnSignUp)]

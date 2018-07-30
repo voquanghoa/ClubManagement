@@ -69,34 +69,33 @@ namespace ClubManagement.Activities
             var dialog = DialogExtensions.CreateDialog(Resources.GetString(Resource.String.sign_up), Resources.GetString(Resource.String.wait), this);
             dialog.Show();
 
-            new Thread(() =>
+            var userEmails = new List<string>();
+            this.DoRequest(() => userEmails = usersController.Values.Select(x => x.Email).ToList(), () =>
             {
-                var userEmails = new List<string>();
-                this.DoRequest(() => userEmails = usersController.Values.Select(x => x.Email).ToList(), () =>
+                if (userEmails.Contains(edtEmail.Text))
                 {
-                    if (userEmails.Contains(edtEmail.Text))
-                    {
-                        Toast.MakeText(this, Resources.GetString(Resource.String.exist_email), ToastLength.Short)
-                            .Show();
-                    }
+                    Toast.MakeText(this, Resources.GetString(Resource.String.exist_email), ToastLength.Short)
+                        .Show();
+                    dialog.Dismiss();
+                    return;
+                }
 
-                    this.DoRequest(() =>
+                this.DoRequest(() =>
+                {
+                    usersController.Add(new UserModel
                     {
-                        usersController.Add(new UserModel
-                        {
-                            Email = edtEmail.Text,
-                            Name = edtName.Text,
-                            Password = edtPassword.Text
-                        });
-                    }, () =>
-                    {
-                        Toast.MakeText(this, Resources.GetString(Resource.String.signup_success), ToastLength.Short)
-                            .Show();
-                        Finish();
+                        Email = edtEmail.Text,
+                        Name = edtName.Text,
+                        Password = edtPassword.Text
                     });
+                }, () =>
+                {
+                    Toast.MakeText(this, Resources.GetString(Resource.String.signup_success), ToastLength.Short)
+                        .Show();
+                    dialog.Dismiss();
+                    Finish();
                 });
-                dialog.Dismiss();
-            }).Start();
+            }, ()=> dialog.Dismiss());
         }
 
         protected override void OnCreate(Bundle savedInstanceState)

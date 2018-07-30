@@ -14,7 +14,7 @@ namespace ClubManagement.Ultilities
 {
     public static class ActivityExtensions
     {
-        public static void DoRequest(this Activity activity, Action action, Action postAction = null)
+        public static void DoRequest(this Activity activity, Action action, Action postAction = null, Action exceptionAction = null)
         {
             new Thread(() =>
             {
@@ -25,6 +25,7 @@ namespace ClubManagement.Ultilities
                 }
                 catch (Exception ex)
                 {
+                    activity.RunOnUiThread(exceptionAction);
                     activity.RunOnUiThread(() => Toast.MakeText(activity,
                             ex.Message, ToastLength.Short)
                         .Show());
