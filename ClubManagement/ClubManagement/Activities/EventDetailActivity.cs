@@ -89,7 +89,9 @@ namespace ClubManagement.Activities
 
         private void UpdateUserEvents(bool isJoined)
         {
-            try
+
+
+            this.DoRequest(() =>
             {
                 if (isJoined)
                 {
@@ -106,11 +108,7 @@ namespace ClubManagement.Activities
 
                     userEventsController.Delete(userEvent);
                 }
-            }
-            catch (Exception)
-            {
-                Toast.MakeText(this, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
-            }
+            }, () => { });
         }
 
 		private void EventDetailActivity_MapReady(object sender, EventArgs e)

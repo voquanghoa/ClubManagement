@@ -104,27 +104,34 @@ namespace ClubManagement.Fragments
         {
             await Task.Run(() =>
             {
-                personGoTimes = userEventsController.Values.Where(x => x.EventId == EventDetail.Id)
-                .Join(usersController.Values,
-                    x => x.UserId,
-                    y => y.Id,
-                    (x, y) => y)
-                .Select(x =>
+                try
                 {
-                    var personGoTimeModel = new PersonGoTimeModel()
-                    {
-                        Name = x.Name,
-                        GoTime = mapsController.GetGoTime(x.Latitude,
-                            x.Longitude,
-                            EventDetail.Latitude,
-                            EventDetail.Longitude),
-                        Selected = false,
-                        Latitude = x.Latitude,
-                        Longitude = x.Longitude
-                    };
+                    personGoTimes = userEventsController.Values.Where(x => x.EventId == EventDetail.Id)
+                        .Join(usersController.Values,
+                            x => x.UserId,
+                            y => y.Id,
+                            (x, y) => y)
+                        .Select(x =>
+                        {
+                            var personGoTimeModel = new PersonGoTimeModel()
+                            {
+                                Name = x.Name,
+                                GoTime = mapsController.GetGoTime(x.Latitude,
+                                    x.Longitude,
+                                    EventDetail.Latitude,
+                                    EventDetail.Longitude),
+                                Selected = false,
+                                Latitude = x.Latitude,
+                                Longitude = x.Longitude
+                            };
 
-                    return personGoTimeModel;
-                }).ToList();
+                            return personGoTimeModel;
+                        }).ToList();
+                }
+                catch (Exception)
+                {
+                    Toast.MakeText(Context, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
+                }
 
                 this?.Activity?.RunOnUiThread(() =>
                 {

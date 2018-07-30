@@ -14,6 +14,7 @@ using Android.Widget;
 using ClubManagement.Activities.Base;
 using System.Collections.Generic;
 using Android.Gms.Maps.Model;
+using ClubManagement.Ultilities;
 
 namespace ClubManagement.Activities
 {
@@ -40,24 +41,21 @@ namespace ClubManagement.Activities
         {
             Task.Run(() =>
             {
-                try
-                {
-                    var user = userEventsController.Values.Where(x => x.EventId == eventDetail.Id)
-                        .Join(usersController.Values,
-                            x => x.UserId,
-                            y => y.Id,
-                            (x, y) => y)
-                        .ToList();
-
-                    RunOnUiThread(() =>
+                var user = new List<UserModel>();
+                this.DoRequest(() =>
                     {
-                        user.ForEach(x => markers.Add(AddMapMarker(x.Latitude, x.Longitude, x.Name, Resource.Drawable.icon_person)));
+                        user = userEventsController.Values.Where(x => x.EventId == eventDetail.Id)
+                            .Join(usersController.Values,
+                                x => x.UserId,
+                                y => y.Id,
+                                (x, y) => y)
+                            .ToList();
+                    },
+                    () =>
+                    {
+                        user.ForEach(x =>
+                            markers.Add(AddMapMarker(x.Latitude, x.Longitude, x.Name, Resource.Drawable.icon_person)));
                     });
-                }
-                catch (Exception)
-                {
-                    Toast.MakeText(this, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
-                }
             });
 
             AddMapMarker(eventDetail.Latitude, eventDetail.Longitude, eventDetail.Title, Resource.Drawable.icon_event);

@@ -63,17 +63,16 @@ namespace ClubManagement.Activities
                         usersController.UpdateUserLocation(user);
                         return;
                     }
+                    RunOnUiThread(() =>
+                    {
+                        dialog.Dismiss();
+                        Toast.MakeText(this, Resources.GetString(Resource.String.wrong_email), ToastLength.Short).Show();
+                    });
                 }
                 catch (Exception)
                 {
                     Toast.MakeText(this, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
                 }
-
-                RunOnUiThread(() =>
-                {
-                    dialog.Dismiss();
-                    Toast.MakeText(this, Resources.GetString(Resource.String.wrong_email), ToastLength.Short).Show();
-                });
             }).Start();
         }
 
