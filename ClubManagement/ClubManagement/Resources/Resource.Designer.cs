@@ -4023,8 +4023,8 @@ namespace ClubManagement
 			// aapt resource value: 0x7f080045
 			public const int google_storage_bucket = 2131230789;
 			
-			// aapt resource value: 0x7f08007f
-			public const int invalid_email_format = 2131230847;
+			// aapt resource value: 0x7f080082
+			public const int invalid_email_format = 2131230850;
 			
 			// aapt resource value: 0x7f080078
 			public const int joined = 2131230840;
@@ -4062,8 +4062,8 @@ namespace ClubManagement
 			// aapt resource value: 0x7f08003a
 			public const int password_toggle_content_description = 2131230778;
 			
-			// aapt resource value: 0x7f08007e
-			public const int password_too_short = 2131230846;
+			// aapt resource value: 0x7f080081
+			public const int password_too_short = 2131230849;
 			
 			// aapt resource value: 0x7f08003b
 			public const int path_password_eye = 2131230779;

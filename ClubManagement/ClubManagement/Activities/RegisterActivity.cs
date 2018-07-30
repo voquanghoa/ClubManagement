@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Android.App;
@@ -70,41 +71,31 @@ namespace ClubManagement.Activities
 
             new Thread(() =>
             {
-                try
+                var userEmails = new List<string>();
+                this.DoRequest(() => userEmails = usersController.Values.Select(x => x.Email).ToList(), () =>
                 {
-                    var userEmails = usersController.Values.Select(x => x.Email).ToList();
-
                     if (userEmails.Contains(edtEmail.Text))
                     {
-                        RunOnUiThread(() =>
-                        {
-                            Toast.MakeText(this, Resources.GetString(Resource.String.exist_email), ToastLength.Short)
-                                .Show();
-                            dialog.Dismiss();
-                        });
-                        return;
+                        Toast.MakeText(this, Resources.GetString(Resource.String.exist_email), ToastLength.Short)
+                            .Show();
                     }
 
-                    usersController.Add(new UserModel
+                    this.DoRequest(() =>
                     {
-                        Email = edtEmail.Text,
-                        Name = edtName.Text,
-                        Password = edtPassword.Text
+                        usersController.Add(new UserModel
+                        {
+                            Email = edtEmail.Text,
+                            Name = edtName.Text,
+                            Password = edtPassword.Text
+                        });
+                    }, () =>
+                    {
+                        Toast.MakeText(this, Resources.GetString(Resource.String.signup_success), ToastLength.Short)
+                            .Show();
+                        Finish();
                     });
-                }
-                catch (Exception)
-                {
-                    Toast.MakeText(this, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short)
-                        .Show();
-                    return;
-                }
-
-                RunOnUiThread(() =>
-                {
-                    Toast.MakeText(this, Resources.GetString(Resource.String.signup_success), ToastLength.Short).Show();
-                    dialog.Dismiss();
                 });
-                Finish();
+                dialog.Dismiss();
             }).Start();
         }
 
