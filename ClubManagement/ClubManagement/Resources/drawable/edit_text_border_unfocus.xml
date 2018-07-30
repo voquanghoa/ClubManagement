@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
-  <solid android:color="@null"/>
-  <corners android:radius="@dimen/view_conner_radius"/>
-  <stroke  android:width="@dimen/edit_text_border_stroke_width" android:color="@color/edit_text_border_color_unfocus"/>
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:top="-4dp" android:left="-4dp" android:right="-4dp">
+        <shape android:shape="rectangle">
+            <stroke android:width="@dimen/edit_text_border_stroke_width" android:color="@color/edit_text_border_color_focus" />
+        </shape>
+    </item>
+</layer-list>
