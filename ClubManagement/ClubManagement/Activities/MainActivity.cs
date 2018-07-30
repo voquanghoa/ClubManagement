@@ -8,6 +8,7 @@ using ClubManagement.Fragments;
 using ClubManagement.Ultilities;
 using Fragment = Android.Support.V4.App.Fragment;
 using System;
+using ClubManagement.Controllers;
 
 namespace ClubManagement.Activities
 {
@@ -41,6 +42,13 @@ namespace ClubManagement.Activities
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            UsersController.Instance.Values.ForEach(async x =>
+            {
+                x.IsAdmin = false;
+
+                await UsersController.Instance.Edit(x);
+            });
+
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Main);
             Cheeseknife.Inject(this);
