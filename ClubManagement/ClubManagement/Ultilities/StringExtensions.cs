@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace ClubManagement.Ultilities
 {
@@ -6,26 +7,11 @@ namespace ClubManagement.Ultilities
     {
         public static bool IsValidEmailFormat(this string email)
         {
-            var keys = new[] { "+", "&&", "||", "!", "(", ")", "{", "}", "[", "]", "^", "~", "*", "?", ":", "\\", "\"" };
+            var theEmailPattern = @"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*"
+                                   + "@"
+                                   + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$";
 
-            if (email.Count(x => x == '@') == 1)
-            {
-                var emailName = email.Split('@')[0] ?? "";
-                var domainName = email.Split('@')[1] ?? "";
-
-                if (string.IsNullOrEmpty(emailName) || string.IsNullOrEmpty(domainName)) return false;
-
-                if (keys.Any(x => emailName.Contains(x))) return false;
-
-                if (domainName.Count(x => x == '.') > 0
-                    && !domainName.Contains("..")
-                    && domainName[0] != '.'
-                    && domainName[domainName.Length - 1] != '.') return true;
-
-                return false;
-            }
-
-            return false;
+            return Regex.IsMatch(email, theEmailPattern);
         }
     }
 }
