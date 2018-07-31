@@ -13,8 +13,6 @@ namespace ClubManagement.CustomAdapters
 {
     public class MoneyAdminViewHolder : RecyclerView.ViewHolder
     {
-        private readonly bool isAdmin = true; // Fake admin 
-
         [InjectView(Resource.Id.tvUser)] private TextView tvUser;
 
         [InjectView(Resource.Id.imgState)] private ImageView imgState;
@@ -39,7 +37,8 @@ namespace ClubManagement.CustomAdapters
         [InjectOnClick(Resource.Id.imgState)]
         private void Pay(object sender, EventArgs e)
         {
-            if (!isAdmin) return;
+            if (!AppDataController.Instance.IsAdmin) return;
+
             var moneyUserController = UserMoneysController.Instance;
             var builder = new AlertDialog.Builder(ItemView.Context)
                 .SetCancelable(false)

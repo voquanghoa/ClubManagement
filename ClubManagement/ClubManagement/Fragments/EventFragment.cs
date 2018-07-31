@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using Android.Support.V4.Widget;
 using ClubManagement.Fragments.Bases;
 using Android.Widget;
+using ClubManagement.Ultilities;
 
 namespace ClubManagement.Fragments
 {
@@ -77,6 +78,9 @@ namespace ClubManagement.Fragments
 
         private void InitView(View view)
         {
+            fabAdd = view.FindViewById<FloatingActionButton>(Resource.Id.fabAdd);
+            fabAdd.Visibility = ViewStates.Gone;
+
             var recyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerView1);
             recyclerView.SetLayoutManager(new LinearLayoutManager(view.Context));
             recyclerView.SetAdapter(adapter);
@@ -84,8 +88,10 @@ namespace ClubManagement.Fragments
             tabLayout = view.FindViewById<TabLayout>(Resource.Id.tabView1);
             tabLayout.TabSelected += (s, e) => DisplayData(data);
 
-            fabAdd = view.FindViewById<FloatingActionButton>(Resource.Id.fabAdd);
-            fabAdd.Click += AddEvent_Click;
+            Context.DoWithAdmin(() =>
+            {
+                fabAdd.Click += AddEvent_Click;
+            });
         }
 
         private void AddEvent_Click(object sender, System.EventArgs e)
@@ -130,7 +136,10 @@ namespace ClubManagement.Fragments
                 {
                     case 0:
                         adapter.Events = data;
-                        fabAdd.Visibility = ViewStates.Visible;
+                        Context.DoWithAdmin(() =>
+                        {
+                            fabAdd.Visibility = ViewStates.Visible;
+                        });
                         break;
                     case 1:
                         adapter.Events = data.Where(x => x.Time > DateTime.Now).ToList();
