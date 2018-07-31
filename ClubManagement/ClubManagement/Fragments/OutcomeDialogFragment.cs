@@ -5,6 +5,7 @@ using Android.Views;
 using Android.Widget;
 using ClubManagement.Controllers;
 using ClubManagement.Models;
+using ClubManagement.Ultilities;
 
 namespace ClubManagement.Fragments
 {
@@ -72,6 +73,9 @@ namespace ClubManagement.Fragments
 
             datePickerFragment.PickDate += DatePickerFragment_PickDate;
             edtDate.Click += EdtDate_Click;
+
+            edtTitle.AfterTextChanged += edtTitle.EdtTitleOrDescription_AfterTextChanged;
+            edtDescription.AfterTextChanged += edtDescription.EdtTitleOrDescription_AfterTextChanged;
 
             return view;
         }
