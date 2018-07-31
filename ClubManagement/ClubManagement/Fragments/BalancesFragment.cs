@@ -8,6 +8,7 @@ using Fragment = Android.Support.V4.App.Fragment;
 using Android.Widget;
 using ClubManagement.Controllers;
 using System.Linq;
+using ClubManagement.Ultilities;
 
 namespace ClubManagement.Fragments
 {
@@ -62,7 +63,13 @@ namespace ClubManagement.Fragments
             }
             else
             {
-                view.FindViewById<ImageButton>(Resource.Id.imgbtnAdd).Click += AddOutcome_Click;
+                Context.DoWithAdmin(() =>
+                {
+                    view.FindViewById<ImageButton>(Resource.Id.imgbtnAdd).Click += AddOutcome_Click;
+                }, () =>
+                {
+                    view.FindViewById<ImageButton>(Resource.Id.imgbtnAdd).Visibility = ViewStates.Gone;
+                });
 
                 adapter.Balances = Outcomes;
             }
