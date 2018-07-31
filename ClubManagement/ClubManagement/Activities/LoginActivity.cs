@@ -58,6 +58,9 @@ namespace ClubManagement.Activities
                     preferencesEditor.PutString(AppConstantValues.UserIdPreferenceKey, loginUser.Id);
                     preferencesEditor.Commit();
                     Finish();
+
+                    AppDataController.Instance.UpdateUser();
+
                     StartActivity(typeof(MainActivity));
                     Toast.MakeText(this, Resources.GetString(Resource.String.login_success), ToastLength.Short)
                         .Show();

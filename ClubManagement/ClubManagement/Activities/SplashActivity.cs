@@ -34,6 +34,7 @@ namespace ClubManagement.Activities
                 Finish();
                 var userId = preferences.GetString(AppConstantValues.UserIdPreferenceKey, string.Empty);
                 var currentUser = UsersController.Instance.Values.First(u => u.Id == userId);
+                AppDataController.Instance.UpdateUser();
                 UsersController.Instance.UpdateUserLocation(currentUser);
             }
             else

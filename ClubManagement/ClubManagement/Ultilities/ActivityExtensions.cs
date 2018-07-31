@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using ClubManagement.Controllers;
 
 namespace ClubManagement.Ultilities
 {
@@ -32,6 +33,17 @@ namespace ClubManagement.Ultilities
                 }
 
             }).Start();
+        }
+
+        public static void DoWithAdmin(this Context context, Action action)
+        {
+            if (AppDataController.Instance.IsAdmin) action();
+        }
+
+        public static void DoWithAdmin(this Context context, Action action, Action notAdminAction)
+        {
+            if (AppDataController.Instance.IsAdmin) action();
+            else notAdminAction();
         }
     }
 }
