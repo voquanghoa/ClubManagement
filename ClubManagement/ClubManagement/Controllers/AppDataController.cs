@@ -12,9 +12,26 @@ namespace ClubManagement.Controllers
     {
         public static AppDataController Instance = new AppDataController();
 
-        public readonly string UserId;
+        private string userId;
 
-        public readonly string UserName;
+        private string userName;
+
+        private bool isAdmin;
+
+        public string UserId
+        {
+            get => userId;
+        }
+
+        public string UserName
+        {
+            get => userName;
+        }
+
+        public bool IsAdmin
+        {
+            get => isAdmin;
+        }
 
         private MoneysController moneysController = MoneysController.Instance;
 
@@ -22,12 +39,15 @@ namespace ClubManagement.Controllers
 
         private UsersController usersController = UsersController.Instance;
 
-        private AppDataController()
+        public void UpdateUser()
         {
-            UserId = PreferenceManager.GetDefaultSharedPreferences(Application.Context)
+            userId = PreferenceManager.GetDefaultSharedPreferences(Application.Context)
                 .GetString("UserId", string.Empty);
 
-            UserName = usersController.Values.FirstOrDefault(x => x.Id == UserId)?.Name;
+            var user = usersController.Values.FirstOrDefault(x => x.Id == UserId);
+
+            userName = user?.Name;
+            isAdmin = user?.IsAdmin ?? true;
         }
 
         public int NumberOfUnpaidBudgets

@@ -75,12 +75,15 @@ namespace ClubManagement.Activities
 
             btnJoin.ChangeStatusButtonJoin(currentIsJoined);
 
-            btnJoin.Click += (s, e) =>
+            this.DoWithAdmin(() =>
             {
-                currentIsJoined = !currentIsJoined;
-                btnJoin.ChangeStatusButtonJoin(currentIsJoined);
-                UpdateUserEvents(currentIsJoined);
-            };
+                btnJoin.Click += (s, e) =>
+                {
+                    currentIsJoined = !currentIsJoined;
+                    btnJoin.ChangeStatusButtonJoin(currentIsJoined);
+                    UpdateUserEvents(currentIsJoined);
+                };
+            });
 
 			FragmentManager.FindFragmentById<MapFragment>(Resource.Id.mapFragment).GetMapAsync(this);
 
@@ -89,8 +92,6 @@ namespace ClubManagement.Activities
 
         private void UpdateUserEvents(bool isJoined)
         {
-
-
             this.DoRequest(() =>
             {
                 if (isJoined)
