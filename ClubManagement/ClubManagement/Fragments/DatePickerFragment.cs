@@ -13,7 +13,10 @@ namespace ClubManagement.Fragments
         public override Dialog OnCreateDialog(Bundle savedInstanceState)
         {
             var currently = DateTime.Now;
-            return new DatePickerDialog(Activity, this, currently.Year, currently.Month - 1, currently.Day);
+			var datePickerDialog = new DatePickerDialog(Activity, this, currently.Year, currently.Month - 1, currently.Day);
+            datePickerDialog.DatePicker.MinDate = Java.Lang.JavaSystem.CurrentTimeMillis();
+
+			return datePickerDialog;
         }
 
         public void OnDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
