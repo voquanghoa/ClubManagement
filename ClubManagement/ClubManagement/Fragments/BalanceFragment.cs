@@ -12,6 +12,7 @@ using ClubManagement.Fragments.Bases;
 using Android.Support.V4.Widget;
 using ClubManagement.Controllers;
 using System.Linq;
+using Android.Widget;
 
 namespace ClubManagement.Fragments
 {
@@ -77,10 +78,21 @@ namespace ClubManagement.Fragments
 
         protected override List<OutcomeModel> QueryData()
         {
-            incomes = AppDataController.Instance.Incomes.Select(x => (OutcomeModel)x).OrderByDescending(x => x.Date).ToList();
-            outcomes = OutComesController.Instance.Values;
-            sumIncomes = AppDataController.Instance.Incomes.Sum(x => x.Amount);
-            sumOutcomes = OutComesController.Instance.Values.Sum(x => x.Amount);
+            try
+            {
+                incomes = AppDataController.Instance.Incomes.Select(x => (OutcomeModel)x).OrderByDescending(x => x.Date).ToList();
+                outcomes = OutComesController.Instance.Values;
+                sumIncomes = AppDataController.Instance.Incomes.Sum(x => x.Amount);
+                sumOutcomes = OutComesController.Instance.Values.Sum(x => x.Amount);
+            }
+            catch (Exception)
+            {
+                Toast.MakeText(Context, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
+                incomes = new List<OutcomeModel>();
+                outcomes = new List<OutcomeModel>();
+                sumIncomes = 0;
+                sumOutcomes = 0;
+            }
 
             return null;
         }

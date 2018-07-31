@@ -56,6 +56,9 @@
   <string name="memberLocation">Member location</string>
   <string name="location">Location</string>
   <string name="addEvent">Add event</string>
+  <string name="textview_no_internet">Oops! No internet connection!</string>
+  <string name="button_retry">Retry</string>
+  <string name="no_internet_connection">No internet connection! Try again!</string>
   <string name="password_too_short">Password is at least 6 characters</string>
   <string name="invalid_email_format">Invalid email format</string>
 </resources>

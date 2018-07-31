@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Android.OS;
 using Android.Support.Design.Widget;
@@ -11,6 +12,7 @@ using ClubManagement.Fragments.Bases;
 using ClubManagement.Models;
 using ClubManagement.Ultilities;
 using Android.Support.V7.Widget;
+using Android.Widget;
 
 namespace ClubManagement.Fragments
 {
@@ -52,7 +54,15 @@ namespace ClubManagement.Fragments
 
         protected override List<MoneyState> QueryData()
         {
-            return appDataController.GetListMoneyState();
+            try
+            {
+                return appDataController.GetListMoneyState();
+            }
+            catch (Exception)
+            {
+                Toast.MakeText(Context, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
+                return new List<MoneyState>();
+            }
         }
 
         protected override void DisplayData(List<MoneyState> data)

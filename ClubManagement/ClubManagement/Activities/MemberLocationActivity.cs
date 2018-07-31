@@ -10,9 +10,11 @@ using ClubManagement.Models;
 using ClubManagement.Fragments;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using Android.Widget;
 using ClubManagement.Activities.Base;
 using System.Collections.Generic;
 using Android.Gms.Maps.Model;
+using ClubManagement.Ultilities;
 
 namespace ClubManagement.Activities
 {
@@ -39,17 +41,21 @@ namespace ClubManagement.Activities
         {
             Task.Run(() =>
             {
-                var user = userEventsController.Values.Where(x => x.EventId == eventDetail.Id)
-               .Join(usersController.Values,
-                   x => x.UserId,
-                   y => y.Id,
-                   (x, y) => y)
-               .ToList();
-
-                RunOnUiThread(() =>
-                {
-                    user.ForEach(x => markers.Add(AddMapMarker(x.Latitude, x.Longitude, x.Name, Resource.Drawable.icon_person)));
-                });
+                var user = new List<UserModel>();
+                this.DoRequest(() =>
+                    {
+                        user = userEventsController.Values.Where(x => x.EventId == eventDetail.Id)
+                            .Join(usersController.Values,
+                                x => x.UserId,
+                                y => y.Id,
+                                (x, y) => y)
+                            .ToList();
+                    },
+                    () =>
+                    {
+                        user.ForEach(x =>
+                            markers.Add(AddMapMarker(x.Latitude, x.Longitude, x.Name, Resource.Drawable.icon_person)));
+                    });
             });
 
             AddMapMarker(eventDetail.Latitude, eventDetail.Longitude, eventDetail.Title, Resource.Drawable.icon_event);

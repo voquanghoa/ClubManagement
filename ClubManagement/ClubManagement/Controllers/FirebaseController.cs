@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using Android.Util;
 using Firebase.Xamarin.Database.Query;
 using ClubManagement.Models;
 
@@ -26,14 +29,13 @@ namespace ClubManagement.Controllers
         {
             get
             {
-                var users = FirebaseClient.OnceAsync<T>().Result;
-
-                return users.Select(x =>
+                var users = FirebaseClient.OnceAsync<T>().Result.Select(x =>
                 {
                     x.Object.Id = x.Key;
 
                     return x.Object;
                 }).ToList();
+                return users;
             }
         }
 

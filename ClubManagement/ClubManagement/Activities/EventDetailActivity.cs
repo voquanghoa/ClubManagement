@@ -89,21 +89,26 @@ namespace ClubManagement.Activities
 
         private void UpdateUserEvents(bool isJoined)
         {
-            if (isJoined)
-            {
-                userEventsController.Add(new UserEventModel()
-                {
-                    EventId = eventDetail.Id,
-                    UserId = userId
-                });
-            }
-            else
-            {
-                var userEvent = userEventsController.Values
-                    .First(x => x.EventId == eventDetail.Id && x.UserId == userId);
 
-                userEventsController.Delete(userEvent);
-            }
+
+            this.DoRequest(() =>
+            {
+                if (isJoined)
+                {
+                    userEventsController.Add(new UserEventModel()
+                    {
+                        EventId = eventDetail.Id,
+                        UserId = userId
+                    });
+                }
+                else
+                {
+                    var userEvent = userEventsController.Values
+                        .First(x => x.EventId == eventDetail.Id && x.UserId == userId);
+
+                    userEventsController.Delete(userEvent);
+                }
+            }, () => { });
         }
 
 		private void EventDetailActivity_MapReady(object sender, EventArgs e)

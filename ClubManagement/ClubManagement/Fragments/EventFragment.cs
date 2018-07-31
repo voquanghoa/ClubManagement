@@ -101,18 +101,25 @@ namespace ClubManagement.Fragments
 
         protected override List<UserLoginEventModel> QueryData()
         {
-            return eventsController.Values.Count >= data.Count
-                ? eventsController.Values.Select(x =>
-                {
-                    var userLoginEventModel = new UserLoginEventModel(x)
+            try
+            {
+                return eventsController.Values.Count >= data.Count
+                    ? eventsController.Values.Select(x =>
                     {
-                        IsJoined = userEventsController.Values
-                            .Any(y => y.EventId == x.Id && y.UserId == userId)
-                    };
+                        var userLoginEventModel = new UserLoginEventModel(x)
+                        {
+                            IsJoined = userEventsController.Values
+                                .Any(y => y.EventId == x.Id && y.UserId == userId)
+                        };
 
-                    return userLoginEventModel;
-                }).ToList()
-                : data;
+                        return userLoginEventModel;
+                    }).ToList()
+                    : data;
+            }
+            catch (Exception)
+            {
+                return new List<UserLoginEventModel>();
+            }
         }
 
         protected override void DisplayData(List<UserLoginEventModel> data)
