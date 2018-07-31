@@ -4134,6 +4134,9 @@ namespace ClubManagement
 			// aapt resource value: 0x7f08005f
 			public const int title = 2131230815;
 			
+			// aapt resource value: 0x7f080083
+			public const int title_or_description_too_long = 2131230851;
+			
 			// aapt resource value: 0x7f080076
 			public const int unpaid = 2131230838;
 			

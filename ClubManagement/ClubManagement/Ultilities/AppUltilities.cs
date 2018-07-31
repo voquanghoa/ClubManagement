@@ -31,5 +31,19 @@ namespace ClubManagement.Ultilities
                 btnJoin.SetBackgroundColor(Color.Green);
             }
         }
+
+        private const int MaxCharacters = 256;
+
+        public static void EdtTitleOrDescription_AfterTextChanged(this EditText editText, object sender, Android.Text.AfterTextChangedEventArgs e)
+        {
+            if (e.Editable.Length() > MaxCharacters)
+            {
+                e.Editable.Delete(MaxCharacters, e.Editable.Length());
+
+                Toast.MakeText(editText.Context,
+                        editText.Resources.GetString(Resource.String.title_or_description_too_long),
+                        ToastLength.Short).Show();
+            }
+        }
     }
 }

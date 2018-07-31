@@ -9,6 +9,7 @@ using Android.Gms.Location.Places.UI;
 using Android.Content;
 using Android.Gms.Location.Places;
 using System.Threading.Tasks;
+using ClubManagement.Ultilities;
 
 namespace ClubManagement.Fragments
 {
@@ -100,6 +101,9 @@ namespace ClubManagement.Fragments
             Cheeseknife.Inject(this, view);
 
             datePickerFragment.PickDate += DatePickerFragment_PickDate;
+
+            edtTitle.AfterTextChanged += edtTitle.EdtTitleOrDescription_AfterTextChanged;
+            edtDescription.AfterTextChanged += edtDescription.EdtTitleOrDescription_AfterTextChanged;
 
             return view;
         }
