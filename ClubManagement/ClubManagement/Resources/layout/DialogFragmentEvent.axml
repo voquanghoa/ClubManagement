@@ -12,99 +12,111 @@
         android:padding="@dimen/textview_padding_left_right"
         android:text="@string/addEvent"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-    <TableRow
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_margin="@dimen/dialog_margin"
-        android:layout_marginTop="@dimen/textview_margin_top_bottom"
-        android:id="@+id/tableRow1">
-        <TextView
-            android:text="@string/title"
-            android:layout_marginRight="@dimen/textview_margin_left_right"
-            android:gravity="right"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-        <EditText
-            android:id="@+id/edtTitle"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingBottom="@dimen/edit_text_padding_top_bottom"
-            android:paddingTop="@dimen/edit_text_padding_top_bottom"
-            android:paddingRight="@dimen/edit_text_padding_left_right"
-            android:paddingLeft="@dimen/edit_text_padding_left_right"
-            android:background="@drawable/edittext_states"
-            android:textColor="@color/text_color_black" />
-    </TableRow>
-    <TableRow
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_margin="@dimen/dialog_margin"
-        android:id="@+id/tableRow1">
-        <TextView
-            android:text="@string/description"
-            android:layout_marginRight="@dimen/textview_margin_left_right"
-            android:gravity="right"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-        <EditText
-            android:id="@+id/edtDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingBottom="@dimen/edit_text_padding_top_bottom"
-            android:paddingTop="@dimen/edit_text_padding_top_bottom"
-            android:paddingRight="@dimen/edit_text_padding_left_right"
-            android:paddingLeft="@dimen/edit_text_padding_left_right"
-            android:background="@drawable/edittext_states"
-            android:textColor="@color/text_color_black" />
-    </TableRow>
-    <TableRow
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_margin="@dimen/dialog_margin"
-        android:id="@+id/tableRow1">
-        <TextView
-            android:text="@string/location"
-            android:layout_marginRight="@dimen/textview_margin_left_right"
-            android:gravity="right"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-        <EditText
-            android:id="@+id/edtLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:editable="false"
-            android:focusable="false"
-            android:paddingBottom="@dimen/edit_text_padding_top_bottom"
-            android:paddingTop="@dimen/edit_text_padding_top_bottom"
-            android:paddingRight="@dimen/edit_text_padding_left_right"
-            android:paddingLeft="@dimen/edit_text_padding_left_right"
-            android:background="@drawable/edittext_states"
-            android:textColor="@color/text_color_black" />
-    </TableRow>
-    <TableRow
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_margin="@dimen/dialog_margin"
-        android:id="@+id/tableRow1">
-        <TextView
-            android:text="@string/date"
-            android:layout_marginRight="@dimen/textview_margin_left_right"
-            android:gravity="right"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-        <EditText
-            android:id="@+id/edtDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:editable="false"
-            android:focusable="false"
-            android:paddingBottom="@dimen/edit_text_padding_top_bottom"
-            android:paddingTop="@dimen/edit_text_padding_top_bottom"
-            android:paddingRight="@dimen/edit_text_padding_left_right"
-            android:paddingLeft="@dimen/edit_text_padding_left_right"
-            android:background="@drawable/edittext_states"
-            android:textColor="@color/text_color_black" />
-    </TableRow>
+            android:layout_height="match_parent"
+            android:stretchColumns="1"
+            android:minWidth="25px"
+            android:minHeight="25px">
+            <TableRow
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_margin="@dimen/dialog_margin"
+                android:layout_marginTop="@dimen/textview_margin_top_bottom"
+                android:id="@+id/tableRow1">
+                <TextView
+                    android:text="@string/title"
+                    android:layout_marginRight="@dimen/textview_margin_left_right"
+                    android:gravity="right"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                <EditText
+                    android:id="@+id/edtTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingBottom="@dimen/edit_text_padding_top_bottom"
+                    android:paddingTop="@dimen/edit_text_padding_top_bottom"
+                    android:paddingRight="@dimen/edit_text_padding_left_right"
+                    android:paddingLeft="@dimen/edit_text_padding_left_right"
+                    android:background="@drawable/edittext_states"
+                    android:textColor="@color/text_color_black" />
+            </TableRow>
+            <TableRow
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_margin="@dimen/dialog_margin"
+                android:id="@+id/tableRow1">
+                <TextView
+                    android:text="@string/description"
+                    android:layout_marginRight="@dimen/textview_margin_left_right"
+                    android:gravity="right"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                <EditText
+                    android:id="@+id/edtDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingBottom="@dimen/edit_text_padding_top_bottom"
+                    android:paddingTop="@dimen/edit_text_padding_top_bottom"
+                    android:paddingRight="@dimen/edit_text_padding_left_right"
+                    android:paddingLeft="@dimen/edit_text_padding_left_right"
+                    android:background="@drawable/edittext_states"
+                    android:textColor="@color/text_color_black" />
+            </TableRow>
+            <TableRow
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_margin="@dimen/dialog_margin"
+                android:id="@+id/tableRow1">
+                <TextView
+                    android:text="@string/location"
+                    android:layout_marginRight="@dimen/textview_margin_left_right"
+                    android:gravity="right"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                <EditText
+                    android:id="@+id/edtLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:paddingBottom="@dimen/edit_text_padding_top_bottom"
+                    android:paddingTop="@dimen/edit_text_padding_top_bottom"
+                    android:paddingRight="@dimen/edit_text_padding_left_right"
+                    android:paddingLeft="@dimen/edit_text_padding_left_right"
+                    android:background="@drawable/edittext_states"
+                    android:textColor="@color/text_color_black" />
+            </TableRow>
+            <TableRow
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_margin="@dimen/dialog_margin"
+                android:id="@+id/tableRow1">
+                <TextView
+                    android:text="@string/date"
+                    android:layout_marginRight="@dimen/textview_margin_left_right"
+                    android:gravity="right"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                <EditText
+                    android:id="@+id/edtDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:paddingBottom="@dimen/edit_text_padding_top_bottom"
+                    android:paddingTop="@dimen/edit_text_padding_top_bottom"
+                    android:paddingRight="@dimen/edit_text_padding_left_right"
+                    android:paddingLeft="@dimen/edit_text_padding_left_right"
+                    android:background="@drawable/edittext_states"
+                    android:textColor="@color/text_color_black" />
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_height="wrap_content"
