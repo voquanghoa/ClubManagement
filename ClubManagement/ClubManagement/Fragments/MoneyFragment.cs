@@ -56,7 +56,7 @@ namespace ClubManagement.Fragments
         {
             try
             {
-                return appDataController.GetListMoneyState();
+                return appDataController.GetListMoneyState().OrderByDescending(x => x.MoneyModel.Amount).ToList();
             }
             catch (Exception)
             {
