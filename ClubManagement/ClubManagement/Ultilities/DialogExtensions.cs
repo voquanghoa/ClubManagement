@@ -1,7 +1,9 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.Preferences;
+using Android.Support.Design.Widget;
 using ClubManagement.Activities;
+using ClubManagement.Fragments;
 
 #pragma warning disable 618
 

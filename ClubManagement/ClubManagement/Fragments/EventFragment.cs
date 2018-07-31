@@ -1,3 +1,4 @@
+using System;
 using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V7.Widget;
@@ -100,18 +101,25 @@ namespace ClubManagement.Fragments
 
         protected override List<UserLoginEventModel> QueryData()
         {
-            return eventsController.Values.Count >= data.Count
-                ? eventsController.Values.Select(x =>
-                {
-                    var userLoginEventModel = new UserLoginEventModel(x)
+            try
+            {
+                return eventsController.Values.Count >= data.Count
+                    ? eventsController.Values.Select(x =>
                     {
-                        IsJoined = userEventsController.Values
-                            .Any(y => y.EventId == x.Id && y.UserId == userId)
-                    };
+                        var userLoginEventModel = new UserLoginEventModel(x)
+                        {
+                            IsJoined = userEventsController.Values
+                                .Any(y => y.EventId == x.Id && y.UserId == userId)
+                        };
 
-                    return userLoginEventModel;
-                }).ToList()
-                : data;
+                        return userLoginEventModel;
+                    }).ToList()
+                    : data;
+            }
+            catch (Exception)
+            {
+                return new List<UserLoginEventModel>();
+            }
         }
 
         protected override void DisplayData(List<UserLoginEventModel> data)
@@ -125,11 +133,11 @@ namespace ClubManagement.Fragments
                         fabAdd.Visibility = ViewStates.Visible;
                         break;
                     case 1:
-                        adapter.Events = data.Where(x => x.IsJoined).ToList();
+                        adapter.Events = data.Where(x => x.Time > DateTime.Now).ToList();
                         fabAdd.Visibility = ViewStates.Gone;
                         break;
                     case 2:
-                        adapter.Events = data.Where(x => !x.IsJoined).ToList();
+                        adapter.Events = data.Where(x => x.IsJoined).ToList();
                         fabAdd.Visibility = ViewStates.Gone;
                         break;
                 }

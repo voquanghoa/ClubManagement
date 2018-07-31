@@ -54,10 +54,20 @@ namespace ClubManagement.Fragments
 
         protected override string QueryData()
         {
-            unpaidBudgets = appDataController.NumberOfUnpaidBudgets;
-            upcomingEvents = appDataController.UpcomingEvents;
-            timeToNextUpcomingEvent = upcomingEvents.Any() ? (appDataController.UpcomingEvents.OrderBy(x => x.Time).First().Time - DateTime.Now).Days : 0;
+            try
+            {
+                unpaidBudgets = appDataController.NumberOfUnpaidBudgets;
+                upcomingEvents = appDataController.UpcomingEvents;
+                timeToNextUpcomingEvent = upcomingEvents.Any() ? (appDataController.UpcomingEvents.OrderBy(x => x.Time).First().Time - DateTime.Now).Days : 0;
 
+            }
+            catch (Exception)
+            {
+                Toast.MakeText(Context, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
+                unpaidBudgets = 0;
+                upcomingEvents = new List<EventModel>();
+                timeToNextUpcomingEvent = 0;
+            }
             return null;
         }
 

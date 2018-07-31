@@ -4,6 +4,9 @@ using Android.App;
 using Android.OS;
 using Android.Support.V4.Widget;
 using Android.Views;
+using ClubManagement.CustomAdapters;
+using ClubManagement.Ultilities;
+using Plugin.Connectivity;
 using Fragment = Android.Support.V4.App.Fragment;
 
 namespace ClubManagement.Fragments.Bases
@@ -21,7 +24,6 @@ namespace ClubManagement.Fragments.Bases
         public override void OnViewCreated(View view, Bundle savedInstanceState)
         {
             base.OnViewCreated(view, savedInstanceState);
-
             SwipeRefreshLayout.Refresh += HandleRefresh;
             UpdateViewData();
         }
@@ -35,6 +37,12 @@ namespace ClubManagement.Fragments.Bases
         {
             if (!isLoadingData)
             {
+                if (!CrossConnectivity.Current.IsConnected)
+                {
+                    var dialog = new NoInternetBottomDialog(Context);
+                    dialog.Show();
+                    return;
+                }
                 SwipeRefreshLayout.Refreshing = true;
                 isLoadingData = true;
                 this.data = await Task.Run(() => QueryData());
@@ -47,7 +55,7 @@ namespace ClubManagement.Fragments.Bases
                         {
                             if (View != null)
                             {
-                                DisplayData(this.data);
+                                DisplayData(data);
                                 SwipeRefreshLayout.Refreshing = false;
                             }
                         });

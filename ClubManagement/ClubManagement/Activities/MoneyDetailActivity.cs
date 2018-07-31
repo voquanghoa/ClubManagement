@@ -9,6 +9,7 @@ using ClubManagement.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Android.Support.V4.Widget;
+using ClubManagement.Ultilities;
 
 namespace ClubManagement.Activities
 {
@@ -66,15 +67,18 @@ namespace ClubManagement.Activities
 
             Task.Run(() =>
             {
-                moneyAdminStates = appDataController.GetMoneyAdminStates(moneyId);
+                this.DoRequest(
+                    () => { moneyAdminStates = appDataController.GetMoneyAdminStates(moneyId); },
+                    () =>
+                    {
+                        adapter.MoneyAdminStates = moneyAdminStates;
 
-                RunOnUiThread(() =>
-                {
-                    adapter.MoneyAdminStates = moneyAdminStates;
-
-                    refresh.Refreshing = false;
-                });
+                        refresh.Refreshing = false;
+                    }
+                );
             });
+
+            
         }
     }
 }

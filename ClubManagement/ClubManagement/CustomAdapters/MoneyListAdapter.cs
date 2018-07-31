@@ -2,15 +2,17 @@
 using Android.Content;
 using Android.Support.V7.Widget;
 using Android.Views;
+using Android.Widget;
 using ClubManagement.Activities;
 using ClubManagement.Interfaces;
 using ClubManagement.Models;
+using Plugin.Connectivity;
 
 namespace ClubManagement.CustomAdapters
 {
     public class MoneyListAdapter : RecyclerView.Adapter, IItemClickListener
     {
-        private List<MoneyState> moneyStates = new List<MoneyState>();
+        private readonly List<MoneyState> moneyStates = new List<MoneyState>();
 
         public List<MoneyState> MoneyStates
         {
@@ -41,6 +43,12 @@ namespace ClubManagement.CustomAdapters
 
         public void OnClick(View view, int position)
         {
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                Toast.MakeText(view.Context, view.Context.Resources.GetString(Resource.String.no_internet_connection),
+                    ToastLength.Short).Show();
+                return;
+            }
             var intent = new Intent(view.Context, typeof(MoneyDetailActivity));
             var moneyState = moneyStates[position].MoneyModel;
             intent.PutExtra("Budget", moneyState.Amount);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Android.App;
@@ -6,6 +7,7 @@ using Android.OS;
 using Android.Preferences;
 using Android.Widget;
 using ClubManagement.Controllers;
+using ClubManagement.Models;
 using ClubManagement.Ultilities;
 
 namespace ClubManagement.Activities
@@ -24,8 +26,6 @@ namespace ClubManagement.Activities
         {
             this.HideKeyboard();
 
-
-
             if (string.IsNullOrEmpty(edtEmail.Text) || string.IsNullOrEmpty(edtPassword.Text))
             {
                 Toast.MakeText(this, Resources.GetString(Resource.String.fill_all_fields), ToastLength.Short).Show();
@@ -34,43 +34,41 @@ namespace ClubManagement.Activities
 
             var dialog = DialogExtensions.CreateDialog(Resources.GetString(Resource.String.sign_in), Resources.GetString(Resource.String.wait), this);
             dialog.Show();
-            new Thread(() =>
-            {
-                var users = usersController.Values;
+			var activity = this;
 
-                if (!users.Select(x => x.Email.ToLower()).Contains(edtEmail.Text.ToLower()))
+            var users = new List<UserModel>();
+            this.DoRequest(() => users = usersController.Values, () =>
+            {
+                var loginUser = users.FirstOrDefault(x =>
+                    string.Equals(x.Email, edtEmail.Text, StringComparison.CurrentCultureIgnoreCase));
+
+                if (loginUser == null)
                 {
-                    RunOnUiThread(() =>
-                    {
-                        Toast.MakeText(this, Resources.GetString(Resource.String.not_exist_email), ToastLength.Short).Show();
-                        dialog.Dismiss();
-                    });
+                    Toast.MakeText(activity, Resources.GetString(Resource.String.not_exist_email),
+                        ToastLength.Short).Show();
+                    dialog.Dismiss();
                     return;
                 }
-                if (users.Any(u => u.Email.ToLower() == edtEmail.Text.ToLower() && u.Password == edtPassword.Text))
+
+                if (loginUser.Password == edtPassword.Text)
                 {
-                    var user = users.First(u => u.Email.ToLower() == edtEmail.Text.ToLower() && u.Password == edtPassword.Text);
-                    var preferencesEditor = PreferenceManager.GetDefaultSharedPreferences(Application.Context).Edit();
+                    var preferencesEditor =
+                        PreferenceManager.GetDefaultSharedPreferences(Application.Context).Edit();
                     preferencesEditor.PutBoolean(AppConstantValues.LogStatusPreferenceKey, true);
-                    preferencesEditor.PutString(AppConstantValues.UserIdPreferenceKey, user.Id);
+                    preferencesEditor.PutString(AppConstantValues.UserIdPreferenceKey, loginUser.Id);
                     preferencesEditor.Commit();
                     Finish();
                     StartActivity(typeof(MainActivity));
-                    RunOnUiThread(() =>
-                    {
-                        Toast.MakeText(this, Resources.GetString(Resource.String.login_success), ToastLength.Short).Show();
-                        dialog.Dismiss();
-                    });
-                    usersController.UpdateUserLocation(user);
+                    Toast.MakeText(this, Resources.GetString(Resource.String.login_success), ToastLength.Short)
+                        .Show();
+                    dialog.Dismiss();
+                    this.DoRequest(() => usersController.UpdateUserLocation(loginUser));
                     return;
                 }
 
-                RunOnUiThread(() =>
-                {
-                    dialog.Dismiss();
-                    Toast.MakeText(this, Resources.GetString(Resource.String.wrong_email), ToastLength.Short).Show();
-                });
-            }).Start();
+                Toast.MakeText(activity, Resources.GetString(Resource.String.wrong_email), ToastLength.Short)
+                    .Show();
+            }, () => dialog.Dismiss());
         }
 
         [InjectOnClick(Resource.Id.btnSignUp)]
