@@ -38,8 +38,6 @@ namespace ClubManagement.Activities
 
             edtEmail.Text = edtEmail.Text.ToLower().Trim();
             edtName.Text = edtName.Text.Trim();
-            edtPassword.Text = edtPassword.Text.Trim();
-            edtConfirmPassword.Text = edtConfirmPassword.Text.Trim();
 
             if (string.IsNullOrEmpty(edtEmail.Text) || string.IsNullOrEmpty(edtName.Text) ||
                 string.IsNullOrEmpty(edtPassword.Text) || string.IsNullOrEmpty(edtConfirmPassword.Text))
