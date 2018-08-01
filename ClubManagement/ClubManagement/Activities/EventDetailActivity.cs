@@ -75,17 +75,14 @@ namespace ClubManagement.Activities
 
             btnJoin.ChangeStatusButtonJoin(currentIsJoined);
 
-            this.DoWithAdmin(() =>
+            btnJoin.Click += (s, e) =>
             {
-                btnJoin.Click += (s, e) =>
-                {
-                    currentIsJoined = !currentIsJoined;
-                    btnJoin.ChangeStatusButtonJoin(currentIsJoined);
-                    UpdateUserEvents(currentIsJoined);
-                };
-            });
+                currentIsJoined = !currentIsJoined;
+                btnJoin.ChangeStatusButtonJoin(currentIsJoined);
+                UpdateUserEvents(currentIsJoined);
+            };
 
-			FragmentManager.FindFragmentById<MapFragment>(Resource.Id.mapFragment).GetMapAsync(this);
+            FragmentManager.FindFragmentById<MapFragment>(Resource.Id.mapFragment).GetMapAsync(this);
 
 			MapReady += EventDetailActivity_MapReady;
         }
