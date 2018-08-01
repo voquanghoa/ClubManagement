@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using Android.App;
 using Android.OS;
@@ -37,9 +38,7 @@ namespace ClubManagement.Activities
             this.HideKeyboard();
 
             edtEmail.Text = edtEmail.Text.ToLower().Trim();
-            edtName.Text = edtName.Text.Trim();
-            edtPassword.Text = edtPassword.Text.Trim();
-            edtConfirmPassword.Text = edtConfirmPassword.Text.Trim();
+            edtName.Text = new Regex("[ ]{2,}]").Replace(edtName.Text, " ").Trim();
 
             if (string.IsNullOrEmpty(edtEmail.Text) || string.IsNullOrEmpty(edtName.Text) ||
                 string.IsNullOrEmpty(edtPassword.Text) || string.IsNullOrEmpty(edtConfirmPassword.Text))
@@ -57,6 +56,12 @@ namespace ClubManagement.Activities
             if (!edtEmail.Text.IsValidEmailFormat())
             {
                 Toast.MakeText(this, Resources.GetString(Resource.String.invalid_email_format), ToastLength.Short).Show();
+                return;
+            }
+
+            if (!edtName.Text.IsValidNameFormat())
+            {
+                Toast.MakeText(this, Resources.GetString(Resource.String.invalid_name_format), ToastLength.Short).Show();
                 return;
             }
 

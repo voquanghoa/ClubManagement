@@ -10,7 +10,7 @@ using Plugin.Connectivity;
 
 namespace ClubManagement.Activities
 {
-    [Activity(Label = "SplashActivity", MainLauncher = true, NoHistory = true, Theme = "@style/AppTheme")]
+	[Activity(Label = "Club Management", MainLauncher = true, NoHistory = true, Theme = "@style/AppTheme")]
     public class SplashActivity : Activity
     {
         [InjectOnClick(Resource.Id.btnRetry)]
