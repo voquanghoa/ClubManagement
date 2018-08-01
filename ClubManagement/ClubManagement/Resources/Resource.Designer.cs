@@ -4026,6 +4026,9 @@ namespace ClubManagement
 			// aapt resource value: 0x7f080082
 			public const int invalid_email_format = 2131230850;
 			
+			// aapt resource value: 0x7f080083
+			public const int invalid_name_format = 2131230851;
+			
 			// aapt resource value: 0x7f080078
 			public const int joined = 2131230840;
 			
