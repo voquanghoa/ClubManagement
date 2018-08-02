@@ -66,7 +66,7 @@ namespace ClubManagement.Fragments
             {
                 var intent = new Intent(Context, typeof(EventDetailActivity));
 
-                var eventDetail = JsonConvert.SerializeObject(data[e.Position]);
+                var eventDetail = JsonConvert.SerializeObject(adapter.Events[e.Position]);
 
                 intent.PutExtra("EventDetail", eventDetail);
 
