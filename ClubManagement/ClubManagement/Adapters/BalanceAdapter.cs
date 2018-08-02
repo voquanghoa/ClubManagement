@@ -37,7 +37,7 @@ namespace ClubManagement.Adapters
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder viewHolder, int position)
         {
-            ((BalanceAdapterViewHolder)viewHolder).BalanceModel = balances[position];
+            if (viewHolder is BalanceAdapterViewHolder holder) holder.BalanceModel = balances[position];
         }
 
         public override int ItemCount => balances.Count;

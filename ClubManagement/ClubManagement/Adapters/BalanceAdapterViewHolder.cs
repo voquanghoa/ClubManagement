@@ -30,7 +30,8 @@ namespace ClubManagement.Adapters
 
                 tvTitle.Text = value.Title;
                 tvDescription.Text = value.Description;
-                tvMoney.Text = $"{numberSign}{value.Amount * 1000} đ";
+                var money = value.Amount * 1000;
+                tvMoney.Text = $"{numberSign}{money}đ";
                 tvDate.Text = value.Date.ToShortDateString();
             }
         }
