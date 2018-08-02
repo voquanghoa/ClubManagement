@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
   <integer name="max_length">256</integer>
+  <integer name="max_line">2</integer>
 </resources>
