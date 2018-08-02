@@ -84,14 +84,13 @@ namespace ClubManagement.Fragments
                 Context.DoWithAdmin(() =>
                 {
                     view.FindViewById<ImageButton>(Resource.Id.imgbtnAdd).Click += AddOutcome_Click;
+                    itemTouchHelper.AttachToRecyclerView(rvBalance);
                 }, () =>
                 {
                     view.FindViewById<ImageButton>(Resource.Id.imgbtnAdd).Visibility = ViewStates.Gone;
                 });
 
                 adapter.Balances = Outcomes;
-
-                itemTouchHelper.AttachToRecyclerView(rvBalance);
             }
         }
 

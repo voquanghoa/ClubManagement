@@ -98,14 +98,13 @@ namespace ClubManagement.Fragments
             recyclerView.SetLayoutManager(new LinearLayoutManager(view.Context));
             recyclerView.SetAdapter(adapter);
 
-            itemTouchHelper.AttachToRecyclerView(recyclerView);
-
             tabLayout = view.FindViewById<TabLayout>(Resource.Id.tabView1);
             tabLayout.TabSelected += (s, e) => DisplayData(data);
 
             Context.DoWithAdmin(() =>
             {
                 fabAdd.Click += AddEvent_Click;
+                itemTouchHelper.AttachToRecyclerView(recyclerView);
             });
         }
 
