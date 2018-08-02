@@ -36,7 +36,7 @@ namespace ClubManagement.Fragments
 
             outcomeDialogFragment.SaveClick += (s, e) =>
             {
-                Outcomes.Add((OutcomeModel)s);
+                Outcomes.Insert(0, (OutcomeModel)s);
 
                 adapter.Balances = Outcomes;
             };
