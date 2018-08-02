@@ -71,6 +71,7 @@ namespace ClubManagement.Activities
 
                 Toast.MakeText(activity, Resources.GetString(Resource.String.wrong_email), ToastLength.Short)
                     .Show();
+                dialog.Dismiss();
             }, () => dialog.Dismiss());
         }
 

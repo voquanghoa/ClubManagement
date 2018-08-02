@@ -19,7 +19,6 @@ namespace ClubManagement.Adapters
                 events = value;
                 NotifyDataSetChanged();
             }
-            get => events;
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
