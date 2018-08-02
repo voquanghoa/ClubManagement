@@ -28,10 +28,13 @@ namespace ClubManagement.Adapters
 
         public event EventHandler<ClickEventArgs> ClickHander;
 
+        public string Id;
+
         public UserLoginEventModel EventModel
         {
             set
             {
+                Id = value.Id;
                 tvTitle.Text = value.Title;
                 tvDescription.Text = value.Description;
                 tvTime.Text = value.Time.ToShortDateString();
