@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Android.App;
+using Android.Content.PM;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
@@ -31,6 +33,8 @@ namespace ClubManagement.Fragments
         [InjectView(Resource.Id.tvUpcomingEvent)]
         private TextView tvUpcomingEvent;
 
+        [InjectView(Resource.Id.tvVersion)] private TextView tvVersion;
+
         protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
 
         [InjectOnClick(Resource.Id.btnLogout)]
@@ -43,6 +47,7 @@ namespace ClubManagement.Fragments
         {
             var view = inflater.Inflate(Resource.Layout.fragment_dashboard, container, false);
             Cheeseknife.Inject(this, view);
+            GetAndShowAppVersion();
             return view;
         }
 
@@ -85,6 +90,19 @@ namespace ClubManagement.Fragments
                 tvUpcomingEvent.Text = $"Your next event will be held in {timeToNextUpcomingEvent} " + (timeToNextUpcomingEvent > 1 ? "days" : "day");
                 tvEvents.Visibility = ViewStates.Visible;
                 tvUpcomingEvent.Visibility = ViewStates.Visible;
+            }
+        }
+
+        private void GetAndShowAppVersion()
+        {
+            try
+            {
+                var packageInfo = Application.Context.PackageManager.GetPackageInfo(Application.Context.PackageName, 0);
+                tvVersion.Text = $"Version: {packageInfo.VersionName}";
+            }
+            catch (PackageManager.NameNotFoundException e)
+            {
+                Toast.MakeText(Context, e.Message, ToastLength.Short).Show();
             }
         }
     }
