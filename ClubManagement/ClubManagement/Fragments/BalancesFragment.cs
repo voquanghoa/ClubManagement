@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using Fragment = Android.Support.V4.App.Fragment;
 using Android.Widget;
 using ClubManagement.Controllers;
-using System.Linq;
 using ClubManagement.Ultilities;
+using Android.Support.V7.Widget.Helper;
 
 namespace ClubManagement.Fragments
 {
@@ -28,6 +28,8 @@ namespace ClubManagement.Fragments
 
         private OutcomeDialogFragment outcomeDialogFragment = new OutcomeDialogFragment();
 
+        private ItemTouchHelper itemTouchHelper;
+
         public BalancesFragment(Type type)
         {
             this.type = type;
@@ -40,6 +42,22 @@ namespace ClubManagement.Fragments
 
                 adapter.Balances = Outcomes;
             };
+
+            var swipeToDeleteCallback = new SwipeLeftToDeleteCallback(ItemTouchHelper.ActionStateIdle, ItemTouchHelper.Left);
+            swipeToDeleteCallback.SwipeLeft += SwipeToDeleteCallback_SwipeLeft;
+
+            itemTouchHelper = new ItemTouchHelper(swipeToDeleteCallback);
+        }
+
+        private void SwipeToDeleteCallback_SwipeLeft(object sender, ClickEventArgs e)
+        {
+            if (sender is BalanceAdapterViewHolder eventViewHolder)
+            {
+                OutComesController.Instance.Delete(Outcomes[e.Position]);
+
+                Outcomes.RemoveAt(e.Position);
+                adapter.NotifyItemRemoved(e.Position);
+            }
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -72,6 +90,8 @@ namespace ClubManagement.Fragments
                 });
 
                 adapter.Balances = Outcomes;
+
+                itemTouchHelper.AttachToRecyclerView(rvBalance);
             }
         }
 
