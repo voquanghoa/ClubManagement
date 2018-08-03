@@ -1,12 +1,9 @@
 ﻿using System;
 using Android.App;
 using Android.Gms.Maps;
-using Android.Gms.Maps.Model;
 using Android.OS;
-using Android.Preferences;
 using Android.Widget;
 using ClubManagement.Controllers;
-using ClubManagement.Fragments;
 using ClubManagement.Models;
 using ClubManagement.Ultilities;
 using Newtonsoft.Json;
@@ -77,9 +74,16 @@ namespace ClubManagement.Activities
 
             btnJoin.Click += (s, e) =>
             {
-                currentIsJoined = !currentIsJoined;
-                btnJoin.ChangeStatusButtonJoin(currentIsJoined);
-                UpdateUserEvents(currentIsJoined);
+                this.DoWithAdmin(() =>
+                {
+                    UpdateUserEvents(!currentIsJoined);
+                }, () =>
+                {
+                    if (currentIsJoined == false)
+                    {
+                        UpdateUserEvents(!currentIsJoined);
+                    }
+                });
             };
 
             FragmentManager.FindFragmentById<MapFragment>(Resource.Id.mapFragment).GetMapAsync(this);
@@ -89,6 +93,9 @@ namespace ClubManagement.Activities
 
         private void UpdateUserEvents(bool isJoined)
         {
+            currentIsJoined = isJoined;
+            btnJoin.ChangeStatusButtonJoin(isJoined);
+
             this.DoRequest(() =>
             {
                 if (isJoined)
