@@ -13,8 +13,8 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using Android.Support.V4.Widget;
 using ClubManagement.Fragments.Bases;
-using Android.Widget;
 using ClubManagement.Ultilities;
+using Android.Support.V7.Widget.Helper;
 
 namespace ClubManagement.Fragments
 {
@@ -34,11 +34,18 @@ namespace ClubManagement.Fragments
 
         private FloatingActionButton fabAdd;
 
+        private ItemTouchHelper itemTouchHelper;
+
         protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
 
         public EventFragment()
         {
             data = new List<UserLoginEventModel>();
+
+            var swipeToDeleteCallback = new SwipeLeftToDeleteCallback(ItemTouchHelper.ActionStateIdle, ItemTouchHelper.Left);
+            swipeToDeleteCallback.SwipeLeft += SwipeToDeleteCallback_SwipeLeft;
+
+            itemTouchHelper = new ItemTouchHelper(swipeToDeleteCallback);
 
             eventDialogFragment.SaveClick += (s, e) =>
             {
@@ -91,6 +98,8 @@ namespace ClubManagement.Fragments
             recyclerView.SetLayoutManager(new LinearLayoutManager(view.Context));
             recyclerView.SetAdapter(adapter);
 
+            itemTouchHelper.AttachToRecyclerView(recyclerView);
+
             tabLayout = view.FindViewById<TabLayout>(Resource.Id.tabView1);
             tabLayout.TabSelected += (s, e) => DisplayData(data);
 
@@ -98,6 +107,19 @@ namespace ClubManagement.Fragments
             {
                 fabAdd.Click += AddEvent_Click;
             });
+        }
+
+        private void SwipeToDeleteCallback_SwipeLeft(object sender, ClickEventArgs e)
+        {
+            if (sender is EventViewHolder eventViewHolder)
+            {
+                var id = eventViewHolder.Id;
+
+                data.RemoveAll(x => x.Id.Equals(id));
+                eventsController.Delete(new EventModel() { Id = id });
+
+                DisplayData(data);
+            }
         }
 
         private void AddEvent_Click(object sender, System.EventArgs e)
@@ -115,18 +137,16 @@ namespace ClubManagement.Fragments
         {
             try
             {
-                return eventsController.Values.Count >= data.Count
-                    ? eventsController.Values.Select(x =>
+                return eventsController.Values.Select(x => 
+                {
+                    var userLoginEventModel = new UserLoginEventModel(x)
                     {
-                        var userLoginEventModel = new UserLoginEventModel(x)
-                        {
-                            IsJoined = userEventsController.Values
-                                .Any(y => y.EventId == x.Id && y.UserId == userId)
-                        };
+                        IsJoined = userEventsController.Values
+                            .Any(y => y.EventId == x.Id && y.UserId == userId)
+                    };
 
-                        return userLoginEventModel;
-                    }).ToList()
-                    : data;
+                    return userLoginEventModel;
+                }).ToList();
             }
             catch (Exception)
             {

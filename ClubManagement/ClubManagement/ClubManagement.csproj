@@ -172,6 +172,7 @@
     <Compile Include="Adapters\BalanceAdapterViewHolder.cs" />
     <Compile Include="Adapters\PersonGoTimeClickEventArgs.cs" />
     <Compile Include="Adapters\ClickEventArgs.cs" />
+    <Compile Include="Adapters\SwipeToDeleteCallback.cs" />
     <Compile Include="Controllers\AppDataController.cs" />
     <Compile Include="Adapters\EventsAdapter.cs" />
     <Compile Include="Adapters\PersonGoTimesAdapter.cs" />
@@ -438,6 +439,9 @@
     <AndroidResource Include="Resources\anim\layout_animation_fall_down.xml" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_trash.png" />
+  </ItemGroup>
+  <ItemGroup> 
     <AndroidResource Include="Resources\values\integers.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
