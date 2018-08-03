@@ -62,4 +62,6 @@
   <string name="password_too_short">Password is at least 6 characters</string>
   <string name="invalid_email_format">Invalid email format</string>
   <string name="invalid_name_format">Invalid name format</string>
+  <string name="textview_add_budget">Add budget</string>
+  <string name="time">Time</string>
 </resources>

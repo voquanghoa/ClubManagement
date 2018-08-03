@@ -22,6 +22,19 @@ namespace ClubManagement.Fragments
 
         [InjectView(Resource.Id.rvMoney)] private RecyclerView rvMoney;
 
+        [InjectView(Resource.Id.fabAdd)] private FloatingActionButton fabAdd;
+
+        [InjectOnClick(Resource.Id.fabAdd)]
+        private void Add(object s, EventArgs e)
+        {
+            Context.DoWithAdmin(() =>
+            {
+                AddBudgetDialogFragment.Show(FragmentManager, null);
+            });
+        }
+
+        public  AddBudgetDialogFragment AddBudgetDialogFragment = new AddBudgetDialogFragment();
+
         private readonly MoneyListAdapter adapter = new MoneyListAdapter();
 
         private readonly AppDataController appDataController = AppDataController.Instance;
@@ -36,9 +49,34 @@ namespace ClubManagement.Fragments
 
             SetupTabView();
 
+            Init();
+
             return view;
         }
 
+        private void Init()
+        {
+            Context.DoWithAdmin(() =>
+            {
+                fabAdd.Visibility = ViewStates.Visible;
+            }, () =>
+            {
+                fabAdd.Visibility = ViewStates.Gone;
+            });
+
+            AddBudgetDialogFragment.SaveClick += (s, e) =>
+            {
+                if (s is MoneyModel moneyModel)
+                {
+                    data.Insert(0, new MoneyState
+                    {
+                        MoneyModel = moneyModel,
+                        IsPaid = false
+                    });
+                    adapter.MoneyStates = data;
+                }
+            };
+        }
         private void SetupTabView()
         {
             rvMoney.SetLayoutManager(new LinearLayoutManager(Context));

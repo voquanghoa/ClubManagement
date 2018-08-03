@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:stretchColumns="1"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <TextView
+        android:layout_width="match_parent"
+        android:background="@color/text_color_green"
+        android:textColor="@color/text_color_white"
+        android:padding="@dimen/textview_padding_left_right"
+        android:text="@string/textview_add_budget"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <TableRow
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_margin="@dimen/dialog_margin"
+        android:id="@+id/tableRow1">
+        <TextView
+            android:text="@string/description"
+            android:layout_marginRight="@dimen/textview_margin_left_right"
+            android:gravity="right"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <EditText
+            android:id="@+id/edtDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="@integer/max_length"
+            android:maxLines="@integer/max_line"
+            android:layout_weight="1"
+            android:paddingBottom="@dimen/edit_text_padding_top_bottom"
+            android:paddingTop="@dimen/edit_text_padding_top_bottom"
+            android:paddingRight="@dimen/edit_text_padding_left_right"
+            android:paddingLeft="@dimen/edit_text_padding_left_right"
+            android:background="@drawable/edittext_states"
+            android:textColor="@color/text_color_black" />
+    </TableRow>
+    <TableRow
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_margin="@dimen/dialog_margin"
+        android:id="@+id/tableRow1">
+        <TextView
+            android:text="@string/amount"
+            android:layout_marginRight="@dimen/textview_margin_left_right"
+            android:gravity="right"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <EditText
+            android:id="@+id/edtAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:paddingBottom="@dimen/edit_text_padding_top_bottom"
+            android:paddingTop="@dimen/edit_text_padding_top_bottom"
+            android:paddingRight="@dimen/edit_text_padding_left_right"
+            android:paddingLeft="@dimen/edit_text_padding_left_right"
+            android:background="@drawable/edittext_states"
+            android:textColor="@color/text_color_black" />
+    </TableRow>
+    <TableRow
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_margin="@dimen/dialog_margin"
+        android:id="@+id/tableRow1">
+        <TextView
+            android:text="@string/time"
+            android:layout_marginRight="@dimen/textview_margin_left_right"
+            android:gravity="right"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <EditText
+            android:id="@+id/edtTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:editable="false"
+            android:focusable="false"
+            android:paddingBottom="@dimen/edit_text_padding_top_bottom"
+            android:paddingTop="@dimen/edit_text_padding_top_bottom"
+            android:paddingRight="@dimen/edit_text_padding_left_right"
+            android:paddingLeft="@dimen/edit_text_padding_left_right"
+            android:background="@drawable/edittext_states"
+            android:textColor="@color/text_color_black" />
+    </TableRow>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+        <Button
+            android:text="@string/cancel"
+            android:background="@color/gray_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/btnCancel" />
+        <Button
+            android:text="@string/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/text_color_green"
+            android:textColor="@color/text_color_white"
+            android:layout_weight="1"
+            android:id="@+id/btnSave" />
+    </LinearLayout>
+</TableLayout>
