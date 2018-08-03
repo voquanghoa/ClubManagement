@@ -3459,6 +3459,9 @@ namespace ClubManagement
 			// aapt resource value: 0x7f09000a
 			public const int max_length = 2131296266;
 			
+			// aapt resource value: 0x7f09000b
+			public const int max_line = 2131296267;
+			
 			// aapt resource value: 0x7f090009
 			public const int show_password_duration = 2131296265;
 			
