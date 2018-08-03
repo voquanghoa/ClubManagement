@@ -2,7 +2,6 @@
 using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V4.View;
-using Android.Support.V4.App;
 using Android.Views;
 using ClubManagement.Models;
 using System.Collections.Generic;
