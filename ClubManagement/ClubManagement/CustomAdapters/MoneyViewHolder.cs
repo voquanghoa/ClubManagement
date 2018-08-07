@@ -23,7 +23,7 @@ namespace ClubManagement.CustomAdapters
         {
             set
             {
-                tvTitle.Text = $"{value.MoneyModel.Time.ToShortDateString()} - Budget : {value.MoneyModel.Amount}$";
+                tvTitle.Text = $"{value.MoneyModel.Time.ToShortDateString()} - Budget : {value.MoneyModel.Amount * 1000} đ";
                 tvDescription.Text = value.MoneyModel.Description;
                 imgState.SetImageResource(value.IsPaid ? Resource.Drawable.icon_paid : Resource.Drawable.icon_unpaid);
             }
