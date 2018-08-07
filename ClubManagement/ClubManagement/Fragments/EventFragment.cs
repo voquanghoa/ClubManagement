@@ -114,8 +114,12 @@ namespace ClubManagement.Fragments
             {
                 var id = eventViewHolder.Id;
 
-                data.RemoveAll(x => x.Id.Equals(id));
-                eventsController.Delete(new EventModel() { Id = id });
+                Context.GetConfirmDialog(Resource.String.delete_events, Resource.String.confirm_delete, () =>
+                {
+                    data.RemoveAll(x => x.Id.Equals(id));
+                    eventsController.Delete(new EventModel() { Id = id });
+                    DisplayData(data);
+                }).Show();
 
                 DisplayData(data);
             }

@@ -3987,6 +3987,9 @@ namespace ClubManagement
 			// aapt resource value: 0x7f080015
 			public const int common_signin_button_text_long = 2131230741;
 			
+			// aapt resource value: 0x7f080086
+			public const int confirm_delete = 2131230854;
+			
 			// aapt resource value: 0x7f080068
 			public const int confirm_logout = 2131230824;
 			
@@ -3998,6 +4001,9 @@ namespace ClubManagement
 			
 			// aapt resource value: 0x7f080041
 			public const int default_web_client_id = 2131230785;
+			
+			// aapt resource value: 0x7f080087
+			public const int delete_events = 2131230855;
 			
 			// aapt resource value: 0x7f080060
 			public const int description = 2131230816;

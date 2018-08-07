@@ -1,9 +1,8 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.Preferences;
-using Android.Support.Design.Widget;
 using ClubManagement.Activities;
-using ClubManagement.Fragments;
+using System;
 
 #pragma warning disable 618
 
@@ -36,6 +35,34 @@ namespace ClubManagement.Ultilities
                     context.StartActivity(typeof(LoginActivity));
                 })
                 .SetNegativeButton(context.Resources.GetString(Resource.String.dialog_negative_button), (dce, e) => { }).Show();
+        }
+
+        public static AlertDialog GetConfirmDialog(this Context context, int title, 
+            int message, Action actionAllow)
+        {
+            return new AlertDialog.Builder(context)
+                .SetTitle(title)
+                .SetMessage(message)
+                .SetCancelable(false)
+                .SetPositiveButton(Resource.String.dialog_positive_button,
+                    (s, e) =>
+                    {
+                        if (s is Dialog dialog)
+                        {
+                            actionAllow();
+
+                            dialog.Dismiss();
+                        }
+                    })
+                .SetNegativeButton(Resource.String.dialog_negative_button,
+                    (s, e) =>
+                    {
+                        if (s is Dialog dialog)
+                        {
+                            dialog.Dismiss();
+                        }
+                    })
+                .Create();
         }
     }
 }
