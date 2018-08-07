@@ -65,5 +65,6 @@
   <string name="textview_add_budget">Add budget</string>
   <string name="time">Time</string>
   <string name="confirm_delete">Are you sure to delete?</string>
-  <string name="delete_events">Delete events</string>
+  <string name="delete_event">Delete event</string>
+  <string name="delete_outcome">Delete outcome</string>
 </resources>
