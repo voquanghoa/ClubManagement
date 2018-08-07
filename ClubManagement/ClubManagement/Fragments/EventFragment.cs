@@ -167,7 +167,7 @@ namespace ClubManagement.Fragments
                         });
                         break;
                     case 1:
-                        adapter.Events = data.Where(x => x.Time > DateTime.Now).Where(x => !x.IsJoined).ToList();
+                        adapter.Events = data.Where(x => x.Time >= DateTime.Now).Where(x => !x.IsJoined).ToList();
                         fabAdd.Visibility = ViewStates.Gone;
                         break;
                     case 2:
