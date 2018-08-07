@@ -33,6 +33,22 @@ namespace ClubManagement.Fragments
             });
         }
 
+        public MoneyFragment()
+        {
+            AddBudgetDialogFragment.SaveClick += (s, e) =>
+            {
+                if (s is MoneyModel moneyModel)
+                {
+                    data.Insert(0, new MoneyState
+                    {
+                        MoneyModel = moneyModel,
+                        IsPaid = false
+                    });
+                    adapter.MoneyStates = data;
+                }
+            };
+        }
+
         public  AddBudgetDialogFragment AddBudgetDialogFragment = new AddBudgetDialogFragment();
 
         private readonly MoneyListAdapter adapter = new MoneyListAdapter();
@@ -63,19 +79,6 @@ namespace ClubManagement.Fragments
             {
                 fabAdd.Visibility = ViewStates.Gone;
             });
-
-            AddBudgetDialogFragment.SaveClick += (s, e) =>
-            {
-                if (s is MoneyModel moneyModel)
-                {
-                    data.Insert(0, new MoneyState
-                    {
-                        MoneyModel = moneyModel,
-                        IsPaid = false
-                    });
-                    adapter.MoneyStates = data;
-                }
-            };
         }
         private void SetupTabView()
         {
