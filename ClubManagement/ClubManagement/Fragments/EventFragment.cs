@@ -160,18 +160,18 @@ namespace ClubManagement.Fragments
                 switch (tabLayout.SelectedTabPosition)
                 {
                     case 0:
-                        adapter.Events = data;
+                        adapter.Events = data.OrderByDescending(x => x.Time).ToList();
                         Context.DoWithAdmin(() =>
                         {
                             fabAdd.Visibility = ViewStates.Visible;
                         });
                         break;
                     case 1:
-                        adapter.Events = data.Where(x => x.Time > DateTime.Now).Where(x => !x.IsJoined).ToList();
+                        adapter.Events = data.Where(x => x.Time > DateTime.Now).Where(x => !x.IsJoined).OrderBy(x => x.Time).ToList();
                         fabAdd.Visibility = ViewStates.Gone;
                         break;
                     case 2:
-                        adapter.Events = data.Where(x => x.IsJoined).ToList();
+                        adapter.Events = data.Where(x => x.IsJoined).OrderBy(x => x.Time).ToList();
                         fabAdd.Visibility = ViewStates.Gone;
                         break;
                 }
