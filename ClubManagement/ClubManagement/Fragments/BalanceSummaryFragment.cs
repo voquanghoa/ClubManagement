@@ -1,11 +1,7 @@
-﻿using Android.Support.V4.App;
-using Android.OS;
+﻿using Android.OS;
 using Android.Views;
 using Android.Widget;
-using ClubManagement.Controllers;
-using System.Linq;
-using System.Threading.Tasks;
-using Android.App;
+using ClubManagement.Ultilities;
 
 namespace ClubManagement.Fragments
 {
@@ -44,9 +40,9 @@ namespace ClubManagement.Fragments
 
             numberSign = finalBalance > 0 ? "+" : "";
 
-            tvFinalBalance.Text = $"Final balance: {numberSign}{finalBalance * 1000} đ";
-            tvIncome.Text = $"Income total: +{SumIncomes * 1000} đ";
-            tvOutcome.Text = $"Outcome total: -{SumOutcomes * 1000} đ";
+            tvFinalBalance.Text = $"Final balance: {numberSign}{finalBalance.ToNumberFormat()} đ";
+            tvIncome.Text = $"Income total: +{SumIncomes.ToNumberFormat()} đ";
+            tvOutcome.Text = $"Outcome total: -{SumOutcomes.ToNumberFormat()} đ";
         }
     }
 }
