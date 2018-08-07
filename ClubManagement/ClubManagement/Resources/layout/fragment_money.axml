@@ -38,9 +38,22 @@
         android:id="@+id/refresher"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvMoney"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvMoney"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <android.support.design.widget.FloatingActionButton
+                android:src="@drawable/icon_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/fabAdd"
+                android:layout_margin="@dimen/textview_margin_top_bottom"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                app:backgroundTint="@color/tabbar_background_color" />
+        </RelativeLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>
