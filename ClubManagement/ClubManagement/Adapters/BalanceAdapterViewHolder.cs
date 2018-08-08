@@ -3,6 +3,7 @@ using Android.Views;
 using Android.Widget;
 using ClubManagement.Fragments;
 using ClubManagement.Models;
+using ClubManagement.Ultilities;
 
 namespace ClubManagement.Adapters
 {
@@ -30,7 +31,7 @@ namespace ClubManagement.Adapters
 
                 tvTitle.Text = value.Title;
                 tvDescription.Text = value.Description;
-                tvMoney.Text = $"{numberSign}{value.Amount * 1000} đ";
+                tvMoney.Text = $"{numberSign}{value.Amount.ToCurrency()}";
                 tvDate.Text = value.Date.ToShortDateString();
             }
         }

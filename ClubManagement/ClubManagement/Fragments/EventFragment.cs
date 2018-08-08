@@ -157,23 +157,17 @@ namespace ClubManagement.Fragments
         {
             if (data != null)
             {
-                switch (tabLayout.SelectedTabPosition)
+                if(tabLayout.SelectedTabPosition == 0)
                 {
-                    case 0:
-                        adapter.Events = data;
-                        Context.DoWithAdmin(() =>
-                        {
-                            fabAdd.Visibility = ViewStates.Visible;
-                        });
-                        break;
-                    case 1:
-                        adapter.Events = data.Where(x => x.Time >= DateTime.Now).Where(x => !x.IsJoined).ToList();
-                        fabAdd.Visibility = ViewStates.Gone;
-                        break;
-                    case 2:
-                        adapter.Events = data.Where(x => x.IsJoined).ToList();
-                        fabAdd.Visibility = ViewStates.Gone;
-                        break;
+                    adapter.Events = data.OrderByDescending(x => x.Time).ToList();
+                    Context.DoWithAdmin(() =>{ fabAdd.Visibility = ViewStates.Visible;});
+                }
+                else
+                {
+                    fabAdd.Visibility = ViewStates.Gone;
+                    var isJoined = tabLayout.SelectedTabPosition == 2;
+               
+					adapter.Events = data.Where(x => x.IsJoined == isJoined && x.Time >= DateTime.Today).OrderBy(x => x.Time).ToList();
                 }
             }
         }
