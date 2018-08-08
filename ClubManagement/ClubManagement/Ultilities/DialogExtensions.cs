@@ -37,7 +37,7 @@ namespace ClubManagement.Ultilities
                 .SetNegativeButton(context.Resources.GetString(Resource.String.dialog_negative_button), (dce, e) => { }).Show();
         }
 
-        public static AlertDialog GetConfirmDialog(this Context context, int title, 
+        public static AlertDialog ShowConfirmDialog(this Context context, int title, 
             int message, Action actionAllow)
         {
             return new AlertDialog.Builder(context)
