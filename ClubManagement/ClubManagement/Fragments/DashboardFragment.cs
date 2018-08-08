@@ -48,6 +48,7 @@ namespace ClubManagement.Fragments
             var view = inflater.Inflate(Resource.Layout.fragment_dashboard, container, false);
             Cheeseknife.Inject(this, view);
             GetAndShowAppVersion();
+            DisplayData(data);
             return view;
         }
 
@@ -84,7 +85,7 @@ namespace ClubManagement.Fragments
                 tvBudget.Visibility = ViewStates.Visible;
             }
 
-            if (upcomingEvents.Count != 0)
+            if (upcomingEvents != null && upcomingEvents.Any())
             {
                 tvEvents.Text = $"You have {upcomingEvents.Count} upcoming " + (upcomingEvents.Count > 1 ? "events" : "event");
                 tvUpcomingEvent.Text = $"Your next event will be held in {timeToNextUpcomingEvent} " + (timeToNextUpcomingEvent > 1 ? "days" : "day");
