@@ -64,4 +64,6 @@
   <string name="invalid_name_format">Invalid name format</string>
   <string name="textview_add_budget">Add budget</string>
   <string name="time">Time</string>
+  <string name="confirm_delete">Are you sure to delete?</string>
+  <string name="delete_events">Delete events</string>
 </resources>
