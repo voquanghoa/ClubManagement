@@ -59,8 +59,6 @@ namespace ClubManagement.Fragments
                     Outcomes.RemoveAt(e.Position);
                     adapter.NotifyItemRemoved(e.Position);
                 }).Show();
-
-                adapter.NotifyDataSetChanged();
             }
         }
 
