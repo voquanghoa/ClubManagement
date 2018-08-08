@@ -79,10 +79,8 @@ namespace ClubManagement.Fragments
         {
             try
             {
-                incomes = AppDataController.Instance.Incomes.Select(x => (OutcomeModel)x).ToList();
-                incomes.Reverse();
-                outcomes = OutComesController.Instance.Values;
-                outcomes.Reverse();
+                incomes = AppDataController.Instance.Incomes.Select(x => (OutcomeModel)x).OrderByDescending(x => x.Date).ToList();
+                outcomes = OutComesController.Instance.Values.OrderByDescending(x => x.Date).ToList();
                 sumIncomes = AppDataController.Instance.Incomes.Sum(x => x.Amount);
                 sumOutcomes = OutComesController.Instance.Values.Sum(x => x.Amount);
             }
