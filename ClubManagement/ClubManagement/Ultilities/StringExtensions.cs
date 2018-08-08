@@ -19,5 +19,7 @@ namespace ClubManagement.Ultilities
             const string namePattern = @"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$";
             return Regex.IsMatch(name, namePattern);
         }
+
+		public static string ToCurrency(this int name) => name.ToString("N0") + "đ";
     }
 }
