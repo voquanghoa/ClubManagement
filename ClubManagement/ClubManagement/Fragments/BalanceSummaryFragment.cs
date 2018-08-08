@@ -40,9 +40,9 @@ namespace ClubManagement.Fragments
 
             numberSign = finalBalance > 0 ? "+" : "";
 
-            tvFinalBalance.Text = $"Final balance: {numberSign}{finalBalance.ToNumberFormat()}đ";
-            tvIncome.Text = $"Income total: +{SumIncomes.ToNumberFormat()}đ";
-            tvOutcome.Text = $"Outcome total: -{SumOutcomes.ToNumberFormat()}đ";
+            tvFinalBalance.Text = $"Final balance: {numberSign}{finalBalance.ToCurrency()}";
+            tvIncome.Text = $"Income total: +{SumIncomes.ToCurrency()}";
+            tvOutcome.Text = $"Outcome total: -{SumOutcomes.ToCurrency()}";
         }
     }
 }
