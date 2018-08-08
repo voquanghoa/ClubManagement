@@ -3,6 +3,7 @@ using Android.Views;
 using Android.Widget;
 using ClubManagement.Interfaces;
 using ClubManagement.Models;
+using ClubManagement.Ultilities;
 
 namespace ClubManagement.CustomAdapters
 {
@@ -23,7 +24,7 @@ namespace ClubManagement.CustomAdapters
         {
             set
             {
-                tvTitle.Text = $"{value.MoneyModel.Time.ToShortDateString()} - Budget : {value.MoneyModel.Amount}$";
+                tvTitle.Text = $"{value.MoneyModel.Time.ToShortDateString()} - Budget : {value.MoneyModel.Amount.ToCurrency()}";
                 tvDescription.Text = value.MoneyModel.Description;
                 imgState.SetImageResource(value.IsPaid ? Resource.Drawable.icon_paid : Resource.Drawable.icon_unpaid);
             }

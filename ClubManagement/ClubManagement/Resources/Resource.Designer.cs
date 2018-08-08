@@ -4003,10 +4003,10 @@ namespace ClubManagement
 			public const int default_web_client_id = 2131230785;
 			
 			// aapt resource value: 0x7f080087
-			public const int delete_events = 2131230855;
+			public const int delete_event = 2131230855;
 			
 			// aapt resource value: 0x7f080088
-			public const int delete_outcomes = 2131230856;
+			public const int delete_outcome = 2131230856;
 			
 			// aapt resource value: 0x7f080060
 			public const int description = 2131230816;

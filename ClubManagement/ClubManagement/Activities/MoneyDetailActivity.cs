@@ -52,7 +52,7 @@ namespace ClubManagement.Activities
             moneyId = Intent.GetStringExtra("MoneyId");
             var time = Intent.GetStringExtra("Time");
 
-            tvDescription.Text = $"{time} - Budget : {budget}$\n\n{description}";
+            tvDescription.Text = $"{time} - Budget : {budget.ToCurrency()}\n\n{description}";
 
             adapter = new MoneyAdminListAdapter(tvPayState, moneyId)
             {
