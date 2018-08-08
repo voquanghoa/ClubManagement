@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Android.OS;
 using Android.Support.Design.Widget;
-using Android.Support.V4.App;
 using Android.Support.V4.Widget;
 using Android.Views;
 using ClubManagement.Controllers;
