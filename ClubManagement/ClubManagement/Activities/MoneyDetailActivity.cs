@@ -56,7 +56,7 @@ namespace ClubManagement.Activities
 
             adapter = new MoneyAdminListAdapter(tvPayState, moneyId)
             {
-                MoneyAdminStates = new List<MoneyAdminState>()
+                MoneyAdminStates = AppDataController.Instance.OldMoneyAdminStates
             };
 
             rvUser.SetLayoutManager(new LinearLayoutManager(this));
