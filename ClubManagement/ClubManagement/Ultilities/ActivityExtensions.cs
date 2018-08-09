@@ -45,5 +45,17 @@ namespace ClubManagement.Ultilities
             if (AppDataController.Instance.IsAdmin) action();
             else notAdminAction();
         }
+
+		public static void ShowIfAdmin(this View view)
+		{
+			if (AppDataController.Instance.IsAdmin) 
+			{
+				view.Visibility = ViewStates.Visible;	
+			}
+            else
+			{
+				view.Visibility = ViewStates.Gone;   
+			}
+		}
     }
 }

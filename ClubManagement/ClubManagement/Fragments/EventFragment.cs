@@ -86,13 +86,7 @@ namespace ClubManagement.Fragments
         private void InitView(View view)
         {
             fabAdd = view.FindViewById<FloatingActionButton>(Resource.Id.fabAdd);
-            Context.DoWithAdmin(() =>
-            {
-                fabAdd.Visibility = ViewStates.Visible;
-            }, () => 
-            {
-                fabAdd.Visibility = ViewStates.Gone;
-            });
+			fabAdd.ShowIfAdmin();
 
             var recyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerView1);
             recyclerView.SetLayoutManager(new LinearLayoutManager(view.Context));
@@ -166,7 +160,7 @@ namespace ClubManagement.Fragments
                 if(tabLayout.SelectedTabPosition == 0)
                 {
                     adapter.Events = data.OrderByDescending(x => x.Time).ToList();
-                    Context.DoWithAdmin(() =>{ fabAdd.Visibility = ViewStates.Visible;});
+					fabAdd.ShowIfAdmin();
                 }
                 else
                 {

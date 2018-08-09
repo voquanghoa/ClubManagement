@@ -71,13 +71,7 @@ namespace ClubManagement.Fragments
 
         private void Init()
         {
-            Context.DoWithAdmin(() =>
-            {
-                fabAdd.Visibility = ViewStates.Visible;
-            }, () =>
-            {
-                fabAdd.Visibility = ViewStates.Gone;
-            });
+			fabAdd.ShowIfAdmin();
         }
         private void SetupTabView()
         {
