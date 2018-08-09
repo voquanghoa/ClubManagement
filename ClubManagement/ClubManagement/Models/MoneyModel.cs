@@ -6,7 +6,7 @@ namespace ClubManagement.Models
     public class MoneyModel : FirebaseModel
     {
         [JsonProperty("amount")]
-        public int Amount { get; set; }
+        public long Amount { get; set; }
 
         [JsonProperty("time")]
         public DateTime Time { get; set; }

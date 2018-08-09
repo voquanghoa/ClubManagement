@@ -20,6 +20,6 @@ namespace ClubManagement.Ultilities
             return Regex.IsMatch(name, namePattern);
         }
 
-		public static string ToCurrency(this int name) => name.ToString("N0") + "đ";
+		public static string ToCurrency(this long name) => name.ToString("N0") + "đ";
     }
 }

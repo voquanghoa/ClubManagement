@@ -109,7 +109,7 @@ namespace ClubManagement.Controllers
         {
             get
             {
-                return userMoneysController.Values.Join(moneysController.Values,
+                var xz = userMoneysController.Values.Join(moneysController.Values,
                 x => x.MoneyId,
                 y => y.Id,
                 (x, y) => new
@@ -126,6 +126,7 @@ namespace ClubManagement.Controllers
                         Amount = x.y.Amount,
                         Date = x.y.Time
                     }).ToList();
+                return xz;
             }
         }
     }

@@ -48,7 +48,7 @@ namespace ClubManagement.Activities
         private void Init()
         {
             var description = Intent.GetStringExtra("Description");
-            var budget = Intent.GetIntExtra("Budget", 0);
+            var budget = Intent.GetLongExtra("Budget", 0);
             moneyId = Intent.GetStringExtra("MoneyId");
             var time = Intent.GetStringExtra("Time");
 
