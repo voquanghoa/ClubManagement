@@ -39,6 +39,8 @@ namespace ClubManagement.Controllers
 
         private UsersController usersController = UsersController.Instance;
 
+        public List<MoneyAdminState> OldMoneyAdminStates { get; set; } = new List<MoneyAdminState>();
+
         public void UpdateUser()
         {
             userId = PreferenceManager.GetDefaultSharedPreferences(Application.Context)
@@ -102,6 +104,7 @@ namespace ClubManagement.Controllers
                 User = x,
                 IsPaid = paidUserIds.Contains(x.Id)
             }));
+            OldMoneyAdminStates = moneyAdminStates;
             return moneyAdminStates;
         }
 
