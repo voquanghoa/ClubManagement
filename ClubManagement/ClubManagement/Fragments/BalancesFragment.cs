@@ -53,12 +53,16 @@ namespace ClubManagement.Fragments
         {
             if (sender is BalanceAdapterViewHolder eventViewHolder)
             {
-				Context.ShowConfirmDialog(Resource.String.delete_outcome, Resource.String.confirm_delete, () =>
-                {
-                    OutComesController.Instance.Delete(Outcomes[e.Position]);
-                    Outcomes.RemoveAt(e.Position);
-                    adapter.NotifyItemRemoved(e.Position);
-                }).Show();
+                Context.ShowConfirmDialog(Resource.String.delete_outcome, Resource.String.confirm_delete,
+                    () =>
+                    {
+                        OutComesController.Instance.Delete(Outcomes[e.Position]);
+                        Outcomes.RemoveAt(e.Position);
+                        adapter.NotifyItemRemoved(e.Position);
+                    }, () =>
+                    {
+                        adapter.NotifyDataSetChanged();
+                    }).Show();
             }
         }
 

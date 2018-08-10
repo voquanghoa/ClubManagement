@@ -12,7 +12,7 @@ namespace ClubManagement.Models
         public string Description { get; set; }
 
         [JsonProperty("amount")]
-        public int Amount { get; set; }
+        public long Amount { get; set; }
 
         [JsonProperty("date")]
         public DateTime Date { get; set; }

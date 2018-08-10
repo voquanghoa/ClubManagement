@@ -16,11 +16,11 @@ namespace ClubManagement.Fragments
         [InjectView(Resource.Id.tvOutcome)]
         private TextView tvOutcome;
 
-        public int SumIncomes;
+        public long SumIncomes;
 
-        public int SumOutcomes;
+        public long SumOutcomes;
 
-        private int finalBalance;
+        private long finalBalance;
 
         private string numberSign;
 

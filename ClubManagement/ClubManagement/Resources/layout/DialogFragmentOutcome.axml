@@ -75,6 +75,8 @@
             android:id="@+id/edtAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLength="@integer/max_length"
+            android:singleLine="true"
             android:layout_weight="1"
             android:inputType="number"
             android:paddingBottom="@dimen/edit_text_padding_top_bottom"

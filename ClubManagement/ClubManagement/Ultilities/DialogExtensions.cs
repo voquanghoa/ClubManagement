@@ -38,7 +38,7 @@ namespace ClubManagement.Ultilities
         }
 
         public static AlertDialog ShowConfirmDialog(this Context context, int title, 
-            int message, Action actionAllow)
+            int message, Action actionAllow, Action actionDeny)
         {
             return new AlertDialog.Builder(context)
                 .SetTitle(title)
@@ -59,6 +59,8 @@ namespace ClubManagement.Ultilities
                     {
                         if (s is Dialog dialog)
                         {
+                            actionDeny();
+
                             dialog.Dismiss();
                         }
                     })
