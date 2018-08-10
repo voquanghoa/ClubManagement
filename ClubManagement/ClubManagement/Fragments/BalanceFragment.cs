@@ -45,7 +45,7 @@ namespace ClubManagement.Fragments
         {
             base.OnCreate(savedInstanceState);
 
-            adapter = new PagerAdapter(Activity.SupportFragmentManager);
+            adapter = new PagerAdapter(ChildFragmentManager);
             adapter.AddFramgent(balanceSummaryFragment, AppConstantValues.BalanceFragmentSummaryTab);
             adapter.AddFramgent(IncomesFragment, AppConstantValues.BalanceFragmentIncomeTab);
             adapter.AddFramgent(OutcomesFragment, AppConstantValues.BalanceFragmentOutcomeTab);
