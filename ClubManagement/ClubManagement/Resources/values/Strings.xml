@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">ClubManagement</string>
+  <string name="app_name">ClubManager</string>
   <string name="ApiKey">AIzaSyDOpe15Np8iCzvlVpqzDo83RIVL_eHd-Mo</string>
   <string name="email_hint">Your email</string>
   <string name="name_hint">Your name</string>
