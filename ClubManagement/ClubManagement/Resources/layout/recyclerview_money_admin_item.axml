@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/textview_dashboard_background_color"
+        android:background="@color/item_background_color"
         android:layout_weight="1">
         <TextView
             android:id="@+id/tvUser"
@@ -31,6 +31,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
         android:src="@drawable/icon_unpaid"
-        android:background="@color/textview_dashboard_background_color"
+        android:background="@color/item_background_color"
         android:padding="@dimen/imageview_margin" />
 </LinearLayout>
