@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/textview_dashboard_background_color"
+        android:background="@color/item_event_background_color"
         android:layout_weight="1">
         <TextView
             android:id="@+id/tvTitle"
@@ -30,7 +30,7 @@
             android:layout_marginLeft="@dimen/textview_margin_left_right"
             android:layout_marginRight="@dimen/textview_margin_left_right"
             android:layout_marginBottom="@dimen/textview_margin_top_bottom"
-            android:textColor="@color/text_color_white"
+            android:textColor="@color/text_color_black"
             android:text="Team build 2018 for all members." />
     </LinearLayout>
     <ImageView
@@ -39,6 +39,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
         android:src="@drawable/icon_unpaid"
-        android:background="@color/textview_dashboard_background_color"
+        android:background="@color/item_event_background_color"
         android:padding="@dimen/imageview_margin" />
 </LinearLayout>
