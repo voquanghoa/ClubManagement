@@ -34,6 +34,8 @@ namespace ClubManagement.Fragments
 
         public MoneyFragment()
         {
+            data = new List<MoneyState>();
+
             AddBudgetDialogFragment.SaveClick += (s, e) =>
             {
                 if (s is MoneyModel moneyModel)
@@ -95,7 +97,7 @@ namespace ClubManagement.Fragments
             catch (Exception)
             {
                 Toast.MakeText(Context, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
-                return new List<MoneyState>();
+                return data;
             }
         }
 

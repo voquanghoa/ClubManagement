@@ -18,7 +18,7 @@ namespace ClubManagement.Fragments
     {
         private int unpaidBudgets;
 
-        private List<EventModel> upcomingEvents;
+        private List<EventModel> upcomingEvents = new List<EventModel>();
 
         private int timeToNextUpcomingEvent;
         
@@ -48,6 +48,7 @@ namespace ClubManagement.Fragments
             var view = inflater.Inflate(Resource.Layout.fragment_dashboard, container, false);
             Cheeseknife.Inject(this, view);
             GetAndShowAppVersion();
+            DisplayData(data);
             return view;
         }
 
@@ -69,22 +70,23 @@ namespace ClubManagement.Fragments
             catch (Exception)
             {
                 Toast.MakeText(Context, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
-                unpaidBudgets = 0;
-                upcomingEvents = new List<EventModel>();
-                timeToNextUpcomingEvent = 0;
             }
             return null;
         }
 
         protected override void DisplayData(string data)
         {
+            tvEvents.Visibility = ViewStates.Gone;
+            tvUpcomingEvent.Visibility = ViewStates.Gone;
+            tvBudget.Visibility = ViewStates.Gone;
+
             if (unpaidBudgets != 0)
             {
                 tvBudget.Text = $"You need to pay {unpaidBudgets} " + (unpaidBudgets > 1 ? "budgets" : "budget");
                 tvBudget.Visibility = ViewStates.Visible;
             }
 
-            if (upcomingEvents.Count != 0)
+            if (upcomingEvents != null && upcomingEvents.Any())
             {
                 tvEvents.Text = $"You have {upcomingEvents.Count} upcoming " + (upcomingEvents.Count > 1 ? "events" : "event");
                 tvUpcomingEvent.Text = $"Your next event will be held in {timeToNextUpcomingEvent} " + (timeToNextUpcomingEvent > 1 ? "days" : "day");
