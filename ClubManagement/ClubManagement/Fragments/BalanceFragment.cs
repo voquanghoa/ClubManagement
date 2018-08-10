@@ -37,9 +37,9 @@ namespace ClubManagement.Fragments
 
         private List<OutcomeModel> outcomes;
 
-        private int sumIncomes;
+        private long sumIncomes;
 
-        private int sumOutcomes;
+        private long sumOutcomes;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
