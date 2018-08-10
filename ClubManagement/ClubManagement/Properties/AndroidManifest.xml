@@ -11,7 +11,7 @@
 	<!-- These are optional, but recommended. They will allow Maps to use the My Location provider. -->
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-	<application android:allowBackup="true" android:label="ClubManagement" android:icon="@drawable/icon_textview_budget" android:theme="@style/AppTheme">
+	<application android:allowBackup="true" android:label="ClubManagement" android:icon="@mipmap/ic_launcher" android:theme="@style/AppTheme">
 		<!-- Put your Google Maps V2 API Key here. -->
 		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 		<meta-data android:name="com.google.android.geo.API_KEY" android:value="@string/ApiKey" />
