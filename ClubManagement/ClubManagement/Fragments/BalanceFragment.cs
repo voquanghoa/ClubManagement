@@ -33,9 +33,9 @@ namespace ClubManagement.Fragments
 
         private BalancesFragment OutcomesFragment = new BalancesFragment(BalancesFragment.Type.Outcome);
 
-        private List<OutcomeModel> incomes;
+        private List<OutcomeModel> incomes = new List<OutcomeModel>();
 
-        private List<OutcomeModel> outcomes;
+        private List<OutcomeModel> outcomes = new List<OutcomeModel>();
 
         private long sumIncomes;
 
@@ -87,10 +87,6 @@ namespace ClubManagement.Fragments
             catch (Exception)
             {
                 Toast.MakeText(Context, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
-                incomes = new List<OutcomeModel>();
-                outcomes = new List<OutcomeModel>();
-                sumIncomes = 0;
-                sumOutcomes = 0;
             }
 
             return null;

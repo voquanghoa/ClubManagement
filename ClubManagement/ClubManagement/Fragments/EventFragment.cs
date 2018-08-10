@@ -149,7 +149,7 @@ namespace ClubManagement.Fragments
             }
             catch (Exception)
             {
-                return new List<UserLoginEventModel>();
+                return data;
             }
         }
 
