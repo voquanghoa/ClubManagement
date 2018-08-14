@@ -28,7 +28,7 @@ namespace ClubManagement.Fragments
             Dismiss();
         }
 
-        private DatePickerFragment datePickerFragment = new DatePickerFragment();
+        private DatePickerFragment datePickerFragment = new DatePickerFragment(false);
 
         public event EventHandler SaveClick;
 

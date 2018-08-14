@@ -10,7 +10,7 @@ namespace ClubManagement.Fragments
 {
     public class AddBudgetDialogFragment : DialogFragment
     {
-        private readonly DatePickerFragment datePickerFragment = new DatePickerFragment();
+        private readonly DatePickerFragment datePickerFragment = new DatePickerFragment(false);
 
         [InjectView(Resource.Id.edtTime)] private EditText edtTime;
 
