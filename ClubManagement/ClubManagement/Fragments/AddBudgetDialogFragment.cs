@@ -43,7 +43,12 @@ namespace ClubManagement.Fragments
                 catch (Exception)
                 {
                     Toast.MakeText(Context, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
+                    return;
                 }
+
+                edtTime.Text = string.Empty;
+                edtAmount.Text = string.Empty;
+                edtDescription.Text = string.Empty;
             }
             else
             {
