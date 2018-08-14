@@ -99,6 +99,7 @@
             android:gravity="right"
             android:id="@+id/linearLayout3">
             <TextView
+                android:id="@+id/tvJoinStatus"
                 android:text="@string/willYouJoin"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:gravity="center_vertical"

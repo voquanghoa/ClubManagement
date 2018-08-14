@@ -9,6 +9,7 @@ using ClubManagement.Ultilities;
 using Newtonsoft.Json;
 using System.Linq;
 using Android.Content;
+using Android.Views;
 using ClubManagement.Activities.Base;
 
 namespace ClubManagement.Activities
@@ -30,6 +31,8 @@ namespace ClubManagement.Activities
 
         [InjectView(Resource.Id.btnJoin)]
         private Button btnJoin;
+
+        [InjectView(Resource.Id.tvJoinStatus)] private TextView tvJoinStatus;
 
         [InjectOnClick(Resource.Id.btnBack)]
         private void Back(object s, EventArgs e)
@@ -72,6 +75,16 @@ namespace ClubManagement.Activities
 
             btnJoin.ChangeStatusButtonJoin(currentIsJoined);
 
+            if (eventDetail.Time < DateTime.Now)
+            {
+                tvJoinStatus.Text = Resources.GetString(Resource.String.event_happened);
+                btnJoin.Visibility = ViewStates.Gone;
+            }
+            else if (eventDetail.IsJoined)
+            {
+                tvJoinStatus.Text = Resources.GetString(Resource.String.you_joined);
+            }
+
             btnJoin.Click += (s, e) =>
             {
                 this.DoWithAdmin(() =>
@@ -95,6 +108,7 @@ namespace ClubManagement.Activities
         {
             currentIsJoined = isJoined;
             btnJoin.ChangeStatusButtonJoin(isJoined);
+            tvJoinStatus.Text = Resources.GetString(isJoined ? Resource.String.you_joined : Resource.String.willYouJoin);
 
             this.DoRequest(() =>
             {
