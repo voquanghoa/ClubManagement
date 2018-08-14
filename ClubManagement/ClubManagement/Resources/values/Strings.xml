@@ -67,4 +67,5 @@
   <string name="confirm_delete">Are you sure to delete?</string>
   <string name="delete_event">Delete event</string>
   <string name="delete_outcome">Delete outcome</string>
+  <string name="amount_parse_error_message">Amount must be bigger than 0đ and not too much!</string>
 </resources>

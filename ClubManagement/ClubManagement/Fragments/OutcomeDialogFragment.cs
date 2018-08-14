@@ -35,27 +35,34 @@ namespace ClubManagement.Fragments
         [InjectOnClick(Resource.Id.btnSave)]
         private void OnClickSave(object sender, EventArgs e)
         {
-            if (int.TryParse(edtAmount.Text, out var amount) && amount > 0
+            if (string.IsNullOrEmpty(edtAmount.Text)
                 && DateTime.TryParse(edtDate.Text, out var date) 
                 && !string.IsNullOrEmpty(edtTitle.Text)
                 && !string.IsNullOrEmpty(edtDescription.Text))
             {
-                var outcomeModel = new OutcomeModel()
+                if (int.TryParse(edtAmount.Text, out var amount) && amount > 0)
                 {
-                    Title = edtTitle.Text,
-                    Description = edtDescription.Text,
-                    Amount = amount,
-                    Date = date
-                };
-                try
-                {
-                    OutComesController.Instance.Add(outcomeModel);
-                    SaveClick?.Invoke(outcomeModel, e);
-                    Dismiss();
+                    var outcomeModel = new OutcomeModel()
+                    {
+                        Title = edtTitle.Text,
+                        Description = edtDescription.Text,
+                        Amount = amount,
+                        Date = date
+                    };
+                    try
+                    {
+                        OutComesController.Instance.Add(outcomeModel);
+                        SaveClick?.Invoke(outcomeModel, e);
+                        Dismiss();
+                    }
+                    catch (Exception)
+                    {
+                        Toast.MakeText(Context, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
+                    }
                 }
-                catch (Exception)
+                else
                 {
-                    Toast.MakeText(Context, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
+                    Toast.MakeText(Context, Resources.GetString(Resource.String.amount_parse_error_message), ToastLength.Short).Show();
                 }
             }
             else
