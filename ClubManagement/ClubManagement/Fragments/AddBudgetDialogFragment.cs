@@ -51,6 +51,10 @@ namespace ClubManagement.Fragments
                 {
                     Toast.MakeText(Context, Resources.GetString(Resource.String.amount_parse_error_message), ToastLength.Short).Show();
                 }
+
+                edtTime.Text = string.Empty;
+                edtAmount.Text = string.Empty;
+                edtDescription.Text = string.Empty;
             }
             else
             {
