@@ -40,11 +40,15 @@ namespace ClubManagement.Adapters
                 tvTime.Text = value.Time.ToShortDateString();
                 tvPlace.Text = value.Place;
                 var preferences = PreferenceManager.GetDefaultSharedPreferences(Application.Context);
-                var userId = preferences.GetString("UserId", string.Empty);
+                preferences.GetString("UserId", string.Empty);
 
                 btnJoin.ChangeStatusButtonJoin(value.IsJoined);
 
                 btnJoin.Clickable = false;
+
+                btnJoin.Visibility = value.Time < DateTime.Now && !value.IsJoined
+                    ? ViewStates.Gone
+                    : ViewStates.Visible;
             }
         }
 
