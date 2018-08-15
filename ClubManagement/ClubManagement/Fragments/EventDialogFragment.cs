@@ -1,5 +1,4 @@
 ﻿using System;
-using Android.Support.V4.App;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
@@ -9,6 +8,8 @@ using Android.Gms.Location.Places.UI;
 using Android.Content;
 using Android.Gms.Location.Places;
 using System.Threading.Tasks;
+using Android.App;
+using DialogFragment = Android.Support.V4.App.DialogFragment;
 
 namespace ClubManagement.Fragments
 {
@@ -50,7 +51,7 @@ namespace ClubManagement.Fragments
             Dismiss();
         }
 
-        private DatePickerFragment datePickerFragment = new DatePickerFragment();
+        private DatePickerFragment datePickerFragment = new DatePickerFragment(true);
 
         public event EventHandler SaveClick;
 
@@ -85,7 +86,13 @@ namespace ClubManagement.Fragments
                 catch (Exception)
                 {
                     Toast.MakeText(Context, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
+                    return;
                 }
+
+                edtDate.Text = string.Empty;
+                edtDescription.Text = string.Empty;
+                edtLocation.Text = string.Empty;
+                edtTitle.Text = string.Empty;
             }
             else
             {

@@ -3910,6 +3910,9 @@ namespace ClubManagement
 			// aapt resource value: 0x7f090062
 			public const int amount = 2131296354;
 			
+			// aapt resource value: 0x7f090089
+			public const int amount_parse_error_message = 2131296393;
+			
 			// aapt resource value: 0x7f090046
 			public const int app_name = 2131296326;
 			
