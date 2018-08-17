@@ -3,6 +3,7 @@ using Android.Content;
 using Android.Graphics;
 using Android.Views.InputMethods;
 using Android.Widget;
+using Java.Util;
 
 namespace ClubManagement.Ultilities
 {
@@ -29,6 +30,13 @@ namespace ClubManagement.Ultilities
                 btnJoin.SetTextColor(Color.White);
                 btnJoin.SetBackgroundColor(Color.Green);
             }
+        }
+
+        public static void SetTextFont(this TextView textView, TypefaceStyle style)
+        {
+            var assetManager = Application.Context.ApplicationContext.Assets;
+            var typeface = Typeface.CreateFromAsset(assetManager, Java.Lang.String.Format(Locale.Us, "fonts/%s", "IckyTicketMono.ttf"));
+            textView.SetTypeface(typeface, style);
         }
     }
 }

@@ -31,4 +31,8 @@
   <dimen name="line_black_height">2dp</dimen>
   <dimen name="item_balance_padding">8dp</dimen>
   <dimen name="dialog_margin">8dp</dimen>
+  <dimen name="dimen_5dp">5dp</dimen>
+  <dimen name="dimen_10dp">10dp</dimen>
+  <dimen name="dimen_20dp">20dp</dimen>
+  <dimen name="number_dashboard_size">40sp</dimen>
 </resources>
