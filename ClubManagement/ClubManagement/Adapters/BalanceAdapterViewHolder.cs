@@ -40,6 +40,8 @@ namespace ClubManagement.Adapters
         {
             this.type = type;
             Cheeseknife.Inject(this, itemView);
+            tvDescription.Selected = true;
+            tvTitle.Selected = true;
         }
     }
 }
