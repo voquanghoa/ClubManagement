@@ -21,7 +21,7 @@ namespace ClubManagement.Fragments
         private List<EventModel> upcomingEvents = new List<EventModel>();
 
         private int timeToNextUpcomingEvent;
-        
+
         private readonly AppDataController appDataController = AppDataController.Instance;
 
         [InjectView(Resource.Id.tvBudget)]
@@ -33,7 +33,11 @@ namespace ClubManagement.Fragments
         [InjectView(Resource.Id.tvUpcomingEvent)]
         private TextView tvUpcomingEvent;
 
-        [InjectView(Resource.Id.tvVersion)] private TextView tvVersion;
+        [InjectView(Resource.Id.tvVersion)]
+        private TextView tvVersion;
+
+        [InjectView(Resource.Id.tvUserName)]
+        private TextView tvUserName;
 
         protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
 
@@ -47,6 +51,9 @@ namespace ClubManagement.Fragments
         {
             var view = inflater.Inflate(Resource.Layout.fragment_dashboard, container, false);
             Cheeseknife.Inject(this, view);
+
+            tvUserName.Text = appDataController.UserName;
+
             GetAndShowAppVersion();
             DisplayData(data);
             return view;
