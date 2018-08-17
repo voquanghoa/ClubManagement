@@ -4,7 +4,7 @@
   <item
     android:id="@+id/dashboardTab"
     android:enabled="true"
-    android:title="Dashboard"
+    android:title="Home"
     android:icon="@drawable/icon_tab_dashboard"
     app:showAsAction="ifRoom"/>
   <item
