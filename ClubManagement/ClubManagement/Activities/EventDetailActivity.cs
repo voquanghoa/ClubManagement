@@ -87,16 +87,8 @@ namespace ClubManagement.Activities
 
             btnJoin.Click += (s, e) =>
             {
-                this.DoWithAdmin(() =>
-                {
-                    UpdateUserEvents(!currentIsJoined);
-                }, () =>
-                {
-                    if (currentIsJoined == false)
-                    {
-                        UpdateUserEvents(!currentIsJoined);
-                    }
-                });
+                if (currentIsJoined) return;
+                UpdateUserEvents(!currentIsJoined);
             };
 
             FragmentManager.FindFragmentById<MapFragment>(Resource.Id.mapFragment).GetMapAsync(this);
