@@ -25,4 +25,10 @@
     android:title="Balance"
     android:icon="@drawable/icon_tab_balance"
     app:showAsAction="ifRoom"/>
+  <item
+    android:id="@+id/notificationTab"
+    android:enabled="true"
+    android:title="Notification"
+    android:icon="@drawable/icon_tab_notification"
+    app:showAsAction="ifRoom"/>
 </menu>
