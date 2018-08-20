@@ -2649,6 +2649,7 @@ namespace ClubManagement
 			
 			// aapt resource value: 0x7f020084
 			public const int icon_tab_money = 2130837636;
+			public const int icon_tab_notification = 2130837636;
 			
 			// aapt resource value: 0x7f020085
 			public const int icon_textview_budget = 2130837637;
@@ -2767,6 +2768,11 @@ namespace ClubManagement
 			
 			// aapt resource value: 0x7f0b00d5
 			public const int action_image = 2131427541;
+			// aapt resource value: 0x7f0b00ce
+			public const int action_divider = 2131427534;
+			
+			// aapt resource value: 0x7f0b00c8
+			public const int action_image = 2131427528;
 			
 			// aapt resource value: 0x7f0b0003
 			public const int action_menu_divider = 2131427331;
@@ -2783,11 +2789,11 @@ namespace ClubManagement
 			// aapt resource value: 0x7f0b004d
 			public const int action_mode_close_button = 2131427405;
 			
-			// aapt resource value: 0x7f0b00d6
-			public const int action_text = 2131427542;
+			// aapt resource value: 0x7f0b00c9
+			public const int action_text = 2131427529;
 			
-			// aapt resource value: 0x7f0b00e4
-			public const int actions = 2131427556;
+			// aapt resource value: 0x7f0b00d7
+			public const int actions = 2131427543;
 			
 			// aapt resource value: 0x7f0b004e
 			public const int activity_chooser_view_content = 2131427406;
@@ -3385,6 +3391,14 @@ namespace ClubManagement
 			
 			// aapt resource value: 0x7f0b00b6
 			public const int tvDashboardItemEvents = 2131427510;
+			// aapt resource value: 0x7f0b00af
+			public const int tvBudget = 2131427503;
+			
+			// aapt resource value: 0x7f0b00a6
+			public const int tvCreatedBy = 2131427494;
+			
+			// aapt resource value: 0x7f0b00c2
+			public const int tvDate = 2131427522;
 			
 			// aapt resource value: 0x7f0b00b5
 			public const int tvDashboardItemEventsCount = 2131427509;
@@ -3433,6 +3447,14 @@ namespace ClubManagement
 			
 			// aapt resource value: 0x7f0b00c8
 			public const int tvIncome = 2131427528;
+			// aapt resource value: 0x7f0b00b0
+			public const int tvEvents = 2131427504;
+			
+			// aapt resource value: 0x7f0b00ba
+			public const int tvFinalBalance = 2131427514;
+			
+			// aapt resource value: 0x7f0b00bb
+			public const int tvIncome = 2131427515;
 			
 			// aapt resource value: 0x7f0b00ab
 			public const int tvJoinStatus = 2131427499;
@@ -3516,6 +3538,9 @@ namespace ClubManagement
 			// aapt resource value: 0x7f0a0005
 			public const int design_snackbar_text_max_lines = 2131361797;
 			
+			// aapt resource value: 0x7f0a000b
+			public const int edit_text_amount_max_length = 2131361803;
+			
 			// aapt resource value: 0x7f0a0000
 			public const int google_play_services_version = 2131361792;
 			
@@ -3525,8 +3550,8 @@ namespace ClubManagement
 			// aapt resource value: 0x7f0a000a
 			public const int max_length = 2131361802;
 			
-			// aapt resource value: 0x7f0a000b
-			public const int max_line = 2131361803;
+			// aapt resource value: 0x7f0a000c
+			public const int max_line = 2131361804;
 			
 			// aapt resource value: 0x7f0a0009
 			public const int show_password_duration = 2131361801;

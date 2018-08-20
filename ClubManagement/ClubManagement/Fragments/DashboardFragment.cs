@@ -99,7 +99,11 @@ namespace ClubManagement.Fragments
 
         private readonly AppDataController appDataController = AppDataController.Instance;
 
-        [InjectView(Resource.Id.tvVersion)] private TextView tvVersion;
+        [InjectView(Resource.Id.tvVersion)]
+        private TextView tvVersion;
+
+        [InjectView(Resource.Id.tvUserName)]
+        private TextView tvUserName;
 
         protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
 
@@ -113,6 +117,9 @@ namespace ClubManagement.Fragments
         {
             var view = inflater.Inflate(Resource.Layout.fragment_dashboard, container, false);
             Cheeseknife.Inject(this, view);
+
+            tvUserName.Text = appDataController.UserName;
+
             GetAndShowAppVersion();
             SetTextFont();
             DisplayData(data);
