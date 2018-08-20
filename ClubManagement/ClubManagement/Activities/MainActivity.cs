@@ -14,7 +14,7 @@ namespace ClubManagement.Activities
     [Activity(Label = "ClubManagement", Theme = "@style/AppTheme")]
     public class MainActivity : FragmentActivity
     {
-        private bool doubleBackpress = false;
+        private bool doubleBackpress;
 
         [InjectView(Resource.Id.bottom_navigation_tabbar)]
         private BottomNavigationView bottomNavigationView;
@@ -37,6 +37,10 @@ namespace ClubManagement.Activities
                 Resource.Id.balanceTab,
                 new BalanceFragment()
             },
+            {
+                Resource.Id.notificationTab,
+                new NotificationFragment()
+            }
         };
 
         protected override void OnCreate(Bundle savedInstanceState)
