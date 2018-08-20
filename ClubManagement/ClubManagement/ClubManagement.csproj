@@ -191,6 +191,7 @@
     <Compile Include="Fragments\BalanceSummaryFragment.cs" />
     <Compile Include="Fragments\DatePickerFragment.cs" />
     <Compile Include="Fragments\EventDialogFragment.cs" />
+    <Compile Include="Fragments\NotificationFragment.cs" />
     <Compile Include="Fragments\OutcomeDialogFragment.cs" />
     <Compile Include="Fragments\PersonGoTimesFragment.cs" />
     <Compile Include="Models\AddressGeocodeAPIModel.cs" />
@@ -290,7 +291,9 @@
     </AndroidResource>
     <AndroidResource Include="Resources\values\Strings.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_tab_notification.png" />
+  </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\colors.xml" />
   </ItemGroup>
