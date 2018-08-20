@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Android.App;
+using Android.Content;
 using Android.Content.PM;
+using Android.Graphics;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
@@ -11,27 +14,90 @@ using ClubManagement.Models;
 using ClubManagement.Ultilities;
 using ClubManagement.Fragments.Bases;
 using Android.Support.V4.Widget;
+using ClubManagement.Activities;
+using Newtonsoft.Json;
 
 namespace ClubManagement.Fragments
 {
     public class DashboardFragment : SwipeToRefreshDataFragment<string>
     {
+        [InjectView(Resource.Id.tvDashboardTitle)] private TextView tvDashboardTitle;
+
+        [InjectView(Resource.Id.tvDashboardItemGoingTitle)] private TextView tvDashboadItemGoingTitle;
+
+        [InjectView(Resource.Id.tvDashboardItemGoingCount)] private TextView tvDashboadItemGoingCount;
+
+        [InjectView(Resource.Id.tvDashboardItemGoingEvents)] private TextView tvDashboadItemGoingEvents;
+
+        [InjectView(Resource.Id.tvDashboardItemEventsTitle)] private TextView tvDashboardItemEventsTitle;
+
+        [InjectView(Resource.Id.tvDashboardItemEventsCount)] private TextView tvDashboardItemEventsCount;
+
+        [InjectView(Resource.Id.tvDashboardItemEvents)] private TextView tvDashboardItemEvents;
+
+        [InjectView(Resource.Id.tvDashboardItemNextEventTitle)] private TextView tvDashboardItemNextEventTitle;
+
+        [InjectView(Resource.Id.tvDashboardItemNextEventMonth)] private TextView tvDashboardItemNextEventMonth;
+
+        [InjectView(Resource.Id.tvDashboardItemNextEventDate)] private TextView tvDashboardItemNextEventDate;
+
+        [InjectView(Resource.Id.tvDashboardItemNeedToPayTitle)] private TextView tvDashboardItemNeedToPayTitle;
+
+        [InjectView(Resource.Id.tvDashboardItemNeedToPayCount)] private TextView tvDashboardItemNeedToPayCount;
+
+        [InjectView(Resource.Id.tvDashboardItemNeedToPayFees)] private TextView tvDashboardItemNeedToPayFees;
+
+        [InjectView(Resource.Id.itemGoingParentView)] private LinearLayout itemGoingParentView;
+
+        [InjectView(Resource.Id.itemNewEventsParentView)] private LinearLayout itemNewEventsParentView;
+
+        [InjectView(Resource.Id.itemNextEventParentView)] private LinearLayout itemNextEventParentView;
+
+        [InjectView(Resource.Id.itemNeedToPayParentView)] private LinearLayout itemNeedToPayParentView;
+
+        public event EventHandler ItemClick;
+
+        [InjectOnClick(Resource.Id.itemGoingParentView)]
+        private void ShowGoingEventsTab(object s, EventArgs e)
+        {
+            ItemClick?.Invoke(AppConstantValues.EventClickShowGoingEventsTabTag, e);
+        }
+
+        [InjectOnClick(Resource.Id.itemNewEventsParentView)]
+        private void ShowNewEventsTab(object s, EventArgs e)
+        {
+            ItemClick?.Invoke(AppConstantValues.EventClickShowNewEventsTabTag, e);
+        }
+
+        [InjectOnClick(Resource.Id.itemNextEventParentView)]
+        private void ShowNextEvent(object s, EventArgs e)
+        {
+            var userLoginEventModel = new UserLoginEventModel(nextEvent)
+            {
+                IsJoined = true
+            };
+
+            var eventDetail = JsonConvert.SerializeObject(userLoginEventModel);
+            var intent = new Intent(Context, typeof(EventDetailActivity));
+            intent.PutExtra("EventDetail", eventDetail);
+            StartActivity(intent);
+        }
+
+        [InjectOnClick(Resource.Id.itemNeedToPayParentView)]
+        private void ShowMoneyScreen(object s, EventArgs e)
+        {
+            ItemClick?.Invoke(AppConstantValues.EventClickShowMoneyScreenTag, e);
+        }
+
         private int unpaidBudgets;
 
-        private List<EventModel> upcomingEvents = new List<EventModel>();
+        private EventModel nextEvent;
 
-        private int timeToNextUpcomingEvent;
+        private List<EventModel> goingEvents = new List<EventModel>();
+
+        private int numberOfUpComingEvent;
 
         private readonly AppDataController appDataController = AppDataController.Instance;
-
-        [InjectView(Resource.Id.tvBudget)]
-        private TextView tvBudget;
-
-        [InjectView(Resource.Id.tvEvents)]
-        private TextView tvEvents;
-
-        [InjectView(Resource.Id.tvUpcomingEvent)]
-        private TextView tvUpcomingEvent;
 
         [InjectView(Resource.Id.tvVersion)]
         private TextView tvVersion;
@@ -55,8 +121,26 @@ namespace ClubManagement.Fragments
             tvUserName.Text = appDataController.UserName;
 
             GetAndShowAppVersion();
+            SetTextFont();
             DisplayData(data);
             return view;
+        }
+
+        private void SetTextFont()
+        {
+            tvDashboardTitle.SetTextFont(TypefaceStyle.Bold);
+            tvDashboadItemGoingTitle.SetTextFont(TypefaceStyle.Normal);
+            tvDashboadItemGoingCount.SetTextFont(TypefaceStyle.Normal);
+            tvDashboadItemGoingEvents.SetTextFont(TypefaceStyle.Normal);
+            tvDashboardItemEventsTitle.SetTextFont(TypefaceStyle.Normal);
+            tvDashboardItemEventsCount.SetTextFont(TypefaceStyle.Normal);
+            tvDashboardItemEvents.SetTextFont(TypefaceStyle.Normal);
+            tvDashboardItemNextEventTitle.SetTextFont(TypefaceStyle.Normal);
+            tvDashboardItemNextEventMonth.SetTextFont(TypefaceStyle.Normal);
+            tvDashboardItemNextEventDate.SetTextFont(TypefaceStyle.Normal);
+            tvDashboardItemNeedToPayTitle.SetTextFont(TypefaceStyle.Normal);
+            tvDashboardItemNeedToPayCount.SetTextFont(TypefaceStyle.Normal);
+            tvDashboardItemNeedToPayFees.SetTextFont(TypefaceStyle.Normal);
         }
 
         public override void OnResume()
@@ -70,9 +154,9 @@ namespace ClubManagement.Fragments
             try
             {
                 unpaidBudgets = appDataController.NumberOfUnpaidBudgets;
-                upcomingEvents = appDataController.UpcomingEvents;
-                timeToNextUpcomingEvent = upcomingEvents.Any() ? (appDataController.UpcomingEvents.OrderBy(x => x.Time).First().Time - DateTime.Now).Days : 0;
-
+                goingEvents = appDataController.GoingEvents;
+                numberOfUpComingEvent = appDataController.NumberOfUpComingEvents;
+                nextEvent = goingEvents.Any() ? goingEvents.OrderBy(x => x.Time).First() : null;
             }
             catch (Exception)
             {
@@ -83,22 +167,23 @@ namespace ClubManagement.Fragments
 
         protected override void DisplayData(string data)
         {
-            tvEvents.Visibility = ViewStates.Gone;
-            tvUpcomingEvent.Visibility = ViewStates.Gone;
-            tvBudget.Visibility = ViewStates.Gone;
+            itemGoingParentView.Visibility = ViewStates.Gone;
+            itemNewEventsParentView.Visibility = ViewStates.Gone;
+            itemNextEventParentView.Visibility = ViewStates.Gone;
+            itemNeedToPayParentView.Visibility = ViewStates.Gone;
 
-            if (unpaidBudgets != 0)
-            {
-                tvBudget.Text = $"You need to pay {unpaidBudgets} " + (unpaidBudgets > 1 ? "budgets" : "budget");
-                tvBudget.Visibility = ViewStates.Visible;
-            }
+            SetDataToTextview(itemGoingParentView, tvDashboadItemGoingCount, goingEvents.Count,
+                tvDashboadItemGoingEvents, "event");
+            SetDataToTextview(itemNewEventsParentView, tvDashboardItemEventsCount,
+                numberOfUpComingEvent - goingEvents.Count, tvDashboardItemEvents, "event");
+            SetDataToTextview(itemNeedToPayParentView, tvDashboardItemNeedToPayCount, unpaidBudgets,
+                tvDashboardItemNeedToPayFees, "fee");
 
-            if (upcomingEvents != null && upcomingEvents.Any())
+            if (nextEvent != null)
             {
-                tvEvents.Text = $"You have {upcomingEvents.Count} upcoming " + (upcomingEvents.Count > 1 ? "events" : "event");
-                tvUpcomingEvent.Text = $"Your next event will be held in {timeToNextUpcomingEvent} " + (timeToNextUpcomingEvent > 1 ? "days" : "day");
-                tvEvents.Visibility = ViewStates.Visible;
-                tvUpcomingEvent.Visibility = ViewStates.Visible;
+                itemNextEventParentView.Visibility = ViewStates.Visible;
+                tvDashboardItemNextEventMonth.Text = nextEvent.Time.ToString("MMM", CultureInfo.InvariantCulture);
+                tvDashboardItemNextEventDate.Text = nextEvent.Time.Day.ToString();
             }
         }
 
@@ -113,6 +198,14 @@ namespace ClubManagement.Fragments
             {
                 Toast.MakeText(Context, e.Message, ToastLength.Short).Show();
             }
+        }
+
+        private void SetDataToTextview(View parent, TextView tvCount, int count, TextView tvUnit, string unit)
+        {
+            if (count <= 0) return;
+            parent.Visibility = ViewStates.Visible;
+            tvCount.Text = count.ToString();
+            tvUnit.Text = unit + (count > 1 ? "s" : string.Empty);
         }
     }
 }

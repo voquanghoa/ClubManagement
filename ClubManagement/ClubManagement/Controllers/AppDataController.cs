@@ -12,42 +12,27 @@ namespace ClubManagement.Controllers
     {
         public static AppDataController Instance = new AppDataController();
 
-        private string userId;
+        public string UserId { get; private set; }
 
-        private string userName;
+        public string UserName { get; private set; }
 
-        private bool isAdmin;
+        public bool IsAdmin { get; private set; }
 
-        public string UserId
-        {
-            get => userId;
-        }
+        private readonly MoneysController moneysController = MoneysController.Instance;
 
-        public string UserName
-        {
-            get => userName;
-        }
+        private readonly UserMoneysController userMoneysController = UserMoneysController.Instance;
 
-        public bool IsAdmin
-        {
-            get => isAdmin;
-        }
-
-        private MoneysController moneysController = MoneysController.Instance;
-
-        private UserMoneysController userMoneysController = UserMoneysController.Instance;
-
-        private UsersController usersController = UsersController.Instance;
+        private readonly UsersController usersController = UsersController.Instance;
 
         public void UpdateUser()
         {
-            userId = PreferenceManager.GetDefaultSharedPreferences(Application.Context)
+            UserId = PreferenceManager.GetDefaultSharedPreferences(Application.Context)
                 .GetString("UserId", string.Empty);
 
             var user = usersController.Values.FirstOrDefault(x => x.Id == UserId);
 
-            userName = user?.Name;
-            isAdmin = user?.IsAdmin ?? true;
+            UserName = user?.Name;
+            IsAdmin = user?.IsAdmin ?? true;
         }
 
         public int NumberOfUnpaidBudgets
@@ -60,7 +45,7 @@ namespace ClubManagement.Controllers
             }
         }
 
-        public List <EventModel> UpcomingEvents 
+        public List <EventModel> GoingEvents 
         {
             get
             {
@@ -68,9 +53,13 @@ namespace ClubManagement.Controllers
                                     new List<UserEventModel>()).Where(x => x.UserId == UserId).ToList();
                 var eventList = EventsController.Instance.Values ?? new List<EventModel>();
                 return joinedEvents.Join(eventList, j => j.EventId, e => e.Id, (j, e) => e)
-                    .Where(e => e.Time > DateTime.Now).ToList();
+                    .Where(e => e.Time >= DateTime.Now).ToList();
             }
         }
+
+        public int NumberOfUpComingEvents => (EventsController.Instance.Values ?? new List<EventModel>())
+            .Where(e => e.Time >= DateTime.Now)
+            .ToList().Count;
 
         public List<MoneyState> GetListMoneyState()
         {

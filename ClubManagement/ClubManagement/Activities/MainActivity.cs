@@ -8,6 +8,9 @@ using ClubManagement.Fragments;
 using ClubManagement.Ultilities;
 using Fragment = Android.Support.V4.App.Fragment;
 using System;
+using Android.Content;
+using ClubManagement.Models;
+using Newtonsoft.Json;
 
 namespace ClubManagement.Activities
 {
@@ -19,29 +22,62 @@ namespace ClubManagement.Activities
         [InjectView(Resource.Id.bottom_navigation_tabbar)]
         private BottomNavigationView bottomNavigationView;
 
+        private static readonly DashboardFragment DashboardFragment = new DashboardFragment();
+
+        private static readonly EventFragment EventFragment = new EventFragment();
+
+        private static readonly MoneyFragment MoneyFragment = new MoneyFragment();
+
+        private static readonly BalanceFragment BalanceFragment = new BalanceFragment();
+
+        private static readonly NotificationFragment NotificationFragment = new NotificationFragment();
+
         private readonly Dictionary<int, Fragment> fragmentMapIds = new Dictionary<int, Fragment>
         {
             {
                 Resource.Id.dashboardTab,
-                new DashboardFragment()
+                DashboardFragment
             },
             {
                 Resource.Id.eventTab,
-                new EventFragment()
+                EventFragment
             },
             {
                 Resource.Id.moneyTab,
-                new MoneyFragment()
+                MoneyFragment
             },
             {
                 Resource.Id.balanceTab,
-                new BalanceFragment()
+                BalanceFragment
             },
             {
                 Resource.Id.notificationTab,
-                new NotificationFragment()
+                NotificationFragment
             }
         };
+
+        public MainActivity()
+        {
+            DashboardFragment.ItemClick += (s, e) =>
+            {
+                if (!(s is string tag)) return;
+                switch (tag)
+                {
+                    case AppConstantValues.EventClickShowGoingEventsTabTag:
+                        DisplayFragment(Resource.Id.eventTab);
+                        bottomNavigationView.SelectedItemId = Resource.Id.eventTab;
+                        return;
+                    case AppConstantValues.EventClickShowNewEventsTabTag:
+                        DisplayFragment(Resource.Id.eventTab);
+                        bottomNavigationView.SelectedItemId = Resource.Id.eventTab;
+                        return;
+                    case AppConstantValues.EventClickShowMoneyScreenTag:
+                        DisplayFragment(Resource.Id.moneyTab);
+                        bottomNavigationView.SelectedItemId = Resource.Id.moneyTab;
+                        return;
+                }
+            };
+        }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {

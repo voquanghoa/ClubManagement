@@ -38,6 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
+                android:id="@+id/tvDashboardTitle"
                 android:text="@string/textview_dashboard_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -45,56 +46,204 @@
                 android:paddingRight="@dimen/textview_padding_left_right"
                 android:paddingTop="@dimen/textview_padding_top_bottom"
                 android:paddingBottom="@dimen/textview_padding_top_bottom"
-                android:textSize="@dimen/text_description_size"
+                android:textSize="@dimen/tabbar_text_size"
                 android:textStyle="bold"
-                android:textColor="@color/text_color_blue" />
-            <TextView
+                android:textColor="@color/text_color_black" />
+            <LinearLayout
+                android:id="@+id/itemGoingParentView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/textview_padding_left_right"
-                android:paddingRight="@dimen/textview_padding_left_right"
-                android:paddingTop="@dimen/textview_padding_top_bottom"
-                android:paddingBottom="@dimen/textview_padding_top_bottom"
-                android:textSize="@dimen/text_description_size"
-                android:background="@color/item_background_color"
-                android:textStyle="bold"
-                android:visibility="gone"
-                android:textColor="@color/text_color_blue"
-                android:drawableRight="@drawable/icon_textview_budget"
-                android:id="@+id/tvBudget" />
-            <TextView
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_marginRight="@dimen/dimen_20dp"
+                android:layout_marginLeft="@dimen/dimen_20dp"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+                android:background="@drawable/dashboard_item_background_border">
+                <TextView
+                    android:id="@+id/tvDashboardItemGoingTitle"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:text="@string/dashboard_item_going"
+                    android:textSize="@dimen/text_description_size"
+                    android:textColor="@color/text_color_black"
+                    android:paddingLeft="@dimen/textview_padding_left_right"
+                    android:paddingRight="@dimen/textview_padding_left_right"
+                    android:paddingTop="@dimen/textview_padding_top_bottom"
+                    android:paddingBottom="@dimen/textview_padding_top_bottom" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tvDashboardItemGoingCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5"
+                        android:textColor="@color/text_color_black"
+                        android:gravity="center"
+                        android:textSize="@dimen/number_dashboard_size" />
+                    <TextView
+                        android:id="@+id/tvDashboardItemGoingEvents"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/dashboard_item_events"
+                        android:textSize="@dimen/text_description_size"
+                        android:textColor="@color/text_color_black"
+                        android:paddingLeft="@dimen/dimen_5dp"
+                        android:paddingRight="@dimen/textview_padding_left_right"
+                        android:paddingTop="@dimen/textview_padding_top_bottom"
+                        android:paddingBottom="@dimen/textview_padding_top_bottom" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginTop="@dimen/textview_margin_top_bottom"
-                android:paddingLeft="@dimen/textview_padding_left_right"
-                android:paddingRight="@dimen/textview_padding_left_right"
-                android:paddingTop="@dimen/textview_padding_top_bottom"
-                android:paddingBottom="@dimen/textview_padding_top_bottom"
-                android:textSize="@dimen/text_description_size"
-                android:background="@color/item_background_color"
-                android:textStyle="bold"
-                android:visibility="gone"
-                android:textColor="@color/text_color_blue"
-                android:drawableRight="@drawable/icon_textview_events"
-                android:id="@+id/tvEvents" />
-            <TextView
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:id="@+id/itemNewEventsParentView"
+                android:layout_marginRight="@dimen/dimen_20dp"
+                android:layout_marginLeft="@dimen/dimen_20dp"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+                android:background="@drawable/dashboard_item_background_border">
+                <TextView
+                    android:id="@+id/tvDashboardItemEventsTitle"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:text="@string/dashboard_item_new_events"
+                    android:textSize="@dimen/text_description_size"
+                    android:textColor="@color/text_color_black"
+                    android:paddingLeft="@dimen/textview_padding_left_right"
+                    android:paddingRight="@dimen/textview_padding_left_right"
+                    android:paddingTop="@dimen/textview_padding_top_bottom"
+                    android:paddingBottom="@dimen/textview_padding_top_bottom" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/tvDashboardItemEventsCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5"
+                        android:textColor="@color/text_color_black"
+                        android:gravity="center"
+                        android:textSize="@dimen/number_dashboard_size" />
+                    <TextView
+                        android:id="@+id/tvDashboardItemEvents"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/dashboard_item_events"
+                        android:textSize="@dimen/text_description_size"
+                        android:textColor="@color/text_color_black"
+                        android:paddingLeft="@dimen/dimen_5dp"
+                        android:paddingRight="@dimen/textview_padding_left_right"
+                        android:paddingTop="@dimen/textview_padding_top_bottom"
+                        android:paddingBottom="@dimen/textview_padding_top_bottom" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/itemNextEventParentView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginTop="@dimen/textview_margin_top_bottom"
-                android:paddingLeft="@dimen/textview_padding_left_right"
-                android:paddingRight="@dimen/textview_padding_left_right"
-                android:paddingTop="@dimen/textview_padding_top_bottom"
-                android:paddingBottom="@dimen/textview_padding_top_bottom"
-                android:textSize="@dimen/text_description_size"
-                android:background="@color/item_background_color"
-                android:textStyle="bold"
-                android:visibility="gone"
-                android:textColor="@color/text_color_blue"
-                android:drawableRight="@drawable/icon_textview_upcoming_event"
-                android:id="@+id/tvUpcomingEvent" />
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_marginRight="@dimen/dimen_20dp"
+                android:layout_marginLeft="@dimen/dimen_20dp"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+                android:background="@drawable/dashboard_item_background_border">
+                <TextView
+                    android:id="@+id/tvDashboardItemNextEventTitle"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:text="@string/dashboard_item_next_event"
+                    android:textSize="@dimen/text_description_size"
+                    android:textColor="@color/text_color_black"
+                    android:paddingLeft="@dimen/textview_padding_left_right"
+                    android:paddingRight="@dimen/textview_padding_left_right"
+                    android:paddingTop="@dimen/textview_padding_top_bottom"
+                    android:paddingBottom="@dimen/textview_padding_top_bottom" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tvDashboardItemNextEventMonth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Aug"
+                        android:textColor="@color/text_color_black"
+                        android:textSize="20sp" />
+                    <TextView
+                        android:id="@+id/tvDashboardItemNextEventDate"
+                        android:layout_width="wrap_content"
+                        android:paddingLeft="@dimen/dimen_5dp"
+                        android:layout_height="wrap_content"
+                        android:text="14"
+                        android:textColor="@color/text_color_black"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:id="@+id/itemNeedToPayParentView"
+                android:layout_marginRight="@dimen/dimen_20dp"
+                android:layout_marginLeft="@dimen/dimen_20dp"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+                android:background="@drawable/dashboard_item_background_border">
+                <TextView
+                    android:id="@+id/tvDashboardItemNeedToPayTitle"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:text="@string/dashboard_item_need_to_pay"
+                    android:textSize="@dimen/text_description_size"
+                    android:textColor="@color/text_color_black"
+                    android:paddingLeft="@dimen/textview_padding_left_right"
+                    android:paddingRight="@dimen/textview_padding_left_right"
+                    android:paddingTop="@dimen/textview_padding_top_bottom"
+                    android:paddingBottom="@dimen/textview_padding_top_bottom" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/tvDashboardItemNeedToPayCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5"
+                        android:textColor="@color/text_color_black"
+                        android:gravity="center"
+                        android:textSize="@dimen/number_dashboard_size" />
+                    <TextView
+                        android:id="@+id/tvDashboardItemNeedToPayFees"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/dashboard_item_fees"
+                        android:textSize="@dimen/text_description_size"
+                        android:textColor="@color/text_color_black"
+                        android:paddingLeft="@dimen/dimen_5dp"
+                        android:paddingRight="@dimen/textview_padding_left_right"
+                        android:paddingTop="@dimen/textview_padding_top_bottom"
+                        android:paddingBottom="@dimen/textview_padding_top_bottom" />
+                </LinearLayout>
+            </LinearLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">

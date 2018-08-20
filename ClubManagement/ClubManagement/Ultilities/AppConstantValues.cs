@@ -12,18 +12,14 @@
 
         public const string BalanceFragmentIncomeTab = "Income";
 
-        public const string MoneyFragmentAllTabTitle = "All";
+        public const float DefaultMapZoomLevel = 12f;
 
-        public const string MoneyFragmentPaidTabTitle = "Already paid";
+        public const string EventClickShowGoingEventsTabTag = "Going events";
 
-        public const string MoneyFragmentUnpaidTabTitle = "Unpaid";
+        public const string EventClickShowNewEventsTabTag = "New events";
 
-        public const string EventFragmentAllTab = "All";
+        public const string EventClickShowNextEventTag = "Next event";
 
-        public const string EventFragmentUpcomingTab = "Upcoming";
-
-        public const string EventFragmentJoinedTab = "Joined";
-
-		public const float DefaultMapZoomLevel = 12f;
+        public const string EventClickShowMoneyScreenTag = "Money screen";
     }
 }

@@ -20,7 +20,7 @@
   <string name="textview_resend_code">Resend the code?</string>
   <string name="textview_verify_ok_note">Done. Your account has been created successfully.You now can use all features of the app.</string>
   <string name="button_ok">Ok</string>
-  <string name="textview_dashboard_title">Your interest things.</string>
+  <string name="textview_dashboard_title">What\'s new?</string>
   <string name="willYouJoin">Would you like to join event?</string>
   <string name="eventLocation">Event location</string>
   <string name="button_pay">Pay</string>
@@ -70,4 +70,11 @@
   <string name="event_happened">Event is already happened.</string>
   <string name="you_joined">You have already joined this event.</string>
   <string name="amount_parse_error_message">Amount must be bigger than 0đ and not too much!</string>
+
+  <string name="dashboard_item_going">You\'re going</string>
+  <string name="dashboard_item_new_events">New events</string>
+  <string name="dashboard_item_next_event">Next event</string>
+  <string name="dashboard_item_need_to_pay">Don\'t forget to pay</string>
+  <string name="dashboard_item_events">events</string>
+  <string name="dashboard_item_fees">fees</string>
 </resources>
