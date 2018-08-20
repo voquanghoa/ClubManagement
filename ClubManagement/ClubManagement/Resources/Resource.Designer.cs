@@ -1917,6 +1917,9 @@ namespace ClubManagement
 			// aapt resource value: 0x7f08009d
 			public const int carview_padding_top_bottom = 2131230877;
 			
+			// aapt resource value: 0x7f0800b9
+			public const int circle_image_view_border_width = 2131230905;
+			
 			// aapt resource value: 0x7f0800b8
 			public const int circle_image_view_heigth_width = 2131230904;
 			

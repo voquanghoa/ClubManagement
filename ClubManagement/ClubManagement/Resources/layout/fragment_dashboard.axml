@@ -12,6 +12,7 @@
             android:layout_height="@dimen/circle_image_view_heigth_width"
             android:layout_gravity="right"
             app:civ_fill_color="@color/text_color_white"
+            app:civ_border_width="@dimen/circle_image_view_border_width"
             android:layout_margin="@dimen/circle_image_view_margin_right"
             android:id="@+id/civAvatar" />
         <TextView

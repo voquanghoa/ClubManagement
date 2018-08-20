@@ -13,6 +13,7 @@ using Refractored.Controls;
 using Square.Picasso;
 using Android.Support.V4.Widget;
 using Java.Lang.Reflect;
+using ClubManagement.Ultilities;
 
 namespace ClubManagement.Fragments
 {
@@ -81,7 +82,15 @@ namespace ClubManagement.Fragments
 
         private void PopupMenu_MenuItemClick(object sender, PopupMenu.MenuItemClickEventArgs e)
         {
-            
+            switch (e.Item.ItemId)
+            {
+                case Resource.Id.changeAvatar:
+
+                    break;
+                case Resource.Id.logOut:
+                    Context.ShowLogoutDialog();
+                    break;
+            }
         }
 
         public override void OnResume()
