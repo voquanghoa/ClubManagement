@@ -3468,6 +3468,9 @@ namespace ClubManagement
 			// aapt resource value: 0x7f0a0005
 			public const int design_snackbar_text_max_lines = 2131361797;
 			
+			// aapt resource value: 0x7f0a000b
+			public const int edit_text_amount_max_length = 2131361803;
+			
 			// aapt resource value: 0x7f0a0000
 			public const int google_play_services_version = 2131361792;
 			
@@ -3477,8 +3480,8 @@ namespace ClubManagement
 			// aapt resource value: 0x7f0a000a
 			public const int max_length = 2131361802;
 			
-			// aapt resource value: 0x7f0a000b
-			public const int max_line = 2131361803;
+			// aapt resource value: 0x7f0a000c
+			public const int max_line = 2131361804;
 			
 			// aapt resource value: 0x7f0a0009
 			public const int show_password_duration = 2131361801;
