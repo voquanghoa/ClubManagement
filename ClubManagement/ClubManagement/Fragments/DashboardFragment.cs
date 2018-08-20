@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.Graphics;
 using Android.OS;
@@ -13,6 +14,8 @@ using ClubManagement.Models;
 using ClubManagement.Ultilities;
 using ClubManagement.Fragments.Bases;
 using Android.Support.V4.Widget;
+using ClubManagement.Activities;
+using Newtonsoft.Json;
 
 namespace ClubManagement.Fragments
 {
@@ -51,6 +54,40 @@ namespace ClubManagement.Fragments
         [InjectView(Resource.Id.itemNextEventParentView)] private LinearLayout itemNextEventParentView;
 
         [InjectView(Resource.Id.itemNeedToPayParentView)] private LinearLayout itemNeedToPayParentView;
+
+        public event EventHandler ItemClick;
+
+        [InjectOnClick(Resource.Id.itemGoingParentView)]
+        private void ShowGoingEventsTab(object s, EventArgs e)
+        {
+            ItemClick?.Invoke(AppConstantValues.EventClickShowGoingEventsTabTag, e);
+        }
+
+        [InjectOnClick(Resource.Id.itemNewEventsParentView)]
+        private void ShowNewEventsTab(object s, EventArgs e)
+        {
+            ItemClick?.Invoke(AppConstantValues.EventClickShowNewEventsTabTag, e);
+        }
+
+        [InjectOnClick(Resource.Id.itemNextEventParentView)]
+        private void ShowNextEvent(object s, EventArgs e)
+        {
+            var userLoginEventModel = new UserLoginEventModel(nextEvent)
+            {
+                IsJoined = true
+            };
+
+            var eventDetail = JsonConvert.SerializeObject(userLoginEventModel);
+            var intent = new Intent(Context, typeof(EventDetailActivity));
+            intent.PutExtra("EventDetail", eventDetail);
+            StartActivity(intent);
+        }
+
+        [InjectOnClick(Resource.Id.itemNeedToPayParentView)]
+        private void ShowMoneyScreen(object s, EventArgs e)
+        {
+            ItemClick?.Invoke(AppConstantValues.EventClickShowMoneyScreenTag, e);
+        }
 
         private int unpaidBudgets;
 
