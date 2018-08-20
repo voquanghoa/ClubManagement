@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+  <item
+    android:id="@+id/changeAvatar"
+    android:title="@string/change_avatar"
+    android:icon="@drawable/icon_change" />
+  <item
+    android:id="@+id/logOut"
+    android:title="@string/log_out"
+    android:icon="@drawable/icon_exit" />
+</menu>

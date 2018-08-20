@@ -31,4 +31,6 @@
   <dimen name="line_black_height">2dp</dimen>
   <dimen name="item_balance_padding">8dp</dimen>
   <dimen name="dialog_margin">8dp</dimen>
+  <dimen name="circle_image_view_margin_right">8dp</dimen>
+  <dimen name="circle_image_view_heigth_width">36dp</dimen>
 </resources>

@@ -8,9 +8,11 @@ using Android.Views;
 using Android.Widget;
 using ClubManagement.Controllers;
 using ClubManagement.Models;
-using ClubManagement.Ultilities;
 using ClubManagement.Fragments.Bases;
+using Refractored.Controls;
+using Square.Picasso;
 using Android.Support.V4.Widget;
+using Java.Lang.Reflect;
 
 namespace ClubManagement.Fragments
 {
@@ -39,13 +41,12 @@ namespace ClubManagement.Fragments
         [InjectView(Resource.Id.tvUserName)]
         private TextView tvUserName;
 
-        protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
+        [InjectView(Resource.Id.civAvatar)]
+        private CircleImageView civAvatar;
 
-        [InjectOnClick(Resource.Id.btnLogout)]
-        private void Logout(object s, EventArgs e)
-        {
-            DialogExtensions.ShowLogoutDialog(Context);
-        }
+        private const string UrlDefaultImage = "http://png.icons8.com/material-rounded/48/000000/user.png";
+
+        protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -53,10 +54,34 @@ namespace ClubManagement.Fragments
             Cheeseknife.Inject(this, view);
 
             tvUserName.Text = appDataController.UserName;
+            Picasso.With(this.Context).Load(UrlDefaultImage).Fit().Into(civAvatar);
+
+            civAvatar.Click += CivAvatar_Click;
 
             GetAndShowAppVersion();
             DisplayData(data);
             return view;
+        }
+
+        private void CivAvatar_Click(object sender, EventArgs e)
+        {
+            var popupMenu = new PopupMenu(this.Context, sender as View);
+
+            var field = popupMenu.Class.GetDeclaredField("mPopup");
+            field.Accessible = true;
+            var menuPopupHelper = field.Get(popupMenu);
+            var setForceIcons = menuPopupHelper.Class.GetDeclaredMethod("setForceShowIcon", Java.Lang.Boolean.Type);
+            setForceIcons.Invoke(menuPopupHelper, true);
+
+            popupMenu.Inflate(Resource.Menu.User);
+            popupMenu.MenuItemClick += PopupMenu_MenuItemClick;
+
+            popupMenu.Show();
+        }
+
+        private void PopupMenu_MenuItemClick(object sender, PopupMenu.MenuItemClickEventArgs e)
+        {
+            
         }
 
         public override void OnResume()
