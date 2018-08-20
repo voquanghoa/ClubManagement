@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Android.App;
 using Android.Content.PM;
@@ -12,7 +13,6 @@ using ClubManagement.Models;
 using ClubManagement.Ultilities;
 using ClubManagement.Fragments.Bases;
 using Android.Support.V4.Widget;
-using Java.Util;
 
 namespace ClubManagement.Fragments
 {
@@ -44,12 +44,22 @@ namespace ClubManagement.Fragments
 
         [InjectView(Resource.Id.tvDashboardItemNeedToPayFees)] private TextView tvDashboardItemNeedToPayFees;
 
+        [InjectView(Resource.Id.itemGoingParentView)] private LinearLayout itemGoingParentView;
+
+        [InjectView(Resource.Id.itemNewEventsParentView)] private LinearLayout itemNewEventsParentView;
+
+        [InjectView(Resource.Id.itemNextEventParentView)] private LinearLayout itemNextEventParentView;
+
+        [InjectView(Resource.Id.itemNeedToPayParentView)] private LinearLayout itemNeedToPayParentView;
+
         private int unpaidBudgets;
 
-        private List<EventModel> upcomingEvents = new List<EventModel>();
+        private EventModel nextEvent;
 
-        private int timeToNextUpcomingEvent;
-        
+        private List<EventModel> goingEvents = new List<EventModel>();
+
+        private int numberOfUpComingEvent;
+
         private readonly AppDataController appDataController = AppDataController.Instance;
 
         [InjectView(Resource.Id.tvVersion)] private TextView tvVersion;
@@ -67,12 +77,12 @@ namespace ClubManagement.Fragments
             var view = inflater.Inflate(Resource.Layout.fragment_dashboard, container, false);
             Cheeseknife.Inject(this, view);
             GetAndShowAppVersion();
-            Init();
+            SetTextFont();
             DisplayData(data);
             return view;
         }
 
-        private void Init()
+        private void SetTextFont()
         {
             tvDashboardTitle.SetTextFont(TypefaceStyle.Bold);
             tvDashboadItemGoingTitle.SetTextFont(TypefaceStyle.Normal);
@@ -88,6 +98,7 @@ namespace ClubManagement.Fragments
             tvDashboardItemNeedToPayCount.SetTextFont(TypefaceStyle.Normal);
             tvDashboardItemNeedToPayFees.SetTextFont(TypefaceStyle.Normal);
         }
+
         public override void OnResume()
         {
             base.OnResume();
@@ -99,9 +110,9 @@ namespace ClubManagement.Fragments
             try
             {
                 unpaidBudgets = appDataController.NumberOfUnpaidBudgets;
-                upcomingEvents = appDataController.UpcomingEvents;
-                timeToNextUpcomingEvent = upcomingEvents.Any() ? (appDataController.UpcomingEvents.OrderBy(x => x.Time).First().Time - DateTime.Now).Days : 0;
-
+                goingEvents = appDataController.GoingEvents;
+                numberOfUpComingEvent = appDataController.NumberOfUpComingEvents;
+                nextEvent = goingEvents.Any() ? goingEvents.OrderBy(x => x.Time).First() : null;
             }
             catch (Exception)
             {
@@ -112,23 +123,24 @@ namespace ClubManagement.Fragments
 
         protected override void DisplayData(string data)
         {
-            //tvEvents.Visibility = ViewStates.Gone;
-            //tvUpcomingEvent.Visibility = ViewStates.Gone;
-            //tvBudget.Visibility = ViewStates.Gone;
+            itemGoingParentView.Visibility = ViewStates.Gone;
+            itemNewEventsParentView.Visibility = ViewStates.Gone;
+            itemNextEventParentView.Visibility = ViewStates.Gone;
+            itemNeedToPayParentView.Visibility = ViewStates.Gone;
 
-            //if (unpaidBudgets != 0)
-            //{
-            //    tvBudget.Text = $"You need to pay {unpaidBudgets} " + (unpaidBudgets > 1 ? "budgets" : "budget");
-            //    tvBudget.Visibility = ViewStates.Visible;
-            //}
+            SetDataToTextview(itemGoingParentView, tvDashboadItemGoingCount, goingEvents.Count,
+                tvDashboadItemGoingEvents, "event");
+            SetDataToTextview(itemNewEventsParentView, tvDashboardItemEventsCount,
+                numberOfUpComingEvent - goingEvents.Count, tvDashboardItemEvents, "event");
+            SetDataToTextview(itemNeedToPayParentView, tvDashboardItemNeedToPayCount, unpaidBudgets,
+                tvDashboardItemNeedToPayFees, "fee");
 
-            //if (upcomingEvents != null && upcomingEvents.Any())
-            //{
-            //    tvEvents.Text = $"You have {upcomingEvents.Count} upcoming " + (upcomingEvents.Count > 1 ? "events" : "event");
-            //    tvUpcomingEvent.Text = $"Your next event will be held in {timeToNextUpcomingEvent} " + (timeToNextUpcomingEvent > 1 ? "days" : "day");
-            //    tvEvents.Visibility = ViewStates.Visible;
-            //    tvUpcomingEvent.Visibility = ViewStates.Visible;
-            //}
+            if (nextEvent != null)
+            {
+                itemNextEventParentView.Visibility = ViewStates.Visible;
+                tvDashboardItemNextEventMonth.Text = nextEvent.Time.ToString("MMM", CultureInfo.InvariantCulture);
+                tvDashboardItemNextEventDate.Text = nextEvent.Time.Day.ToString();
+            }
         }
 
         private void GetAndShowAppVersion()
@@ -142,6 +154,14 @@ namespace ClubManagement.Fragments
             {
                 Toast.MakeText(Context, e.Message, ToastLength.Short).Show();
             }
+        }
+
+        private void SetDataToTextview(View parent, TextView tvCount, int count, TextView tvUnit, string unit)
+        {
+            if (count <= 0) return;
+            parent.Visibility = ViewStates.Visible;
+            tvCount.Text = count.ToString();
+            tvUnit.Text = unit + (count > 1 ? "s" : string.Empty);
         }
     }
 }
