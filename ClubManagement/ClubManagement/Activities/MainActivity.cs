@@ -30,6 +30,8 @@ namespace ClubManagement.Activities
 
         private static readonly BalanceFragment BalanceFragment = new BalanceFragment();
 
+        private static readonly NotificationFragment NotificationFragment = new NotificationFragment();
+
         private readonly Dictionary<int, Fragment> fragmentMapIds = new Dictionary<int, Fragment>
         {
             {
@@ -47,11 +49,10 @@ namespace ClubManagement.Activities
             {
                 Resource.Id.balanceTab,
                 BalanceFragment
-                new BalanceFragment()
             },
             {
                 Resource.Id.notificationTab,
-                new NotificationFragment()
+                NotificationFragment
             }
         };
 
