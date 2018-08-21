@@ -55,7 +55,6 @@ namespace ClubManagement.Adapters
         public EventViewHolder(View itemView) :base(itemView)
         {
             Cheeseknife.Inject(this, itemView);
-
             itemView.Click += (s, e) =>
             {
                 ClickHander?.Invoke(s, new ClickEventArgs() { Position = AdapterPosition });
