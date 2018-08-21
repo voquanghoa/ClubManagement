@@ -34,8 +34,6 @@ namespace ClubManagement.CustomAdapters
         {
             Cheeseknife.Inject(this, itemView);
             itemView.SetOnClickListener(this);
-            tvDescription.Selected = true;
-            tvTitle.Selected = true;
         }
 
         public void OnClick(View v)
