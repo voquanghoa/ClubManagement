@@ -20,7 +20,7 @@ namespace ClubManagement.Ultilities
             return progressDialog;
         }
 
-        public static void ShowLogoutDialog(Context context)
+        public static void ShowLogoutDialog(this Context context)
         {
             var preferencesEditor = PreferenceManager.GetDefaultSharedPreferences(Application.Context).Edit();
             new AlertDialog.Builder(context)
