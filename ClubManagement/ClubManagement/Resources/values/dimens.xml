@@ -36,4 +36,8 @@
   <dimen name="circle_image_view_border_width">2dp</dimen>
   <dimen name="line_width">2dp</dimen>
   <dimen name="button_margin">8dp</dimen>
+  <dimen name="dimen_5dp">5dp</dimen>
+  <dimen name="dimen_10dp">10dp</dimen>
+  <dimen name="dimen_20dp">20dp</dimen>
+  <dimen name="number_dashboard_size">40sp</dimen>
 </resources>

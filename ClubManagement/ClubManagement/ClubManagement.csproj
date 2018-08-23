@@ -262,7 +262,8 @@
     <GoogleServicesJson Include="google-services.json" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <AndroidAsset Include="Assets\fonts\MarketSaturday.ttf" />
+    <AndroidAsset Include="Assets\fonts\IckyTicketMono.ttf" />
     <None Include="GettingStarted.Xamarin" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
@@ -499,6 +500,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon_exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\dashboard_item_background_border.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\button_change_avatar.xml" />
