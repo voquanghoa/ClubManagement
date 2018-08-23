@@ -10,7 +10,7 @@ namespace ClubManagement.Ultilities
 {
     public static class DialogExtensions
     {
-        public static ProgressDialog CreateDialog(string title, string message, Context context)
+        public static ProgressDialog CreateDialog(this Context context, string title, string message)
         {
             var progressDialog = new ProgressDialog(context);
             progressDialog.SetTitle(title);

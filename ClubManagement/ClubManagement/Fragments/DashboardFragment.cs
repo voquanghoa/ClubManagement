@@ -12,8 +12,9 @@ using ClubManagement.Fragments.Bases;
 using Refractored.Controls;
 using Square.Picasso;
 using Android.Support.V4.Widget;
-using Java.Lang.Reflect;
 using ClubManagement.Ultilities;
+using Android.Graphics;
+using System.Threading.Tasks;
 
 namespace ClubManagement.Fragments
 {
@@ -45,17 +46,59 @@ namespace ClubManagement.Fragments
         [InjectView(Resource.Id.civAvatar)]
         private CircleImageView civAvatar;
 
-        private const string UrlDefaultImage = "http://png.icons8.com/material-rounded/48/000000/user.png";
+        private ChangeAvatarFragment changeAvatarFragment = new ChangeAvatarFragment();
+
+        private string UrlDefaultImage = "http://png.icons8.com/material-rounded/48/000000/user.png";
 
         protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
+
+        public DashboardFragment()
+        {
+            changeAvatarFragment.ChangeAvatar += ChangeAvatarFragment_ChangeAvatar;
+        }
+
+        private void ChangeAvatarFragment_ChangeAvatar(object sender, EventArgs e)
+        {
+            if (sender is string imageUrl)
+            {
+                UrlDefaultImage = imageUrl;
+                LoadAvatar();
+
+                Task.Run(async () =>
+                {
+                    appDataController.User.Avatar = imageUrl;
+
+                    await UsersController.Instance.Edit(appDataController.User);
+                });
+            }
+        }
+
+        private void LoadAvatar()
+        {
+            Picasso.With(Context).Load(UrlDefaultImage).Fit().Into(civAvatar);
+        }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.fragment_dashboard, container, false);
             Cheeseknife.Inject(this, view);
 
-            tvUserName.Text = appDataController.UserName;
-            Picasso.With(this.Context).Load(UrlDefaultImage).Fit().Into(civAvatar);
+            if (appDataController.UserName.Length > 10)
+            {
+                tvUserName.Text = appDataController.UserName.Substring(0, 10).ToString() + "...";
+            }
+            else
+            {
+                tvUserName.Text = appDataController.UserName;
+            }
+            
+
+            if (!string.IsNullOrEmpty(appDataController.User.Avatar))
+            {
+                UrlDefaultImage = appDataController.User.Avatar;
+            }
+
+            LoadAvatar();
 
             civAvatar.Click += CivAvatar_Click;
 
@@ -66,7 +109,7 @@ namespace ClubManagement.Fragments
 
         private void CivAvatar_Click(object sender, EventArgs e)
         {
-            var popupMenu = new PopupMenu(this.Context, sender as View);
+            var popupMenu = new PopupMenu(Context, sender as View);
 
             var field = popupMenu.Class.GetDeclaredField("mPopup");
             field.Accessible = true;
@@ -85,7 +128,7 @@ namespace ClubManagement.Fragments
             switch (e.Item.ItemId)
             {
                 case Resource.Id.changeAvatar:
-
+                    changeAvatarFragment.Show(FragmentManager, null);
                     break;
                 case Resource.Id.logOut:
                     Context.ShowLogoutDialog();

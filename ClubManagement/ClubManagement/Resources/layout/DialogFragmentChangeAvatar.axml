@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:background="@null"
+    android:id="@+id/LnLayoutChangeAvatar">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_change_avatar"
+        android:minWidth="25px"
+        android:minHeight="25px">
+        <Button
+            android:text="@string/take_a_photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:id="@+id/btnTakePhoto" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_width"
+            android:background="@color/black_color" />
+        <Button
+            android:text="@string/select_a_photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:id="@+id/btnSelectPhoto" />
+    </LinearLayout>
+    <Button
+        android:text="@string/cancel"
+        android:background="@drawable/button_change_avatar"
+        android:layout_marginTop="@dimen/button_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/tabbar_height"
+        android:id="@+id/btnCancel" />
+</LinearLayout>

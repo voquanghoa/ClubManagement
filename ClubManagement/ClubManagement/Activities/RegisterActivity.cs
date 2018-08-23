@@ -71,7 +71,7 @@ namespace ClubManagement.Activities
                 return;
             }
 
-            var dialog = DialogExtensions.CreateDialog(Resources.GetString(Resource.String.sign_up), Resources.GetString(Resource.String.wait), this);
+            var dialog = this.CreateDialog(Resources.GetString(Resource.String.sign_up), Resources.GetString(Resource.String.wait));
             dialog.Show();
 
             var userEmails = new List<string>();

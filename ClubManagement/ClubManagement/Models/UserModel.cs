@@ -19,6 +19,9 @@ namespace ClubManagement.Models
         [JsonProperty("longitude")]
         public double Longitude { get; set; }
 
+        [JsonProperty("avatar")]
+        public string Avatar { get; set; } = "";
+
         [JsonProperty("isAdmin")]
         public bool IsAdmin { get; set; }
     }

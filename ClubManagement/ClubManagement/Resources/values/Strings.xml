@@ -72,4 +72,8 @@
   <string name="amount_parse_error_message">Amount must be bigger than 0đ and not too much!</string>
   <string name="change_avatar">Change avatar</string>
   <string name="log_out">Log out</string>
+  <string name="take_a_photo">Take a photo</string>
+  <string name="select_a_photo">Select a photo</string>
+<string name="change_avatar_success">Change avatar successfully!</string>
+<string name="change_avatar_failure">Change avatar failure!</string>
 </resources>
