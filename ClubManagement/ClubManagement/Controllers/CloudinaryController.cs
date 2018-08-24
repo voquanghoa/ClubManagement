@@ -1,7 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Android.Content;
-using Android.Provider;
+using ClubManagement.Ultilities;
 
 namespace ClubManagement.Controllers
 {
@@ -22,33 +21,13 @@ namespace ClubManagement.Controllers
 
             var uploadParams = new CloudinaryDotNet.Actions.ImageUploadParams
             {
-                File = new CloudinaryDotNet.Actions.FileDescription(GetFilePathFromUri(context, imageUri)),
+                File = new CloudinaryDotNet.Actions.FileDescription(FilePathUtilities.GetAbsoluteFilePath(context, imageUri)),
                 PublicId = publicId
             };
 
             var uploadResult = await cloudinary.UploadAsync(uploadParams);
 
             return uploadResult.Uri.OriginalString;
-        }
-
-        private static string GetFilePathFromUri(Context context, Android.Net.Uri imageUri)
-        {
-            try
-            {
-                using (var cursor = context.ContentResolver.Query(imageUri,
-                    new[] { MediaStore.Images.Media.InterfaceConsts.Data }, null, null, null))
-                {
-                    if (cursor == null) return string.Empty;
-                    var columnIndex =
-                        cursor.GetColumnIndexOrThrow(Android.Provider.MediaStore.Images.Media.InterfaceConsts.Data);
-                    cursor.MoveToFirst();
-                    return cursor.GetString(columnIndex);
-                }
-            }
-            catch (Exception)
-            {
-                return string.Empty;
-            }
         }
     }
 }

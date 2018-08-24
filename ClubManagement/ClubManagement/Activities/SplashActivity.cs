@@ -51,14 +51,27 @@ namespace ClubManagement.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            if (!CrossConnectivity.Current.IsConnected)
-            {
-                SetContentView(Resource.Layout.activity_no_internet);
-                Cheeseknife.Inject(this);
-                return;
-            }
+            //if (!CrossConnectivity.Current.IsConnected)
+            //{
+            //    SetContentView(Resource.Layout.activity_no_internet);
+            //    Cheeseknife.Inject(this);
+            //    return;
+            //}
 
-            StartApp();
+            //StartApp();
+            Test();
+        }
+
+        private void Test()
+        {
+            var intent = new Intent(Intent.ActionGetContent);
+            intent.SetType("image/*");
+            StartActivityForResult(intent, 1);
+        }
+
+        protected override async void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            await CloudinaryController.UploadImage(this, data.Data, Guid.NewGuid().ToString());
         }
     }
 }

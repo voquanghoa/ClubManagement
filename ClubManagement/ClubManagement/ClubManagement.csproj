@@ -250,6 +250,7 @@
     <Compile Include="Ultilities\BottomNavigationHelper.cs" />
     <Compile Include="Ultilities\DialogExtensions.cs" />
     <Compile Include="Fragments\Bases\SwipeToRefreshDataFragment.cs" />
+    <Compile Include="Ultilities\FilePathUtilities.cs" />
     <Compile Include="Ultilities\StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
