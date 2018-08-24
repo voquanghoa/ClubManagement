@@ -2049,14 +2049,14 @@ namespace ClubManagement
 			// aapt resource value: 0x7f0800b6
 			public const int dialog_margin = 2131230902;
 			
-			// aapt resource value: 0x7f0800bd
-			public const int dimen_10dp = 2131230909;
-			
-			// aapt resource value: 0x7f0800be
-			public const int dimen_20dp = 2131230910;
+			// aapt resource value: 0x7f0800bb
+			public const int dimen_10dp = 2131230907;
 			
 			// aapt resource value: 0x7f0800bc
-			public const int dimen_5dp = 2131230908;
+			public const int dimen_20dp = 2131230908;
+			
+			// aapt resource value: 0x7f0800ba
+			public const int dimen_5dp = 2131230906;
 			
 			// aapt resource value: 0x7f08005e
 			public const int disabled_alpha_material_dark = 2131230814;
@@ -2174,7 +2174,6 @@ namespace ClubManagement
 			
 			// aapt resource value: 0x7f0800bf
 			public const int number_dashboard_size = 2131230911;
-			
 			// aapt resource value: 0x7f080000
 			public const int place_autocomplete_button_padding = 2131230720;
 			
@@ -2514,6 +2513,7 @@ namespace ClubManagement
 			
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
+
 			
 			// aapt resource value: 0x7f0200a0
 			public const int avd_hide_password_1 = 2130837664;
@@ -2523,10 +2523,12 @@ namespace ClubManagement
 			
 			// aapt resource value: 0x7f0200a2
 			public const int avd_hide_password_3 = 2130837666;
+
 			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
 			
+
 			// aapt resource value: 0x7f0200a3
 			public const int avd_show_password_1 = 2130837667;
 			
@@ -2535,6 +2537,7 @@ namespace ClubManagement
 			
 			// aapt resource value: 0x7f0200a5
 			public const int avd_show_password_3 = 2130837669;
+
 			
 			// aapt resource value: 0x7f020055
 			public const int button_background = 2130837589;
@@ -2648,6 +2651,7 @@ namespace ClubManagement
 			public const int icon_add = 2130837625;
 			
 			// aapt resource value: 0x7f02007a
+
 			public const int icon_arrow_right = 2130837626;
 			
 			// aapt resource value: 0x7f02007b
@@ -2915,8 +2919,9 @@ namespace ClubManagement
 			// aapt resource value: 0x7f0b003c
 			public const int center_vertical = 2131427388;
 			
-			// aapt resource value: 0x7f0b0100
+
 			public const int changeAvatar = 2131427584;
+
 			
 			// aapt resource value: 0x7f0b0065
 			public const int checkbox = 2131427429;
@@ -3136,9 +3141,10 @@ namespace ClubManagement
 			
 			// aapt resource value: 0x7f0b0052
 			public const int list_item = 2131427410;
-			
+
 			// aapt resource value: 0x7f0b0101
 			public const int logOut = 2131427585;
+
 			
 			// aapt resource value: 0x7f0b008c
 			public const int mapFragment = 2131427468;
@@ -3175,10 +3181,12 @@ namespace ClubManagement
 			
 			// aapt resource value: 0x7f0b0011
 			public const int normal = 2131427345;
-			
-			// aapt resource value: 0x7f0b00ff
+
 			public const int notificationTab = 2131427583;
-			
+
+			// aapt resource value: 0x7f0b00fc
+			public const int notificationTab = 2131427580;
+
 			// aapt resource value: 0x7f0b00e7
 			public const int notification_background = 2131427559;
 			
@@ -4159,6 +4167,7 @@ namespace ClubManagement
 			// aapt resource value: 0x7f090055
 			public const int confirm_password_hint = 2131296341;
 			
+
 			// aapt resource value: 0x7f090096
 			public const int dashboard_item_events = 2131296406;
 			
@@ -4176,6 +4185,7 @@ namespace ClubManagement
 			
 			// aapt resource value: 0x7f090094
 			public const int dashboard_item_next_event = 2131296404;
+
 			
 			// aapt resource value: 0x7f090061
 			public const int date = 2131296353;
