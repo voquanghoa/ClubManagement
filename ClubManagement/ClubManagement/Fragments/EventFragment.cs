@@ -22,19 +22,19 @@ namespace ClubManagement.Fragments
     {
         private TabLayout tabLayout;
 
-        private UserEventsController userEventsController = UserEventsController.Instance;
+        private readonly UserEventsController userEventsController = UserEventsController.Instance;
 
-        private EventsController eventsController = EventsController.Instance;
+        private readonly EventsController eventsController = EventsController.Instance;
 
-        private EventsAdapter adapter = new EventsAdapter();
+        private readonly EventsAdapter adapter = new EventsAdapter();
 
-        private string userId = AppDataController.Instance.UserId;
+        private readonly string userId = AppDataController.Instance.UserId;
 
-        private EventDialogFragment eventDialogFragment = new EventDialogFragment();
+        private readonly EventDialogFragment eventDialogFragment = new EventDialogFragment();
 
         private FloatingActionButton fabAdd;
 
-        private ItemTouchHelper itemTouchHelper;
+        private readonly ItemTouchHelper itemTouchHelper;
 
         protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
 
