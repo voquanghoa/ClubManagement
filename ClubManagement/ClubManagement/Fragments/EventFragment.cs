@@ -22,19 +22,19 @@ namespace ClubManagement.Fragments
     {
         private TabLayout tabLayout;
 
-        private UserEventsController userEventsController = UserEventsController.Instance;
+        private readonly UserEventsController userEventsController = UserEventsController.Instance;
 
-        private EventsController eventsController = EventsController.Instance;
+        private readonly EventsController eventsController = EventsController.Instance;
 
-        private EventsAdapter adapter = new EventsAdapter();
+        private readonly EventsAdapter adapter = new EventsAdapter();
 
-        private string userId = AppDataController.Instance.UserId;
+        private readonly string userId = AppDataController.Instance.UserId;
 
-        private EventDialogFragment eventDialogFragment = new EventDialogFragment();
+        private readonly EventDialogFragment eventDialogFragment = new EventDialogFragment();
 
         private FloatingActionButton fabAdd;
 
-        private ItemTouchHelper itemTouchHelper;
+        private readonly ItemTouchHelper itemTouchHelper;
 
         protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
 
@@ -157,17 +157,20 @@ namespace ClubManagement.Fragments
         {
             if (data != null)
             {
-                if(tabLayout.SelectedTabPosition == 0)
+                switch (tabLayout.SelectedTabPosition)
                 {
-                    adapter.Events = data.OrderByDescending(x => x.Time).ToList();
-					fabAdd.ShowIfAdmin();
-                }
-                else
-                {
-                    fabAdd.Visibility = ViewStates.Gone;
-                    var isJoined = tabLayout.SelectedTabPosition == 2;
-               
-					adapter.Events = data.Where(x => x.IsJoined == isJoined && x.Time >= DateTime.Today).OrderBy(x => x.Time).ToList();
+                    case 0:
+                        adapter.Events = data.Where(x => x.Time >= DateTime.Now && !x.IsJoined).ToList();
+                        fabAdd.ShowIfAdmin();
+                        break;
+                    case 1:
+                        fabAdd.Visibility = ViewStates.Gone;
+                        adapter.Events = data.Where(x => x.Time >= DateTime.Now && x.IsJoined).ToList();
+                        break;
+                    case 2:
+                        fabAdd.Visibility = ViewStates.Gone;
+                        adapter.Events = data.Where(x => x.Time < DateTime.Now).ToList();
+                        break;
                 }
             }
         }

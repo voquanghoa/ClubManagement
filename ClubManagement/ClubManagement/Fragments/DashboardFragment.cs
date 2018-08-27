@@ -217,6 +217,7 @@ namespace ClubManagement.Fragments
             tvDashboardItemNeedToPayTitle.SetTextFont(TypefaceStyle.Normal);
             tvDashboardItemNeedToPayCount.SetTextFont(TypefaceStyle.Normal);
             tvDashboardItemNeedToPayFees.SetTextFont(TypefaceStyle.Normal);
+            tvUserName.SetTextFont(TypefaceStyle.Bold);
         }
 
         public override void OnResume()
