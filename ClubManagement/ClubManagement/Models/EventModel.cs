@@ -28,5 +28,8 @@ namespace ClubManagement.Models
 
         [JsonProperty("longitude")]
         public double Longitude { get; set; }
+
+        [JsonProperty("image_url")]
+        public string ImageUrl { get; set; }
     }
 }

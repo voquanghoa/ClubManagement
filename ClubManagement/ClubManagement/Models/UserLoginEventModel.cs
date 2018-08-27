@@ -24,5 +24,7 @@ namespace ClubManagement.Models
 
         [JsonProperty("isJoined")]
         public bool IsJoined { get; set; }
+
+        public int NumberOfJoinedUsers { get; set; }
     }
 }
