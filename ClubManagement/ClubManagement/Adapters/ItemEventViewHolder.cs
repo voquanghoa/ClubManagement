@@ -41,11 +41,19 @@ namespace ClubManagement.Adapters
                 tvEventTitle.Text = value.Title;
                 tvTime.Text = value.Time.ToShortTimeString();
                 tvPlace.Text = value.Place;
-                imgJoinedUsers.SetImageResource(value.IsJoined
-                    ? Resource.Drawable.icon_paid
-                    : Resource.Drawable.icon_going);
-                tvGoingStatus.Text = value.IsJoined ? "Going" : $"You and {value.NumberOfJoinedUsers - 1} going";
-                tvGoingStatus.SetTextColor(ContextCompat.GetColorStateList(ItemView.Context, Resource.Color.state_going_color));
+                if (value.IsJoined)
+                {
+                    imgJoinedUsers.SetImageResource(Resource.Drawable.icon_paid);
+                    tvGoingStatus.Text = "Going";
+                    tvGoingStatus.SetTextColor(ContextCompat.GetColorStateList(ItemView.Context,
+                        Resource.Color.state_going_color));
+                }
+                else
+                {
+                    imgJoinedUsers.SetImageResource(Resource.Drawable.icon_going);
+                    tvGoingStatus.Text = $"You and {value.NumberOfJoinedUsers - 1} going";
+                    tvGoingStatus.SetTextColor(ContextCompat.GetColorStateList(ItemView.Context, Resource.Color.state_not_going_color));
+                }
             }
         }
 
