@@ -104,7 +104,7 @@ namespace ClubManagement.Fragments
 
         private void SwipeToDeleteCallback_SwipeLeft(object sender, ClickEventArgs e)
         {
-            if (sender is EventViewHolder eventViewHolder)
+            if (sender is ItemEventViewHolder eventViewHolder)
             {
                 var id = eventViewHolder.Id;
 
@@ -136,12 +136,15 @@ namespace ClubManagement.Fragments
         {
             try
             {
-                return eventsController.Values.Select(x => 
+                var userEvents = userEventsController.Values;
+
+                return eventsController.Values.Select(x =>
                 {
                     var userLoginEventModel = new UserLoginEventModel(x)
                     {
-                        IsJoined = userEventsController.Values
-                            .Any(y => y.EventId == x.Id && y.UserId == userId)
+                        IsJoined = userEvents
+                            .Any(y => y.EventId == x.Id && y.UserId == userId),
+                        NumberOfJoinedUsers = userEvents.Count(e => e.EventId == x.Id)
                     };
 
                     return userLoginEventModel;

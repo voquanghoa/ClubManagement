@@ -24,11 +24,11 @@ namespace ClubManagement.Adapters
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
-            var id = Resource.Layout.ItemEvent;
+            var id = Resource.Layout.item_recyclerview_events;
             var itemView = LayoutInflater.From(parent.Context).
                    Inflate(id, parent, false);
 
-            var viewHolder = new EventViewHolder(itemView);
+            var viewHolder = new ItemEventViewHolder(itemView);
 
             viewHolder.ClickHander += ItemClick;
 
@@ -37,7 +37,7 @@ namespace ClubManagement.Adapters
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder viewHolder, int position)
         {
-            ((EventViewHolder)viewHolder).EventModel = events[position];
+            ((ItemEventViewHolder)viewHolder).EventModel = events[position];
         }
 
         public override int ItemCount => events.Count;

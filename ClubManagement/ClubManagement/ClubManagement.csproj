@@ -64,6 +64,9 @@
     <Reference Include="Firebase.Xamarin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Firebase.Xamarin.0.3.6\lib\Firebase.Xamarin.dll</HintPath>
     </Reference>
+    <Reference Include="Glide, Version=4.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Glide.Xamarin.4.1.1\lib\MonoAndroid10\Glide.dll</HintPath>
+    </Reference>
     <Reference Include="Java.Interop" />
     <Reference Include="JWT, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Firebase.Xamarin.0.3.6\lib\JWT.dll</HintPath>
@@ -195,6 +198,7 @@
     <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Adapters\BalanceAdapter.cs" />
     <Compile Include="Adapters\BalanceAdapterViewHolder.cs" />
+    <Compile Include="Adapters\ItemEventViewHolder.cs" />
     <Compile Include="Adapters\PersonGoTimeClickEventArgs.cs" />
     <Compile Include="Adapters\ClickEventArgs.cs" />
     <Compile Include="Adapters\SwipeToDeleteCallback.cs" />
@@ -511,14 +515,16 @@
     <AndroidResource Include="Resources\drawable\dashboard_item_background_border.xml" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\layout\item_recyclerview_events.axml" />
     <AndroidResource Include="Resources\drawable\button_change_avatar.xml" />
- </ItemGroup>
+  </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\appbar_layout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_going.png" />
     <AndroidResource Include="Resources\drawable\toolbar_shadow.xml" />
   </ItemGroup>
   <ItemGroup>

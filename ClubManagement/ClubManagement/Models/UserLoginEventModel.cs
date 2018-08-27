@@ -20,9 +20,12 @@ namespace ClubManagement.Models
             base.Latitude = eventModel.Latitude;
             base.Longitude = eventModel.Longitude;
             base.Place = eventModel.Place;
+            base.ImageUrl = eventModel.ImageUrl;
         }
 
         [JsonProperty("isJoined")]
         public bool IsJoined { get; set; }
+
+        public int NumberOfJoinedUsers { get; set; }
     }
 }
