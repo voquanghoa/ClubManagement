@@ -513,6 +513,7 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\button_change_avatar.xml" />
  </ItemGroup>
+  <ItemGroup>
     <AndroidResource Include="Resources\layout\appbar_layout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
