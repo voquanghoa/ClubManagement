@@ -32,7 +32,7 @@ namespace ClubManagement.Activities
                 return;
             }
 
-            var dialog = DialogExtensions.CreateDialog(Resources.GetString(Resource.String.sign_in), Resources.GetString(Resource.String.wait), this);
+            var dialog = this.CreateDialog(Resources.GetString(Resource.String.sign_in), Resources.GetString(Resource.String.wait));
             dialog.Show();
 			var activity = this;
 

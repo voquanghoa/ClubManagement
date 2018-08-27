@@ -27,4 +27,5 @@
   <color name="text_color_red">#ff0000</color>
   <color name="text_color_retry">#009e91</color>
   <color name="item_background_color">#c3cfdb</color>
+  <color name="white_color">#ffffff</color>
 </resources>
