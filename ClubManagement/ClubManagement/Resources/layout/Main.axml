@@ -9,6 +9,10 @@
         android:layout_height="match_parent"
         android:id="@+id/content_frame"
         android:layout_weight="1" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_shadow_height"
+        android:background="@drawable/bottom_tabbar_shadow" />
     <android.support.design.widget.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="@dimen/tabbar_height"
