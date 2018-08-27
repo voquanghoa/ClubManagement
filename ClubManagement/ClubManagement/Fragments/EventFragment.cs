@@ -104,7 +104,7 @@ namespace ClubManagement.Fragments
 
         private void SwipeToDeleteCallback_SwipeLeft(object sender, ClickEventArgs e)
         {
-            if (sender is EventViewHolder eventViewHolder)
+            if (sender is ItemEventViewHolder eventViewHolder)
             {
                 var id = eventViewHolder.Id;
 
