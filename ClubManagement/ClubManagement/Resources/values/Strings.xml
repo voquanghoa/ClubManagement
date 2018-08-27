@@ -46,11 +46,12 @@
   <string name="exist_email">Email is exist!</string>
   <string name="signup_success">Sign up successfully!</string>
   <string name="back_to_exit">Press back again to exit!</string>
+  <string name="new_event">New</string>
   <string name="all">All</string>
   <string name="paid">Already paid</string>
   <string name="unpaid">Unpaid</string>
-  <string name="upcoming">Upcoming</string>
-  <string name="joined">Joined</string>
+  <string name="going">Going</string>
+  <string name="past">Past</string>
   <string name="add_outcome_dialog_error">Input Empty!\nPlease fill in all fields</string>
   <string name="eventDetail">Event detail</string>
   <string name="memberLocation">Member location</string>
@@ -72,6 +73,10 @@
   <string name="amount_parse_error_message">Amount must be bigger than 0đ and not too much!</string>
   <string name="change_avatar">Change avatar</string>
   <string name="log_out">Log out</string>
+  <string name="take_a_photo">Take a photo</string>
+  <string name="select_a_photo">Select a photo</string>
+<string name="change_avatar_success">Change avatar successfully!</string>
+<string name="change_avatar_failure">Change avatar failure!</string>
   <string name="dashboard_item_going">You\'re going</string>
   <string name="dashboard_item_new_events">New events</string>
   <string name="dashboard_item_next_event">Next event</string>

@@ -55,6 +55,9 @@
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Cloudinary.Core, Version=1.31.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cloudinary.Core.1.31.0\lib\netstandard1.6\Cloudinary.Core.dll</HintPath>
+    </Reference>
     <Reference Include="crypto, Version=1.8.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
       <HintPath>..\packages\Firebase.Xamarin.0.3.6\lib\crypto.dll</HintPath>
     </Reference>
@@ -65,8 +68,8 @@
     <Reference Include="JWT, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Firebase.Xamarin.0.3.6\lib\JWT.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Plugin.Connectivity, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xam.Plugin.Connectivity.3.2.0\lib\MonoAndroid10\Plugin.Connectivity.dll</HintPath>
@@ -96,6 +99,7 @@
       <HintPath>..\packages\Square.Picasso.2.5.2.1\lib\MonoAndroid\Square.Picasso.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Firebase.Xamarin.0.3.6\lib\System.Reactive.Core.dll</HintPath>
     </Reference>
@@ -153,6 +157,15 @@
     <Reference Include="Xamarin.Android.Support.Vector.Drawable, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Android.Support.Vector.Drawable.25.4.0.2\lib\MonoAndroid70\Xamarin.Android.Support.Vector.Drawable.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Firebase.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Firebase.Common.32.961.0\lib\MonoAndroid70\Xamarin.Firebase.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Firebase.Storage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Firebase.Storage.32.961.0\lib\MonoAndroid41\Xamarin.Firebase.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Firebase.Storage.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Firebase.Storage.Common.32.961.0\lib\MonoAndroid70\Xamarin.Firebase.Storage.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Xamarin.GooglePlayServices.Base, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.GooglePlayServices.Base.32.961.0\lib\MonoAndroid70\Xamarin.GooglePlayServices.Base.dll</HintPath>
     </Reference>
@@ -190,6 +203,7 @@
     <Compile Include="Adapters\EventsAdapter.cs" />
     <Compile Include="Adapters\PersonGoTimesAdapter.cs" />
     <Compile Include="Adapters\PersonsGoTimeAdapterViewHolder.cs" />
+    <Compile Include="Controllers\CloudinaryController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\FirebaseController.cs" />
     <Compile Include="Controllers\MapsController.cs" />
@@ -202,6 +216,7 @@
     <Compile Include="Fragments\AddBudgetDialogFragment.cs" />
     <Compile Include="Fragments\BalancesFragment.cs" />
     <Compile Include="Fragments\BalanceSummaryFragment.cs" />
+    <Compile Include="Fragments\ChangeAvatarFragment.cs" />
     <Compile Include="Fragments\DatePickerFragment.cs" />
     <Compile Include="Fragments\EventDialogFragment.cs" />
     <Compile Include="Fragments\NotificationFragment.cs" />
@@ -246,6 +261,7 @@
     <Compile Include="Ultilities\BottomNavigationHelper.cs" />
     <Compile Include="Ultilities\DialogExtensions.cs" />
     <Compile Include="Fragments\Bases\SwipeToRefreshDataFragment.cs" />
+    <Compile Include="Ultilities\FilePathUtilities.cs" />
     <Compile Include="Ultilities\StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -254,6 +270,7 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\fonts\MarketSaturday.ttf" />
     <AndroidAsset Include="Assets\fonts\IckyTicketMono.ttf" />
+    <None Include="app.config" />
     <None Include="GettingStarted.Xamarin" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
@@ -297,6 +314,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\DialogFragmentEvent.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\DialogFragmentChangeAvatar.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -493,11 +513,19 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\item_recyclerview_events.axml">
+    <AndroidResource Include="Resources\drawable\button_change_avatar.xml" />
+ </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\appbar_layout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon_going.png" />
+    <AndroidResource Include="Resources\drawable\toolbar_shadow.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\bottom_tabbar_shadow.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.v7.CardView.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.v7.CardView.targets" Condition="Exists('..\packages\Xamarin.Android.Support.v7.CardView.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.v7.CardView.targets')" />

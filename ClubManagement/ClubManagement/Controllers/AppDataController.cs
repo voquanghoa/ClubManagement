@@ -10,7 +10,7 @@ namespace ClubManagement.Controllers
 {
     public class AppDataController
     {
-        public static AppDataController Instance = new AppDataController();
+        public static AppDataController Instance = new AppDataController();       
 
         public string UserId { get; private set; }
 
@@ -24,12 +24,16 @@ namespace ClubManagement.Controllers
 
         private readonly UsersController usersController = UsersController.Instance;
 
+        private UserModel user;
+
+        public UserModel User => user;
+
         public void UpdateUser()
         {
             UserId = PreferenceManager.GetDefaultSharedPreferences(Application.Context)
                 .GetString("UserId", string.Empty);
 
-            var user = usersController.Values.FirstOrDefault(x => x.Id == UserId);
+            user = usersController.Values.FirstOrDefault(x => x.Id == UserId);
 
             UserName = user?.Name;
             IsAdmin = user?.IsAdmin ?? true;

@@ -1,8 +1,13 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using Android;
 using Android.App;
+using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Preferences;
+using Android.Provider;
 using Android.Widget;
 using ClubManagement.Controllers;
 using ClubManagement.Ultilities;
@@ -10,7 +15,7 @@ using Plugin.Connectivity;
 
 namespace ClubManagement.Activities
 {
-    [Activity(Label = "@string/app_name", MainLauncher = true, NoHistory = true, Theme = "@style/AppTheme")]
+    [Activity(Label = "@string/app_name", MainLauncher = true, Theme = "@style/AppTheme")]
     public class SplashActivity : Activity
     {
         [InjectOnClick(Resource.Id.btnRetry)]
@@ -52,6 +57,7 @@ namespace ClubManagement.Activities
                 Cheeseknife.Inject(this);
                 return;
             }
+
             StartApp();
         }
     }
