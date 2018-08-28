@@ -248,7 +248,6 @@
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserEventModel.cs" />
     <Compile Include="Models\UserMoneyModel.cs" />
-    <Compile Include="Adapters\EventViewHolder.cs" />
     <Compile Include="Cheeseknife.cs" />
     <Compile Include="Fragments\BalanceFragment.cs" />
     <Compile Include="Fragments\DashboardFragment.cs" />
@@ -284,9 +283,6 @@
     </None>
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\FragmentEvent.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\ItemEvent.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\EventDetail.axml">
