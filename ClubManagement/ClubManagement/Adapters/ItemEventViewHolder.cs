@@ -34,7 +34,7 @@ namespace ClubManagement.Adapters
             {
                 Id = value.Id;
                 tvEventTitle.Text = value.Title;
-                tvTime.Text = value.Time.DayOfWeek + " " + value.Time.ToShortTimeString();
+                tvTime.Text = value.Time.ToString("M") + " " + value.Time.ToShortTimeString();
                 tvPlace.Text = value.Place;
                 Glide.With(ItemView.Context).Load(value.ImageUrl).Into(imgEvent);
                 if (value.IsJoined)
