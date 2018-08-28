@@ -42,7 +42,7 @@ namespace ClubManagement.Adapters
                 var preferences = PreferenceManager.GetDefaultSharedPreferences(Application.Context);
                 preferences.GetString("UserId", string.Empty);
 
-                btnJoin.ChangeStatusButtonJoin(value.IsJoined);
+                
 
                 btnJoin.Clickable = false;
 

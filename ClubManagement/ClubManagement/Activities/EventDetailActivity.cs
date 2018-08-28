@@ -1,5 +1,4 @@
 ﻿using System;
-using Android.App;
 using Android.Gms.Maps;
 using Android.OS;
 using Android.Widget;
@@ -10,29 +9,40 @@ using Newtonsoft.Json;
 using System.Linq;
 using Android.Content;
 using Android.Views;
-using ClubManagement.Activities.Base;
+using ClubManagement.Fragments;
+using FragmentActivity = Android.Support.V4.App.FragmentActivity;
+using Android.App;
+using System.Globalization;
+using System.Threading.Tasks;
 
 namespace ClubManagement.Activities
 {
     [Activity(Label = "EventDetailActivity", Theme = "@style/AppTheme")]
-    public class EventDetailActivity : MapAbstractActivity
+    public class EventDetailActivity : FragmentActivity
     {
+        [InjectView(Resource.Id.tvMonth)]
+        private TextView tvMonth;
+
+        [InjectView(Resource.Id.tvDate)]
+        private TextView tvDate;
+
         [InjectView(Resource.Id.tvTitle)]
         private TextView tvTitle;
 
-        [InjectView(Resource.Id.tvDescription)]
-        private TextView tvDescription;
+        [InjectView(Resource.Id.tvStatus)]
+        private TextView tvStatus;
+
+        [InjectView(Resource.Id.tvUsers)]
+        private TextView tvUsers;
 
         [InjectView(Resource.Id.tvTime)]
         private TextView tvTime;
 
-        [InjectView(Resource.Id.tvPlace)]
-        private TextView tvPlace;
+        [InjectView(Resource.Id.tvAddress)]
+        private TextView tvAddress;
 
-        [InjectView(Resource.Id.btnJoin)]
-        private Button btnJoin;
-
-        [InjectView(Resource.Id.tvJoinStatus)] private TextView tvJoinStatus;
+        [InjectView(Resource.Id.tvDescription)]
+        private TextView tvDescription;
 
         [InjectOnClick(Resource.Id.btnBack)]
         private void Back(object s, EventArgs e)
@@ -40,10 +50,9 @@ namespace ClubManagement.Activities
             Finish();
         }
 
-        [InjectView(Resource.Id.tvCreatedBy)]
-        private TextView tvCreatedBy;
-
         private UserEventsController userEventsController = UserEventsController.Instance;
+
+        private UnjoinEventFragment unjoinEventFragment = new UnjoinEventFragment();
 
         private string userId = AppDataController.Instance.UserId;
 
@@ -52,6 +61,21 @@ namespace ClubManagement.Activities
         private bool currentIsJoined;
 
         private string content;
+
+        public EventDetailActivity()
+        {
+            unjoinEventFragment.NotGoing += UnjoinEventFragment_NotGoing;
+        }
+
+        private void UnjoinEventFragment_NotGoing(object sender, EventArgs e)
+        {
+            if (sender is Dialog dialog)
+            {
+                UpdateUserEvents(!currentIsJoined);
+
+                dialog.Dismiss();
+            }
+        }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -65,42 +89,50 @@ namespace ClubManagement.Activities
 
             eventDetail = JsonConvert.DeserializeObject<UserLoginEventModel>(content);
             
-            tvCreatedBy.Text = $"Created by {eventDetail.CreatedBy} in {eventDetail.CreatedTime}";
             tvTitle.Text = eventDetail.Title;
             tvDescription.Text = eventDetail.Description;
-            tvTime.Text = eventDetail.Time.ToShortDateString();
-            tvPlace.Text = eventDetail.Place;
+            tvTime.Text = "Time";
+            tvAddress.Text = eventDetail.Place;
+            tvMonth.Text = eventDetail.Time.ToString("MMM", CultureInfo.InvariantCulture);
+            tvDate.Text = eventDetail.Time.Day.ToString();
+            tvUsers.Text = "0";
+
+            var count = 0;
+
+            this.DoRequest(() => count = userEventsController.Values
+                    .Where(x => x.EventId == eventDetail.Id).Count()
+                , () => tvUsers.Text = count.ToString());
 
             currentIsJoined = eventDetail.IsJoined;
 
-            btnJoin.ChangeStatusButtonJoin(currentIsJoined);
-
             if (eventDetail.Time < DateTime.Now)
             {
-                tvJoinStatus.Text = Resources.GetString(Resource.String.event_happened);
-                btnJoin.Visibility = ViewStates.Gone;
+                tvStatus.Text = !eventDetail.IsJoined
+                    ? Resources.GetString(Resource.String.event_happened)
+                    : Resources.GetString(Resource.String.you_joined);
             }
-            else if (eventDetail.IsJoined)
+            else
             {
-                tvJoinStatus.Text = Resources.GetString(Resource.String.you_joined);
+                tvStatus.ChangeTextViewStatus(currentIsJoined);
+
+                tvStatus.Click += (s, e) =>
+                {
+                    if (!currentIsJoined)
+                    {
+                        UpdateUserEvents(!currentIsJoined);
+                    }
+                    else
+                    {
+                        unjoinEventFragment.Show(SupportFragmentManager, null);
+                    }
+                };
             }
-
-            btnJoin.Click += (s, e) =>
-            {
-                if (currentIsJoined) return;
-                UpdateUserEvents(!currentIsJoined);
-            };
-
-            FragmentManager.FindFragmentById<MapFragment>(Resource.Id.mapFragment).GetMapAsync(this);
-
-			MapReady += EventDetailActivity_MapReady;
         }
 
         private void UpdateUserEvents(bool isJoined)
         {
             currentIsJoined = isJoined;
-            btnJoin.ChangeStatusButtonJoin(isJoined);
-            tvJoinStatus.Text = Resources.GetString(isJoined ? Resource.String.you_joined : Resource.String.willYouJoin);
+            tvStatus.ChangeTextViewStatus(isJoined);
 
             this.DoRequest(() =>
             {
@@ -121,24 +153,5 @@ namespace ClubManagement.Activities
                 }
             }, () => { });
         }
-
-		private void EventDetailActivity_MapReady(object sender, EventArgs e)
-		{
-			googleMap.MapClick += GoogleMap_MapClick;
-
-            AddMapMarker(eventDetail.Latitude, eventDetail.Longitude, eventDetail.Title, Resource.Drawable.icon_event);
-
-            MoveMapCamera(eventDetail.Latitude, eventDetail.Longitude);
-		}
-
-		private void GoogleMap_MapClick(object sender, GoogleMap.MapClickEventArgs e)
-		{
-			var intent = new Intent(this, typeof(MemberLocationActivity));
-
-            intent.PutExtra("EventDetail", content);
-
-            StartActivity(intent);
-		}
-
     }
 }
