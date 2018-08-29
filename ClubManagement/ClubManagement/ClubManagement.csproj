@@ -64,6 +64,9 @@
     <Reference Include="Firebase.Xamarin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Firebase.Xamarin.0.3.6\lib\Firebase.Xamarin.dll</HintPath>
     </Reference>
+    <Reference Include="Glide, Version=4.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Glide.Xamarin.4.1.1\lib\MonoAndroid10\Glide.dll</HintPath>
+    </Reference>
     <Reference Include="Java.Interop" />
     <Reference Include="JWT, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Firebase.Xamarin.0.3.6\lib\JWT.dll</HintPath>
@@ -195,6 +198,7 @@
     <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Adapters\BalanceAdapter.cs" />
     <Compile Include="Adapters\BalanceAdapterViewHolder.cs" />
+    <Compile Include="Adapters\ItemEventViewHolder.cs" />
     <Compile Include="Adapters\PersonGoTimeClickEventArgs.cs" />
     <Compile Include="Adapters\ClickEventArgs.cs" />
     <Compile Include="Adapters\SwipeToDeleteCallback.cs" />
@@ -245,7 +249,6 @@
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserEventModel.cs" />
     <Compile Include="Models\UserMoneyModel.cs" />
-    <Compile Include="Adapters\EventViewHolder.cs" />
     <Compile Include="Cheeseknife.cs" />
     <Compile Include="Fragments\BalanceFragment.cs" />
     <Compile Include="Fragments\DashboardFragment.cs" />
@@ -281,9 +284,6 @@
     </None>
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\FragmentEvent.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\ItemEvent.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\EventDetail.axml">
@@ -517,6 +517,7 @@
     <AndroidResource Include="Resources\drawable\dashboard_item_background_border.xml" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\layout\item_recyclerview_events.axml" />
     <AndroidResource Include="Resources\drawable\button_change_avatar.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -525,6 +526,7 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_going.png" />
     <AndroidResource Include="Resources\drawable\toolbar_shadow.xml" />
   </ItemGroup>
   <ItemGroup>
