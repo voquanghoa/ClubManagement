@@ -21,5 +21,13 @@
         public const string EventClickShowNextEventTag = "Next event";
 
         public const string EventClickShowMoneyScreenTag = "Money screen";
+
+        public const string EventListHeaderToday = "Today";
+
+        public const string EventListHeaderTomorrow = "Tomorrow";
+
+        public const string EventListHeaderNextWeek = "Next week";
+
+        public const string EventListHeaderOther = "Other";
     }
 }

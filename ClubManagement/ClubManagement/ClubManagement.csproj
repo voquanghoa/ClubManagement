@@ -198,6 +198,7 @@
     <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Adapters\BalanceAdapter.cs" />
     <Compile Include="Adapters\BalanceAdapterViewHolder.cs" />
+    <Compile Include="Adapters\ItemEventHeaderViewHolder.cs" />
     <Compile Include="Adapters\ItemEventViewHolder.cs" />
     <Compile Include="Adapters\PersonGoTimeClickEventArgs.cs" />
     <Compile Include="Adapters\ClickEventArgs.cs" />
@@ -226,6 +227,7 @@
     <Compile Include="Fragments\OutcomeDialogFragment.cs" />
     <Compile Include="Fragments\PersonGoTimesFragment.cs" />
     <Compile Include="Models\AddressGeocodeAPIModel.cs" />
+    <Compile Include="Models\DescriptionItem.cs" />
     <Compile Include="Models\DistanceMatrixDistanceAPIModel.cs" />
     <Compile Include="Models\ElementMatrixDistanceAPIModel.cs" />
     <Compile Include="CustomAdapters\MoneyListAdapter.cs" />
@@ -233,6 +235,8 @@
     <Compile Include="CustomAdapters\MoneyAdminListAdapter.cs" />
     <Compile Include="CustomAdapters\MoneyAdminViewHolder.cs" />
     <Compile Include="Interfaces\IItemClickListener.cs" />
+    <Compile Include="Models\EventHeaderItem.cs" />
+    <Compile Include="Models\EventItem.cs" />
     <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\FirebaseModel.cs" />
     <Compile Include="Models\IncomeModel.cs" />
@@ -262,6 +266,7 @@
     <Compile Include="Ultilities\AppConstantValues.cs" />
     <Compile Include="Ultilities\AppUltilities.cs" />
     <Compile Include="Ultilities\BottomNavigationHelper.cs" />
+    <Compile Include="Ultilities\DateTimeExtensions.cs" />
     <Compile Include="Ultilities\DialogExtensions.cs" />
     <Compile Include="Fragments\Bases\SwipeToRefreshDataFragment.cs" />
     <Compile Include="Ultilities\FilePathUtilities.cs" />
@@ -529,6 +534,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\bottom_tabbar_shadow.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\item_header_recyclerview_events.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.v7.CardView.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.v7.CardView.targets" Condition="Exists('..\packages\Xamarin.Android.Support.v7.CardView.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.v7.CardView.targets')" />

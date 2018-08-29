@@ -163,19 +163,54 @@ namespace ClubManagement.Fragments
                 switch (tabLayout.SelectedTabPosition)
                 {
                     case 0:
-                        adapter.Events = data.Where(x => x.Time >= DateTime.Now && !x.IsJoined).ToList();
+                        adapter.IsPastTab = false;
+                        adapter.Events = data.Where(x => x.Time.Date >= DateTime.Today && !x.IsJoined).ToList();
                         fabAdd.ShowIfAdmin();
                         break;
                     case 1:
+                        adapter.IsPastTab = false;
                         fabAdd.Visibility = ViewStates.Gone;
-                        adapter.Events = data.Where(x => x.Time >= DateTime.Now && x.IsJoined).ToList();
+                        adapter.Events = data.Where(x => x.Time.Date >= DateTime.Today && x.IsJoined).ToList();
                         break;
                     case 2:
                         fabAdd.Visibility = ViewStates.Gone;
-                        adapter.Events = data.Where(x => x.Time < DateTime.Now).ToList();
+                        adapter.IsPastTab = true;
+                        adapter.Events = data.Where(x => x.Time.Date < DateTime.Today).ToList();
                         break;
                 }
             }
+        }
+
+        private Dictionary<string, List<UserLoginEventModel>> GetListEventWithTimeHeader()
+        {
+            var eventsWithTimeHeader = new Dictionary<string, List<UserLoginEventModel>>
+            {
+                { "Today", new List<UserLoginEventModel>()},
+                { "Tomorrow", new List<UserLoginEventModel>()},
+                { "Next week", new List<UserLoginEventModel>()},
+                { "Other", new List<UserLoginEventModel>()}
+            };
+
+            foreach (var eventModel in data)
+            {
+                if (eventModel.Time.IsToday())
+                {
+                    eventsWithTimeHeader["Today"].Add(eventModel);
+                }
+                else if (eventModel.Time.IsTomorrow())
+                {
+                    eventsWithTimeHeader["Tomorrow"].Add(eventModel);
+                }
+                else if (eventModel.Time.IsInNextWeek())
+                {
+                    eventsWithTimeHeader["Next week"].Add(eventModel);
+                }
+                else
+                {
+                    eventsWithTimeHeader["Other"].Add(eventModel);
+                }
+            }
+            return eventsWithTimeHeader;
         }
     }
 }
