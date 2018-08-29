@@ -7,10 +7,6 @@ using Android.Widget;
 using ClubManagement.Fragments;
 using ClubManagement.Ultilities;
 using Fragment = Android.Support.V4.App.Fragment;
-using System;
-using Android.Content;
-using ClubManagement.Models;
-using Newtonsoft.Json;
 
 namespace ClubManagement.Activities
 {
