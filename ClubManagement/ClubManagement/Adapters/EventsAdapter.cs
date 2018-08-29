@@ -80,6 +80,7 @@ namespace ClubManagement.Adapters
             {
                 { AppConstantValues.EventListHeaderToday, new List<UserLoginEventModel>()},
                 { AppConstantValues.EventListHeaderTomorrow, new List<UserLoginEventModel>()},
+                { AppConstantValues.EventListHeaderThisWeek, new List<UserLoginEventModel>()},
                 { AppConstantValues.EventListHeaderNextWeek, new List<UserLoginEventModel>()},
                 { AppConstantValues.EventListHeaderOther, new List<UserLoginEventModel>()}
             };
@@ -93,6 +94,10 @@ namespace ClubManagement.Adapters
                 else if (eventModel.Time.IsTomorrow())
                 {
                     eventsWithTimeHeader[AppConstantValues.EventListHeaderTomorrow].Add(eventModel);
+                }
+                else if (eventModel.Time.IsInThisWeek())
+                {
+                    eventsWithTimeHeader[AppConstantValues.EventListHeaderThisWeek].Add(eventModel);
                 }
                 else if (eventModel.Time.IsInNextWeek())
                 {

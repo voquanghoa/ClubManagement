@@ -180,37 +180,5 @@ namespace ClubManagement.Fragments
                 }
             }
         }
-
-        private Dictionary<string, List<UserLoginEventModel>> GetListEventWithTimeHeader()
-        {
-            var eventsWithTimeHeader = new Dictionary<string, List<UserLoginEventModel>>
-            {
-                { "Today", new List<UserLoginEventModel>()},
-                { "Tomorrow", new List<UserLoginEventModel>()},
-                { "Next week", new List<UserLoginEventModel>()},
-                { "Other", new List<UserLoginEventModel>()}
-            };
-
-            foreach (var eventModel in data)
-            {
-                if (eventModel.Time.IsToday())
-                {
-                    eventsWithTimeHeader["Today"].Add(eventModel);
-                }
-                else if (eventModel.Time.IsTomorrow())
-                {
-                    eventsWithTimeHeader["Tomorrow"].Add(eventModel);
-                }
-                else if (eventModel.Time.IsInNextWeek())
-                {
-                    eventsWithTimeHeader["Next week"].Add(eventModel);
-                }
-                else
-                {
-                    eventsWithTimeHeader["Other"].Add(eventModel);
-                }
-            }
-            return eventsWithTimeHeader;
-        }
     }
 }

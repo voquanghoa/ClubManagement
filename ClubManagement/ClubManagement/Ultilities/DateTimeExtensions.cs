@@ -12,6 +12,13 @@ namespace ClubManagement.Ultilities
             return start.AddDays(daysToAdd);
         }
 
+        public static bool IsInThisWeek(this DateTime dateTime)
+        {
+            var today = DateTime.Today;
+            var thisSunday = NextWeekDay(today, DayOfWeek.Sunday).AddDays(-7);
+            return dateTime.Date >= DateTime.Today && dateTime.Date <= thisSunday.Date;
+        }
+
         public static bool IsInNextWeek(this DateTime dateTime)
         {
             var today = DateTime.Today;
