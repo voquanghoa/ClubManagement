@@ -16,119 +16,153 @@
         android:contentInsetEnd="0dp"
         app:contentInsetRight="0dp"
         app:contentInsetEnd="0dp">
-        <ImageButton
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/event_detail_text_color"
+                android:text="@string/eventDetail"
+                android:gravity="center"
+                android:textSize="@dimen/tabbar_text_size"
+                android:textStyle="bold" />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon_black_back"
+                android:background="@null"
+                android:id="@+id/btnBack" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+    <ImageView
+        android:scaleType="fitCenter"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/image_view_event_detail_height"
+        android:id="@+id/imgViewPhoto" />
+    <LinearLayout
+        android:id="@+id/itemNextEventParentView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/text_event_detail_margin_large"
+        android:layout_marginRight="@dimen/text_event_detail_margin_large"
+        android:layout_marginTop="@dimen/text_event_detail_margin"
+        android:orientation="horizontal">
+        <LinearLayout
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/event_detail_text_color"
+                android:text="Aug"
+                android:textSize="@dimen/text_title_size" />
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="wrap_content"
+                android:paddingLeft="@dimen/dimen_5dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/event_detail_text_color"
+                android:text="14"
+                android:textSize="@dimen/text_title_size" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tvTitle"
+            android:gravity="center"
             android:layout_height="match_parent"
-            android:src="@drawable/icon_back"
-            android:background="@null"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textColor="@color/event_detail_text_color"
+            android:text="Title"
+            android:textSize="@dimen/text_title_size"
             android:paddingLeft="@dimen/textview_padding_left_right"
             android:paddingRight="@dimen/textview_padding_left_right"
-            android:id="@+id/btnBack" />
+            android:paddingTop="@dimen/textview_padding_top_bottom"
+            android:paddingBottom="@dimen/textview_padding_top_bottom" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/text_event_detail_margin"
+        android:layout_marginRight="@dimen/text_event_detail_margin"
+        android:layout_marginBottom="@dimen/text_event_detail_margin_small"
+        android:id="@+id/linearLayout2">
         <TextView
-            android:layout_width="wrap_content"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/event_detail_text_color"
+            android:layout_marginRight="@dimen/text_event_detail_margin_large"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="@string/eventDetail"
+            android:layout_weight="1"
             android:gravity="center_vertical"
-            android:textColor="@color/text_color_white"
-            android:textSize="@dimen/tabbar_text_size"
-            android:textStyle="bold" />
-    </android.support.v7.widget.Toolbar>
+            android:textSize="@dimen/text_description_size"
+            android:drawablePadding="@dimen/text_event_detail_margin_small"
+            android:id="@+id/tvStatus" />
+        <TextView
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/event_detail_text_color"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/text_description_size"
+            android:gravity="center_vertical"
+            android:id="@+id/tvUsers"
+            android:drawablePadding="@dimen/text_event_detail_margin_small"
+            android:drawableLeft="@drawable/icon_users" />
+    </LinearLayout>
     <TextView
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_margin="@dimen/text_event_detail_margin"
-        android:textColor="@color/text_color_blue"
+        android:textColor="@color/event_detail_text_color"
+        android:layout_marginLeft="@dimen/text_event_detail_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/text_title_size"
-        android:id="@+id/tvTitle" />
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/item_event_margin"
-        android:background="@color/item_event_background_color"
-        android:id="@+id/linearLayout1">
-        <TextView
-            android:text="Large Text"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_margin="@dimen/text_event_detail_margin"
-            android:textColor="@color/text_color_black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_description_size"
-            android:id="@+id/tvDescription" />
-        <TextView
-            android:text="Large Text"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_margin="@dimen/text_event_detail_margin"
-            android:textColor="@color/text_color_green"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_description_size"
-            android:id="@+id/tvCreatedBy" />
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_event_detail_margin"
-            android:id="@+id/linearLayout2">
-            <TextView
-                android:text="Large Text"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_marginRight="@dimen/text_event_detail_margin_large"
-                android:textColor="@color/text_color_blue"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textSize="@dimen/text_description_size"
-                android:id="@+id/tvTime" />
-            <TextView
-                android:text="Large Text"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/text_color_blue"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textSize="@dimen/text_description_size"
-                android:id="@+id/tvPlace" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_event_detail_margin"
-            android:gravity="right"
-            android:id="@+id/linearLayout3">
-            <TextView
-                android:id="@+id/tvJoinStatus"
-                android:text="@string/willYouJoin"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:gravity="center_vertical"
-                android:textColor="@color/text_color_green"
-                android:layout_marginRight="@dimen/text_event_detail_margin"
-                android:textSize="@dimen/text_description_size"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-            <Button
-                android:text="Button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textSize="@dimen/text_description_size"
-                android:id="@+id/btnJoin" />
-        </LinearLayout>
-    </LinearLayout>
+        android:textSize="@dimen/text_description_size"
+        android:gravity="center_vertical"
+        android:id="@+id/tvTime"
+        android:layout_marginBottom="@dimen/text_event_detail_margin_small"
+        android:drawablePadding="@dimen/text_event_detail_margin_small"
+        android:drawableLeft="@drawable/icon_time" />
     <TextView
-        android:text="@string/eventLocation"
+        android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/text_color_green"
-        android:layout_margin="@dimen/text_event_detail_margin"
-        android:textSize="@dimen/text_title_size"
+        android:textColor="@color/event_detail_text_color"
+        android:layout_marginLeft="@dimen/text_event_detail_margin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <fragment
-        android:id="@+id/mapFragment"
-        android:layout_margin="@dimen/item_event_margin"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/text_description_size"
+        android:id="@+id/tvAddress"
+        android:layout_marginBottom="@dimen/text_event_detail_margin_small"
+        android:drawablePadding="@dimen/text_event_detail_margin_small"
+        android:drawableLeft="@drawable/icon_marker" />
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        class="com.google.android.gms.maps.MapFragment" />
+        android:layout_height="@dimen/line_width"
+        android:layout_marginTop="@dimen/text_event_detail_margin_small"
+        android:layout_marginBottom="@dimen/text_event_detail_margin_small"
+        android:background="@color/black_color" />
+    <TextView
+        android:text="@string/description"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/event_detail_text_color"
+        android:layout_marginLeft="@dimen/text_event_detail_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_title_size" />
+    <TextView
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/event_detail_text_color"
+        android:layout_marginLeft="@dimen/text_event_detail_margin_large"
+        android:layout_marginRight="@dimen/text_event_detail_margin_large"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_description_size"
+        android:id="@+id/tvDescription" />
 </LinearLayout>

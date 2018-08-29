@@ -16,19 +16,25 @@ namespace ClubManagement.Ultilities
             inputMethodManager.HideSoftInputFromWindow(activity.CurrentFocus.WindowToken, 0);
         }
 
-        public static void ChangeStatusButtonJoin(this Button btnJoin, bool isJoined)
+        public static void ChangeTextViewStatus(this TextView textViewStatus, bool isJoined)
         {
-            if (isJoined)
+            if (!isJoined)
             {
-                btnJoin.Text = "Joined";
-                btnJoin.SetTextColor(Color.Green);
-                btnJoin.SetBackgroundColor(Color.Gray);
+                textViewStatus.Text = Application.Context.Resources
+                    .GetString(Resource.String.going);
+                textViewStatus.SetCompoundDrawablesWithIntrinsicBounds(Resource.Drawable.icon_like,
+                    0,
+                    0,
+                    0);
             }
             else
             {
-                btnJoin.Text = "Join";
-                btnJoin.SetTextColor(Color.White);
-                btnJoin.SetBackgroundColor(Color.Green);
+                textViewStatus.Text = Application.Context.Resources
+                    .GetString(Resource.String.you_are_going);
+                textViewStatus.SetCompoundDrawablesWithIntrinsicBounds(Resource.Drawable.icon_check,
+                    0,
+                    0,
+                    0);
             }
         }
 
