@@ -6,7 +6,6 @@ using Android.Net;
 using Android.Provider;
 using ClubManagement.Ultilities;
 using Java.IO;
-
 namespace ClubManagement.Controllers
 {
     public static class CloudinaryController
@@ -35,15 +34,26 @@ namespace ClubManagement.Controllers
             return uploadResult.Uri.OriginalString;
         }
 
-        private static Bitmap ResizeImage(Context context, Uri uri, int requireSize)
+		private static Bitmap ResizeImage(Context context, Uri uri, int sizeLimit)
         {
             var bitmap = MediaStore.Images.Media.GetBitmap(context.ContentResolver, uri);
+         
             var inWidth = bitmap.Width;
             var inHeight = bitmap.Height;
 
-            return inWidth > inHeight
-                ? Bitmap.CreateScaledBitmap(bitmap, requireSize, inHeight * requireSize / inWidth, false)
-                : Bitmap.CreateScaledBitmap(bitmap, inWidth * requireSize / inHeight, requireSize, false);
+			var scaleRatio = System.Math.Max(inWidth, inHeight) * 1.0 / sizeLimit;
+
+			if (scaleRatio <= 1)
+			{
+				return bitmap;
+			}
+			else
+			{
+				var outWidth = (int)(inWidth / scaleRatio);
+				var outHeight = (int)(inHeight / scaleRatio);
+
+				return Bitmap.CreateScaledBitmap(bitmap, outWidth, outHeight, false);
+			}
         }
 
         private static Uri GetImageUri(Context inContext, Bitmap inImage)
