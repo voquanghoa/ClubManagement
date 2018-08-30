@@ -198,6 +198,7 @@
     <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Adapters\BalanceAdapter.cs" />
     <Compile Include="Adapters\BalanceAdapterViewHolder.cs" />
+    <Compile Include="Adapters\ItemEventHeaderViewHolder.cs" />
     <Compile Include="Adapters\ItemEventViewHolder.cs" />
     <Compile Include="Adapters\PersonGoTimeClickEventArgs.cs" />
     <Compile Include="Adapters\ClickEventArgs.cs" />
@@ -227,6 +228,7 @@
     <Compile Include="Fragments\PersonGoTimesFragment.cs" />
     <Compile Include="Fragments\UnjoinEventFragment.cs" />
     <Compile Include="Models\AddressGeocodeAPIModel.cs" />
+    <Compile Include="Models\DescriptionItem.cs" />
     <Compile Include="Models\DistanceMatrixDistanceAPIModel.cs" />
     <Compile Include="Models\ElementMatrixDistanceAPIModel.cs" />
     <Compile Include="CustomAdapters\MoneyListAdapter.cs" />
@@ -234,6 +236,8 @@
     <Compile Include="CustomAdapters\MoneyAdminListAdapter.cs" />
     <Compile Include="CustomAdapters\MoneyAdminViewHolder.cs" />
     <Compile Include="Interfaces\IItemClickListener.cs" />
+    <Compile Include="Models\EventHeaderItem.cs" />
+    <Compile Include="Models\EventItem.cs" />
     <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\FirebaseModel.cs" />
     <Compile Include="Models\IncomeModel.cs" />
@@ -262,6 +266,7 @@
     <Compile Include="Ultilities\AppConstantValues.cs" />
     <Compile Include="Ultilities\AppUltilities.cs" />
     <Compile Include="Ultilities\BottomNavigationHelper.cs" />
+    <Compile Include="Ultilities\DateTimeExtensions.cs" />
     <Compile Include="Ultilities\DialogExtensions.cs" />
     <Compile Include="Fragments\Bases\SwipeToRefreshDataFragment.cs" />
     <Compile Include="Ultilities\FilePathUtilities.cs" />
@@ -533,6 +538,9 @@
     <AndroidResource Include="Resources\drawable\bottom_tabbar_shadow.xml" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\layout\item_header_recyclerview_events.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\drawable\icon_time.png" />
   </ItemGroup>
   <ItemGroup>
