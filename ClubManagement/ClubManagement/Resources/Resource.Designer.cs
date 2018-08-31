@@ -1917,8 +1917,8 @@ namespace ClubManagement
 			// aapt resource value: 0x7f080014
 			public const int abc_text_size_title_material_toolbar = 2131230740;
 			
-			// aapt resource value: 0x7f0800b9
-			public const int button_margin = 2131230905;
+			// aapt resource value: 0x7f0800ba
+			public const int button_margin = 2131230906;
 			
 			// aapt resource value: 0x7f0800a1
 			public const int button_margin_bottom = 2131230881;
@@ -1952,6 +1952,9 @@ namespace ClubManagement
 			
 			// aapt resource value: 0x7f0800b5
 			public const int circle_image_view_margin_right = 2131230901;
+			
+			// aapt resource value: 0x7f0800b8
+			public const int circle_imageview_padding = 2131230904;
 			
 			// aapt resource value: 0x7f08007a
 			public const int design_appbar_elevation = 2131230842;
@@ -2070,14 +2073,14 @@ namespace ClubManagement
 			// aapt resource value: 0x7f0800b4
 			public const int dialog_margin = 2131230900;
 			
-			// aapt resource value: 0x7f0800bb
-			public const int dimen_10dp = 2131230907;
-			
 			// aapt resource value: 0x7f0800bc
-			public const int dimen_20dp = 2131230908;
+			public const int dimen_10dp = 2131230908;
 			
-			// aapt resource value: 0x7f0800ba
-			public const int dimen_5dp = 2131230906;
+			// aapt resource value: 0x7f0800bd
+			public const int dimen_20dp = 2131230909;
+			
+			// aapt resource value: 0x7f0800bb
+			public const int dimen_5dp = 2131230907;
 			
 			// aapt resource value: 0x7f08005e
 			public const int disabled_alpha_material_dark = 2131230814;
@@ -2118,8 +2121,8 @@ namespace ClubManagement
 			// aapt resource value: 0x7f080066
 			public const int hint_pressed_alpha_material_light = 2131230822;
 			
-			// aapt resource value: 0x7f0800bf
-			public const int image_view_event_detail_height = 2131230911;
+			// aapt resource value: 0x7f0800c0
+			public const int image_view_event_detail_height = 2131230912;
 			
 			// aapt resource value: 0x7f0800ac
 			public const int imageview_margin = 2131230892;
@@ -2148,8 +2151,8 @@ namespace ClubManagement
 			// aapt resource value: 0x7f0800b2
 			public const int line_black_height = 2131230898;
 			
-			// aapt resource value: 0x7f0800b8
-			public const int line_width = 2131230904;
+			// aapt resource value: 0x7f0800b9
+			public const int line_width = 2131230905;
 			
 			// aapt resource value: 0x7f080067
 			public const int notification_action_icon_size = 2131230823;
@@ -2196,8 +2199,8 @@ namespace ClubManagement
 			// aapt resource value: 0x7f080071
 			public const int notification_top_pad_large_text = 2131230833;
 			
-			// aapt resource value: 0x7f0800bd
-			public const int number_dashboard_size = 2131230909;
+			// aapt resource value: 0x7f0800be
+			public const int number_dashboard_size = 2131230910;
 			
 			// aapt resource value: 0x7f080000
 			public const int place_autocomplete_button_padding = 2131230720;
@@ -2247,14 +2250,14 @@ namespace ClubManagement
 			// aapt resource value: 0x7f0800ab
 			public const int text_description_size = 2131230891;
 			
-			// aapt resource value: 0x7f0800c0
-			public const int text_event_detail_margin = 2131230912;
-			
 			// aapt resource value: 0x7f0800c1
-			public const int text_event_detail_margin_large = 2131230913;
+			public const int text_event_detail_margin = 2131230913;
 			
 			// aapt resource value: 0x7f0800c2
-			public const int text_event_detail_margin_small = 2131230914;
+			public const int text_event_detail_margin_large = 2131230914;
+			
+			// aapt resource value: 0x7f0800c3
+			public const int text_event_detail_margin_small = 2131230915;
 			
 			// aapt resource value: 0x7f0800a3
 			public const int text_title_size = 2131230883;
@@ -2277,8 +2280,8 @@ namespace ClubManagement
 			// aapt resource value: 0x7f080099
 			public const int view_conner_radius = 2131230873;
 			
-			// aapt resource value: 0x7f0800be
-			public const int view_shadow_height = 2131230910;
+			// aapt resource value: 0x7f0800bf
+			public const int view_shadow_height = 2131230911;
 			
 			static Dimension()
 			{
