@@ -10,7 +10,7 @@ namespace ClubManagement.Adapters
 {
     public class EventsAdapter : RecyclerView.Adapter
     {
-        private List<EventItem> eventItems = new List<EventItem>();
+        public List<EventItem> EventItems = new List<EventItem>();
 
         private List<UserLoginEventModel> events = new List<UserLoginEventModel>();
 
@@ -23,7 +23,7 @@ namespace ClubManagement.Adapters
             set
             {
                 events = value;
-                eventItems = GetEventItems(value);
+                EventItems = GetEventItems(value);
                 NotifyDataSetChanged();
             }
             get => events;
@@ -59,20 +59,20 @@ namespace ClubManagement.Adapters
             }
             if (GetItemViewType(position) == EventItem.TypeHeader)
             {
-                ((ItemEventHeaderViewHolder) viewHolder).Header = ((EventHeaderItem) eventItems[position]).Header;
+                ((ItemEventHeaderViewHolder) viewHolder).Header = ((EventHeaderItem) EventItems[position]).Header;
             }
             else if (GetItemViewType(position) == EventItem.TypeDescription)
             {
-                ((ItemEventViewHolder) viewHolder).EventModel = ((DescriptionItem) eventItems[position]).EventModel;
+                ((ItemEventViewHolder) viewHolder).EventModel = ((DescriptionItem) EventItems[position]).EventModel;
             }
         }
 
         public override int GetItemViewType(int position)
         {
-            return IsPastTab ? base.GetItemViewType(position) : eventItems[position].GetType();
+            return IsPastTab ? base.GetItemViewType(position) : EventItems[position].GetType();
         }
 
-        public override int ItemCount => IsPastTab ? events.Count : eventItems.Count;
+        public override int ItemCount => IsPastTab ? events.Count : EventItems.Count;
 
         private List<EventItem> GetEventItems(List<UserLoginEventModel> eventModels)
         {
@@ -90,30 +90,32 @@ namespace ClubManagement.Adapters
                 if (eventModel.Time.IsToday())
                 {
                     eventsWithTimeHeader[AppConstantValues.EventListHeaderToday].Add(eventModel);
+                    continue;
                 }
-                else if (eventModel.Time.IsTomorrow())
+                if (eventModel.Time.IsTomorrow())
                 {
                     eventsWithTimeHeader[AppConstantValues.EventListHeaderTomorrow].Add(eventModel);
+                    continue;
                 }
-                else if (eventModel.Time.IsInThisWeek())
+                if (eventModel.Time.IsInThisWeek())
                 {
                     eventsWithTimeHeader[AppConstantValues.EventListHeaderThisWeek].Add(eventModel);
+                    continue;
                 }
-                else if (eventModel.Time.IsInNextWeek())
+                if (eventModel.Time.IsInNextWeek())
                 {
                     eventsWithTimeHeader[AppConstantValues.EventListHeaderNextWeek].Add(eventModel);
+                    continue;
                 }
-                else
-                {
-                    eventsWithTimeHeader[AppConstantValues.EventListHeaderOther].Add(eventModel);
-                }
+
+                eventsWithTimeHeader[AppConstantValues.EventListHeaderOther].Add(eventModel);
             }
 
             var eventItems = new List<EventItem>();
 
             foreach (var item in eventsWithTimeHeader)
             {
-                if (!item.Value.Any()) break;
+                if (!item.Value.Any()) continue;
                 eventItems.Add(new EventHeaderItem
                 {
                     Header = item.Key
