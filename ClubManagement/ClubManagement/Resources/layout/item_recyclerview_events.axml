@@ -11,7 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@color/item_event_background_color"
+            android:background="@color/event_ticket_background_color"
             android:padding="@dimen/dimen_10dp"
             android:weightSum="3">
             <ImageView
@@ -41,7 +41,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Friday 8PM - 9:30PM"
-                    android:textColor="@color/item_event_text_color"
+                    android:textColor="@color/event_ticket_text_color"
                     android:textSize="@dimen/text_description_size"
                     android:id="@+id/tvTime" />
                 <TextView
@@ -51,7 +51,7 @@
                     android:ellipsize="end"
                     android:singleLine="true"
                     android:textSize="@dimen/text_description_size"
-                    android:textColor="@color/item_event_text_color"
+                    android:textColor="@color/event_ticket_text_color"
                     android:id="@+id/tvPlace" />
                 <LinearLayout
                     android:layout_width="match_parent"

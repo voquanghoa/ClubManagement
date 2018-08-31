@@ -10,12 +10,12 @@
         style="@style/TabLayoutThemes"
         android:layout_width="match_parent"
         android:layout_height="@dimen/tabbar_height"
-        android:background="@color/tabbar_background_color"
-        app:tabSelectedTextColor="@color/text_color_black"
+        android:background="@color/color_blue"
+        app:tabSelectedTextColor="@color/tablayout_selected_color"
         app:tabGravity="fill"
         app:tabMode="fixed"
         app:tabIndicatorColor="@color/colorAccent"
-        app:tabTextColor="@color/text_tabbar_unchoose_color"
+        app:tabTextColor="@color/tablayout_unselected_color"
         app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
         android:id="@+id/tabView1">
         <android.support.design.widget.TabItem
@@ -47,7 +47,8 @@
                 android:layout_margin="@dimen/textview_margin_top_bottom"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
-                app:backgroundTint="@color/tabbar_background_color" />
+                app:backgroundTint="@color/add_button_color"
+                android:tint="@color/white_color" />
         </RelativeLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>
