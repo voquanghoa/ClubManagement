@@ -90,25 +90,23 @@ namespace ClubManagement.Adapters
                 if (eventModel.Time.IsToday())
                 {
                     eventsWithTimeHeader[AppConstantValues.EventListHeaderToday].Add(eventModel);
-                    continue;
                 }
-                if (eventModel.Time.IsTomorrow())
+                else if (eventModel.Time.IsTomorrow())
                 {
                     eventsWithTimeHeader[AppConstantValues.EventListHeaderTomorrow].Add(eventModel);
-                    continue;
                 }
-                if (eventModel.Time.IsInThisWeek())
+                else if (eventModel.Time.IsInThisWeek())
                 {
                     eventsWithTimeHeader[AppConstantValues.EventListHeaderThisWeek].Add(eventModel);
-                    continue;
                 }
-                if (eventModel.Time.IsInNextWeek())
+                else if (eventModel.Time.IsInNextWeek())
                 {
                     eventsWithTimeHeader[AppConstantValues.EventListHeaderNextWeek].Add(eventModel);
-                    continue;
                 }
-
-                eventsWithTimeHeader[AppConstantValues.EventListHeaderOther].Add(eventModel);
+                else
+                {
+                    eventsWithTimeHeader[AppConstantValues.EventListHeaderOther].Add(eventModel);
+                }
             }
 
             var eventItems = new List<EventItem>();
