@@ -61,10 +61,12 @@ namespace ClubManagement.Activities
                 {
                     case AppConstantValues.EventClickShowGoingEventsTabTag:
                         DisplayFragment(Resource.Id.eventTab);
+                        EventFragment.SelectedTabIndex = 1;
                         bottomNavigationView.SelectedItemId = Resource.Id.eventTab;
                         return;
                     case AppConstantValues.EventClickShowNewEventsTabTag:
                         DisplayFragment(Resource.Id.eventTab);
+                        EventFragment.SelectedTabIndex = 0;
                         bottomNavigationView.SelectedItemId = Resource.Id.eventTab;
                         return;
                     case AppConstantValues.EventClickShowMoneyScreenTag:

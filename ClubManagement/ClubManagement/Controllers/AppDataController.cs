@@ -57,12 +57,12 @@ namespace ClubManagement.Controllers
                                     new List<UserEventModel>()).Where(x => x.UserId == UserId).ToList();
                 var eventList = EventsController.Instance.Values ?? new List<EventModel>();
                 return joinedEvents.Join(eventList, j => j.EventId, e => e.Id, (j, e) => e)
-                    .Where(e => e.Time >= DateTime.Now).ToList();
+                    .Where(e => e.Time.Date >= DateTime.Today).ToList();
             }
         }
 
         public int NumberOfUpComingEvents => (EventsController.Instance.Values ?? new List<EventModel>())
-            .Where(e => e.Time >= DateTime.Now)
+            .Where(e => e.Time.Date >= DateTime.Today)
             .ToList().Count;
 
         public List<MoneyState> GetListMoneyState()
