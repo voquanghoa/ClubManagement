@@ -34,6 +34,8 @@ namespace ClubManagement.Fragments
 
         private FloatingActionButton fabAdd;
 
+        public int SelectedTabIndex { set; get; }
+
         private readonly ItemTouchHelper itemTouchHelper;
 
         protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
@@ -96,6 +98,7 @@ namespace ClubManagement.Fragments
 
             tabLayout = view.FindViewById<TabLayout>(Resource.Id.tabView1);
             tabLayout.TabSelected += (s, e) => DisplayData(data);
+            tabLayout.GetTabAt(SelectedTabIndex).Select();
 
             Context.DoWithAdmin(() =>
             {

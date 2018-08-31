@@ -111,9 +111,8 @@ namespace ClubManagement.Adapters
 
             var eventItems = new List<EventItem>();
 
-            foreach (var item in eventsWithTimeHeader)
+			foreach (var item in eventsWithTimeHeader.Where(x => x.Value.Any()))
             {
-                if (!item.Value.Any()) continue;
                 eventItems.Add(new EventHeaderItem
                 {
                     Header = item.Key
