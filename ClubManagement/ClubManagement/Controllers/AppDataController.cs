@@ -61,9 +61,8 @@ namespace ClubManagement.Controllers
             }
         }
 
-        public int NumberOfUpComingEvents => (EventsController.Instance.Values ?? new List<EventModel>())
-            .Where(e => e.Time.Date >= DateTime.Today)
-            .ToList().Count;
+		public int NumberOfUpComingEvents => (EventsController.Instance.Values ?? new List<EventModel>())
+			.Count(e => e.Time.Date >= DateTime.Today);
 
         public List<MoneyState> GetListMoneyState()
         {
