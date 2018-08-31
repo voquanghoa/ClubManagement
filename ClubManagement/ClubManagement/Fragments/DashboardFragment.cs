@@ -18,6 +18,7 @@ using Android.Support.V4.Widget;
 using ClubManagement.Ultilities;
 using Android.Graphics;
 using System.Threading.Tasks;
+using Android.Preferences;
 using ClubManagement.Activities;
 using Newtonsoft.Json;
 
@@ -103,6 +104,9 @@ namespace ClubManagement.Fragments
 
         private readonly AppDataController appDataController = AppDataController.Instance;
 
+        private readonly ISharedPreferences preferences =
+            PreferenceManager.GetDefaultSharedPreferences(Application.Context);
+
         [InjectView(Resource.Id.tvVersion)]
         private TextView tvVersion;
 
@@ -114,7 +118,7 @@ namespace ClubManagement.Fragments
 
         private readonly ChangeAvatarFragment changeAvatarFragment = new ChangeAvatarFragment();
 
-        private string urlDefaultImage = "http://res.cloudinary.com/dw0yzvsvn/image/upload/v1535698760/icon_user.png";
+        private string avatarUrl;
 
         protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
 
@@ -127,7 +131,9 @@ namespace ClubManagement.Fragments
         {
             if (sender is string imageUrl)
             {
-                urlDefaultImage = imageUrl;
+                var preferencesEditor = preferences.Edit();
+                preferencesEditor.PutString(AppConstantValues.UserAvatarUrl, imageUrl);
+                preferencesEditor.Commit();
                 LoadAvatar();
 
                 Task.Run(async () =>
@@ -141,7 +147,13 @@ namespace ClubManagement.Fragments
 
         private void LoadAvatar()
         {
-            Picasso.With(Context).Load(urlDefaultImage).Fit().Into(civAvatar);
+            avatarUrl = preferences.GetString(AppConstantValues.UserAvatarUrl, string.Empty);
+            if (string.IsNullOrEmpty(avatarUrl))
+            {
+                civAvatar.SetImageResource(Resource.Drawable.icon_user);
+                return;
+            }
+            Picasso.With(Context).Load(avatarUrl).Fit().Into(civAvatar);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -157,12 +169,7 @@ namespace ClubManagement.Fragments
             {
                 tvUserName.Text = appDataController.UserName;
             }
-
-            if (!string.IsNullOrEmpty(appDataController.User.Avatar))
-            {
-                urlDefaultImage = appDataController.User.Avatar;
-            }
-
+            
             LoadAvatar();
 
             civAvatar.Click += CivAvatar_Click;

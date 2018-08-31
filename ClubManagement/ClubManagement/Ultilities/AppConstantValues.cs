@@ -6,6 +6,8 @@
 
         public const string LogStatusPreferenceKey = "IsLogged";
 
+        public const string UserAvatarUrl = "UserAvatarUrl";
+
         public const string BalanceFragmentSummaryTab = "Summary";
 
         public const string BalanceFragmentOutcomeTab = "Outcome";
