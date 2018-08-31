@@ -519,9 +519,6 @@
     <AndroidResource Include="Resources\drawable\icon_exit.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\dashboard_item_background_border.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\layout\item_recyclerview_events.axml" />
     <AndroidResource Include="Resources\drawable\button_change_avatar.xml" />
   </ItemGroup>

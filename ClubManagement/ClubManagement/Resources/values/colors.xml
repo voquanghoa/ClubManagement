@@ -34,4 +34,7 @@
   <color name="item_event_text_color">#9d9494</color>
   <color name="white_color">#ffffff</color>
   <color name="event_detail_text_color">#000000</color>
+  <color name="color_gray">#333333</color>
+  <color name="color_blue">#1976d2</color>
+  <color name="color_red">#bc081c</color>
 </resources>

@@ -112,9 +112,9 @@ namespace ClubManagement.Fragments
         [InjectView(Resource.Id.civAvatar)]
         private CircleImageView civAvatar;
 
-        private ChangeAvatarFragment changeAvatarFragment = new ChangeAvatarFragment();
+        private readonly ChangeAvatarFragment changeAvatarFragment = new ChangeAvatarFragment();
 
-        private string UrlDefaultImage = "http://png.icons8.com/material-rounded/48/000000/user.png";
+        private string urlDefaultImage = "http://res.cloudinary.com/dw0yzvsvn/image/upload/v1535698760/icon_user.png";
 
         protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
 
@@ -127,7 +127,7 @@ namespace ClubManagement.Fragments
         {
             if (sender is string imageUrl)
             {
-                UrlDefaultImage = imageUrl;
+                urlDefaultImage = imageUrl;
                 LoadAvatar();
 
                 Task.Run(async () =>
@@ -141,7 +141,7 @@ namespace ClubManagement.Fragments
 
         private void LoadAvatar()
         {
-            Picasso.With(Context).Load(UrlDefaultImage).Fit().Into(civAvatar);
+            Picasso.With(Context).Load(urlDefaultImage).Fit().Into(civAvatar);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -160,7 +160,7 @@ namespace ClubManagement.Fragments
 
             if (!string.IsNullOrEmpty(appDataController.User.Avatar))
             {
-                UrlDefaultImage = appDataController.User.Avatar;
+                urlDefaultImage = appDataController.User.Avatar;
             }
 
             LoadAvatar();
