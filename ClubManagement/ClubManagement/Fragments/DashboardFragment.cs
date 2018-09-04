@@ -148,11 +148,7 @@ namespace ClubManagement.Fragments
         private void LoadAvatar()
         {
             avatarUrl = preferences.GetString(AppConstantValues.UserAvatarUrl, string.Empty);
-            if (string.IsNullOrEmpty(avatarUrl))
-            {
-                civAvatar.SetImageResource(Resource.Drawable.icon_user);
-                return;
-            }
+			civAvatar.SetImageResource(Resource.Drawable.icon_user);
             Picasso.With(Context).Load(avatarUrl).Fit().Into(civAvatar);
         }
 
