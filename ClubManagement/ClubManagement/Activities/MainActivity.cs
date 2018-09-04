@@ -3,6 +3,7 @@ using Android.App;
 using Android.Support.V4.App;
 using Android.OS;
 using Android.Support.Design.Widget;
+using Android.Views;
 using Android.Widget;
 using ClubManagement.Fragments;
 using ClubManagement.Ultilities;
@@ -82,6 +83,7 @@ namespace ClubManagement.Activities
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Main);
             Cheeseknife.Inject(this);
+            ChangeStatusBarColor();
             BottomNavigationHelper.RemoveShiftMode(bottomNavigationView);
             bottomNavigationView.NavigationItemSelected += BottomNavigation_NavigationItemSelected;
             DisplayFragment(Resource.Id.dashboardTab);
@@ -124,6 +126,13 @@ namespace ClubManagement.Activities
             doubleBackpress = true;
             Toast.MakeText(this, Resources.GetString(Resource.String.back_to_exit), ToastLength.Short).Show();
             new Handler().PostDelayed(() => { doubleBackpress = false; }, 2000);
+        }
+
+        private void ChangeStatusBarColor()
+        {
+            Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
+            Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+            Window.SetStatusBarColor(Resources.GetColor(Resource.Color.color_dark_blue, null));
         }
     }
 }
