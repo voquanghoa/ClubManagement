@@ -24,7 +24,7 @@
                 android:paddingBottom="@dimen/textview_padding_top_bottom"
                 android:textSize="@dimen/tabbar_text_size"
                 android:textStyle="bold"
-                android:textColor="@color/text_color_black" />
+                android:textColor="@color/color_gray" />
             <LinearLayout
                 android:id="@+id/itemGoingParentView"
                 android:layout_width="match_parent"
@@ -34,7 +34,7 @@
                 android:layout_marginRight="@dimen/dimen_20dp"
                 android:layout_marginLeft="@dimen/dimen_20dp"
                 android:layout_marginBottom="@dimen/dimen_10dp"
-                android:background="@drawable/dashboard_item_background_border">
+                android:background="@color/color_blue">
                 <TextView
                     android:id="@+id/tvDashboardItemGoingTitle"
                     android:layout_gravity="center_vertical"
@@ -43,7 +43,7 @@
                     android:layout_weight="2"
                     android:text="@string/dashboard_item_going"
                     android:textSize="@dimen/text_description_size"
-                    android:textColor="@color/text_color_black"
+                    android:textColor="@color/text_color_white"
                     android:paddingLeft="@dimen/textview_padding_left_right"
                     android:paddingRight="@dimen/textview_padding_left_right"
                     android:paddingTop="@dimen/textview_padding_top_bottom"
@@ -57,7 +57,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="5"
-                        android:textColor="@color/text_color_black"
+                        android:textColor="@color/text_color_white"
                         android:gravity="center"
                         android:textSize="@dimen/number_dashboard_size" />
                     <TextView
@@ -68,7 +68,7 @@
                         android:layout_weight="1"
                         android:text="@string/dashboard_item_events"
                         android:textSize="@dimen/text_description_size"
-                        android:textColor="@color/text_color_black"
+                        android:textColor="@color/text_color_white"
                         android:paddingLeft="@dimen/dimen_5dp"
                         android:paddingRight="@dimen/textview_padding_left_right"
                         android:paddingTop="@dimen/textview_padding_top_bottom"
@@ -84,7 +84,7 @@
                 android:layout_marginRight="@dimen/dimen_20dp"
                 android:layout_marginLeft="@dimen/dimen_20dp"
                 android:layout_marginBottom="@dimen/dimen_10dp"
-                android:background="@drawable/dashboard_item_background_border">
+                android:background="@color/color_blue">
                 <TextView
                     android:id="@+id/tvDashboardItemEventsTitle"
                     android:layout_gravity="center_vertical"
@@ -93,7 +93,7 @@
                     android:layout_weight="2"
                     android:text="@string/dashboard_item_new_events"
                     android:textSize="@dimen/text_description_size"
-                    android:textColor="@color/text_color_black"
+                    android:textColor="@color/text_color_white"
                     android:paddingLeft="@dimen/textview_padding_left_right"
                     android:paddingRight="@dimen/textview_padding_left_right"
                     android:paddingTop="@dimen/textview_padding_top_bottom"
@@ -107,7 +107,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="5"
-                        android:textColor="@color/text_color_black"
+                        android:textColor="@color/text_color_white"
                         android:gravity="center"
                         android:textSize="@dimen/number_dashboard_size" />
                     <TextView
@@ -118,7 +118,7 @@
                         android:layout_weight="1"
                         android:text="@string/dashboard_item_events"
                         android:textSize="@dimen/text_description_size"
-                        android:textColor="@color/text_color_black"
+                        android:textColor="@color/text_color_white"
                         android:paddingLeft="@dimen/dimen_5dp"
                         android:paddingRight="@dimen/textview_padding_left_right"
                         android:paddingTop="@dimen/textview_padding_top_bottom"
@@ -134,7 +134,7 @@
                 android:layout_marginRight="@dimen/dimen_20dp"
                 android:layout_marginLeft="@dimen/dimen_20dp"
                 android:layout_marginBottom="@dimen/dimen_10dp"
-                android:background="@drawable/dashboard_item_background_border">
+                android:background="@color/color_blue">
                 <TextView
                     android:id="@+id/tvDashboardItemNextEventTitle"
                     android:layout_gravity="center_vertical"
@@ -143,7 +143,7 @@
                     android:layout_weight="2"
                     android:text="@string/dashboard_item_next_event"
                     android:textSize="@dimen/text_description_size"
-                    android:textColor="@color/text_color_black"
+                    android:textColor="@color/text_color_white"
                     android:paddingLeft="@dimen/textview_padding_left_right"
                     android:paddingRight="@dimen/textview_padding_left_right"
                     android:paddingTop="@dimen/textview_padding_top_bottom"
@@ -158,7 +158,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Aug"
-                        android:textColor="@color/text_color_black"
+                        android:textColor="@color/text_color_white"
                         android:textSize="20sp" />
                     <TextView
                         android:id="@+id/tvDashboardItemNextEventDate"
@@ -166,7 +166,7 @@
                         android:paddingLeft="@dimen/dimen_5dp"
                         android:layout_height="wrap_content"
                         android:text="14"
-                        android:textColor="@color/text_color_black"
+                        android:textColor="@color/text_color_white"
                         android:textSize="20sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -179,7 +179,7 @@
                 android:layout_marginRight="@dimen/dimen_20dp"
                 android:layout_marginLeft="@dimen/dimen_20dp"
                 android:layout_marginBottom="@dimen/dimen_10dp"
-                android:background="@drawable/dashboard_item_background_border">
+                android:background="@color/color_red">
                 <TextView
                     android:id="@+id/tvDashboardItemNeedToPayTitle"
                     android:layout_gravity="center_vertical"
@@ -188,7 +188,7 @@
                     android:layout_weight="2"
                     android:text="@string/dashboard_item_need_to_pay"
                     android:textSize="@dimen/text_description_size"
-                    android:textColor="@color/text_color_black"
+                    android:textColor="@color/text_color_white"
                     android:paddingLeft="@dimen/textview_padding_left_right"
                     android:paddingRight="@dimen/textview_padding_left_right"
                     android:paddingTop="@dimen/textview_padding_top_bottom"
@@ -202,7 +202,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="5"
-                        android:textColor="@color/text_color_black"
+                        android:textColor="@color/text_color_white"
                         android:gravity="center"
                         android:textSize="@dimen/number_dashboard_size" />
                     <TextView
@@ -213,7 +213,7 @@
                         android:layout_weight="1"
                         android:text="@string/dashboard_item_fees"
                         android:textSize="@dimen/text_description_size"
-                        android:textColor="@color/text_color_black"
+                        android:textColor="@color/text_color_white"
                         android:paddingLeft="@dimen/dimen_5dp"
                         android:paddingRight="@dimen/textview_padding_left_right"
                         android:paddingTop="@dimen/textview_padding_top_bottom"

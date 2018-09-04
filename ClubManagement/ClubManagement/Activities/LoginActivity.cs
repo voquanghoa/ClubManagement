@@ -56,6 +56,7 @@ namespace ClubManagement.Activities
                         PreferenceManager.GetDefaultSharedPreferences(Application.Context).Edit();
                     preferencesEditor.PutBoolean(AppConstantValues.LogStatusPreferenceKey, true);
                     preferencesEditor.PutString(AppConstantValues.UserIdPreferenceKey, loginUser.Id);
+                    preferencesEditor.PutString(AppConstantValues.UserAvatarUrl, loginUser.Avatar);
                     preferencesEditor.Commit();
                     Finish();
 
