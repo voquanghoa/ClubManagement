@@ -15,6 +15,7 @@ using Android.Support.V4.Widget;
 using ClubManagement.Fragments.Bases;
 using ClubManagement.Ultilities;
 using Android.Support.V7.Widget.Helper;
+using Android.Widget;
 
 namespace ClubManagement.Fragments
 {
@@ -29,8 +30,6 @@ namespace ClubManagement.Fragments
         private readonly EventsAdapter adapter = new EventsAdapter();
 
         private readonly string userId = AppDataController.Instance.UserId;
-
-        private readonly EventDialogFragment eventDialogFragment = new EventDialogFragment();
 
         private FloatingActionButton fabAdd;
 
@@ -48,21 +47,6 @@ namespace ClubManagement.Fragments
             swipeToDeleteCallback.SwipeLeft += SwipeToDeleteCallback_SwipeLeft;
 
             itemTouchHelper = new ItemTouchHelper(swipeToDeleteCallback);
-
-            eventDialogFragment.SaveClick += (s, e) =>
-            {
-                if (s is EventModel eventModel)
-                {
-                    var userLoginEventModel = new UserLoginEventModel(eventModel)
-                    {
-                        IsJoined = false
-                    };
-
-                    data.Add(userLoginEventModel);
-
-                    adapter.Events = data;
-                }
-            };
 
             adapter.ItemClick += (s, e) =>
             {
@@ -128,7 +112,8 @@ namespace ClubManagement.Fragments
 
         private void AddEvent_Click(object sender, System.EventArgs e)
         {
-            eventDialogFragment.Show(FragmentManager, null);
+            var intent = new Intent(Context, typeof(CreateEventActivity));
+            StartActivityForResult(intent, 1);
         }
 
         public override void OnResume()
@@ -183,6 +168,14 @@ namespace ClubManagement.Fragments
                         adapter.Events = data.Where(x => x.Time.Date < DateTime.Today).OrderByDescending(x => x.Time).ToList();
                         break;
                 }
+            }
+        }
+
+        public override void OnActivityResult(int requestCode, int resultCode, Intent intent)
+        {
+            if (requestCode == 1 && resultCode == -1)
+            {
+                Toast.MakeText(Context, Resources.GetString(Resource.String.create_event_success), ToastLength.Short).Show();
             }
         }
     }

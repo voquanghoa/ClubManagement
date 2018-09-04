@@ -85,4 +85,9 @@
   <string name="dashboard_item_fees">fees</string>
   <string name="you_are_going">You are going</string>
   <string name="not_going">Not going</string>
+  <string name="done">Done</string>
+  <string name="create_event">Create Event</string>
+  <string name="cross_create_event_title">Cancel</string>
+  <string name="cross_create_event_message">Are you sure to cancel?</string>
+  <string name="create_event_success">Create event successfully!</string>
 </resources>
