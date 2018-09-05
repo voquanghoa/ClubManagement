@@ -58,7 +58,11 @@ namespace ClubManagement.Activities
         {
             if (s is View view)
             {
-                var popupMenu = view.CreatepopupMenu(Resource.Menu.DetailEventOption);
+                var menuRes = eventDetail.Time.Date.CompareTo(DateTime.Now.Date) < 0
+                    ? Resource.Menu.DetailEventOptionForPastEvent
+                    : Resource.Menu.DetailEventOption;
+
+                var popupMenu = view.CreatepopupMenu(menuRes);
                 popupMenu.MenuItemClick += PopupMenu_MenuItemClick; ;
                 popupMenu.Show();
             }
