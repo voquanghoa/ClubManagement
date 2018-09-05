@@ -33,6 +33,16 @@
                 android:src="@drawable/icon_black_back"
                 android:background="@null"
                 android:id="@+id/btnBack" />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon_option"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@null"
+                android:id="@+id/btnOption"
+                android:scaleType="fitCenter"
+                android:layout_alignParentRight="true" />
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
     <ImageView

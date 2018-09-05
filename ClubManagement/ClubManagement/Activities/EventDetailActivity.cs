@@ -50,6 +50,49 @@ namespace ClubManagement.Activities
             Finish();
         }
 
+        [InjectView(Resource.Id.btnOption)]
+        private ImageButton btnOption;
+
+        [InjectOnClick(Resource.Id.btnOption)]
+        private void Option(object s, EventArgs e)
+        {
+            if (s is View view)
+            {
+                var popupMenu = view.CreatepopupMenu(Resource.Menu.DetailEventOption);
+                popupMenu.MenuItemClick += PopupMenu_MenuItemClick; ;
+                popupMenu.Show();
+            }
+        }
+
+        private void PopupMenu_MenuItemClick(object sender, PopupMenu.MenuItemClickEventArgs e)
+        {
+            switch (e.Item.ItemId)
+            {
+                case Resource.Id.edit:
+                    
+                    break;
+                case Resource.Id.delete:
+                    this.ShowConfirmDialog(Resource.String.title_confirm_delete,
+                        Resource.String.message_confirm_delete,
+                        () => 
+                        {
+                            var processDialog = new ProgressDialog(this);
+
+                            processDialog.Show();
+
+                            this.DoRequest(async () =>
+                            {
+                                await EventsController.Instance.Delete(eventDetail);
+
+                                processDialog.Dismiss();
+
+                                Finish();
+                            });
+                        }).Show();
+                    break;
+            }
+        }
+
         private UserEventsController userEventsController = UserEventsController.Instance;
 
         private UnjoinEventFragment unjoinEventFragment = new UnjoinEventFragment();
@@ -84,6 +127,11 @@ namespace ClubManagement.Activities
             SetContentView(Resource.Layout.EventDetail);
 
             Cheeseknife.Inject(this);
+
+            if (!AppDataController.Instance.IsAdmin)
+            {
+                btnOption.Visibility = ViewStates.Gone;
+            }
 
             content = Intent.GetStringExtra("EventDetail");
 
