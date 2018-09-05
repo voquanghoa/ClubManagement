@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tabbar_height"
+        android:background="@color/color_blue">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_cross"
+            android:background="@null"
+            android:id="@+id/btnCross"
+            android:paddingLeft="@dimen/dimen_20dp"
+            android:paddingRight="@dimen/dimen_20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/create_event"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_large"
+            android:textStyle="bold" />
+        <Button
+            android:layout_width="wrap_content"
+            android:background="@null"
+            android:textAllCaps="false"
+            android:id="@+id/btnDone"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_gravity="right"
+            android:text="@string/done"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_large"
+            android:textStyle="bold"
+            android:paddingLeft="@dimen/dimen_20dp"
+            android:paddingRight="@dimen/dimen_20dp" />
+    </android.support.v7.widget.Toolbar>
+    <FrameLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_shadow_height"
+            android:background="@drawable/toolbar_shadow" />
+    </FrameLayout>
+</LinearLayout>

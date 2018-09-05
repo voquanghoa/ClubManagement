@@ -38,6 +38,7 @@
   <dimen name="dimen_5dp">5dp</dimen>
   <dimen name="dimen_10dp">10dp</dimen>
   <dimen name="dimen_20dp">20dp</dimen>
+  <dimen name="text_size_large">20sp</dimen>
   <dimen name="number_dashboard_size">40sp</dimen>
   <dimen name="view_shadow_height">2dp</dimen>
   <dimen name="image_view_event_detail_height">180dp</dimen>
