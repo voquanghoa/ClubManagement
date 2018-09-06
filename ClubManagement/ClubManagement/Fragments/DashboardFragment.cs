@@ -16,7 +16,6 @@ using Refractored.Controls;
 using Square.Picasso;
 using Android.Support.V4.Widget;
 using ClubManagement.Ultilities;
-using Android.Graphics;
 using System.Threading.Tasks;
 using Android.Preferences;
 using ClubManagement.Activities;
@@ -136,7 +135,7 @@ namespace ClubManagement.Fragments
                 preferencesEditor.Commit();
                 LoadAvatar();
 
-                Task.Run(async () =>
+                Activity.DoRequest(async () =>
                 {
                     appDataController.User.Avatar = imageUrl;
 
@@ -149,7 +148,11 @@ namespace ClubManagement.Fragments
         {
             avatarUrl = preferences.GetString(AppConstantValues.UserAvatarUrl, string.Empty);
 			civAvatar.SetImageResource(Resource.Drawable.icon_user);
-            Picasso.With(Context).Load(avatarUrl).Fit().Into(civAvatar);
+
+            if (!string.IsNullOrEmpty(avatarUrl))
+            {
+                Picasso.With(Context).Load(avatarUrl).Fit().Into(civAvatar);
+            }
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -178,18 +181,12 @@ namespace ClubManagement.Fragments
 
         private void CivAvatar_Click(object sender, EventArgs e)
         {
-            var popupMenu = new PopupMenu(Context, sender as View);
-
-            var field = popupMenu.Class.GetDeclaredField("mPopup");
-            field.Accessible = true;
-            var menuPopupHelper = field.Get(popupMenu);
-            var setForceIcons = menuPopupHelper.Class.GetDeclaredMethod("setForceShowIcon", Java.Lang.Boolean.Type);
-            setForceIcons.Invoke(menuPopupHelper, true);
-
-            popupMenu.Inflate(Resource.Menu.User);
-            popupMenu.MenuItemClick += PopupMenu_MenuItemClick;
-
-            popupMenu.Show();
+            if  (sender is View view)
+            {
+                var popupMenu = view.CreatepopupMenu(Resource.Menu.User);
+                popupMenu.MenuItemClick += PopupMenu_MenuItemClick;
+                popupMenu.Show();
+            }
         }
 
         private void PopupMenu_MenuItemClick(object sender, PopupMenu.MenuItemClickEventArgs e)
