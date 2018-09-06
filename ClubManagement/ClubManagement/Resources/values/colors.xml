@@ -45,4 +45,5 @@
   <color name="color_green">#00c853</color>
   <color name="add_button_color">#bd081c</color>
   <color name="member_location_toolbar_color">#525252</color>
+  <color name="color_hint">#e0e0e0</color>
 </resources>

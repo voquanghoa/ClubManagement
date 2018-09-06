@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.Graphics;
+using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
 using Java.Util;
@@ -43,6 +44,21 @@ namespace ClubManagement.Ultilities
             var assetManager = Application.Context.ApplicationContext.Assets;
             var typeface = Typeface.CreateFromAsset(assetManager, Java.Lang.String.Format(Locale.Us, "fonts/%s", "IckyTicketMono.ttf"));
             textView.SetTypeface(typeface, style);
+        }
+
+        public static PopupMenu CreatepopupMenu(this View view, int menuRes)
+        {
+            var popupMenu = new PopupMenu(view.Context, view);
+
+            var field = popupMenu.Class.GetDeclaredField("mPopup");
+            field.Accessible = true;
+            var menuPopupHelper = field.Get(popupMenu);
+            var setForceIcons = menuPopupHelper.Class.GetDeclaredMethod("setForceShowIcon", Java.Lang.Boolean.Type);
+            setForceIcons.Invoke(menuPopupHelper, true);
+
+            popupMenu.Inflate(menuRes);
+
+            return popupMenu;
         }
     }
 }
