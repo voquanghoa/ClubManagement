@@ -7,14 +7,16 @@ using Android.OS;
 using Android.Gms.Maps;
 using ClubManagement.Controllers;
 using ClubManagement.Models;
-using ClubManagement.Fragments;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
-using Android.Widget;
 using ClubManagement.Activities.Base;
 using System.Collections.Generic;
 using Android.Gms.Maps.Model;
 using ClubManagement.Ultilities;
+using Android.Widget;
+using Square.Picasso;
+using Android.Graphics;
+using Android.Graphics.Drawables;
 
 namespace ClubManagement.Activities
 {
@@ -27,38 +29,86 @@ namespace ClubManagement.Activities
             Finish();
         }
 
+        [InjectView(Resource.Id.tvNameAddress)]
+        private TextView tvNameAddress;
+
+        [InjectView(Resource.Id.tvAddress)]
+        private TextView tvAddress;
+
+        [InjectView(Resource.Id.tvNumberPeople)]
+        private TextView tvNumberPeople;
+
         private UserEventsController userEventsController = UserEventsController.Instance;
 
         private UsersController usersController = UsersController.Instance;
 
         private UserLoginEventModel eventDetail;
 
-        private PersonGoTimesFragment personGoTimesFragment = new PersonGoTimesFragment();
-
         private List<Marker> markers = new List<Marker>();
 
         private void MemberLocationActivity_MapReady(object sender, EventArgs e)
         {
-            Task.Run(() =>
+            var users = new List<PersonGoTimeModel>();
+
+            this.DoRequest(() =>
             {
-                var user = new List<UserModel>();
-                this.DoRequest(() =>
+                users = userEventsController.Values.Where(x => x.EventId == eventDetail.Id)
+                    .Join(usersController.Values,
+                        x => x.UserId,
+                        y => y.Id,
+                        (x, y) => y)
+                    .Select(x =>
                     {
-                        user = userEventsController.Values.Where(x => x.EventId == eventDetail.Id)
-                            .Join(usersController.Values,
-                                x => x.UserId,
-                                y => y.Id,
-                                (x, y) => y)
-                            .ToList();
-                    },
-                    () =>
+                        var personGoTimeModel = new PersonGoTimeModel()
+                        {
+                            Name = x.Name,
+                            DistanceAndTime = MapsController.Instance.GetGoTime(x.Latitude,
+                                x.Longitude,
+                                eventDetail.Latitude,
+                                eventDetail.Longitude),
+                            Avatar = x.Avatar,
+                            Selected = false,
+                            Latitude = x.Latitude,
+                            Longitude = x.Longitude,
+                            LastLogin = x.LastLogin
+                        };
+
+                        return personGoTimeModel;
+                    }).ToList();
+            }, () =>
+            {
+                users.ForEach(x =>
+                {
+                    var title = $"{x.DistanceAndTime.Duration?.Text ?? "0 mims"}\n{x.DistanceAndTime.Distance?.Text ?? "0 m"} ago";
+
+                    var userMarker = AddMapMarker(x.Latitude, x.Longitude, x.Name);
+                    userMarker.Snippet = title;
+
+                    markers.Add(userMarker);
+
+                    var alpha = eventDetail.Time.Subtract(x.LastLogin) < new TimeSpan(0, 30, 0)
+                        && eventDetail.Time.CompareTo(x.LastLogin) == 1
+                        ? 1 : 0.6f;
+
+                    if (!string.IsNullOrEmpty(x.Avatar))
                     {
-                        user.ForEach(x =>
-                            markers.Add(AddMapMarker(x.Latitude, x.Longitude, x.Name, Resource.Drawable.icon_person)));
-                    });
+                        Picasso.With(this).Load(x.Avatar).Into(new Target()
+                        {
+                            Marker = userMarker,
+                            Alpha = alpha
+                        });
+                    }
+                    else
+                    {
+                        userMarker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.icon_user));
+                        userMarker.Alpha = alpha;
+                    }
+                });
             });
 
-            AddMapMarker(eventDetail.Latitude, eventDetail.Longitude, eventDetail.Title, Resource.Drawable.icon_event);
+            var marker = AddMapMarker(eventDetail.Latitude, eventDetail.Longitude, eventDetail.Title);
+
+            marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.icon_event));
 
             MoveMapCamera(eventDetail.Latitude, eventDetail.Longitude);
         }
@@ -71,46 +121,16 @@ namespace ClubManagement.Activities
 
             Cheeseknife.Inject(this);
 
-            FragmentManager.BeginTransaction()
-                           .Replace(Resource.Id.memberFrament, personGoTimesFragment)
-                .Commit();
-
             var content = Intent.GetStringExtra("EventDetail");
-
             eventDetail = JsonConvert.DeserializeObject<UserLoginEventModel>(content);
 
-            personGoTimesFragment.EventDetail = eventDetail;
-
-            personGoTimesFragment.PersonGoTimeClick += (s, e) =>
-            {
-                MoveMapCamera(e.Latitude, e.Longitude);
-            };
-
-            personGoTimesFragment.DisplayPersonsClick += (s, e) =>
-            {
-                FragmentManager.BeginTransaction()
-                    .Detach(personGoTimesFragment)
-                    .Attach(personGoTimesFragment)
-                    .Commit();
-            };
+            tvNameAddress.Text = eventDetail.Place;
+            tvAddress.Text = eventDetail.Place;
+            tvNumberPeople.Text = $"{Intent.GetStringExtra("NumberPeople")} Going";
 
             FragmentManager.FindFragmentById<MapFragment>(Resource.Id.mapFragment).GetMapAsync(this);
 
             MapReady += MemberLocationActivity_MapReady;
-
-            var previousPosition = 0;
-
-            personGoTimesFragment.ItemClick += (s, e) =>
-            {
-                markers[previousPosition].SetIcon(BitmapDescriptorFactory
-                    .FromResource(Resource.Drawable.icon_person));
-
-                markers[e.Position].SetIcon(BitmapDescriptorFactory
-                    .FromResource(Resource.Drawable.icon_person_selected));
-                markers[e.Position].ShowInfoWindow();
-
-                previousPosition = e.Position;
-            };
         }
     }
 }

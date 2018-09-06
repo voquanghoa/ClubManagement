@@ -41,6 +41,16 @@ namespace ClubManagement.Activities
         [InjectView(Resource.Id.tvAddress)]
         private TextView tvAddress;
 
+        [InjectOnClick(Resource.Id.tvAddress)]
+        private void AddressClick(object s, EventArgs e)
+        {
+            var intent = new Intent(this, typeof(MemberLocationActivity));
+            intent.PutExtra("EventDetail", content);
+            intent.PutExtra("NumberPeople", tvUsers.Text);
+
+            StartActivity(intent);
+        }
+
         [InjectView(Resource.Id.tvDescription)]
         private TextView tvDescription;
 

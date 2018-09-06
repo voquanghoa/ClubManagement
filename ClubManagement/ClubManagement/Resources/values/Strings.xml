@@ -90,4 +90,5 @@
   <string name="cross_create_event_title">Cancel</string>
   <string name="cross_create_event_message">Are you sure to cancel?</string>
   <string name="create_event_success">Create event successfully!</string>
+  <string name="can_not_load_marker">Can not load marker</string>
 </resources>

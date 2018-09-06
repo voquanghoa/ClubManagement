@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace ClubManagement.Models
 {
@@ -24,5 +25,8 @@ namespace ClubManagement.Models
 
         [JsonProperty("isAdmin")]
         public bool IsAdmin { get; set; }
+
+        [JsonProperty("lastLogin")]
+        public DateTime LastLogin { get; set; } = new DateTime();
     }
 }

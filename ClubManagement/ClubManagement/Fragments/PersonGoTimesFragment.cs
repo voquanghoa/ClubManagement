@@ -116,10 +116,6 @@ namespace ClubManagement.Fragments
                             var personGoTimeModel = new PersonGoTimeModel()
                             {
                                 Name = x.Name,
-                                GoTime = mapsController.GetGoTime(x.Latitude,
-                                    x.Longitude,
-                                    EventDetail.Latitude,
-                                    EventDetail.Longitude),
                                 Selected = false,
                                 Latitude = x.Latitude,
                                 Longitude = x.Longitude

@@ -15,7 +15,7 @@ namespace ClubManagement.Controllers
 
         }
 
-        public string GetGoTime(double fromLat, double fromLng, double toLat, double toLng)
+        public ElementMatrixDistanceAPIModel GetGoTime(double fromLat, double fromLng, double toLat, double toLng)
         {
             var webclient = new WebClient();
 
@@ -24,13 +24,9 @@ namespace ClubManagement.Controllers
 
             var result = JsonConvert.DeserializeObject<ResultsMatrixDistanceAPIModel>(content);
 
-            var duration = result.Rows.First().Elements.Last().Duration;
+            var elementMatrixDistanceAPIModel = result.Rows.First().Elements.Last();
 
-            var goTime = duration == null
-                ? "0m"
-                : duration.Text.Replace("hours", "h").Replace("mins", "m").Replace(" ", "");
-
-            return goTime;
+            return elementMatrixDistanceAPIModel;
         }
     }
 }

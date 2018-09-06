@@ -29,7 +29,7 @@ namespace ClubManagement.Adapters
             set
             {
                 tvName.Text = value.Name;
-                tvGoTime.Text = value.GoTime;
+                //tvGoTime.Text = value.GoTime;
 
                 ItemView.SetBackgroundColor(value.Selected ? selectedColor : unSelectColor);
             }
