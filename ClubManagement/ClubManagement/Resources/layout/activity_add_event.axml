@@ -43,7 +43,227 @@
         android:layout_width="match_parent">
         <LinearLayout
             android:layout_height="match_parent"
-            android:layout_width="match_parent" />
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:weightSum="3">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:src="@drawable/image_event_default"
+                android:id="@+id/imgEvent" />
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_20dp"
+                        android:layout_marginRight="@dimen/dimen_20dp"
+                        android:layout_marginTop="@dimen/dimen_5dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="@dimen/text_size_large"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/event_title"
+                            android:textColor="@color/color_gray" />
+                        <ImageButton
+                            android:id="@+id/btnChangeEventImage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/dimen_5dp"
+                            android:paddingBottom="@dimen/dimen_5dp"
+                            android:paddingRight="@dimen/dimen_10dp"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:src="@drawable/icon_image_event"
+                            android:background="@null" />
+                    </LinearLayout>
+                    <EditText
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:id="@+id/edtEventTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_20dp"
+                        android:layout_marginRight="@dimen/dimen_20dp"
+                        android:layout_marginTop="@dimen/dimen_5dp"
+                        android:textSize="@dimen/text_description_size"
+                        android:paddingBottom="@dimen/dimen_5dp"
+                        android:paddingTop="@dimen/dimen_5dp"
+                        android:hint="@string/enter_here"
+                        android:textColorHint="@color/color_hint"
+                        android:background="@drawable/edit_text_border" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_20dp"
+                        android:layout_marginRight="@dimen/dimen_20dp"
+                        android:layout_marginTop="@dimen/dimen_5dp"
+                        android:textSize="@dimen/tabbar_text_size"
+                        android:text="@string/time"
+                        android:textColor="@color/color_gray" />
+                    <LinearLayout
+                        android:id="@+id/pickStartTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_20dp"
+                        android:layout_marginRight="@dimen/dimen_20dp"
+                        android:layout_marginTop="@dimen/dimen_5dp"
+                        android:paddingBottom="@dimen/dimen_5dp"
+                        android:paddingTop="@dimen/dimen_5dp"
+                        android:background="@drawable/edit_text_border"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="@dimen/tabbar_text_size"
+                            android:text="@string/start_time"
+                            android:textColor="@color/color_gray" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="@dimen/text_description_size"
+                            android:text="Aug 29, 2018"
+                            android:id="@+id/tvStartDate"
+                            android:textColor="@color/color_hint" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:id="@+id/tvStartTime"
+                            android:textSize="@dimen/text_description_size"
+                            android:text="10:00AM"
+                            android:textColor="@color/color_hint" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/pickEndTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_20dp"
+                        android:layout_marginRight="@dimen/dimen_20dp"
+                        android:layout_marginTop="@dimen/dimen_5dp"
+                        android:paddingBottom="@dimen/dimen_5dp"
+                        android:paddingTop="@dimen/dimen_5dp"
+                        android:background="@drawable/edit_text_border"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="@dimen/tabbar_text_size"
+                            android:text="@string/end_time"
+                            android:textColor="@color/color_gray" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:id="@+id/tvEndDate"
+                            android:textSize="@dimen/text_description_size"
+                            android:text="Aug 29, 2018"
+                            android:textColor="@color/color_hint" />
+                        <LinearLayout
+                            android:layout_height="wrap_content"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/tvEndTime"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="@dimen/text_description_size"
+                                android:text="10:00AM"
+                                android:textColor="@color/color_hint" />
+                            <ImageButton
+                                android:id="@+id/btnResetEndTime"
+                                android:background="@null"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/icon_delete" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_20dp"
+                        android:layout_marginRight="@dimen/dimen_20dp"
+                        android:layout_marginTop="@dimen/dimen_5dp"
+                        android:textSize="@dimen/tabbar_text_size"
+                        android:text="@string/location"
+                        android:textColor="@color/color_gray" />
+                    <EditText
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:id="@+id/edtEventLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_20dp"
+                        android:layout_marginRight="@dimen/dimen_20dp"
+                        android:layout_marginTop="@dimen/dimen_5dp"
+                        android:textSize="@dimen/text_description_size"
+                        android:paddingBottom="@dimen/dimen_5dp"
+                        android:paddingTop="@dimen/dimen_5dp"
+                        android:hint="@string/enter_location"
+                        android:textColorHint="@color/color_hint"
+                        android:background="@drawable/edit_text_border" />
+                    <EditText
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:editable="false"
+                        android:id="@+id/edtChooseLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_20dp"
+                        android:layout_marginRight="@dimen/dimen_20dp"
+                        android:layout_marginTop="@dimen/dimen_5dp"
+                        android:textSize="@dimen/text_description_size"
+                        android:paddingBottom="@dimen/dimen_5dp"
+                        android:paddingTop="@dimen/dimen_5dp"
+                        android:hint="@string/choose_location"
+                        android:focusable="false"
+                        android:textColorHint="@color/color_hint"
+                        android:background="@drawable/edit_text_border" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_20dp"
+                        android:layout_marginRight="@dimen/dimen_20dp"
+                        android:layout_marginTop="@dimen/dimen_5dp"
+                        android:textSize="@dimen/tabbar_text_size"
+                        android:text="@string/description"
+                        android:textColor="@color/color_gray" />
+                    <EditText
+                        android:id="@+id/edtEventDescription"
+                        android:layout_width="match_parent"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_20dp"
+                        android:layout_marginRight="@dimen/dimen_20dp"
+                        android:layout_marginTop="@dimen/dimen_5dp"
+                        android:textSize="@dimen/text_description_size"
+                        android:paddingBottom="@dimen/dimen_5dp"
+                        android:paddingTop="@dimen/dimen_5dp"
+                        android:hint="@string/enter_here"
+                        android:textColorHint="@color/color_hint"
+                        android:background="@drawable/edit_text_border" />
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
+        </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/view_shadow_height"
