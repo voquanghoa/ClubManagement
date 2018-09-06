@@ -1,5 +1,4 @@
 ﻿using System;
-using Android.Gms.Maps;
 using Android.OS;
 using Android.Widget;
 using ClubManagement.Controllers;
@@ -13,7 +12,6 @@ using ClubManagement.Fragments;
 using FragmentActivity = Android.Support.V4.App.FragmentActivity;
 using Android.App;
 using System.Globalization;
-using System.Threading.Tasks;
 
 namespace ClubManagement.Activities
 {
@@ -34,6 +32,16 @@ namespace ClubManagement.Activities
 
         [InjectView(Resource.Id.tvUsers)]
         private TextView tvUsers;
+
+        [InjectOnClick(Resource.Id.tvUsers)]
+        private void UsersClick(object s, EventArgs e)
+        {
+            var intent = new Intent(this, typeof(GuestsActivity));
+            intent.PutExtra("NumberPeople", tvUsers.Text);
+            intent.PutExtra("EventDetail", content);
+
+            StartActivity(intent);
+        }
 
         [InjectView(Resource.Id.tvTime)]
         private TextView tvTime;
