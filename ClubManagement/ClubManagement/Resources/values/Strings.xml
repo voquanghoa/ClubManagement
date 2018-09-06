@@ -94,4 +94,13 @@
   <string name="cross_create_event_title">Cancel</string>
   <string name="cross_create_event_message">Are you sure to cancel?</string>
   <string name="create_event_success">Create event successfully!</string>
+  <string name="event_title">EVENT TITLE</string>
+  <string name="enter_here">Enter here</string>
+  <string name="time">Time</string>
+  <string name="start_time">Starts</string>
+  <string name="end_time">Ends</string>
+  <string name="location">Location</string>
+  <string name="enter_location">Enter location</string>
+  <string name="choose_location">Choose from the map</string>
+  <string name="description">Description</string>
 </resources>

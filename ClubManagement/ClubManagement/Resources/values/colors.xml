@@ -44,4 +44,5 @@
   <color name="event_ticket_text_color">#666666</color>
   <color name="color_green">#00c853</color>
   <color name="add_button_color">#bd081c</color>
+  <color name="color_hint">#e0e0e0</color>
 </resources>
