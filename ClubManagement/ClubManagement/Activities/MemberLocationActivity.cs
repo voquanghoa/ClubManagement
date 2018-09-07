@@ -33,8 +33,6 @@ namespace ClubManagement.Activities
 
         private UserLoginEventModel eventDetail;
 
-        //private GuestsFragment personGoTimesFragment = new GuestsFragment();
-
         private List<Marker> markers = new List<Marker>();
 
         private void MemberLocationActivity_MapReady(object sender, EventArgs e)
@@ -71,46 +69,13 @@ namespace ClubManagement.Activities
 
             Cheeseknife.Inject(this);
 
-            //FragmentManager.BeginTransaction()
-            //               .Replace(Resource.Id.memberFrament, personGoTimesFragment)
-            //    .Commit();
-
             var content = Intent.GetStringExtra("EventDetail");
 
             eventDetail = JsonConvert.DeserializeObject<UserLoginEventModel>(content);
 
-            //personGoTimesFragment.EventDetail = eventDetail;
-
-            //personGoTimesFragment.PersonGoTimeClick += (s, e) =>
-            //{
-            //    MoveMapCamera(e.Latitude, e.Longitude);
-            //};
-
-            //personGoTimesFragment.DisplayPersonsClick += (s, e) =>
-            //{
-            //    FragmentManager.BeginTransaction()
-            //        .Detach(personGoTimesFragment)
-            //        .Attach(personGoTimesFragment)
-            //        .Commit();
-            //};
-
             FragmentManager.FindFragmentById<MapFragment>(Resource.Id.mapFragment).GetMapAsync(this);
 
             MapReady += MemberLocationActivity_MapReady;
-
-            var previousPosition = 0;
-
-            //personGoTimesFragment.ItemClick += (s, e) =>
-            //{
-            //    markers[previousPosition].SetIcon(BitmapDescriptorFactory
-            //        .FromResource(Resource.Drawable.icon_person));
-
-            //    markers[e.Position].SetIcon(BitmapDescriptorFactory
-            //        .FromResource(Resource.Drawable.icon_person_selected));
-            //    markers[e.Position].ShowInfoWindow();
-
-            //    previousPosition = e.Position;
-            //};
         }
     }
 }

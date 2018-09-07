@@ -242,7 +242,7 @@
     <Compile Include="Models\EventItem.cs" />
     <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\FirebaseModel.cs" />
-    <Compile Include="Models\Guest.cs" />
+    <Compile Include="Models\GuestModel.cs" />
     <Compile Include="Models\IncomeModel.cs" />
     <Compile Include="Models\MoneyAdminState.cs" />
     <Compile Include="Models\MoneyModel.cs" />
