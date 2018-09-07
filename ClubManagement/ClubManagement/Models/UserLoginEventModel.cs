@@ -15,6 +15,7 @@ namespace ClubManagement.Models
             Title = eventModel.Title;
             Description = eventModel.Description;
             TimeStart = eventModel.TimeStart;
+            TimeEnd = eventModel.TimeEnd;
             CreatedBy = eventModel.CreatedBy;
             CreatedTime = eventModel.CreatedTime;
             Latitude = eventModel.Latitude;
