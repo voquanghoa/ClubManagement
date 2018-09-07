@@ -6,6 +6,9 @@ using Android.Gms.Location.Places.UI;
 using Android.OS;
 using Android.Widget;
 using ClubManagement.Ultilities;
+using Android.Views;
+using ClubManagement.Controllers;
+using ClubManagement.Models;
 
 namespace ClubManagement.Activities
 {
@@ -33,12 +36,41 @@ namespace ClubManagement.Activities
         [InjectView(Resource.Id.edtEventDescription)]
         private EditText edtEventDescription;
 
+        [InjectView(Resource.Id.imgEvent)]
+        private ImageView imgEvent;
+
         private const int PlacePickerRequset = 1;
+
+        private const int RequestPickAvatar = 2;
 
         [InjectOnClick(Resource.Id.btnChangeEventImage)]
         private void ChangeEventImage(object sender, EventArgs e)
         {
-            // show pop up menu
+            if (sender is View view)
+            {
+                var popupMenu = view.CreatepopupMenu(Resource.Menu.AddPhoto);
+                popupMenu.MenuItemClick += PopupMenu_MenuItemClick;
+                popupMenu.Show();
+            }
+        }
+
+        private void PopupMenu_MenuItemClick(object sender, PopupMenu.MenuItemClickEventArgs e)
+        {
+            if (sender is PopupMenu popupMenu)
+            {
+                switch (e.Item.ItemId)
+                {
+                    case Resource.Id.addPhoto:
+                        var intent = new Intent(Intent.ActionGetContent);
+                        intent.SetType("image/*");
+                        StartActivityForResult(intent, RequestPickAvatar);
+
+                        break;
+                    case Resource.Id.cancel:
+                        popupMenu.Dismiss();
+                        break;
+                }
+            }
         }
 
         [InjectOnClick(Resource.Id.pickStartTime)]
@@ -97,6 +129,9 @@ namespace ClubManagement.Activities
                 () => { }).Show();
         }
 
+        private EventModel eventModel;
+
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -107,6 +142,17 @@ namespace ClubManagement.Activities
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
+
+            if (requestCode == RequestPickAvatar && resultCode == Result.Ok)
+            {
+                this.DoRequest(async ()=> 
+                {
+                    eventModel.ImageUrl = await CloudinaryController.UploadImage(this, data.Data, $"Images/{Guid.NewGuid()}", 256);
+                });
+                    
+                imgEvent.SetImageURI(data.Data);
+            }
+
             if (requestCode != PlacePickerRequset || resultCode != Result.Ok) return;
             place = PlacePicker.GetPlace(this, data);
             edtChooseLocation.Text = place.AddressFormatted.ToString();
