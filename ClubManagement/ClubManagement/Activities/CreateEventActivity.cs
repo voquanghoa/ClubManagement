@@ -8,6 +8,7 @@ using Android.Widget;
 using ClubManagement.Ultilities;
 using Android.Views;
 using ClubManagement.Controllers;
+using ClubManagement.Fragments;
 using ClubManagement.Models;
 
 namespace ClubManagement.Activities
@@ -16,6 +17,17 @@ namespace ClubManagement.Activities
     public class CreateEventActivity : Activity
     {
         private IPlace place;
+
+        private DateTime startTime;
+
+        private DateTime endTime;
+
+        public CreateEventActivity()
+        {
+            startTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day,
+                DateTime.Now.Hour > 9 ? DateTime.Now.Hour + 1 : 9, 0, 0);
+            endTime = new DateTime(startTime.Year, startTime.Month, startTime.Day, startTime.Hour + 1, startTime.Minute, startTime.Second);
+        }
 
         [InjectView(Resource.Id.edtEventTitle)] private EditText edtEventTitle;
 
@@ -73,26 +85,28 @@ namespace ClubManagement.Activities
             }
         }
 
-        [InjectOnClick(Resource.Id.pickStartTime)]
+        [InjectOnClick(Resource.Id.tvStartDate)]
+        private void PickStartDate(object sender, EventArgs e)
+        {
+            PickDate(DateTime.Now, true);
+        }
+
+        [InjectOnClick(Resource.Id.tvStartTime)]
         private void PickStartTime(object sender, EventArgs e)
         {
-            // show date time picker dialog 
-            Toast.MakeText(this, "sss", ToastLength.Short).Show();
-
+            PickTime(startTime, true);
         }
 
-        [InjectOnClick(Resource.Id.pickEndTime)]
+        [InjectOnClick(Resource.Id.tvEndDate)]
+        private void PickEndDate(object sender, EventArgs e)
+        {
+            PickDate(startTime, false);
+        }
+
+        [InjectOnClick(Resource.Id.tvEndTime)]
         private void PickEndTime(object sender, EventArgs e)
         {
-            // show date time picker dialog
-            Toast.MakeText(this, "sss", ToastLength.Short).Show();
-        }
-
-        [InjectOnClick(Resource.Id.btnResetEndTime)]
-        private void DeleteEndTime(object sender, EventArgs e)
-        {
-            tvEndDate.Text = string.Empty;
-            tvEndTime.Text = string.Empty;
+            PickTime(endTime, false);
         }
 
         [InjectOnClick(Resource.Id.edtChooseLocation)]
@@ -114,7 +128,7 @@ namespace ClubManagement.Activities
                 Toast.MakeText(this, Resources.GetString(Resource.String.fill_all_fields), ToastLength.Short).Show();
                 return;
             }
-            // add event
+
             SetResult(Result.Ok);
             Finish();
         }
@@ -129,7 +143,7 @@ namespace ClubManagement.Activities
                 () => { }).Show();
         }
 
-        private EventModel eventModel;
+        private EventModel eventModel = new EventModel();
 
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -137,6 +151,7 @@ namespace ClubManagement.Activities
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_add_event);
             Cheeseknife.Inject(this);
+            UpdateView();
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
@@ -156,6 +171,77 @@ namespace ClubManagement.Activities
             if (requestCode != PlacePickerRequset || resultCode != Result.Ok) return;
             place = PlacePicker.GetPlace(this, data);
             edtChooseLocation.Text = place.AddressFormatted.ToString();
+        }
+
+        private void PickDate(DateTime minDateTime, bool isPickingStartDate)
+        {
+            var datePickerDialog = new CustomDatePickerDialog(minDateTime);
+            datePickerDialog.PickDate += (s, se) =>
+            {
+                if (s is DateTime dateTime)
+                {
+                    if (isPickingStartDate)
+                    {
+                        startTime = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, startTime.Hour,
+                            startTime.Minute, startTime.Second);
+                        UpdateTime();
+                    }
+                    else
+                    {
+                        endTime = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, endTime.Hour,
+                            endTime.Minute, endTime.Second);
+                    }
+                    UpdateView();
+                }
+            };
+            datePickerDialog.Show(FragmentManager, "");
+        }
+
+        private void PickTime(DateTime mintime, bool isPickingStartTime)
+        {
+            var timePickerDialog = new CustomTimePickerDialog(mintime);
+            timePickerDialog.PickTime += (s, e) =>
+            {
+                if (s is DateTime dateTime)
+                {
+                    if (isPickingStartTime)
+                    {
+                        if (dateTime <= DateTime.Now)
+                        {
+                            Toast.MakeText(this, Resources.GetString(Resource.String.pick_time_in_future), ToastLength.Short).Show();
+                            return;
+                        }
+                        startTime = dateTime;
+                        UpdateTime();
+                    }
+                    else
+                    {
+                        if (dateTime <= startTime)
+                        {
+                            Toast.MakeText(this, Resources.GetString(Resource.String.pick_time_before_start_time), ToastLength.Short).Show();
+                            return;
+                        }
+
+                        endTime = dateTime;
+                    }
+                    UpdateView();
+                }
+            };
+            timePickerDialog.Show(FragmentManager, "");
+        }
+
+        private void UpdateTime()
+        {
+            if (endTime > startTime) return;
+            endTime = new DateTime(startTime.Year, startTime.Month, startTime.Day, startTime.Hour + 1, startTime.Minute, startTime.Second);
+        }
+
+        private void UpdateView()
+        {
+            tvStartDate.Text = startTime.ToString("yyyy MMM dd");
+            tvStartTime.Text = $"{startTime.Hour} : {startTime.Minute}";
+            tvEndDate.Text = endTime.ToString("yyyy MMM dd");
+            tvEndTime.Text = $"{endTime.Hour} : {endTime.Minute}";
         }
     }
 }

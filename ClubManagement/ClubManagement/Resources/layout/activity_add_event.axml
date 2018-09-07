@@ -173,28 +173,14 @@
                             android:textSize="@dimen/text_description_size"
                             android:text="Aug 29, 2018"
                             android:textColor="@color/color_hint" />
-                        <LinearLayout
-                            android:layout_height="wrap_content"
+                        <TextView
+                            android:id="@+id/tvEndTime"
                             android:layout_width="0dp"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:id="@+id/tvEndTime"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="@dimen/text_description_size"
-                                android:text="10:00AM"
-                                android:textColor="@color/color_hint" />
-                            <ImageButton
-                                android:id="@+id/btnResetEndTime"
-                                android:background="@null"
-                                android:paddingLeft="@dimen/dimen_5dp"
-                                android:paddingRight="@dimen/dimen_5dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:src="@drawable/icon_delete" />
-                        </LinearLayout>
+                            android:textSize="@dimen/text_description_size"
+                            android:text="10:00AM"
+                            android:textColor="@color/color_hint" />
                     </LinearLayout>
                     <TextView
                         android:layout_width="match_parent"
