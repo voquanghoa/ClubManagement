@@ -193,6 +193,7 @@
     <Compile Include="Activities\Base\MapAbstractActivity.cs" />
     <Compile Include="Activities\CreateEventActivity.cs" />
     <Compile Include="Activities\EventDetailActivity.cs" />
+    <Compile Include="Activities\GuestActivity.cs" />
     <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Activities\MemberLocationActivity.cs" />
     <Compile Include="Activities\MoneyDetailActivity.cs" />
@@ -200,6 +201,8 @@
     <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Adapters\BalanceAdapter.cs" />
     <Compile Include="Adapters\BalanceAdapterViewHolder.cs" />
+    <Compile Include="Adapters\GuestAdapterViewHolder.cs" />
+    <Compile Include="Adapters\GuestsAdapter.cs" />
     <Compile Include="Adapters\ItemEventHeaderViewHolder.cs" />
     <Compile Include="Adapters\ItemEventViewHolder.cs" />
     <Compile Include="Adapters\PersonGoTimeClickEventArgs.cs" />
@@ -207,8 +210,6 @@
     <Compile Include="Adapters\SwipeToDeleteCallback.cs" />
     <Compile Include="Controllers\AppDataController.cs" />
     <Compile Include="Adapters\EventsAdapter.cs" />
-    <Compile Include="Adapters\PersonGoTimesAdapter.cs" />
-    <Compile Include="Adapters\PersonsGoTimeAdapterViewHolder.cs" />
     <Compile Include="Controllers\CloudinaryController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\FirebaseController.cs" />
@@ -227,7 +228,6 @@
     <Compile Include="Fragments\EventDialogFragment.cs" />
     <Compile Include="Fragments\NotificationFragment.cs" />
     <Compile Include="Fragments\OutcomeDialogFragment.cs" />
-    <Compile Include="Fragments\PersonGoTimesFragment.cs" />
     <Compile Include="Fragments\UnjoinEventFragment.cs" />
     <Compile Include="Models\AddressGeocodeAPIModel.cs" />
     <Compile Include="Models\DescriptionItem.cs" />
@@ -242,6 +242,7 @@
     <Compile Include="Models\EventItem.cs" />
     <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\FirebaseModel.cs" />
+    <Compile Include="Models\GuestModel.cs" />
     <Compile Include="Models\IncomeModel.cs" />
     <Compile Include="Models\MoneyAdminState.cs" />
     <Compile Include="Models\MoneyModel.cs" />
@@ -296,10 +297,10 @@
     <AndroidResource Include="Resources\layout\EventDetail.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\FragmentPersonGoTimes.axml">
+    <AndroidResource Include="Resources\layout\ActivityGuests.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\ItemPersonGoTime.axml">
+    <AndroidResource Include="Resources\layout\ItemGuest.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\FragmentBalance.axml">
@@ -345,7 +346,9 @@
     <AndroidResource Include="Resources\menu\User.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values\colors.xml" />
+    <AndroidResource Include="Resources\values\colors.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\dimens.xml">

@@ -131,6 +131,7 @@ namespace ClubManagement.Activities
 
         private EventModel eventModel;
 
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);

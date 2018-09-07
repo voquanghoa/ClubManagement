@@ -8,15 +8,15 @@ using System.Collections.Generic;
 
 namespace ClubManagement.Adapters
 {
-    class PersonGoTimesAdapter : RecyclerView.Adapter
+    class GuestsAdapter : RecyclerView.Adapter
     {
-        private List<PersonGoTimeModel> personGoTimes;
+        private List<GuestModel> guests;
 
-        public List<PersonGoTimeModel> PersonGoTimes
+        public List<GuestModel> Guests
         {
             set
             {
-                personGoTimes = value;
+                guests = value;
                 NotifyDataSetChanged();
             }
         }
@@ -25,22 +25,21 @@ namespace ClubManagement.Adapters
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
-            var id = Resource.Layout.ItemPersonGoTime;
+            var id = Resource.Layout.ItemGuest;
             var itemView = LayoutInflater.From(parent.Context).
                    Inflate(id, parent, false);
 
-            var viewHoler = new PersonsGoTimeAdapterViewHolder(itemView);
-
-            viewHoler.ClickHander += ItemClick;
-
-            return viewHoler;
+            return new GuestAdapterViewHolder(itemView);
         }
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder viewHolder, int position)
         {
-            ((PersonsGoTimeAdapterViewHolder)viewHolder).PersonGoTimeModel = personGoTimes[position];
+            if (viewHolder is GuestAdapterViewHolder holder)
+            {
+                holder.UserModel = guests[position];
+            }
         }
 
-        public override int ItemCount => personGoTimes.Count;
+        public override int ItemCount => guests.Count;
     }
 }
