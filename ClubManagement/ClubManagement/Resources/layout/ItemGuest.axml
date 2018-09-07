@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="6"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <TextView
+        android:text="L"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:textSize="@dimen/text_title_size"
+        android:textColor="@color/text_color_red"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:id="@+id/tvHeadLetter" />
+    <Refractored.Controls.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="@dimen/circle_image_view_heigth_width"
+        android:layout_height="@dimen/circle_image_view_heigth_width"
+        app:civ_fill_color="@color/text_color_white"
+        android:padding="@dimen/circle_imageview_padding"
+        app:civ_border_width="@dimen/circle_image_view_border_width"
+        android:layout_margin="@dimen/circle_image_view_margin_right"
+        android:id="@+id/civAvatar" />
+    <TextView
+        android:text="Large Text"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:textSize="@dimen/text_size_large"
+        android:textColor="@color/text_color_black"
+        android:layout_weight="5"
+        android:paddingLeft="@dimen/cardview_padding_left_right"
+        android:gravity="center_vertical"
+        android:id="@+id/tvName" />
+</LinearLayout>

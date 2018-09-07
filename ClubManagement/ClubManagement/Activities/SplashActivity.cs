@@ -1,13 +1,8 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
-using Android;
 using Android.App;
-using Android.Content;
-using Android.Graphics;
 using Android.OS;
 using Android.Preferences;
-using Android.Provider;
 using Android.Widget;
 using ClubManagement.Controllers;
 using ClubManagement.Ultilities;
