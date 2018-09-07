@@ -7,7 +7,7 @@
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="@dimen/tabbar_height"
-        android:background="@color/tabbar_background_color"
+        android:background="@color/member_location_toolbar_color"
         android:contentInsetLeft="0dp"
         android:contentInsetStart="0dp"
         app:contentInsetLeft="0dp"
@@ -20,9 +20,10 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/icon_back"
-            android:background="@null"
-            android:paddingLeft="@dimen/textview_padding_left_right"
+            android:scaleType="fitCenter"
+            android:layout_margin="@dimen/margin_small"
             android:paddingRight="@dimen/textview_padding_left_right"
+            android:background="@null"
             android:id="@+id/btnBack" />
         <TextView
             android:layout_width="wrap_content"
@@ -33,23 +34,38 @@
             android:textSize="@dimen/tabbar_text_size"
             android:textStyle="bold" />
     </android.support.v7.widget.Toolbar>
-    <RelativeLayout
+    <LinearLayout
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/item_event_margin"
-        android:id="@+id/relativeLayout1">
-        <fragment
+        android:orientation="vertical"
+        android:layout_margin="@dimen/member_location_margin_large">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_color"
+            android:textSize="@dimen/text_size_normal"
+            android:id="@+id/tvNameAddress" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_color"
+            android:textSize="@dimen/text_size_small"
+            android:id="@+id/tvAddress" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_color"
+            android:gravity="center"
+            android:textSize="@dimen/text_title_size"
+            android:id="@+id/tvNumberPeople" />
+        <fragment xmlns:map="http://schemas.android.com/apk/res-auto"
             android:id="@+id/mapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            map:uiZoomControls="true"
+            map:uiZoomGestures="true"
             class="com.google.android.gms.maps.MapFragment" />
-        <FrameLayout
-            android:id="@+id/memberFrament"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true" />
-    </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>

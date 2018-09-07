@@ -170,8 +170,7 @@ namespace ClubManagement.Activities
                 Finish,
                 () => { }).Show();
         }
-
-
+        
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
