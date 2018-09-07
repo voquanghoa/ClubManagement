@@ -30,6 +30,7 @@
   <string name="date">Date</string>
   <string name="amount">Amount</string>
   <string name="cancel">Cancel</string>
+  <string name="upload_a_photo">Upload a photo</string>
   <string name="save">Save</string>
   <string name="button_logout">Log out</string>
   <string name="dialog_positive_button">Yes</string>
