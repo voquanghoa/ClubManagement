@@ -11,16 +11,17 @@ namespace ClubManagement.Models
 
         public UserLoginEventModel(EventModel eventModel)
         {
-            base.Id = eventModel.Id;
-            base.Title = eventModel.Title;
-            base.Description = eventModel.Description;
-            base.Time = eventModel.Time;
-            base.CreatedBy = eventModel.CreatedBy;
-            base.CreatedTime = eventModel.CreatedTime;
-            base.Latitude = eventModel.Latitude;
-            base.Longitude = eventModel.Longitude;
-            base.Place = eventModel.Place;
-            base.ImageUrl = eventModel.ImageUrl;
+            Id = eventModel.Id;
+            Title = eventModel.Title;
+            Description = eventModel.Description;
+            TimeStart = eventModel.TimeStart;
+            TimeEnd = eventModel.TimeEnd;
+            CreatedBy = eventModel.CreatedBy;
+            CreatedTime = eventModel.CreatedTime;
+            Latitude = eventModel.Latitude;
+            Longitude = eventModel.Longitude;
+            Place = eventModel.Place;
+            ImageUrl = eventModel.ImageUrl;
         }
 
         [JsonProperty("isJoined")]

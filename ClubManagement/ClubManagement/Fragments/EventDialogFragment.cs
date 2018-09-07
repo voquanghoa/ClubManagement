@@ -73,7 +73,7 @@ namespace ClubManagement.Fragments
                     Longitude = place.LatLng.Longitude,
                     Latitude = place.LatLng.Latitude,
                     Place = place.AddressFormatted.ToString(),
-                    Time = date,
+                    TimeStart = date,
                     CreatedTime = DateTime.Now,
                     CreatedBy = AppDataController.Instance.UserName
                 };

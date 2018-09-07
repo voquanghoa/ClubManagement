@@ -11,8 +11,11 @@ namespace ClubManagement.Models
         [JsonProperty("description")]
         public string Description { get; set; } = "";
 
-        [JsonProperty("time")]
-        public DateTime Time { get; set; } = new DateTime();
+        [JsonProperty("timeStart")]
+        public DateTime TimeStart { get; set; } = new DateTime();
+
+        [JsonProperty("timeEnd")]
+        public DateTime TimeEnd { get; set; } = new DateTime();
 
         [JsonProperty("createdBy")]
         public string CreatedBy { get; set; } = "";

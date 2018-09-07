@@ -87,19 +87,19 @@ namespace ClubManagement.Adapters
 
             foreach (var eventModel in eventModels)
             {
-                if (eventModel.Time.IsToday())
+                if (eventModel.TimeStart.IsToday())
                 {
                     eventsWithTimeHeader[AppConstantValues.EventListHeaderToday].Add(eventModel);
                 }
-                else if (eventModel.Time.IsTomorrow())
+                else if (eventModel.TimeStart.IsTomorrow())
                 {
                     eventsWithTimeHeader[AppConstantValues.EventListHeaderTomorrow].Add(eventModel);
                 }
-                else if (eventModel.Time.IsInThisWeek())
+                else if (eventModel.TimeStart.IsInThisWeek())
                 {
                     eventsWithTimeHeader[AppConstantValues.EventListHeaderThisWeek].Add(eventModel);
                 }
-                else if (eventModel.Time.IsInNextWeek())
+                else if (eventModel.TimeStart.IsInNextWeek())
                 {
                     eventsWithTimeHeader[AppConstantValues.EventListHeaderNextWeek].Add(eventModel);
                 }
