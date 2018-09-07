@@ -5,7 +5,7 @@ using Android.Graphics;
 using Android.Net;
 using Android.Provider;
 using ClubManagement.Ultilities;
-using Java.IO;
+
 namespace ClubManagement.Controllers
 {
     public static class CloudinaryController
@@ -16,7 +16,7 @@ namespace ClubManagement.Controllers
 
         private const string ApiSecret = "ventEbxZBzh3g5EAfVw7htDIbDA";
 
-        public static async Task<string> UploadImage(Context context, Uri imageUri, string publicId)
+        public static async Task<string> UploadImage(Context context, Uri imageUri, string publicId, int size)
         {
             var account =
                 new CloudinaryDotNet.Account(CloudName, ApiKey, ApiSecret);
@@ -25,7 +25,7 @@ namespace ClubManagement.Controllers
 
             var uploadParams = new CloudinaryDotNet.Actions.ImageUploadParams
             {
-                File = new CloudinaryDotNet.Actions.FileDescription(FilePathUtilities.GetAbsoluteFilePath(context, GetImageUri(context, ResizeImage(context, imageUri, 256)))),
+                File = new CloudinaryDotNet.Actions.FileDescription(FilePathUtilities.GetAbsoluteFilePath(context, GetImageUri(context, ResizeImage(context, imageUri, size)))),
                 PublicId = publicId
             };
 

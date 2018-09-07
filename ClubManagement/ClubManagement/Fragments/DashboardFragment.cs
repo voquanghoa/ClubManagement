@@ -16,7 +16,6 @@ using Refractored.Controls;
 using Square.Picasso;
 using Android.Support.V4.Widget;
 using ClubManagement.Ultilities;
-using System.Threading.Tasks;
 using Android.Preferences;
 using ClubManagement.Activities;
 using Newtonsoft.Json;
