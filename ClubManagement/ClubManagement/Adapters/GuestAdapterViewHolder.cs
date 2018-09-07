@@ -24,7 +24,7 @@ namespace ClubManagement.Adapters
             {
                 tvName.Text = value.Name;
 
-                tvHeadLetter.Text = value.IsHeadLetter ? value.Name.FirstOrDefault().ToString() : "";
+                tvHeadLetter.Text = value.IsHeadLetter ? value.Name.FirstOrDefault().ToString().ToUpper() : "";
 
                 if (!string.IsNullOrEmpty(value.Avatar))
                 {

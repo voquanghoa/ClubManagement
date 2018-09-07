@@ -2,6 +2,7 @@
 using ClubManagement.Models;
 using Firebase.Xamarin.Database;
 using Plugin.Geolocator;
+using System;
 
 namespace ClubManagement.Controllers
 {
@@ -16,17 +17,16 @@ namespace ClubManagement.Controllers
             FirebaseClient = new FirebaseClient(LinkFirebase).Child(Key);
         }
 
-        public void UpdateUserLocation(UserModel user)
+        public async void UpdateUserLocation(UserModel user)
         {
-            new Thread(async () =>
-            {
-                var locator = CrossGeolocator.Current;
-                locator.DesiredAccuracy = 50;
-                var currentLocation = await locator.GetPositionAsync();
-                user.Latitude = currentLocation.Latitude;
-                user.Longitude = currentLocation.Longitude;
-                await Edit(user);
-            }).Start();
+            var locator = CrossGeolocator.Current;
+            locator.DesiredAccuracy = 50;
+            var currentLocation = await locator.GetPositionAsync();
+            user.Latitude = currentLocation.Latitude;
+            user.Longitude = currentLocation.Longitude;
+            user.LastLogin = DateTime.Now;
+
+            await Edit(user);
         }
     }
 }

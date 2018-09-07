@@ -129,8 +129,7 @@ namespace ClubManagement.Activities
                 () => { }).Show();
         }
 
-        private EventModel eventModel;
-
+        private EventModel eventModel = new EventModel();
 
         protected override void OnCreate(Bundle savedInstanceState)
         {

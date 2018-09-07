@@ -252,6 +252,7 @@
     <Compile Include="Models\ResultsMatrixDistanceAPIModel.cs" />
     <Compile Include="Models\ResultsGeocodeAPIModel.cs" />
     <Compile Include="Models\RowMatrixDistanceAPIModel.cs" />
+    <Compile Include="Models\Target.cs" />
     <Compile Include="Models\UserLoginEventModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserEventModel.cs" />
@@ -330,6 +331,9 @@
     <AndroidResource Include="Resources\layout\DialogFragmentUnjoinEvent.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\InfoMarker.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
@@ -341,6 +345,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon_tab_notification.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\info_marker_border.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\menu\User.xml" />
@@ -416,7 +423,6 @@
     <AndroidResource Include="Resources\drawable\icon_arrow_right.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\icon_person.png" />
     <AndroidResource Include="Resources\layout\fragment_dashboard.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -481,9 +487,6 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\icon_person_selected.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\anim\item_animation_fall_down.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -546,9 +549,6 @@
     <AndroidResource Include="Resources\drawable\icon_time.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\icon_marker.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon_users.png" />
   </ItemGroup>
   <ItemGroup>
@@ -584,6 +584,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon_image_event.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_marker.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\menu\DetailEventOptionForPastEvent.xml" />
