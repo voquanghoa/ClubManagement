@@ -21,7 +21,7 @@ namespace ClubManagement.Fragments
         public override Dialog OnCreateDialog(Bundle savedInstanceState)
         {
             datePickerDialog = new DatePickerDialog(Activity, this, DateTime.Now.Year, DateTime.Now.Month - 1, DateTime.Now.Day);
-            datePickerDialog.DatePicker.MinDate = (long)(MinTime - new DateTime(1970, 1, 1)).TotalMilliseconds;
+            datePickerDialog.DatePicker.MinDate = (long)(MinTime.AddDays(-1) - new DateTime(1970, 1, 1)).TotalMilliseconds;
             return datePickerDialog;
         }
 

@@ -22,6 +22,8 @@ namespace ClubManagement.Activities
 
         private DateTime endTime;
 
+        private string imageUrl = "";
+
         public CreateEventActivity()
         {
             startTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day,
@@ -129,6 +131,32 @@ namespace ClubManagement.Activities
                 return;
             }
 
+            var eventModel = new EventModel
+            {
+                Description = edtEventDescription.Text,
+                Place = edtEventLocation.Text,
+                Title = edtEventTitle.Text,
+                CreatedBy = AppDataController.Instance.UserName,
+                CreatedTime = DateTime.Now,
+                TimeStart = startTime,
+                TimeEnd = endTime,
+                Longitude = place.LatLng.Longitude,
+                Latitude = place.LatLng.Latitude,
+                ImageUrl = imageUrl
+            };
+
+            var progressDialog = this.CreateDialog(Resources.GetString(Resource.String.adding_event),
+                Resources.GetString(Resource.String.wait));
+            progressDialog.Show();
+
+            this.DoRequest(async () =>
+            {
+                await EventsController.Instance.Add(eventModel);
+            }, () =>
+            {
+                progressDialog.Dismiss();
+            });
+
             SetResult(Result.Ok);
             Finish();
         }
@@ -142,8 +170,6 @@ namespace ClubManagement.Activities
                 Finish,
                 () => { }).Show();
         }
-
-        private EventModel eventModel = new EventModel();
 
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -162,7 +188,7 @@ namespace ClubManagement.Activities
             {
                 this.DoRequest(async ()=> 
                 {
-                    eventModel.ImageUrl = await CloudinaryController.UploadImage(this, data.Data, $"Images/{Guid.NewGuid()}", 256);
+                    imageUrl = await CloudinaryController.UploadImage(this, data.Data, $"Images/{Guid.NewGuid()}", 256);
                 });
                     
                 imgEvent.SetImageURI(data.Data);
@@ -178,21 +204,19 @@ namespace ClubManagement.Activities
             var datePickerDialog = new CustomDatePickerDialog(minDateTime);
             datePickerDialog.PickDate += (s, se) =>
             {
-                if (s is DateTime dateTime)
+                if (!(s is DateTime dateTime)) return;
+                if (isPickingStartDate)
                 {
-                    if (isPickingStartDate)
-                    {
-                        startTime = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, startTime.Hour,
-                            startTime.Minute, startTime.Second);
-                        UpdateTime();
-                    }
-                    else
-                    {
-                        endTime = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, endTime.Hour,
-                            endTime.Minute, endTime.Second);
-                    }
-                    UpdateView();
+                    startTime = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, startTime.Hour,
+                        startTime.Minute, startTime.Second);
+                    UpdateTime();
                 }
+                else
+                {
+                    endTime = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, endTime.Hour,
+                        endTime.Minute, endTime.Second);
+                }
+                UpdateView();
             };
             datePickerDialog.Show(FragmentManager, "");
         }
@@ -202,30 +226,28 @@ namespace ClubManagement.Activities
             var timePickerDialog = new CustomTimePickerDialog(mintime);
             timePickerDialog.PickTime += (s, e) =>
             {
-                if (s is DateTime dateTime)
+                if (!(s is DateTime dateTime)) return;
+                if (isPickingStartTime)
                 {
-                    if (isPickingStartTime)
+                    if (dateTime <= DateTime.Now)
                     {
-                        if (dateTime <= DateTime.Now)
-                        {
-                            Toast.MakeText(this, Resources.GetString(Resource.String.pick_time_in_future), ToastLength.Short).Show();
-                            return;
-                        }
-                        startTime = dateTime;
-                        UpdateTime();
+                        Toast.MakeText(this, Resources.GetString(Resource.String.pick_time_in_future), ToastLength.Short).Show();
+                        return;
                     }
-                    else
-                    {
-                        if (dateTime <= startTime)
-                        {
-                            Toast.MakeText(this, Resources.GetString(Resource.String.pick_time_before_start_time), ToastLength.Short).Show();
-                            return;
-                        }
-
-                        endTime = dateTime;
-                    }
-                    UpdateView();
+                    startTime = dateTime;
+                    UpdateTime();
                 }
+                else
+                {
+                    if (dateTime <= startTime)
+                    {
+                        Toast.MakeText(this, Resources.GetString(Resource.String.pick_time_before_start_time), ToastLength.Short).Show();
+                        return;
+                    }
+
+                    endTime = dateTime;
+                }
+                UpdateView();
             };
             timePickerDialog.Show(FragmentManager, "");
         }

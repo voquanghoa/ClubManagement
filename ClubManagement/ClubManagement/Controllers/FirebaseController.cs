@@ -20,7 +20,7 @@ namespace ClubManagement.Controllers
 
         }
 
-        public async void Add(T t)
+        public async Task Add(T t)
         {
             await FirebaseClient.PostAsync(t);
         }
