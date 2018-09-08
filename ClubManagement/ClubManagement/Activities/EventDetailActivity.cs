@@ -76,7 +76,7 @@ namespace ClubManagement.Activities
         {
             if (s is View view)
             {
-                var menuRes = eventDetail.Time.Date.CompareTo(DateTime.Now.Date) < 0
+                var menuRes = eventDetail.TimeStart.Date.CompareTo(DateTime.Now.Date) < 0
                     ? Resource.Menu.DetailEventOptionForPastEvent
                     : Resource.Menu.DetailEventOption;
 
@@ -163,8 +163,8 @@ namespace ClubManagement.Activities
             tvDescription.Text = eventDetail.Description;
             tvTime.Text = "Time";
             tvAddress.Text = eventDetail.Place;
-            tvMonth.Text = eventDetail.Time.ToString("MMM", CultureInfo.InvariantCulture);
-            tvDate.Text = eventDetail.Time.Day.ToString();
+            tvMonth.Text = eventDetail.TimeStart.ToString("MMM", CultureInfo.InvariantCulture);
+            tvDate.Text = eventDetail.TimeStart.Day.ToString();
             tvUsers.Text = "0";
 
             var count = 0;
@@ -175,7 +175,7 @@ namespace ClubManagement.Activities
 
             currentIsJoined = eventDetail.IsJoined;
 
-            if (eventDetail.Time < DateTime.Now)
+            if (eventDetail.TimeStart < DateTime.Now)
             {
                 tvStatus.Text = !eventDetail.IsJoined
                     ? Resources.GetString(Resource.String.event_happened)

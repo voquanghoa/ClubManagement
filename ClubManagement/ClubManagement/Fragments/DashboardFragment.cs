@@ -232,7 +232,7 @@ namespace ClubManagement.Fragments
                 unpaidBudgets = appDataController.NumberOfUnpaidBudgets;
                 goingEvents = appDataController.GoingEvents;
                 numberOfUpComingEvent = appDataController.NumberOfUpComingEvents;
-                nextEvent = goingEvents.Any() ? goingEvents.OrderBy(x => x.Time).First() : null;
+                nextEvent = goingEvents.Any() ? goingEvents.OrderBy(x => x.TimeStart).First() : null;
             }
             catch (Exception)
             {
@@ -258,8 +258,8 @@ namespace ClubManagement.Fragments
             if (nextEvent != null)
             {
                 itemNextEventParentView.Visibility = ViewStates.Visible;
-                tvDashboardItemNextEventMonth.Text = nextEvent.Time.ToString("MMM", CultureInfo.InvariantCulture);
-                tvDashboardItemNextEventDate.Text = nextEvent.Time.Day.ToString();
+                tvDashboardItemNextEventMonth.Text = nextEvent.TimeStart.ToString("MMM", CultureInfo.InvariantCulture);
+                tvDashboardItemNextEventDate.Text = nextEvent.TimeStart.Day.ToString();
             }
         }
 
