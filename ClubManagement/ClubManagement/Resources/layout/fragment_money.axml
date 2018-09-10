@@ -4,56 +4,25 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/tabbar_height"
-        android:background="@color/tabbar_background_color">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Money"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="@dimen/textview_margin_left_right"
-            android:textColor="@color/text_color_white"
-            android:textSize="@dimen/tabbar_text_size"
-            android:textStyle="bold" />
-    </android.support.v7.widget.Toolbar>
     <android.support.design.widget.TabLayout
         android:id="@+id/tlMoney"
         style="@style/TabLayoutThemes"
         android:layout_width="match_parent"
         android:layout_height="@dimen/tabbar_height"
-        android:background="@color/tabbar_background_color"
+        android:background="@color/color_blue"
+        app:tabSelectedTextColor="@color/tablayout_selected_color"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        app:tabTextColor="@color/text_tabbar_unchoose_color">
-        <android.support.design.widget.TabItem
-            android:text="@string/all" />
-        <android.support.design.widget.TabItem
-            android:text="@string/paid" />
-        <android.support.design.widget.TabItem
-            android:text="@string/unpaid" />
-    </android.support.design.widget.TabLayout>
+        app:tabIndicatorColor="@color/colorAccent"
+        app:tabTextColor="@color/tablayout_unselected_color"
+        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget" />
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/refresher"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <RelativeLayout
+        <android.support.v4.view.ViewPager
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rvMoney"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-            <android.support.design.widget.FloatingActionButton
-                android:src="@drawable/icon_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/fabAdd"
-                android:layout_margin="@dimen/textview_margin_top_bottom"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                app:backgroundTint="@color/tabbar_background_color" />
-        </RelativeLayout>
+            android:layout_height="match_parent"
+            android:id="@+id/vpMoney" />
     </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>
