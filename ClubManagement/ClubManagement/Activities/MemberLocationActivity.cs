@@ -86,8 +86,8 @@ namespace ClubManagement.Activities
 
                     markers.Add(userMarker);
 
-                    var alpha = eventDetail.Time.Subtract(x.LastLogin) < new TimeSpan(0, 30, 0)
-                        && eventDetail.Time.CompareTo(x.LastLogin) == 1
+                    var alpha = eventDetail.TimeStart.Subtract(x.LastLogin) < new TimeSpan(0, 30, 0)
+                        && eventDetail.TimeStart.CompareTo(x.LastLogin) == 1
                         ? 1 : 0.6f;
 
                     if (!string.IsNullOrEmpty(x.Avatar))

@@ -106,4 +106,7 @@
   <string name="enter_location">Enter location</string>
   <string name="choose_location">Choose from the map</string>
   <string name="description">Description</string>
+  <string name="pick_time_in_future">Please pick a time in the future!</string>
+  <string name="pick_time_before_start_time">Can not pick a time before start time!</string>
+  <string name="adding_event">Adding event</string>
 </resources>

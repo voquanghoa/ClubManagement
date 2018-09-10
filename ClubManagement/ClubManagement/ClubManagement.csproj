@@ -224,8 +224,9 @@
     <Compile Include="Fragments\BalancesFragment.cs" />
     <Compile Include="Fragments\BalanceSummaryFragment.cs" />
     <Compile Include="Fragments\ChangeAvatarFragment.cs" />
+    <Compile Include="Fragments\CustomDatePickerDialog.cs" />
+    <Compile Include="Fragments\CustomTimePickerDialog.cs" />
     <Compile Include="Fragments\DatePickerFragment.cs" />
-    <Compile Include="Fragments\EventDialogFragment.cs" />
     <Compile Include="Fragments\NotificationFragment.cs" />
     <Compile Include="Fragments\OutcomeDialogFragment.cs" />
     <Compile Include="Fragments\UnjoinEventFragment.cs" />
