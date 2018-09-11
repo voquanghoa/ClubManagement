@@ -190,8 +190,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\Base\CreateOrEditEvent.cs" />
     <Compile Include="Activities\Base\MapAbstractActivity.cs" />
     <Compile Include="Activities\CreateEventActivity.cs" />
+    <Compile Include="Activities\EditEventActivity.cs" />
     <Compile Include="Activities\EventDetailActivity.cs" />
     <Compile Include="Activities\GuestActivity.cs" />
     <Compile Include="Activities\LoginActivity.cs" />

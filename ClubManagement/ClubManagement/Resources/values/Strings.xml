@@ -86,6 +86,7 @@
   <string name="dashboard_item_fees">fees</string>
   <string name="you_are_going">You are going</string>
   <string name="not_going">Not going</string>
+  <string name="edit_event">Edit event</string>
   <string name="edit">Edit</string>
   <string name="delete">Delete</string>
   <string name="title_confirm_delete">Confirm Delete</string>

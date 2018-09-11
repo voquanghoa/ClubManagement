@@ -91,7 +91,11 @@ namespace ClubManagement.Activities
             switch (e.Item.ItemId)
             {
                 case Resource.Id.edit:
-                    
+                    var intent = new Intent(this, typeof(EditEventActivity));
+
+                    intent.PutExtra("EventDetail", content);
+
+                    StartActivity(intent);
                     break;
                 case Resource.Id.delete:
                     this.ShowConfirmDialog(Resource.String.title_confirm_delete,
