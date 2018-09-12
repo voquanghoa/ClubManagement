@@ -112,5 +112,6 @@
   <string name="this_event_happened">This event happened</string>
   <string name="total_amount_paid">Total amount you already paid in</string>
   <string name="total_amount_need_pay">Total amount you need to pay</string>
+  <string name="paid_all">You already paid all fees. Well done!</string>
   <string name="no_fee">No fee</string>
 </resources>

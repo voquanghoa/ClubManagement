@@ -51,7 +51,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:id="@+id/tvStatusNeedPay" />
         <TextView
             android:textColor="@color/text_color_red"
             android:textSize="@dimen/text_size_large"

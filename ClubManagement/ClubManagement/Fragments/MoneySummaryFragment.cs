@@ -3,6 +3,7 @@ using Android.Support.V4.App;
 using Android.Views;
 using Android.Widget;
 using ClubManagement.Models;
+using ClubManagement.Ultilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,12 +18,17 @@ namespace ClubManagement.Fragments
         [InjectView(Resource.Id.tvPaid)]
         private TextView tvPaid;
 
+        [InjectView(Resource.Id.tvStatusNeedPay)]
+        private TextView tvStatusNeedPay;
+
         [InjectView(Resource.Id.spinner)]
         private Spinner spinner;
 
         private List<string> years;
 
         private List<MoneyState> moneyStates;
+
+        private ArrayAdapter adapter;
 
         private const string Total = "Total";
 
@@ -39,15 +45,13 @@ namespace ClubManagement.Fragments
                     .Reverse()
                     .ToList();
 
-                years.Add("Total");
+                years.Add(Total);
 
-                var adapter = new ArrayAdapter(Context, Android.Resource.Layout.SimpleSpinnerItem, years);
+                adapter = new ArrayAdapter(Context, Android.Resource.Layout.SimpleSpinnerItem, years);
                 adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
                 spinner.Adapter = adapter;
 
-                tvPaid.Text = value.Sum(x => x.IsPaid && x.MoneyModel.Time.Year == DateTime.Now.Year 
-                    ? x.MoneyModel.Amount 
-                    : 0).ToString();
+                UpdateMoneyView();
             }
         }
 
@@ -61,8 +65,31 @@ namespace ClubManagement.Fragments
             base.OnViewCreated(view, savedInstanceState);
 
             Cheeseknife.Inject(this, view);
-            
+
             spinner.ItemSelected += Spinner_ItemSelected;
+
+            if (moneyStates != null) UpdateMoneyView();
+        }
+
+        private void UpdateMoneyView()
+        {
+            spinner.Adapter = adapter;
+
+            tvPaid.Text = moneyStates.Sum(x => x.IsPaid && x.MoneyModel.Time.Year == DateTime.Now.Year
+                ? x.MoneyModel.Amount
+                : 0).ToCurrency();
+
+            var sumMoneyNeedPay = moneyStates.Sum(x => !x.IsPaid ? x.MoneyModel.Amount : 0);
+
+            if (sumMoneyNeedPay == 0)
+            {
+                tvStatusNeedPay.Text = GetString(Resource.String.paid_all);
+                tvNeedPay.Visibility = ViewStates.Gone;
+            }
+            else
+            {
+                tvNeedPay.Text = sumMoneyNeedPay.ToCurrency();
+            }
         }
 
         private void Spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
@@ -71,7 +98,7 @@ namespace ClubManagement.Fragments
                     && (x.MoneyModel.Time.Year.ToString().Equals(years[e.Position])
                         || years[e.Position].Equals(Total))
                 ? x.MoneyModel.Amount
-                : 0).ToString();
+                : 0).ToCurrency();
         }
     }
 }
