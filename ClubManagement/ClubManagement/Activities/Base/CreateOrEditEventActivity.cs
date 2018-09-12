@@ -14,35 +14,17 @@ using ClubManagement.Models;
 
 namespace ClubManagement.Activities.Base
 {
-    public class CreateOrEditEvent
+    public class CreateOrEditEventActivity : Activity
     {
         private IPlace place;
 
-        private DateTime startTime;
+        protected DateTime startTime;
 
-        private DateTime endTime;
+        protected DateTime endTime;
 
         private string imageUrl = "";
 
-        private Activity activity;
-
-        public DateTime StartTime
-        {
-            set
-            {
-                startTime = value;
-            }
-        }
-
-        public DateTime EndTime
-        {
-            set
-            {
-                endTime = value;
-            }
-        }
-
-        public UserLoginEventModel Event
+        protected UserLoginEventModel Event
         {
             set
             {
@@ -57,34 +39,39 @@ namespace ClubManagement.Activities.Base
             }
         }
 
-        [InjectView(Resource.Id.edtEventTitle)] private EditText edtEventTitle;
+        [InjectView(Resource.Id.edtEventTitle)]
+        protected EditText edtEventTitle;
 
-        [InjectView(Resource.Id.tvStartDate)] private TextView tvStartDate;
+        [InjectView(Resource.Id.tvStartDate)]
+        protected TextView tvStartDate;
 
-        [InjectView(Resource.Id.tvStartTime)] private TextView tvStartTime;
+        [InjectView(Resource.Id.tvStartTime)]
+        protected TextView tvStartTime;
 
-        [InjectView(Resource.Id.tvEndDate)] private TextView tvEndDate;
+        [InjectView(Resource.Id.tvEndDate)]
+        protected TextView tvEndDate;
 
-        [InjectView(Resource.Id.tvEndTime)] private TextView tvEndTime;
+        [InjectView(Resource.Id.tvEndTime)]
+        protected TextView tvEndTime;
 
         [InjectView(Resource.Id.edtChooseLocation)]
-        private EditText edtChooseLocation;
+        protected EditText edtChooseLocation;
 
         [InjectView(Resource.Id.edtEventLocation)]
-        private EditText edtEventLocation;
+        protected EditText edtEventLocation;
 
         [InjectView(Resource.Id.edtEventDescription)]
-        private EditText edtEventDescription;
+        protected EditText edtEventDescription;
 
         [InjectView(Resource.Id.imgEvent)]
-        private ImageView imgEvent;
+        protected ImageView imgEvent;
 
         private const int PlacePickerRequset = 1;
 
         private const int RequestPickAvatar = 2;
 
         [InjectOnClick(Resource.Id.btnChangeEventImage)]
-        private void ChangeEventImage(object sender, EventArgs e)
+        protected void ChangeEventImage(object sender, EventArgs e)
         {
             if (sender is View view)
             {
@@ -103,7 +90,7 @@ namespace ClubManagement.Activities.Base
                     case Resource.Id.addPhoto:
                         var intent = new Intent(Intent.ActionGetContent);
                         intent.SetType("image/*");
-                        activity.StartActivityForResult(intent, RequestPickAvatar);
+                        StartActivityForResult(intent, RequestPickAvatar);
 
                         break;
                     case Resource.Id.cancel:
@@ -114,38 +101,38 @@ namespace ClubManagement.Activities.Base
         }
 
         [InjectOnClick(Resource.Id.tvStartDate)]
-        private void PickStartDate(object sender, EventArgs e)
+        protected void PickStartDate(object sender, EventArgs e)
         {
             PickDate(DateTime.Now, true);
         }
 
         [InjectOnClick(Resource.Id.tvStartTime)]
-        private void PickStartTime(object sender, EventArgs e)
+        protected void PickStartTime(object sender, EventArgs e)
         {
             PickTime(startTime, true);
         }
 
         [InjectOnClick(Resource.Id.tvEndDate)]
-        private void PickEndDate(object sender, EventArgs e)
+        protected void PickEndDate(object sender, EventArgs e)
         {
             PickDate(startTime, false);
         }
 
         [InjectOnClick(Resource.Id.tvEndTime)]
-        private void PickEndTime(object sender, EventArgs e)
+        protected void PickEndTime(object sender, EventArgs e)
         {
             PickTime(endTime, false);
         }
 
         [InjectOnClick(Resource.Id.edtChooseLocation)]
-        private void ChooseLocation(object sender, EventArgs e)
+        protected void ChooseLocation(object sender, EventArgs e)
         {
             var builder = new PlacePicker.IntentBuilder();
-            activity.StartActivityForResult(builder.Build(activity), PlacePickerRequset);
+            StartActivityForResult(builder.Build(this), PlacePickerRequset);
         }
 
         [InjectOnClick(Resource.Id.btnDone)]
-        private void Done(object sender, EventArgs e)
+        protected void Done(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(edtChooseLocation.Text) ||
                 string.IsNullOrEmpty(edtEventTitle.Text) ||
@@ -154,7 +141,7 @@ namespace ClubManagement.Activities.Base
                 string.IsNullOrEmpty(edtEventLocation.Text) ||
                 string.IsNullOrEmpty(tvStartTime.Text))
             {
-                Toast.MakeText(activity, activity.GetString(Resource.String.fill_all_fields), ToastLength.Short).Show();
+                Toast.MakeText(this, GetString(Resource.String.fill_all_fields), ToastLength.Short).Show();
                 return;
             }
 
@@ -172,11 +159,11 @@ namespace ClubManagement.Activities.Base
                 ImageUrl = imageUrl
             };
 
-            var progressDialog = activity.CreateDialog(activity.GetString(Resource.String.adding_event),
-                activity.GetString(Resource.String.wait));
+            var progressDialog = this.CreateDialog(GetString(Resource.String.adding_event),
+                GetString(Resource.String.wait));
             progressDialog.Show();
 
-            activity.DoRequest(async () =>
+            this.DoRequest(async () =>
             {
                 await EventsController.Instance.Add(eventModel);
             }, () =>
@@ -184,54 +171,54 @@ namespace ClubManagement.Activities.Base
                 progressDialog.Dismiss();
             });
 
-            activity.SetResult(Result.Ok);
-            activity.Finish();
+            SetResult(Result.Ok);
+            Finish();
         }
 
         [InjectOnClick(Resource.Id.btnCross)]
-        private void Cross(object sender, EventArgs e)
+        protected void Cross(object sender, EventArgs e)
         {
             Cancel();
         }
 
         [InjectOnClick(Resource.Id.btnCancel)]
-        private void Cancel(object sender, EventArgs e)
+        protected void Cancel(object sender, EventArgs e)
         {
             Cancel();
         }
 
         private void Cancel()
         {
-            activity.ShowConfirmDialog(
+            this.ShowConfirmDialog(
                 Resource.String.cross_create_event_title,
                 Resource.String.cross_create_event_message,
-                activity.Finish,
+                Finish,
                 () => { }).Show();
         }
 
-        public void OnCreate(Bundle savedInstanceState, Activity activity, View view)
+        protected override void OnCreate(Bundle savedInstanceState)
         {
-            Cheeseknife.Inject(this, view);
-
-            this.activity = activity;
-
-            UpdateView();
+            base.OnCreate(savedInstanceState);
+            SetContentView(Resource.Layout.activity_add_event);
+            Cheeseknife.Inject(this);
         }
-        
-        public void OnActivityResult(int requestCode, Result resultCode, Intent data)
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
+            base.OnActivityResult(requestCode, resultCode, data);
+
             if (requestCode == RequestPickAvatar && resultCode == Result.Ok)
             {
-                activity.DoRequest(async () =>
+                this.DoRequest(async () =>
                 {
-                    imageUrl = await CloudinaryController.UploadImage(activity, data.Data, $"Images/{Guid.NewGuid()}", 256);
+                    imageUrl = await CloudinaryController.UploadImage(this, data.Data, $"Images/{Guid.NewGuid()}", 256);
                 });
 
                 imgEvent.SetImageURI(data.Data);
             }
 
             if (requestCode != PlacePickerRequset || resultCode != Result.Ok) return;
-            place = PlacePicker.GetPlace(activity, data);
+            place = PlacePicker.GetPlace(this, data);
             edtChooseLocation.Text = place.AddressFormatted.ToString();
         }
 
@@ -254,7 +241,7 @@ namespace ClubManagement.Activities.Base
                 }
                 UpdateView();
             };
-            datePickerDialog.Show(activity.FragmentManager, "");
+            datePickerDialog.Show(FragmentManager, "");
         }
 
         private void PickTime(DateTime mintime, bool isPickingStartTime)
@@ -267,7 +254,7 @@ namespace ClubManagement.Activities.Base
                 {
                     if (dateTime <= DateTime.Now)
                     {
-                        Toast.MakeText(activity, activity.GetString(Resource.String.pick_time_in_future), ToastLength.Short).Show();
+                        Toast.MakeText(this, GetString(Resource.String.pick_time_in_future), ToastLength.Short).Show();
                         return;
                     }
                     startTime = dateTime;
@@ -277,7 +264,7 @@ namespace ClubManagement.Activities.Base
                 {
                     if (dateTime <= startTime)
                     {
-                        Toast.MakeText(activity, activity.GetString(Resource.String.pick_time_before_start_time), ToastLength.Short).Show();
+                        Toast.MakeText(this, GetString(Resource.String.pick_time_before_start_time), ToastLength.Short).Show();
                         return;
                     }
 
@@ -285,7 +272,7 @@ namespace ClubManagement.Activities.Base
                 }
                 UpdateView();
             };
-            timePickerDialog.Show(activity.FragmentManager, "");
+            timePickerDialog.Show(FragmentManager, "");
         }
 
         private void UpdateTime()
@@ -294,7 +281,7 @@ namespace ClubManagement.Activities.Base
             endTime = new DateTime(startTime.Ticks).AddHours(1);
         }
 
-        public void UpdateView()
+        protected void UpdateView()
         {
             tvStartDate.Text = startTime.ToString("yyyy MMM dd");
             tvStartTime.Text = $"{startTime.Hour} : {startTime.Minute}";
