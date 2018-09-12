@@ -142,15 +142,15 @@ namespace ClubManagement.Fragments
                 {
                     case 0:
                         adapter.IsPastTab = false;
-                        adapter.Events = data.Where(x => x.TimeStart.Date >= DateTime.Today && !x.IsJoined).OrderBy(x => x.TimeStart).ToList();
+                        adapter.Events = data.Where(x => x.TimeEnd > DateTime.Now && !x.IsJoined).OrderBy(x => x.TimeStart).ToList();
                         break;
                     case 1:
                         adapter.IsPastTab = false;
-                        adapter.Events = data.Where(x => x.TimeStart.Date >= DateTime.Today && x.IsJoined).OrderBy(x => x.TimeStart).ToList();
+                        adapter.Events = data.Where(x => x.TimeEnd > DateTime.Now && x.IsJoined).OrderBy(x => x.TimeStart).ToList();
                         break;
                     case 2:
                         adapter.IsPastTab = true;
-                        adapter.Events = data.Where(x => x.TimeStart.Date < DateTime.Today).OrderByDescending(x => x.TimeStart).ToList();
+                        adapter.Events = data.Where(x => x.TimeEnd <= DateTime.Now).OrderByDescending(x => x.TimeStart).ToList();
                         break;
                 }
             }
