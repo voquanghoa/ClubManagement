@@ -31,8 +31,6 @@ namespace ClubManagement.Fragments
 
         private readonly string userId = AppDataController.Instance.UserId;
 
-        private FloatingActionButton fabAdd;
-
         public int SelectedTabIndex { set; get; }
 
         private readonly ItemTouchHelper itemTouchHelper;
@@ -73,9 +71,6 @@ namespace ClubManagement.Fragments
 
         private void InitView(View view)
         {
-            fabAdd = view.FindViewById<FloatingActionButton>(Resource.Id.fabAdd);
-			fabAdd.ShowIfAdmin();
-
             var recyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerView1);
             recyclerView.SetLayoutManager(new LinearLayoutManager(view.Context));
             recyclerView.SetAdapter(adapter);
@@ -86,7 +81,6 @@ namespace ClubManagement.Fragments
 
             Context.DoWithAdmin(() =>
             {
-                fabAdd.Click += AddEvent_Click;
                 itemTouchHelper.AttachToRecyclerView(recyclerView);
             });
         }
@@ -108,12 +102,6 @@ namespace ClubManagement.Fragments
                         DisplayData(data);
                     }).Show();
             }
-        }
-
-        private void AddEvent_Click(object sender, System.EventArgs e)
-        {
-            var intent = new Intent(Context, typeof(CreateEventActivity));
-            StartActivityForResult(intent, 1);
         }
 
         public override void OnResume()
@@ -155,27 +143,16 @@ namespace ClubManagement.Fragments
                     case 0:
                         adapter.IsPastTab = false;
                         adapter.Events = data.Where(x => x.TimeEnd > DateTime.Now && !x.IsJoined).OrderBy(x => x.TimeStart).ToList();
-                        fabAdd.ShowIfAdmin();
                         break;
                     case 1:
                         adapter.IsPastTab = false;
-                        fabAdd.Visibility = ViewStates.Gone;
                         adapter.Events = data.Where(x => x.TimeEnd > DateTime.Now && x.IsJoined).OrderBy(x => x.TimeStart).ToList();
                         break;
                     case 2:
-                        fabAdd.Visibility = ViewStates.Gone;
                         adapter.IsPastTab = true;
                         adapter.Events = data.Where(x => x.TimeEnd <= DateTime.Now).OrderByDescending(x => x.TimeStart).ToList();
                         break;
                 }
-            }
-        }
-
-        public override void OnActivityResult(int requestCode, int resultCode, Intent intent)
-        {
-            if (requestCode == 1 && resultCode == -1)
-            {
-                Toast.MakeText(Context, Resources.GetString(Resource.String.create_event_success), ToastLength.Short).Show();
             }
         }
     }
