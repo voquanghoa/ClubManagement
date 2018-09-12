@@ -1,4 +1,5 @@
-﻿using Android.Support.V7.Widget;
+﻿using Android.Support.V4.Content;
+using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 using ClubManagement.Interfaces;
@@ -9,14 +10,19 @@ namespace ClubManagement.CustomAdapters
 {
     public class MoneyViewHolder : RecyclerView.ViewHolder, View.IOnClickListener
     {
-        [InjectView(Resource.Id.tvTitle)]
-        private TextView tvTitle;
+        [InjectView(Resource.Id.tvDeadlineTime)]
+        private TextView tvDeadlineTime;
 
         [InjectView(Resource.Id.tvDescription)]
         private TextView tvDescription;
 
-        [InjectView(Resource.Id.imgState)]
-        private ImageView imgState;
+        [InjectView(Resource.Id.imgGroup)] private ImageView imgGroup;
+
+        [InjectView(Resource.Id.tvIsPaid)] private TextView tvIsPaid;
+
+        [InjectView(Resource.Id.tvAmount)] private TextView tvAmount;
+
+        [InjectView(Resource.Id.btnAdmin)] private ImageButton btnAdmin;
 
         public IItemClickListener ItemClickListener { get; set; }
 
@@ -24,9 +30,29 @@ namespace ClubManagement.CustomAdapters
         {
             set
             {
-                tvTitle.Text = $"{value.MoneyModel.Time.ToShortDateString()} - Budget : {value.MoneyModel.Amount.ToCurrency()}";
+                tvDeadlineTime.Text = $"Deadline: {value.MoneyModel.Time:MMM dd, yyyy}";
                 tvDescription.Text = value.MoneyModel.Description;
-                imgState.SetImageResource(value.IsPaid ? Resource.Drawable.icon_paid : Resource.Drawable.icon_unpaid);
+                if (value.IsPaid)
+                {
+                    tvIsPaid.SetTextColor(ContextCompat.GetColorStateList(ItemView.Context, Resource.Color.state_going_color));
+                    tvIsPaid.Text = "PAID";
+                }
+                else
+                {
+                    tvIsPaid.SetTextColor(ContextCompat.GetColorStateList(ItemView.Context, Resource.Color.color_red));
+                    tvIsPaid.Text = "UNPAID";
+                }
+
+                tvAmount.Text = $"{value.MoneyModel.Amount.ToCurrency()}";
+
+                ItemView.Context.DoWithAdmin(() =>
+                {
+                    btnAdmin.Visibility = ViewStates.Visible;
+                    btnAdmin.Click += (s, e) =>
+                    {
+                        // Show admin menu
+                    };
+                });
             }
         }
 
