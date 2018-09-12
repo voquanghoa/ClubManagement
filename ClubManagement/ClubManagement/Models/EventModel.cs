@@ -26,6 +26,9 @@ namespace ClubManagement.Models
         [JsonProperty("place")]
         public string Place { get; set; } = "";
 
+        [JsonProperty("address")]
+        public string Address { get; set; } = "";
+
         [JsonProperty("latitude")]
         public double Latitude { get; set; }
 

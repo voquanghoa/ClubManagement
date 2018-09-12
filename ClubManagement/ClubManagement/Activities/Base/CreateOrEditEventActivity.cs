@@ -11,6 +11,7 @@ using Android.Gms.Location.Places.UI;
 using ClubManagement.Fragments;
 using ClubManagement.Controllers;
 using ClubManagement.Models;
+using Square.Picasso;
 
 namespace ClubManagement.Activities.Base
 {
@@ -24,16 +25,28 @@ namespace ClubManagement.Activities.Base
 
         private string imageUrl = "";
 
+        private EventModel eventModel;
+
+        private bool isEdit;
+
         protected UserLoginEventModel Event
         {
             set
             {
+                eventModel = value as EventModel;
+                isEdit = true;
+
                 startTime = value.TimeStart;
                 endTime = value.TimeEnd;
                 edtEventTitle.Text = value.Title;
                 edtEventDescription.Text = value.Description;
                 edtEventLocation.Text = value.Place;
-                edtChooseLocation.Text = value.Place;
+                edtChooseLocation.Text = value.Address;
+
+                if (!string.IsNullOrEmpty(value.ImageUrl))
+                {
+                    Picasso.With(this).Load(value.ImageUrl).Into(imgEvent);
+                }
 
                 UpdateView();
             }
@@ -134,8 +147,7 @@ namespace ClubManagement.Activities.Base
         [InjectOnClick(Resource.Id.btnDone)]
         protected void Done(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(edtChooseLocation.Text) ||
-                string.IsNullOrEmpty(edtEventTitle.Text) ||
+            if (string.IsNullOrEmpty(edtEventTitle.Text) ||
                 string.IsNullOrEmpty(edtEventDescription.Text) ||
                 string.IsNullOrEmpty(tvStartDate.Text) ||
                 string.IsNullOrEmpty(edtEventLocation.Text) ||
@@ -145,19 +157,41 @@ namespace ClubManagement.Activities.Base
                 return;
             }
 
-            var eventModel = new EventModel
+            if (isEdit)
             {
-                Description = edtEventDescription.Text,
-                Place = edtEventLocation.Text,
-                Title = edtEventTitle.Text,
-                CreatedBy = AppDataController.Instance.UserName,
-                CreatedTime = DateTime.Now,
-                TimeStart = startTime,
-                TimeEnd = endTime,
-                Longitude = place.LatLng.Longitude,
-                Latitude = place.LatLng.Latitude,
-                ImageUrl = imageUrl
-            };
+                eventModel.Description = edtEventDescription.Text;
+                eventModel.Place = edtEventLocation.Text;
+                eventModel.Title = edtEventTitle.Text;
+                eventModel.CreatedBy = AppDataController.Instance.UserName;
+                eventModel.CreatedTime = DateTime.Now;
+                eventModel.TimeStart = startTime;
+                eventModel.TimeEnd = endTime;
+                eventModel.ImageUrl = imageUrl;
+
+                if (!eventModel.Address.Equals(edtChooseLocation.Text))
+                {
+                    eventModel.Address = edtChooseLocation.Text;
+                    eventModel.Longitude = place.LatLng.Longitude;
+                    eventModel.Latitude = place.LatLng.Latitude;
+                }
+            }
+            else
+            {
+                eventModel = new EventModel
+                {
+                    Description = edtEventDescription.Text,
+                    Place = edtEventLocation.Text,
+                    Title = edtEventTitle.Text,
+                    CreatedBy = AppDataController.Instance.UserName,
+                    CreatedTime = DateTime.Now,
+                    TimeStart = startTime,
+                    TimeEnd = endTime,
+                    Address = edtChooseLocation.Text,
+                    Longitude = place.LatLng.Longitude,
+                    Latitude = place.LatLng.Latitude,
+                    ImageUrl = imageUrl
+                };
+            }
 
             var progressDialog = this.CreateDialog(GetString(Resource.String.adding_event),
                 GetString(Resource.String.wait));
@@ -165,7 +199,14 @@ namespace ClubManagement.Activities.Base
 
             this.DoRequest(async () =>
             {
-                await EventsController.Instance.Add(eventModel);
+                if (isEdit)
+                {
+                    await EventsController.Instance.Edit(eventModel);
+                }
+                else
+                {
+                    await EventsController.Instance.Add(eventModel);
+                }
             }, () =>
             {
                 progressDialog.Dismiss();
