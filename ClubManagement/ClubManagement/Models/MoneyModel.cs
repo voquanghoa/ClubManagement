@@ -13,5 +13,8 @@ namespace ClubManagement.Models
 
         [JsonProperty("description")]
         public string Description { get; set; }
+
+        [JsonProperty("group")]
+        public string Group { get; set; }
     }
 }
