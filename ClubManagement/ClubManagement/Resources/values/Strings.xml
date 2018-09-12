@@ -109,5 +109,6 @@
   <string name="pick_time_in_future">Please pick a time in the future!</string>
   <string name="pick_time_before_start_time">Can not pick a time before start time!</string>
   <string name="adding_event">Adding event</string>
+  <string name="this_event_happened">This event happened</string>
   <string name="no_fee">No fee</string>
 </resources>

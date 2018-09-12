@@ -26,6 +26,8 @@ namespace ClubManagement.Adapters
         [InjectView(Resource.Id.tvGoingStatus)]
         private TextView tvGoingStatus;
 
+        private bool isPast;
+
         public string Id;
 
         public UserLoginEventModel EventModel
@@ -37,26 +39,37 @@ namespace ClubManagement.Adapters
                 tvTime.Text = value.TimeStart.ToString("M") + " " + value.TimeStart.ToShortTimeString();
                 tvPlace.Text = value.Place;
                 Glide.With(ItemView.Context).Load(value.ImageUrl).Into(imgEvent);
-                if (value.IsJoined)
+                if (isPast)
                 {
-                    imgJoinedUsers.SetImageResource(Resource.Drawable.icon_paid);
-                    tvGoingStatus.Text = "You and " + (value.NumberOfJoinedUsers > 1
-                                             ? (value.NumberOfJoinedUsers - 1)
-                                             : value.NumberOfJoinedUsers) + " going";
-                    tvGoingStatus.SetTextColor(ContextCompat.GetColorStateList(ItemView.Context,
-                        Resource.Color.state_going_color));
+                    tvGoingStatus.Text = ItemView.Context.GetString(Resource.String.this_event_happened);
+                    imgJoinedUsers.SetImageResource(value.IsJoined ? Resource.Drawable.icon_paid
+                        : Resource.Drawable.icon_going);
                 }
                 else
                 {
-                    imgJoinedUsers.SetImageResource(Resource.Drawable.icon_going);
-                    tvGoingStatus.Text = $"{value.NumberOfJoinedUsers} going";
-                    tvGoingStatus.SetTextColor(ContextCompat.GetColorStateList(ItemView.Context, Resource.Color.state_not_going_color));
+                    if (value.IsJoined)
+                    {
+                        imgJoinedUsers.SetImageResource(Resource.Drawable.icon_paid);
+                        tvGoingStatus.Text = "You and " + (value.NumberOfJoinedUsers > 1
+                                                 ? (value.NumberOfJoinedUsers - 1)
+                                                 : value.NumberOfJoinedUsers) + " going";
+                        tvGoingStatus.SetTextColor(ContextCompat.GetColorStateList(ItemView.Context,
+                            Resource.Color.state_going_color));
+                    }
+                    else
+                    {
+                        imgJoinedUsers.SetImageResource(Resource.Drawable.icon_going);
+                        tvGoingStatus.Text = $"{value.NumberOfJoinedUsers} going";
+                        tvGoingStatus.SetTextColor(ContextCompat.GetColorStateList(ItemView.Context, Resource.Color.state_not_going_color));
+                    }
                 }
             }
         }
 
-        public ItemEventViewHolder(View itemView) : base(itemView)
+        public ItemEventViewHolder(View itemView, bool isPast) : base(itemView)
         {
+            this.isPast = isPast;
+
             Cheeseknife.Inject(this, itemView);
             itemView.Click += (s, e) =>
             {

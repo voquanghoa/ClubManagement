@@ -42,7 +42,7 @@ namespace ClubManagement.Adapters
             {
                 var itemView = LayoutInflater.From(parent.Context)
                     .Inflate(Resource.Layout.item_recyclerview_events, parent, false);
-                var viewHolder = new ItemEventViewHolder(itemView);
+                var viewHolder = new ItemEventViewHolder(itemView, IsPastTab);
                 viewHolder.ClickHander += ItemClick;
                 return viewHolder;
             }
