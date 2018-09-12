@@ -17,6 +17,7 @@ using Square.Picasso;
 using Android.Support.V4.Widget;
 using ClubManagement.Ultilities;
 using Android.Preferences;
+using Android.Support.Design.Widget;
 using ClubManagement.Activities;
 using Newtonsoft.Json;
 
@@ -58,7 +59,27 @@ namespace ClubManagement.Fragments
 
         [InjectView(Resource.Id.itemNeedToPayParentView)] private LinearLayout itemNeedToPayParentView;
 
+        [InjectView(Resource.Id.parentViewFabAddFee)]
+        private View parentViewFabAddFee;
+
+        [InjectView(Resource.Id.parentViewFabAddOutCome)]
+        private View parentViewFabAddOutCome;
+
+        [InjectView(Resource.Id.fabAddEvent)] private FloatingActionButton fabAddEvent;
+
+        [InjectView(Resource.Id.fabAddFee)] private FloatingActionButton fabAddFee;
+
+        [InjectView(Resource.Id.fabAddOutCome)] private FloatingActionButton fabAddOutCome;
+
+        [InjectView(Resource.Id.tvAddEvent)] private View tvAddEvent;
+
+        [InjectView(Resource.Id.bg_fab_menu)] private View bgFabsMenu;
+
         public event EventHandler ItemClick;
+
+        private bool isFabsMenuOpenning;
+
+        private const int RequestAddEventCode = 1;
 
         [InjectOnClick(Resource.Id.itemGoingParentView)]
         private void ShowGoingEventsTab(object s, EventArgs e)
@@ -123,6 +144,7 @@ namespace ClubManagement.Fragments
         public DashboardFragment()
         {
             changeAvatarFragment.ChangeAvatar += ChangeAvatarFragment_ChangeAvatar;
+            
         }
 
         private void ChangeAvatarFragment_ChangeAvatar(object sender, EventArgs e)
@@ -158,6 +180,8 @@ namespace ClubManagement.Fragments
         {
             var view = inflater.Inflate(Resource.Layout.fragment_dashboard, container, false);
             Cheeseknife.Inject(this, view);
+
+            InitFabsMenu();
 
             if (appDataController.UserName.Length > 10)
             {
@@ -282,6 +306,68 @@ namespace ClubManagement.Fragments
             parent.Visibility = ViewStates.Visible;
             tvCount.Text = count.ToString();
             tvUnit.Text = unit + (count > 1 ? "s" : string.Empty);
+        }
+
+        private void InitFabsMenu()
+        {
+            parentViewFabAddFee.Visibility = ViewStates.Gone;
+            parentViewFabAddOutCome.Visibility = ViewStates.Gone;
+            fabAddEvent.Visibility = ViewStates.Gone;
+            tvAddEvent.Visibility = ViewStates.Gone;
+            bgFabsMenu.Visibility = ViewStates.Gone;
+
+            Context.DoWithAdmin(() =>
+            {
+                fabAddEvent.Visibility = ViewStates.Visible;
+                fabAddEvent.Click += (s, e) =>
+                {
+                    if (isFabsMenuOpenning)
+                    {
+                        var intent = new Intent(Context, typeof(CreateEventActivity));
+                        StartActivityForResult(intent, RequestAddEventCode);
+                        CloseFabsMenu();
+                    }
+                    else
+                    {
+                        OpenFabsMenu();
+                    }
+                };
+
+                bgFabsMenu.Click += (s, e) => CloseFabsMenu();
+                fabAddFee.Click += (s, e) =>
+                {
+                    CloseFabsMenu();
+                    // add fee
+                };
+                fabAddOutCome.Click += (s, e) =>
+                {
+                    CloseFabsMenu();
+                    //add outcome
+                };
+            });
+
+        }
+
+        private void OpenFabsMenu()
+        {
+            isFabsMenuOpenning = true;
+            parentViewFabAddOutCome.Visibility = ViewStates.Visible;
+            parentViewFabAddFee.Visibility = ViewStates.Visible;
+            tvAddEvent.Visibility = ViewStates.Visible;
+            bgFabsMenu.Visibility = ViewStates.Visible;
+            bgFabsMenu.Animate().Alpha(1f);
+            fabAddEvent.SetImageResource(Resource.Drawable.icon_add_event);
+        }
+
+        private void CloseFabsMenu()
+        {
+            isFabsMenuOpenning = false;
+            parentViewFabAddOutCome.Visibility = ViewStates.Gone;
+            parentViewFabAddFee.Visibility = ViewStates.Gone;
+            tvAddEvent.Visibility = ViewStates.Gone;
+            bgFabsMenu.Visibility = ViewStates.Gone;
+            fabAddEvent.SetImageResource(Resource.Drawable.icon_add);
+            bgFabsMenu.Animate().Alpha(0f);
         }
     }
 }
