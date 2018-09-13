@@ -10,9 +10,6 @@ namespace ClubManagement.CustomAdapters
 {
     public class MoneyViewHolder : RecyclerView.ViewHolder, View.IOnClickListener
     {
-        [InjectView(Resource.Id.tvDeadlineTime)]
-        private TextView tvDeadlineTime;
-
         [InjectView(Resource.Id.tvDescription)]
         private TextView tvDescription;
 
@@ -30,7 +27,6 @@ namespace ClubManagement.CustomAdapters
         {
             set
             {
-                tvDeadlineTime.Text = $"Deadline: {value.MoneyModel.Time:MMM dd, yyyy}";
                 tvDescription.Text = value.MoneyModel.Description;
                 if (value.IsPaid)
                 {

@@ -89,6 +89,7 @@ namespace ClubManagement.Fragments
 
         protected override void DisplayData(List<MoneyState> data)
         {
+            moneySummaryFragment.MoneyStates = data;
             moneyPaidListFragment.MoneyStates = data.Where(x => x.IsPaid).OrderByDescending(x => x.MoneyModel.Time).ToList();
             moneyUnpaidListFragment.MoneyStates = data.Where(x => !x.IsPaid).OrderByDescending(x => x.MoneyModel.Time).ToList();
         }

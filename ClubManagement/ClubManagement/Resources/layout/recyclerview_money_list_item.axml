@@ -4,19 +4,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingBottom="@dimen/textview_padding_top_bottom">
-    <TextView
-        android:id="@+id/tvDeadlineTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:layout_marginRight="@dimen/dimen_20dp"
-        android:layout_marginLeft="@dimen/dimen_20dp"
-        android:textColor="@color/color_gray"
-        android:text="Deadline: Sep 10 2018"
-        android:paddingTop="@dimen/dimen_5dp"
-        android:paddingBottom="@dimen/dimen_5dp"
-        android:textSize="@dimen/text_description_size" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
