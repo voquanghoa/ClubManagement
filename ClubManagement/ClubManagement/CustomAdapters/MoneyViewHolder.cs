@@ -1,10 +1,20 @@
-﻿using Android.Support.V4.Content;
+﻿using System;
+using Android.App;
+using Android.Content;
+using Android.Graphics;
+using Android.Support.V4.Content;
 using Android.Support.V7.Widget;
+using Android.Text;
+using Android.Text.Style;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
+using ClubManagement.Activities;
 using ClubManagement.Interfaces;
 using ClubManagement.Models;
 using ClubManagement.Ultilities;
+using Newtonsoft.Json;
+using PopupMenu = Android.Widget.PopupMenu;
 
 namespace ClubManagement.CustomAdapters
 {
@@ -46,10 +56,38 @@ namespace ClubManagement.CustomAdapters
                     btnAdmin.Visibility = ViewStates.Visible;
                     btnAdmin.Click += (s, e) =>
                     {
-                        // Show admin menu
+                        var popupMenu = ((View) s).CreatepopupMenu(Resource.Menu.admin_menu);
+                        popupMenu.MenuItemClick += PopupMenu_MenuItemClick;
+                        var menu = popupMenu.Menu;
+                        var item = menu.GetItem(1);
+                        var spanString = new SpannableString(item.TitleFormatted.ToString());
+                        spanString.SetSpan(new ForegroundColorSpan(ItemView.Resources.GetColor(Resource.Color.color_red, null)), 0, spanString.Length(), 0); //fix the color to white
+                        item.SetTitle(spanString);
+                        popupMenu.Show();
                     };
                 });
             }
+        }
+
+        private void PopupMenu_MenuItemClick(object sender, PopupMenu.MenuItemClickEventArgs e)
+        {
+            switch (e.Item.ItemId)
+            {
+                case Resource.Id.edit:
+                    // Edit fee
+                    break;
+                case Resource.Id.delete:
+                    ((Activity) ItemView.Context).RunOnUiThread(() =>
+                    {
+                        ItemView.Context.ShowConfirmDialog(Resource.String.delete_fee, Resource.String.confirm_delete,
+                            () =>
+                            {
+                            },
+                            () => { }).Show();
+                    });
+                    break;
+            }
+            ((PopupMenu) sender).Dismiss();
         }
 
         public MoneyViewHolder(View itemView) : base(itemView)

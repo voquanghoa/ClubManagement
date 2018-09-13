@@ -68,6 +68,7 @@
   <string name="time">Time</string>
   <string name="confirm_delete">Are you sure to delete?</string>
   <string name="delete_event">Delete event</string>
+  <string name="delete_fee">Delete fee</string>
   <string name="delete_outcome">Delete outcome</string>
   <string name="event_happened">Event is already happened.</string>
   <string name="you_joined">You have already joined this event.</string>
