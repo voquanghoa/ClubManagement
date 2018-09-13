@@ -20,6 +20,7 @@ namespace ClubManagement.Models
             CreatedTime = eventModel.CreatedTime;
             Latitude = eventModel.Latitude;
             Longitude = eventModel.Longitude;
+            Address = eventModel.Address;
             Place = eventModel.Place;
             ImageUrl = eventModel.ImageUrl;
         }
