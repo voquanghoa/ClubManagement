@@ -34,6 +34,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tvPaid" />
+        <com.github.mikephil.charting.charts.BarChart
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/barChart" />
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
