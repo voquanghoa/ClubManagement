@@ -7,36 +7,58 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/tabbar_height"
         android:background="@color/color_blue">
-        <ImageButton
-            android:layout_width="wrap_content"
+        <LinearLayout
             android:layout_height="match_parent"
-            android:src="@drawable/icon_cross"
-            android:background="@null"
-            android:id="@+id/btnCross"
-            android:paddingLeft="@dimen/dimen_20dp"
-            android:paddingRight="@dimen/dimen_20dp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:text="@string/create_event"
-            android:textColor="@color/text_color_white"
-            android:textSize="@dimen/text_size_large"
-            android:textStyle="bold" />
-        <Button
-            android:layout_width="wrap_content"
-            android:background="@null"
-            android:textAllCaps="false"
-            android:id="@+id/btnDone"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:layout_gravity="right"
-            android:text="@string/done"
-            android:textColor="@color/text_color_white"
-            android:textSize="@dimen/text_size_large"
-            android:textStyle="bold"
-            android:paddingLeft="@dimen/dimen_20dp"
-            android:paddingRight="@dimen/dimen_20dp" />
+            android:layout_width="match_parent"
+            android:orientation="horizontal">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/icon_cross"
+                android:visibility="gone"
+                android:background="@null"
+                android:id="@+id/btnCross" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:textAllCaps="false"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:visibility="gone"
+                android:layout_gravity="left"
+                android:text="@string/cancel"
+                android:textColor="@color/text_color_white"
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold"
+                android:id="@+id/btnCancel"
+                android:paddingRight="@dimen/dimen_20dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:gravity="center_vertical|left"
+                android:text="@string/create_event"
+                android:textColor="@color/text_color_white"
+                android:textSize="@dimen/text_size_large"
+                android:id="@+id/tvTitle"
+                android:textStyle="bold" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:textAllCaps="false"
+                android:id="@+id/btnDone"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:text="@string/done"
+                android:textColor="@color/text_color_white"
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold"
+                android:paddingRight="@dimen/dimen_20dp"
+                android:paddingLeft="@dimen/dimen_20dp" />
+        </LinearLayout>
     </android.support.v7.widget.Toolbar>
     <FrameLayout
         android:layout_height="match_parent"
@@ -52,9 +74,10 @@
                 android:layout_weight="1"
                 android:src="@drawable/image_event_default"
                 android:id="@+id/imgEvent" />
-            <android.support.v4.widget.NestedScrollView
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:fadeScrollbars="false"
                 android:layout_weight="2">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -88,7 +111,6 @@
                     </LinearLayout>
                     <EditText
                         android:ellipsize="end"
-                        android:singleLine="true"
                         android:id="@+id/edtEventTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -98,7 +120,7 @@
                         android:textSize="@dimen/text_description_size"
                         android:paddingBottom="@dimen/dimen_5dp"
                         android:paddingTop="@dimen/dimen_5dp"
-                        android:hint="@string/enter_here"
+                        android:hint="@string/enter_here_uppercase"
                         android:textColorHint="@color/color_hint"
                         android:background="@drawable/edit_text_border" />
                     <TextView
@@ -193,7 +215,6 @@
                         android:textColor="@color/color_gray" />
                     <EditText
                         android:ellipsize="end"
-                        android:singleLine="true"
                         android:id="@+id/edtEventLocation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -208,7 +229,6 @@
                         android:background="@drawable/edit_text_border" />
                     <EditText
                         android:ellipsize="end"
-                        android:singleLine="true"
                         android:editable="false"
                         android:id="@+id/edtChooseLocation"
                         android:layout_width="match_parent"
@@ -236,7 +256,6 @@
                         android:id="@+id/edtEventDescription"
                         android:layout_width="match_parent"
                         android:ellipsize="end"
-                        android:singleLine="true"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dimen_20dp"
                         android:layout_marginRight="@dimen/dimen_20dp"
@@ -248,7 +267,7 @@
                         android:textColorHint="@color/color_hint"
                         android:background="@drawable/edit_text_border" />
                 </LinearLayout>
-            </android.support.v4.widget.NestedScrollView>
+            </ScrollView>
         </LinearLayout>
         <View
             android:layout_width="match_parent"

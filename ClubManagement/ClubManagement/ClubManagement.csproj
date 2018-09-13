@@ -190,8 +190,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\Base\CreateOrEditEventActivity.cs" />
     <Compile Include="Activities\Base\MapAbstractActivity.cs" />
     <Compile Include="Activities\CreateEventActivity.cs" />
+    <Compile Include="Activities\EditEventActivity.cs" />
     <Compile Include="Activities\EventDetailActivity.cs" />
     <Compile Include="Activities\GuestActivity.cs" />
     <Compile Include="Activities\LoginActivity.cs" />
@@ -632,6 +634,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon_credit_card.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_dot.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\recyclerview_money_list_deadline_time_item.axml">
