@@ -110,15 +110,15 @@ namespace ClubManagement.Fragments
             barChart.AxisLeft.AxisMinimum = 0;
             barChart.AxisLeft.Granularity = 1;
 
-            UpdateBarChart(DateTime.Now.Year.ToString());
+            UpdatePaidView(DateTime.Now.Year.ToString());
         }
 
         private void Spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
-            UpdateBarChart(years[e.Position].ToString());
+            UpdatePaidView(years[e.Position].ToString());
         }
 
-        private void UpdateBarChart(string year)
+        private void UpdatePaidView(string year)
         {
             var sumMoneyPaidByYear = moneyStates.Sum(x => x.IsPaid
                     && (x.MoneyModel.Time.Year.ToString().Equals(year)
