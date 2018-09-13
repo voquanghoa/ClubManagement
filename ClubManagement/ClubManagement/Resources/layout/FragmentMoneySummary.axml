@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/money_summary_background_color"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white_color"
+        android:layout_margin="@dimen/money_summary_margin"
+        android:layout_weight="2"
+        android:id="@+id/linearLayout1">
+        <TextView
+            android:text="@string/total_amount_paid"
+            android:textColor="@color/text_color_black"
+            android:textSize="@dimen/text_size_normal"
+            android:layout_margin="@dimen/margin_small"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/spinner" />
+        <TextView
+            android:textColor="@color/text_color_red"
+            android:textSize="@dimen/text_title_size"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/money_summary_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvPaid" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white_color"
+        android:layout_margin="@dimen/money_summary_margin"
+        android:padding="@dimen/money_summary_padding"
+        android:layout_weight="1"
+        android:id="@+id/linearLayout2">
+        <TextView
+            android:text="@string/total_amount_need_pay"
+            android:textColor="@color/text_color_black"
+            android:textSize="@dimen/text_size_normal"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvStatusNeedPay" />
+        <TextView
+            android:textColor="@color/text_color_red"
+            android:textSize="@dimen/text_size_large"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvNeedPay" />
+    </LinearLayout>
+</LinearLayout>
