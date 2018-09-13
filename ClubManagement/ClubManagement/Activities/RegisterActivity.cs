@@ -91,7 +91,8 @@ namespace ClubManagement.Activities
                     {
                         Email = edtEmail.Text,
                         Name = edtName.Text,
-                        Password = edtPassword.Text
+                        Password = edtPassword.Text,
+                        CreatedTime = DateTime.Now
                     });
                 }, () =>
                 {

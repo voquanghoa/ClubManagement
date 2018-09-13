@@ -72,6 +72,9 @@
     <Reference Include="JWT, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Firebase.Xamarin.0.3.6\lib\JWT.dll</HintPath>
     </Reference>
+    <Reference Include="MPAndroidChart, Version=3.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MPAndroidChart.3.0.3\lib\MonoAndroid\MPAndroidChart.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -267,6 +270,7 @@
     <Compile Include="Fragments\MoneyFragment.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="CustomAdapters\PagerAdapter.cs" />
+    <Compile Include="Models\ValueFormatter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ultilities\ActivityExtensions.cs" />

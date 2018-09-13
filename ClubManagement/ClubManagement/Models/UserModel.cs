@@ -28,5 +28,8 @@ namespace ClubManagement.Models
 
         [JsonProperty("lastLogin")]
         public DateTime LastLogin { get; set; } = new DateTime();
+
+        [JsonProperty("createdTime")]
+        public DateTime CreatedTime { get; set; } = new DateTime(2017, 1, 1);
     }
 }
