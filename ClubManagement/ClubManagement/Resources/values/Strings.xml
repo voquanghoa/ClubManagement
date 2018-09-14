@@ -106,7 +106,7 @@
   <string name="guest_list">Guest List</string>
   <string name="end_time">Ends</string>
   <string name="location">Location</string>
-  <string name="enter_location">Enter location (option)</string>
+  <string name="enter_location">Enter location (Optional)</string>
   <string name="choose_location">Choose from the map</string>
   <string name="description">Description</string>
   <string name="pick_time_in_future">Please pick a time in the future!</string>
