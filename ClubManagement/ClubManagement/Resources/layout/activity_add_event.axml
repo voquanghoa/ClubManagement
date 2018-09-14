@@ -72,6 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:scaleType="centerCrop"
                 android:src="@drawable/image_event_default"
                 android:id="@+id/imgEvent" />
             <ScrollView
