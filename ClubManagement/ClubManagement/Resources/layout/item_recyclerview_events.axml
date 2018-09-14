@@ -5,27 +5,29 @@
     android:layout_height="wrap_content">
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dimen_5dp">
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/dimen_10dp">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:background="@color/event_ticket_background_color"
-            android:padding="@dimen/dimen_10dp">
+            android:background="@color/event_ticket_background_color">
             <ImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_add"
+                android:layout_width="@dimen/event_icon_height"
+                android:layout_height="@dimen/event_icon_height"
                 android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/icon_add"
                 android:id="@+id/imgEvent"
                 android:layout_marginRight="@dimen/dimen_10dp" />
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/dimen_20dp"
+                android:layout_gravity="center"
                 android:orientation="vertical"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:padding="@dimen/dimen_10dp">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
