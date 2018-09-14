@@ -179,11 +179,9 @@ namespace ClubManagement.Activities
 
             currentIsJoined = eventDetail.IsJoined;
 
-            if (eventDetail.TimeStart < DateTime.Now)
+            if (eventDetail.TimeEnd <= DateTime.Now)
             {
-                tvStatus.Text = !eventDetail.IsJoined
-                    ? Resources.GetString(Resource.String.event_happened)
-                    : Resources.GetString(Resource.String.you_joined);
+                tvStatus.Text = Resources.GetString(Resource.String.this_event_happened);
             }
             else
             {
