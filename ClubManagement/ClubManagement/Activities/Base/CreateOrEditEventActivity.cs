@@ -150,7 +150,7 @@ namespace ClubManagement.Activities.Base
             if (string.IsNullOrEmpty(edtEventTitle.Text) ||
                 string.IsNullOrEmpty(edtEventDescription.Text) ||
                 string.IsNullOrEmpty(tvStartDate.Text) ||
-                string.IsNullOrEmpty(edtEventLocation.Text) ||
+                string.IsNullOrEmpty(edtChooseLocation.Text) ||
                 string.IsNullOrEmpty(tvStartTime.Text))
             {
                 Toast.MakeText(this, GetString(Resource.String.fill_all_fields), ToastLength.Short).Show();
@@ -162,8 +162,6 @@ namespace ClubManagement.Activities.Base
                 eventModel.Description = edtEventDescription.Text;
                 eventModel.Place = edtEventLocation.Text;
                 eventModel.Title = edtEventTitle.Text;
-                eventModel.CreatedBy = AppDataController.Instance.UserName;
-                eventModel.CreatedTime = DateTime.Now;
                 eventModel.TimeStart = startTime;
                 eventModel.TimeEnd = endTime;
                 eventModel.ImageUrl = imageUrl;
