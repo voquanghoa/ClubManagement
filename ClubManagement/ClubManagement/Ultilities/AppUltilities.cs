@@ -32,7 +32,7 @@ namespace ClubManagement.Ultilities
             {
                 textViewStatus.Text = Application.Context.Resources
                     .GetString(Resource.String.you_are_going);
-                textViewStatus.SetCompoundDrawablesWithIntrinsicBounds(Resource.Drawable.icon_check,
+                textViewStatus.SetCompoundDrawablesWithIntrinsicBounds(Resource.Drawable.icon_paid,
                     0,
                     0,
                     0);

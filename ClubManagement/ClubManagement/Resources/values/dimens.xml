@@ -49,6 +49,10 @@
   <dimen name="text_event_detail_margin_small">4dp</dimen>
   <dimen name="member_location_margin_large">24dp</dimen>
   <dimen name="margin_small">4dp</dimen>
+  <dimen name="event_detail_title_margin_small">8dp</dimen>
+  <dimen name="event_detail_title_margin">16dp</dimen>
+  <dimen name="event_detail_icon_small">24dp</dimen>
+  <dimen name="event_detail_icon">32dp</dimen>
   <dimen name="money_summary_margin">16dp</dimen>
   <dimen name="money_summary_padding">16dp</dimen>
   <dimen name="text_size_normal">16sp</dimen>
