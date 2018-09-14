@@ -173,7 +173,7 @@ namespace ClubManagement.Activities
             tvTitle.Text = eventDetail.Title;
             tvDescription.Text = eventDetail.Description;
             tvTime.Text = "Time";
-            tvAddress.Text = eventDetail.Place;
+            tvAddress.Text = $"{eventDetail.Place}\n{eventDetail.Address}";
             tvMonth.Text = eventDetail.TimeStart.ToString("MMM", CultureInfo.InvariantCulture);
             tvDate.Text = eventDetail.TimeStart.Day.ToString();
             tvUsers.Text = "0 Going";
