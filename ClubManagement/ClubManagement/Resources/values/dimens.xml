@@ -42,7 +42,7 @@
   <dimen name="text_size_large">20sp</dimen>
   <dimen name="number_dashboard_size">40sp</dimen>
   <dimen name="view_shadow_height">2dp</dimen>
-  <dimen name="image_view_event_detail_height">180dp</dimen>
+  <dimen name="image_view_event_detail_height">200dp</dimen>
   <dimen name="text_guests_margin_large">24dp</dimen>
   <dimen name="text_event_detail_margin">16dp</dimen>
   <dimen name="text_event_detail_margin_large">24dp</dimen>

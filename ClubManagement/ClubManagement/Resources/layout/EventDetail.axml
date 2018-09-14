@@ -75,15 +75,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/event_detail_text_color"
+                android:layout_gravity="center_horizontal"
                 android:text="Aug"
                 android:textSize="@dimen/text_title_size" />
             <TextView
                 android:id="@+id/tvDate"
                 android:layout_width="wrap_content"
-                android:paddingLeft="@dimen/dimen_5dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:textColor="@color/event_detail_text_color"
-                android:text="14"
+                android:text="12"
                 android:textSize="@dimen/text_title_size" />
         </LinearLayout>
         <TextView
