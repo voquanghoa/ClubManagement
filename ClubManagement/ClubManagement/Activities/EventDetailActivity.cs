@@ -169,12 +169,17 @@ namespace ClubManagement.Activities
             content = Intent.GetStringExtra("EventDetail");
 
             eventDetail = JsonConvert.DeserializeObject<UserLoginEventModel>(content);
-            
+
+            var split = string.IsNullOrEmpty(eventDetail.Place) 
+                    | string.IsNullOrEmpty(eventDetail.Address) 
+                ? "" 
+                : "\n";
+
             tvTitle.Text = eventDetail.Title;
             tvDescription.Text = eventDetail.Description;
             tvTime.Text = "Time";
-            tvAddress.Text = $"{eventDetail.Place}\n{eventDetail.Address}";
-            tvMonth.Text = eventDetail.TimeStart.ToString("MMM", CultureInfo.InvariantCulture);
+            tvAddress.Text = $"{eventDetail.Place}{split}{eventDetail.Address}";
+            tvMonth.Text = eventDetail.TimeStart.ToString("MMM", CultureInfo.InvariantCulture).ToUpper();
             tvDate.Text = eventDetail.TimeStart.Day.ToString();
             tvUsers.Text = "0 Going";
 
