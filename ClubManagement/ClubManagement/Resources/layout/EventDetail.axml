@@ -16,39 +16,47 @@
         android:contentInsetEnd="0dp"
         app:contentInsetRight="0dp"
         app:contentInsetEnd="0dp">
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="@color/event_detail_text_color"
-                android:text="@string/eventDetail"
-                android:gravity="center"
-                android:textSize="@dimen/tabbar_text_size"
-                android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:background="@color/color_blue"
+            android:orientation="horizontal">
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/icon_black_back"
+                android:layout_width="@dimen/event_detail_icon_small"
+                android:layout_height="@dimen/event_detail_icon_small"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/event_detail_title_margin_small"
+                android:layout_marginRight="@dimen/event_detail_title_margin"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_back"
                 android:background="@null"
                 android:id="@+id/btnBack" />
-            <ImageButton
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColor="@color/text_color_white"
+                android:text="@string/eventDetail"
+                android:gravity="center_vertical|left"
+                android:textSize="@dimen/text_title_size"
+                android:textStyle="bold" />
+            <ImageButton
+                android:layout_width="@dimen/event_detail_icon"
+                android:layout_height="match_parent"
                 android:src="@drawable/icon_option"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="@dimen/event_detail_title_margin_small"
+                android:layout_marginBottom="@dimen/event_detail_title_margin_small"
+                android:layout_marginRight="@dimen/event_detail_title_margin_small"
                 android:background="@null"
-                android:id="@+id/btnOption"
                 android:scaleType="fitCenter"
-                android:layout_alignParentRight="true" />
-        </RelativeLayout>
+                android:id="@+id/btnOption" />
+        </LinearLayout>
     </android.support.v7.widget.Toolbar>
     <ImageView
-        android:scaleType="fitCenter"
         android:layout_width="match_parent"
         android:layout_height="@dimen/image_view_event_detail_height"
+        android:scaleType="centerCrop"
+        android:src="@drawable/image_event_default"
         android:id="@+id/imgViewPhoto" />
     <LinearLayout
         android:id="@+id/itemNextEventParentView"
@@ -85,6 +93,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:textColor="@color/event_detail_text_color"
+            android:textStyle="bold"
             android:text="Title"
             android:textSize="@dimen/text_title_size"
             android:paddingLeft="@dimen/textview_padding_left_right"
@@ -103,7 +112,7 @@
         <TextView
             android:text="Large Text"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/event_detail_text_color"
+            android:textColor="@color/text_color_blue"
             android:layout_marginRight="@dimen/text_event_detail_margin_large"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -115,7 +124,7 @@
         <TextView
             android:text="Large Text"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/event_detail_text_color"
+            android:textColor="@color/text_color_blue"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -123,8 +132,13 @@
             android:gravity="center_vertical"
             android:id="@+id/tvUsers"
             android:drawablePadding="@dimen/text_event_detail_margin_small"
-            android:drawableLeft="@drawable/icon_users" />
+            android:drawableLeft="@drawable/icon_going" />
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_width"
+        android:layout_margin="@dimen/text_event_detail_margin_small"
+        android:background="@color/text_color_gray" />
     <TextView
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -140,9 +154,9 @@
         android:drawableLeft="@drawable/icon_time" />
     <TextView
         android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/event_detail_text_color"
         android:layout_marginLeft="@dimen/text_event_detail_margin"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
@@ -154,13 +168,12 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_width"
-        android:layout_marginTop="@dimen/text_event_detail_margin_small"
-        android:layout_marginBottom="@dimen/text_event_detail_margin_small"
-        android:background="@color/black_color" />
+        android:layout_margin="@dimen/text_event_detail_margin_small"
+        android:background="@color/text_color_gray" />
     <TextView
         android:text="@string/description"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/event_detail_text_color"
+        android:textColor="@color/text_color_black"
         android:layout_marginLeft="@dimen/text_event_detail_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -168,7 +181,7 @@
     <TextView
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/event_detail_text_color"
+        android:textColor="@color/text_color_gray"
         android:layout_marginLeft="@dimen/text_event_detail_margin_large"
         android:layout_marginRight="@dimen/text_event_detail_margin_large"
         android:layout_width="match_parent"

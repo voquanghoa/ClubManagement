@@ -12,6 +12,10 @@ using ClubManagement.Fragments;
 using FragmentActivity = Android.Support.V4.App.FragmentActivity;
 using Android.App;
 using System.Globalization;
+using Android.Text;
+using Android.Text.Style;
+using Android.Graphics;
+using Square.Picasso;
 
 namespace ClubManagement.Activities
 {
@@ -20,6 +24,9 @@ namespace ClubManagement.Activities
     {
         [InjectView(Resource.Id.tvMonth)]
         private TextView tvMonth;
+
+        [InjectView(Resource.Id.imgViewPhoto)]
+        private ImageView imgViewPhoto;
 
         [InjectView(Resource.Id.tvDate)]
         private TextView tvDate;
@@ -38,7 +45,7 @@ namespace ClubManagement.Activities
         {
             var intent = new Intent(this, typeof(GuestsActivity));
             intent.PutExtra("NumberPeople", tvUsers.Text);
-            intent.PutExtra("EventDetail", content);
+            intent.PutExtra("NumberPeople", tvUsers.Text.Split(' ').FirstOrDefault());
 
             StartActivity(intent);
         }
@@ -54,7 +61,7 @@ namespace ClubManagement.Activities
         {
             var intent = new Intent(this, typeof(MemberLocationActivity));
             intent.PutExtra("EventDetail", content);
-            intent.PutExtra("NumberPeople", tvUsers.Text);
+            intent.PutExtra("NumberPeople", tvUsers.Text.Split(' ').FirstOrDefault());
 
             StartActivity(intent);
         }
@@ -169,13 +176,20 @@ namespace ClubManagement.Activities
             tvAddress.Text = eventDetail.Place;
             tvMonth.Text = eventDetail.TimeStart.ToString("MMM", CultureInfo.InvariantCulture);
             tvDate.Text = eventDetail.TimeStart.Day.ToString();
-            tvUsers.Text = "0";
+            tvUsers.Text = "0 Going";
+
+            if (!string.IsNullOrEmpty(eventDetail.ImageUrl))
+            {
+                Picasso.With(this).Load(eventDetail.ImageUrl).Into(imgViewPhoto);
+            }
+
+            tvAddress.PaintFlags = tvAddress.PaintFlags | PaintFlags.UnderlineText;
 
             var count = 0;
 
             this.DoRequest(() => count = userEventsController.Values
                     .Where(x => x.EventId == eventDetail.Id).Count()
-                , () => tvUsers.Text = count.ToString());
+                , () => tvUsers.Text = $"{count} Going");
 
             currentIsJoined = eventDetail.IsJoined;
 

@@ -22,7 +22,7 @@ namespace ClubManagement.Ultilities
             if (!isJoined)
             {
                 textViewStatus.Text = Application.Context.Resources
-                    .GetString(Resource.String.going);
+                    .GetString(Resource.String.question_going);
                 textViewStatus.SetCompoundDrawablesWithIntrinsicBounds(Resource.Drawable.icon_like,
                     0,
                     0,
@@ -32,10 +32,11 @@ namespace ClubManagement.Ultilities
             {
                 textViewStatus.Text = Application.Context.Resources
                     .GetString(Resource.String.you_are_going);
-                textViewStatus.SetCompoundDrawablesWithIntrinsicBounds(Resource.Drawable.icon_check,
+                textViewStatus.SetCompoundDrawablesWithIntrinsicBounds(Resource.Drawable.icon_paid,
                     0,
                     0,
                     0);
+                textViewStatus.SetTextColor(Color.Red);
             }
         }
 

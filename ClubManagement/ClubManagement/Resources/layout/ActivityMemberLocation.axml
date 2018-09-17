@@ -17,12 +17,13 @@
         app:contentInsetRight="0dp"
         app:contentInsetEnd="0dp">
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/icon_back"
+            android:layout_width="@dimen/event_detail_icon_small"
+            android:layout_height="@dimen/event_detail_icon_small"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/event_detail_title_margin_small"
+            android:layout_marginRight="@dimen/event_detail_title_margin"
             android:scaleType="fitCenter"
-            android:layout_margin="@dimen/margin_small"
-            android:paddingRight="@dimen/textview_padding_left_right"
+            android:src="@drawable/icon_back"
             android:background="@null"
             android:id="@+id/btnBack" />
         <TextView
@@ -31,7 +32,7 @@
             android:text="@string/memberLocation"
             android:gravity="center_vertical"
             android:textColor="@color/text_color_white"
-            android:textSize="@dimen/tabbar_text_size"
+            android:textSize="@dimen/text_title_size"
             android:textStyle="bold" />
     </android.support.v7.widget.Toolbar>
     <LinearLayout
@@ -60,12 +61,12 @@
             android:gravity="center"
             android:textSize="@dimen/text_title_size"
             android:id="@+id/tvNumberPeople" />
-        <fragment xmlns:map="http://schemas.android.com/apk/res-auto"
+        <fragment
             android:id="@+id/mapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            map:uiZoomControls="true"
-            map:uiZoomGestures="true"
+            app:uiZoomControls="true"
+            app:uiZoomGestures="true"
             class="com.google.android.gms.maps.MapFragment" />
     </LinearLayout>
 </LinearLayout>
