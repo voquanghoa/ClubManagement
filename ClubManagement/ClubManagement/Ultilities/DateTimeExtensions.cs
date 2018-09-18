@@ -12,6 +12,8 @@ namespace ClubManagement.Ultilities
             return start.AddDays(daysToAdd);
         }
 
+        public static string ToDateString(this DateTime time) => time.ToString("MMM dd, yyyy");
+
         public static string ToDateTimeString(this DateTime startTime, DateTime endTime)
         {
             return startTime.Day == endTime.Day
