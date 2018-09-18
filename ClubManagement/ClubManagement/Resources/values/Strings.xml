@@ -118,4 +118,7 @@
   <string name="total_amount_need_pay">Total amount you need to pay</string>
   <string name="paid_all">You already paid all fees. Well done!</string>
   <string name="no_fee">No fee</string>
+  <string name="outcome">Outcome</string>
+  <string name="fee">Fee</string>
+  <string name="event">Event</string>
 </resources>
