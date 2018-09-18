@@ -275,6 +275,7 @@
                 android:layout_alignParentRight="true"
                 app:backgroundTint="@color/color_blue"
                 android:tint="@color/white_color"
+                app:elevation="0dp"
                 app:fabSize="mini" />
         </RelativeLayout>
     </LinearLayout>
@@ -309,6 +310,7 @@
                 android:layout_alignParentRight="true"
                 app:backgroundTint="@color/color_blue"
                 android:tint="@color/white_color"
+                app:elevation="0dp"
                 app:fabSize="mini" />
         </RelativeLayout>
     </LinearLayout>
@@ -344,6 +346,7 @@
                 android:layout_alignParentRight="true"
                 app:backgroundTint="@color/add_button_color"
                 android:tint="@color/white_color"
+                app:elevation="0dp"
                 app:fabSize="normal" />
         </RelativeLayout>
     </LinearLayout>
