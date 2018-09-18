@@ -322,10 +322,10 @@ namespace ClubManagement.Activities.Base
 
         protected void UpdateView()
         {
-            tvStartDate.Text = startTime.ToString("yyyy MMM dd");
-            tvStartTime.Text = $"{startTime.Hour} : {startTime.Minute}";
-            tvEndDate.Text = endTime.ToString("yyyy MMM dd");
-            tvEndTime.Text = $"{endTime.Hour} : {endTime.Minute}";
+            tvStartDate.Text = startTime.ToDateString();
+            tvStartTime.Text = startTime.ToTimeString();
+            tvEndDate.Text = endTime.ToDateString();
+            tvEndTime.Text = endTime.ToTimeString();
         }
     }
 }

@@ -5,6 +5,7 @@ using Android.Views;
 using Android.Widget;
 using ClubManagement.Models;
 using Com.Bumptech.Glide;
+using ClubManagement.Ultilities;
 
 namespace ClubManagement.Adapters
 {
@@ -36,9 +37,10 @@ namespace ClubManagement.Adapters
             {
                 Id = value.Id;
                 tvEventTitle.Text = value.Title;
-                tvTime.Text = value.TimeStart.ToString("M") + " " + value.TimeStart.ToShortTimeString();
                 tvPlace.Text = value.Place;
                 Glide.With(ItemView.Context).Load(value.ImageUrl).Into(imgEvent);
+                tvTime.Text = value.TimeStart.ToDateTimeString(value.TimeEnd);
+
                 if (isPast)
                 {
                     tvGoingStatus.Text = ItemView.Context.GetString(Resource.String.this_event_happened);
