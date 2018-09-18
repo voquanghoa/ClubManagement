@@ -254,17 +254,20 @@
         android:layout_marginBottom="@dimen/dimen_10dp"
         android:layout_alignParentRight="true">
         <TextView
-            android:text="Outcome"
+            android:text="@string/outcome"
+            android:textColor="@color/text_color_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingRight="@dimen/dimen_10dp"
             android:paddingLeft="@dimen/dimen_10dp"
             android:paddingTop="@dimen/dimen_5dp"
             android:paddingBottom="@dimen/dimen_5dp"
-            android:background="@drawable/info_marker_border"
+            android:layout_marginRight="@dimen/margin_small"
+            android:background="@drawable/label_box"
             android:layout_weight="1"
             android:layout_gravity="center_vertical" />
         <RelativeLayout
+            android:gravity="center"
             android:layout_width="70dp"
             android:layout_height="wrap_content">
             <android.support.design.widget.FloatingActionButton
@@ -289,17 +292,20 @@
         android:layout_marginBottom="@dimen/dimen_10dp"
         android:layout_alignParentRight="true">
         <TextView
-            android:text="Fee"
+            android:text="@string/fee"
+            android:textColor="@color/text_color_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingRight="@dimen/dimen_10dp"
             android:paddingLeft="@dimen/dimen_10dp"
             android:paddingTop="@dimen/dimen_5dp"
             android:paddingBottom="@dimen/dimen_5dp"
-            android:background="@drawable/info_marker_border"
+            android:layout_marginRight="@dimen/margin_small"
+            android:background="@drawable/label_box"
             android:layout_weight="1"
             android:layout_gravity="center_vertical" />
         <RelativeLayout
+            android:gravity="center"
             android:layout_width="70dp"
             android:layout_height="wrap_content">
             <android.support.design.widget.FloatingActionButton
@@ -325,17 +331,20 @@
         android:layout_alignParentRight="true">
         <TextView
             android:id="@+id/tvAddEvent"
-            android:text="Event"
+            android:text="@string/event"
+            android:textColor="@color/text_color_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingRight="@dimen/dimen_10dp"
             android:paddingLeft="@dimen/dimen_10dp"
             android:paddingTop="@dimen/dimen_5dp"
             android:paddingBottom="@dimen/dimen_5dp"
-            android:background="@drawable/info_marker_border"
+            android:layout_marginRight="@dimen/margin_small"
+            android:background="@drawable/label_box"
             android:layout_weight="1"
             android:layout_gravity="center_vertical" />
         <RelativeLayout
+            android:gravity="center"
             android:layout_width="70dp"
             android:layout_height="wrap_content">
             <android.support.design.widget.FloatingActionButton
