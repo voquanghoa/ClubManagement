@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Android.Support.V4.App;
 using Android.OS;
@@ -18,9 +19,15 @@ namespace ClubManagement.Fragments
 
         private MoneyListAdapter adapter;
 
+        public event EventHandler AdapterItemDeleteClick;
+
         public MoneyListFragment()
         {
             adapter = new MoneyListAdapter();
+            adapter.ItemDeleteClick += (s, e) =>
+            {
+                AdapterItemDeleteClick?.Invoke(s, e);
+            };
         }
 
         public List<MoneyState> MoneyStates 
