@@ -12,6 +12,7 @@ using ClubManagement.Fragments;
 using ClubManagement.Controllers;
 using ClubManagement.Models;
 using Square.Picasso;
+using Android.Text;
 
 namespace ClubManagement.Activities.Base
 {
@@ -240,6 +241,7 @@ namespace ClubManagement.Activities.Base
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_add_event);
             Cheeseknife.Inject(this);
+            edtEventTitle.SetFilters(new IInputFilter[] { new InputFilterAllCaps() });
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
