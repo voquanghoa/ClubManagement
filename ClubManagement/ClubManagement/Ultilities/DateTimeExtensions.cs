@@ -14,16 +14,18 @@ namespace ClubManagement.Ultilities
 
         public static string ToDateString(this DateTime time) => time.ToString("MMM dd, yyyy");
 
+        public static string ToTimeString(this DateTime time) => time.ToString("h:mm");
+
         public static string ToDateTimeString(this DateTime startTime, DateTime endTime)
         {
             return startTime.Day == endTime.Day
-                ? startTime.ToString($"MMM dd \u00B7 h{startTime.ToTimeString()} tt") +
+                ? startTime.ToString($"MMM dd \u00B7 h{startTime.ToMinuteString()} tt") +
                     " - " +
-                    endTime.ToString($"h{endTime.ToTimeString()} tt")
+                    endTime.ToString($"h{endTime.ToMinuteString()} tt")
                 : startTime.ToString("MMM dd") + " - " + endTime.ToString("MMM dd");
         }
 
-        private static string ToTimeString(this DateTime time)
+        private static string ToMinuteString(this DateTime time)
         {
             return time.Minute == 0
                 ? ""

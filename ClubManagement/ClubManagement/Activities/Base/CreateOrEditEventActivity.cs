@@ -323,9 +323,9 @@ namespace ClubManagement.Activities.Base
         protected void UpdateView()
         {
             tvStartDate.Text = startTime.ToDateString();
-            tvStartTime.Text = $"{startTime.Hour} : {startTime.Minute}";
+            tvStartTime.Text = startTime.ToTimeString();
             tvEndDate.Text = endTime.ToDateString();
-            tvEndTime.Text = $"{endTime.Hour} : {endTime.Minute}";
+            tvEndTime.Text = endTime.ToTimeString();
         }
     }
 }
