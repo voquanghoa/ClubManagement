@@ -112,6 +112,7 @@
                     </LinearLayout>
                     <EditText
                         android:ellipsize="end"
+                        android:textAllCaps="true"
                         android:id="@+id/edtEventTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
