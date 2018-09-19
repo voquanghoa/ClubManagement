@@ -8,10 +8,11 @@ namespace ClubManagement.CustomAdapters
 {
     public class MoneyAdminListAdapter : RecyclerView.Adapter
     {
-        private List<MoneyAdminState> moneyAdminStates;
+        private List<MoneyAdminState> moneyAdminStates = new List<MoneyAdminState>();
 
         public List<MoneyAdminState> MoneyAdminStates
         {
+            get => moneyAdminStates;
             set
             {
                 moneyAdminStates = value;
@@ -23,19 +24,11 @@ namespace ClubManagement.CustomAdapters
 
         private readonly string moneyId;
 
-        public MoneyAdminListAdapter(TextView tvState, string moneyId)
-        {
-            this.tvState = tvState;
-            this.moneyId = moneyId;
-        }
-
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             if (holder is MoneyAdminViewHolder viewHolder)
             {
                 viewHolder.MoneyAdminState = moneyAdminStates[position];
-                viewHolder.TvState = tvState;
-                viewHolder.MoneyId = moneyId;
             }
         }
 

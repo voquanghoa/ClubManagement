@@ -8,6 +8,8 @@ using Android.Widget;
 using ClubManagement.Activities;
 using ClubManagement.Interfaces;
 using ClubManagement.Models;
+using ClubManagement.Ultilities;
+using Newtonsoft.Json;
 using Plugin.Connectivity;
 
 namespace ClubManagement.CustomAdapters
@@ -80,13 +82,14 @@ namespace ClubManagement.CustomAdapters
                     ToastLength.Short).Show();
                 return;
             }
-            var intent = new Intent(view.Context, typeof(MoneyDetailActivity));
-            var moneyState = ((FeeDetailItem)feeItems[position]).MoneyState.MoneyModel;
-            intent.PutExtra("Budget", moneyState.Amount);
-            intent.PutExtra("Description", moneyState.Description);
-            intent.PutExtra("MoneyId", moneyState.Id);
-            intent.PutExtra("Time", moneyState.Time.ToShortDateString());
-            view.Context.StartActivity(intent);
+
+            view.Context.DoWithAdmin(() =>
+            {
+                var intent = new Intent(view.Context, typeof(MoneyDetailActivity));
+                var moneyModel = ((FeeDetailItem) feeItems[position]).MoneyState.MoneyModel;
+                intent.PutExtra("MoneyModel", JsonConvert.SerializeObject(moneyModel));
+                view.Context.StartActivity(intent);
+            });
         }
 
         private List<FeeItem> GetListFeeItem(List<MoneyState> moneyStates)
