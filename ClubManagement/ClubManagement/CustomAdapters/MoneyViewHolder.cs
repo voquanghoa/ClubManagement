@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.Graphics;
@@ -97,6 +98,11 @@ namespace ClubManagement.CustomAdapters
                                 ((Activity) ItemView.Context).DoRequest(async () =>
                                     {
                                         await MoneysController.Instance.Delete(moneyState.MoneyModel);
+                                        foreach (var userMoneyModel in UserMoneysController.Instance.Values.Where(x =>
+                                            x.MoneyId == moneyState.MoneyModel.Id))
+                                        {
+                                            await UserMoneysController.Instance.Delete(userMoneyModel);
+                                        }
                                         ((Activity) ItemView.Context).RunOnUiThread(() =>
                                         {
                                             DeleteClick?.Invoke("Success", null);
