@@ -14,9 +14,9 @@
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/icon_cross"
+                android:layout_marginRight="@dimen/textview_margin_left_right"
                 android:visibility="gone"
+                android:src="@drawable/icon_cross"
                 android:background="@null"
                 android:id="@+id/btnCross" />
             <Button
