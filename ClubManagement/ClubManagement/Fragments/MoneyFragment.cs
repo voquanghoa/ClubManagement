@@ -31,6 +31,21 @@ namespace ClubManagement.Fragments
         public MoneyFragment()
         {
             data = new List<MoneyState>();
+            moneyPaidListFragment.AdapterItemDeleteClick += (s, e) =>
+            {
+                if (s is string message && message == "Success")
+                {
+                    UpdateViewData();
+                }
+            };
+
+            moneyUnpaidListFragment.AdapterItemDeleteClick += (s, e) =>
+            {
+                if (s is string message && message == "Success")
+                {
+                    UpdateViewData();
+                }
+            };
         }
 
         private readonly AppDataController appDataController = AppDataController.Instance;

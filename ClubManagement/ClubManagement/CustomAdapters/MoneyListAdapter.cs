@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Android.Content;
 using Android.Support.V7.Widget;
@@ -14,6 +15,8 @@ namespace ClubManagement.CustomAdapters
     public class MoneyListAdapter : RecyclerView.Adapter, IItemClickListener
     {
         private readonly List<MoneyState> moneyStates = new List<MoneyState>();
+
+        public event EventHandler ItemDeleteClick;
 
         public List<MoneyState> MoneyStates
         {
@@ -39,6 +42,7 @@ namespace ClubManagement.CustomAdapters
             if (holder is MoneyViewHolder moneyViewHolder)
             {
                 moneyViewHolder.MoneyState = ((FeeDetailItem) feeItems[position]).MoneyState;
+                moneyViewHolder.DeleteClick += ItemDeleteClick;
                 moneyViewHolder.ItemClickListener = this;
             }
             else if (holder is MoneyDeadlineTimeViewHolder moneyDeadlineTimeViewHolder)

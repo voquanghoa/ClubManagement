@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.Graphics;
@@ -10,6 +11,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using ClubManagement.Activities;
+using ClubManagement.Controllers;
 using ClubManagement.Interfaces;
 using ClubManagement.Models;
 using ClubManagement.Ultilities;
@@ -23,6 +25,10 @@ namespace ClubManagement.CustomAdapters
         [InjectView(Resource.Id.tvDescription)]
         private TextView tvDescription;
 
+        public event EventHandler DeleteClick;
+
+        private PopupMenu popupMenu;
+
         [InjectView(Resource.Id.imgGroup)] private ImageView imgGroup;
 
         [InjectView(Resource.Id.tvIsPaid)] private TextView tvIsPaid;
@@ -33,10 +39,13 @@ namespace ClubManagement.CustomAdapters
 
         public IItemClickListener ItemClickListener { get; set; }
 
+        private MoneyState moneyState;
+
         public MoneyState MoneyState
         {
             set
             {
+                moneyState = value;
                 tvDescription.Text = value.MoneyModel.Description;
                 if (value.IsPaid)
                 {
@@ -56,7 +65,7 @@ namespace ClubManagement.CustomAdapters
                     btnAdmin.Visibility = ViewStates.Visible;
                     btnAdmin.Click += (s, e) =>
                     {
-                        var popupMenu = ((View) s).CreatepopupMenu(Resource.Menu.admin_menu);
+                        popupMenu = ((View) s).CreatepopupMenu(Resource.Menu.admin_menu);
                         popupMenu.MenuItemClick += PopupMenu_MenuItemClick;
                         var menu = popupMenu.Menu;
                         var item = menu.GetItem(1);
@@ -71,6 +80,7 @@ namespace ClubManagement.CustomAdapters
 
         private void PopupMenu_MenuItemClick(object sender, PopupMenu.MenuItemClickEventArgs e)
         {
+            popupMenu.Dismiss();
             switch (e.Item.ItemId)
             {
                 case Resource.Id.edit:
@@ -82,12 +92,30 @@ namespace ClubManagement.CustomAdapters
                         ItemView.Context.ShowConfirmDialog(Resource.String.delete_fee, Resource.String.confirm_delete,
                             () =>
                             {
+                                var dialog = ItemView.Context.CreateDialog("Deleting fee", "Please wait");
+                                dialog.Show();
+                                // delete
+                                ((Activity) ItemView.Context).DoRequest(async () =>
+                                    {
+                                        await MoneysController.Instance.Delete(moneyState.MoneyModel);
+                                        foreach (var userMoneyModel in UserMoneysController.Instance.Values.Where(x =>
+                                            x.MoneyId == moneyState.MoneyModel.Id))
+                                        {
+                                            await UserMoneysController.Instance.Delete(userMoneyModel);
+                                        }
+                                        ((Activity) ItemView.Context).RunOnUiThread(() =>
+                                        {
+                                            DeleteClick?.Invoke("Success", null);
+                                            dialog.Dismiss();
+                                        });
+                                    },
+                                    () => { },
+                                    () => { });
                             },
                             () => { }).Show();
                     });
                     break;
             }
-            ((PopupMenu) sender).Dismiss();
         }
 
         public MoneyViewHolder(View itemView) : base(itemView)
