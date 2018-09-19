@@ -64,7 +64,7 @@ namespace ClubManagement.Ultilities
             var spannableString = new SpannableString(Application.Context.GetString(Resource.String.delete));
             spannableString.SetSpan(new ForegroundColorSpan(Color.Red), 0, spannableString.Length(), 0);
 
-            popupMenu.Menu.FindItem(Resource.Id.delete).SetTitle(spannableString);
+            popupMenu.Menu.FindItem(Resource.Id.delete)?.SetTitle(spannableString);
 
             return popupMenu;
         }

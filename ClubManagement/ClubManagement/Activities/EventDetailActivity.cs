@@ -16,6 +16,7 @@ using Android.Text;
 using Android.Text.Style;
 using Android.Graphics;
 using Square.Picasso;
+using Android.Runtime;
 
 namespace ClubManagement.Activities
 {
@@ -102,7 +103,7 @@ namespace ClubManagement.Activities
 
                     intent.PutExtra("EventDetail", content);
 
-                    StartActivity(intent);
+                    StartActivityForResult(intent, 0);
                     break;
                 case Resource.Id.delete:
                     this.ShowConfirmDialog(Resource.String.title_confirm_delete,
@@ -118,9 +119,9 @@ namespace ClubManagement.Activities
                                 await EventsController.Instance.Delete(eventDetail);
                             }, () =>
                             {
-                                Toast.MakeText(this, Resource.String.delete_event_success, ToastLength.Short).Show();
-
                                 processDialog.Dismiss();
+
+                                Toast.MakeText(this, Resource.String.delete_event_success, ToastLength.Short).Show();
 
                                 Finish();
                             });
@@ -170,12 +171,33 @@ namespace ClubManagement.Activities
             }
 
             content = Intent.GetStringExtra("EventDetail");
-
             eventDetail = JsonConvert.DeserializeObject<UserLoginEventModel>(content);
 
-            var split = string.IsNullOrEmpty(eventDetail.Place) 
-                    | string.IsNullOrEmpty(eventDetail.Address) 
-                ? "" 
+            if (eventDetail.TimeEnd > DateTime.Now)
+            {
+                tvStatus.ChangeTextViewStatus(currentIsJoined);
+
+                tvStatus.Click += (s, e) =>
+                {
+                    if (!currentIsJoined)
+                    {
+                        UpdateUserEvents(!currentIsJoined);
+                    }
+                    else
+                    {
+                        unjoinEventFragment.Show(SupportFragmentManager, null);
+                    }
+                };
+            }
+
+            Update();
+        }
+
+        private void Update()
+        {
+            var split = string.IsNullOrEmpty(eventDetail.Place)
+                    | string.IsNullOrEmpty(eventDetail.Address)
+                ? ""
                 : "\n";
 
             tvTitle.Text = eventDetail.Title;
@@ -208,18 +230,19 @@ namespace ClubManagement.Activities
             else
             {
                 tvStatus.ChangeTextViewStatus(currentIsJoined);
+            }
+        }
 
-                tvStatus.Click += (s, e) =>
-                {
-                    if (!currentIsJoined)
-                    {
-                        UpdateUserEvents(!currentIsJoined);
-                    }
-                    else
-                    {
-                        unjoinEventFragment.Show(SupportFragmentManager, null);
-                    }
-                };
+        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+
+            if (resultCode == Result.Ok)
+            {
+                content = data.GetStringExtra("EventDetail");
+                eventDetail = JsonConvert.DeserializeObject<UserLoginEventModel>(content);
+
+                Update();
             }
         }
 

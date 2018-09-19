@@ -13,6 +13,7 @@ using ClubManagement.Controllers;
 using ClubManagement.Models;
 using Square.Picasso;
 using Android.Text;
+using Newtonsoft.Json;
 
 namespace ClubManagement.Activities.Base
 {
@@ -43,6 +44,7 @@ namespace ClubManagement.Activities.Base
                 edtEventDescription.Text = value.Description;
                 edtEventLocation.Text = value.Place;
                 edtChooseLocation.Text = value.Address;
+                imageUrl = value.ImageUrl;
 
                 if (!string.IsNullOrEmpty(value.ImageUrl))
                 {
@@ -208,16 +210,27 @@ namespace ClubManagement.Activities.Base
                 }
             }, () =>
             {
+                progressDialog.Dismiss();
+
+                var eventDetail = JsonConvert.SerializeObject(eventModel);
+
                 if (!isEdit)
                 {
                     Toast.MakeText(this, Resource.String.create_event_success, ToastLength.Short).Show();
+
+                    var intent = new Intent(this, typeof(EventDetailActivity));
+                    intent.PutExtra("EventDetail", eventDetail);
+
+                    StartActivity(intent);
+                    SetResult(Result.Ok);
+                }
+                else
+                {
+                    SetResult(Result.Ok, new Intent().PutExtra("EventDetail", eventDetail));
                 }
 
-                progressDialog.Dismiss();
+                Finish();
             });
-
-            SetResult(Result.Ok);
-            Finish();
         }
 
         [InjectOnClick(Resource.Id.btnCross)]
@@ -255,10 +268,14 @@ namespace ClubManagement.Activities.Base
 
             if (requestCode == RequestPickAvatar && resultCode == Result.Ok)
             {
+                var progressDialog = this.CreateDialog(GetString(Resource.String.upload_a_photo),
+                GetString(Resource.String.wait));
+                progressDialog.Show();
+
                 this.DoRequest(async () =>
                 {
                     imageUrl = await CloudinaryController.UploadImage(this, data.Data, $"Images/{Guid.NewGuid()}", 256);
-                });
+                }, () => progressDialog.Dismiss());
 
                 imgEvent.SetImageURI(data.Data);
             }
