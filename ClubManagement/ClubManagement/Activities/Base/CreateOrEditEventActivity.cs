@@ -208,6 +208,11 @@ namespace ClubManagement.Activities.Base
                 }
             }, () =>
             {
+                if (!isEdit)
+                {
+                    Toast.MakeText(this, Resource.String.create_event_success, ToastLength.Short).Show();
+                }
+
                 progressDialog.Dismiss();
             });
 

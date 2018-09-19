@@ -1,6 +1,8 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.Graphics;
+using Android.Text;
+using Android.Text.Style;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
@@ -58,6 +60,11 @@ namespace ClubManagement.Ultilities
             setForceIcons.Invoke(menuPopupHelper, true);
 
             popupMenu.Inflate(menuRes);
+
+            var spannableString = new SpannableString(Application.Context.GetString(Resource.String.delete));
+            spannableString.SetSpan(new ForegroundColorSpan(Color.Red), 0, spannableString.Length(), 0);
+
+            popupMenu.Menu.FindItem(Resource.Id.delete).SetTitle(spannableString);
 
             return popupMenu;
         }

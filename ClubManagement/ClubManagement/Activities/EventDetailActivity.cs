@@ -83,12 +83,12 @@ namespace ClubManagement.Activities
         {
             if (s is View view)
             {
-                var menuRes = eventDetail.TimeStart.Date.CompareTo(DateTime.Now.Date) < 0
+                var menuRes = eventDetail.TimeEnd <= DateTime.Now.Date
                     ? Resource.Menu.DetailEventOptionForPastEvent
                     : Resource.Menu.DetailEventOption;
 
                 var popupMenu = view.CreatepopupMenu(menuRes);
-                popupMenu.MenuItemClick += PopupMenu_MenuItemClick; ;
+                popupMenu.MenuItemClick += PopupMenu_MenuItemClick;
                 popupMenu.Show();
             }
         }
@@ -116,6 +116,9 @@ namespace ClubManagement.Activities
                             this.DoRequest(async () =>
                             {
                                 await EventsController.Instance.Delete(eventDetail);
+                            }, () =>
+                            {
+                                Toast.MakeText(this, Resource.String.delete_event_success, ToastLength.Short).Show();
 
                                 processDialog.Dismiss();
 
