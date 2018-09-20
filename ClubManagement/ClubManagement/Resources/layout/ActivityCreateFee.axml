@@ -28,7 +28,7 @@
             android:layout_gravity="center"
             android:text="@string/create_fee"
             android:textColor="@color/text_color_white"
-            android:textSize="@dimen/text_size_large"
+            android:textSize="@dimen/text_title_size"
             android:id="@+id/tvTitle"
             android:textStyle="bold" />
         <Button
@@ -44,78 +44,92 @@
             android:textSize="@dimen/text_size_large"
             android:textStyle="bold" />
     </android.support.v7.widget.Toolbar>
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
+    <FrameLayout
+        android:layout_marginTop="@dimen/create_fee_margin"
+        android:paddingTop="@dimen/create_fee_padding_top"
+        android:paddingBottom="@dimen/create_fee_padding_bottom"
+        android:background="@color/white_color"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout1">
-        <TextView
-            android:text="Large Text"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/fee_icon_width"
-            android:id="@+id/textView1" />
-        <EditText
-            android:ellipsize="end"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/fee_icon_width"
-            android:textSize="@dimen/text_description_size" />
-        <TextView
-            android:text="Large Text"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/fee_icon_width"
-            android:id="@+id/textView2" />
+        android:layout_width="match_parent">
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/linearLayout2">
-            <ImageView
-                android:src="@android:drawable/ic_menu_gallery"
-                android:layout_width="@dimen/fee_icon_width"
-                android:layout_height="match_parent"
-                android:id="@+id/imageView1" />
+            android:id="@+id/linearLayout1">
+            <TextView
+                android:text="@string/create_fee_title"
+                android:textAllCaps="true"
+                android:textColor="@color/color_gray"
+                android:textSize="@dimen/text_size_large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/fee_icon_width"
+                android:id="@+id/textView1" />
             <EditText
                 android:ellipsize="end"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/enter_here"
+                android:textColorHint="@color/color_gray_hint"
+                android:singleLine="true"
+                android:maxLength="@integer/max_length_medium"
+                android:layout_marginLeft="@dimen/fee_icon_width"
                 android:textSize="@dimen/text_description_size" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/linearLayout2">
-            <ImageView
-                android:src="@android:drawable/ic_menu_gallery"
-                android:layout_width="@dimen/fee_icon_width"
-                android:layout_height="match_parent"
-                android:id="@+id/imageView1" />
-            <EditText
-                android:ellipsize="end"
+            <TextView
+                android:text="Large Text"
+                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_description_size" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/linearLayout2">
-            <ImageView
-                android:src="@android:drawable/ic_menu_gallery"
-                android:layout_width="@dimen/fee_icon_width"
-                android:layout_height="match_parent"
-                android:id="@+id/imageView1" />
-            <EditText
-                android:ellipsize="end"
+                android:layout_marginLeft="@dimen/fee_icon_width"
+                android:id="@+id/textView2" />
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_description_size" />
+                android:id="@+id/linearLayout2">
+                <ImageView
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:layout_width="@dimen/fee_icon_width"
+                    android:layout_height="match_parent"
+                    android:id="@+id/imageView1" />
+                <EditText
+                    android:ellipsize="end"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_description_size" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout2">
+                <ImageView
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:layout_width="@dimen/fee_icon_width"
+                    android:layout_height="match_parent"
+                    android:id="@+id/imageView1" />
+                <EditText
+                    android:ellipsize="end"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_description_size" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout2">
+                <ImageView
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:layout_width="@dimen/fee_icon_width"
+                    android:layout_height="match_parent"
+                    android:id="@+id/imageView1" />
+                <EditText
+                    android:ellipsize="end"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_description_size" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </FrameLayout>
 </LinearLayout>
