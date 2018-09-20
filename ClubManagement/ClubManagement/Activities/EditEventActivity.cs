@@ -29,7 +29,7 @@ namespace ClubManagement.Activities
             btnCancel.Visibility = ViewStates.Visible;
             tvTitle.Gravity = GravityFlags.Center;
             tvTitle.Text = GetString(Resource.String.edit_event);
-            btnDone.Text = GetString(Resource.String.button_ok);
+            btnDone.Text = GetString(Resource.String.button_ok).ToUpper();
 
             var content = Intent.GetStringExtra("EventDetail");
             var eventDetail = JsonConvert.DeserializeObject<UserLoginEventModel>(content);
