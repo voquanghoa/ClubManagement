@@ -2,6 +2,8 @@
 using Android.App;
 using Android.OS;
 using ClubManagement.Activities.Base;
+using ClubManagement.Ultilities;
+using System;
 
 namespace ClubManagement.Activities
 {
@@ -11,6 +13,8 @@ namespace ClubManagement.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
+            edtDeadline.Text = DateTime.Now.ToDateString();
         }
     }
 }

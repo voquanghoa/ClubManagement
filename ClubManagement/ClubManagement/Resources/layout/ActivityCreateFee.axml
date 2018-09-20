@@ -119,31 +119,47 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/linearLayout2">
                 <ImageView
-                    android:src="@android:drawable/ic_menu_gallery"
+                    android:src="@drawable/icon_circle"
                     android:layout_width="@dimen/fee_icon_width"
-                    android:layout_height="match_parent"
-                    android:id="@+id/imageView1" />
+                    android:layout_height="@dimen/create_fee_icon_height"
+                    android:scaleType="fitCenter"
+                    android:id="@+id/imageView1"
+                    android:layout_gravity="center_vertical" />
                 <EditText
                     android:ellipsize="end"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_description_size" />
             </LinearLayout>
+          <TextView
+                android:text="@string/deadline"
+                android:textColor="@color/color_gray"
+                android:textSize="@dimen/text_size_large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/fee_icon_width" />
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/linearLayout2">
                 <ImageView
-                    android:src="@android:drawable/ic_menu_gallery"
+                    android:src="@drawable/icon_calendar"
                     android:layout_width="@dimen/fee_icon_width"
-                    android:layout_height="match_parent"
-                    android:id="@+id/imageView1" />
+                    android:layout_height="@dimen/create_fee_icon_height"
+                    android:scaleType="fitCenter"
+                    android:id="@+id/imageView1"
+                    android:layout_gravity="center_vertical" />
                 <EditText
+                    android:id="@+id/edtDeadline"
                     android:ellipsize="end"
+                    android:textColor="@color/color_gray"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_description_size" />
+                    android:textSize="@dimen/text_description_size"
+                    android:drawableRight="@drawable/icon_arrow_right"
+                    android:focusable="false"
+                    android:editable="false" />
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>

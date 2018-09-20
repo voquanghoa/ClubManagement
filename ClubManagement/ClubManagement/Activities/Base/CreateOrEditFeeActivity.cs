@@ -1,19 +1,10 @@
 ﻿using System;
 
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Views;
 using Android.Widget;
-using Android.Gms.Location.Places;
 using ClubManagement.Ultilities;
-using Android.Gms.Location.Places.UI;
 using ClubManagement.Fragments;
-using ClubManagement.Controllers;
-using ClubManagement.Models;
-using Square.Picasso;
-using Android.Text;
-using Newtonsoft.Json;
 
 namespace ClubManagement.Activities.Base
 {
@@ -28,6 +19,28 @@ namespace ClubManagement.Activities.Base
                 Finish,
                 () => { }).Show();
         }
+
+        [InjectView(Resource.Id.edtDeadline)]
+        protected EditText edtDeadline;
+
+        [InjectOnClick(Resource.Id.edtDeadline)]
+        protected void PickDeadline(object sender, EventArgs eventArgs)
+        {
+            var datePickerDialog = new CustomDatePickerDialog(DateTime.Now);
+
+            datePickerDialog.PickDate += (s, e) =>
+            {
+                if (s is DateTime dateTime)
+                {
+                    deadLine = dateTime;
+                    edtDeadline.Text = dateTime.ToDateString();
+                }
+            };
+
+            datePickerDialog.Show(FragmentManager, "");
+        }
+
+        private DateTime deadLine;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
