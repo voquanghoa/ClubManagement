@@ -122,4 +122,7 @@
   <string name="fee">Fee</string>
   <string name="event">Event</string>
   <string name="delete_event_success">Delete event succesfully!</string>
+  <string name="create_fee">Create fee</string>
+  <string name="create_fee_cancel_title">Confirm</string>
+  <string name="create_fee_cancel_message">Do you want to discard fee?</string>
 </resources>

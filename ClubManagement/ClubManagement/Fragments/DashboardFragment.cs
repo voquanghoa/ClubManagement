@@ -334,11 +334,14 @@ namespace ClubManagement.Fragments
                 };
 
                 bgFabsMenu.Click += (s, e) => CloseFabsMenu();
+
                 fabAddFee.Click += (s, e) =>
                 {
+                    var intent = new Intent(Context, typeof(CreateFeeActivity));
+                    StartActivity(intent);
                     CloseFabsMenu();
-                    // add fee
                 };
+
                 fabAddOutCome.Click += (s, e) =>
                 {
                     CloseFabsMenu();

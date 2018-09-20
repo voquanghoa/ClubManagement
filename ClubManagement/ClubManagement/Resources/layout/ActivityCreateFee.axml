@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tabbar_height"
+        android:background="@color/color_blue">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:textAllCaps="false"
+            android:gravity="center_vertical|left"
+            android:layout_gravity="left"
+            android:text="@string/cancel"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_large"
+            android:textStyle="bold"
+            android:id="@+id/btnCancel" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="@string/create_fee"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_large"
+            android:id="@+id/tvTitle"
+            android:textStyle="bold" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:background="@null"
+            android:textAllCaps="false"
+            android:id="@+id/btnDone"
+            android:text="@string/done"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_large"
+            android:textStyle="bold" />
+    </android.support.v7.widget.Toolbar>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1">
+        <TextView
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/fee_icon_width"
+            android:id="@+id/textView1" />
+        <EditText
+            android:ellipsize="end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/fee_icon_width"
+            android:textSize="@dimen/text_description_size" />
+        <TextView
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/fee_icon_width"
+            android:id="@+id/textView2" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout2">
+            <ImageView
+                android:src="@android:drawable/ic_menu_gallery"
+                android:layout_width="@dimen/fee_icon_width"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView1" />
+            <EditText
+                android:ellipsize="end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_description_size" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout2">
+            <ImageView
+                android:src="@android:drawable/ic_menu_gallery"
+                android:layout_width="@dimen/fee_icon_width"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView1" />
+            <EditText
+                android:ellipsize="end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_description_size" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout2">
+            <ImageView
+                android:src="@android:drawable/ic_menu_gallery"
+                android:layout_width="@dimen/fee_icon_width"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView1" />
+            <EditText
+                android:ellipsize="end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_description_size" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
