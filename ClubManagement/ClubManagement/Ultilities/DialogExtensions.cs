@@ -66,5 +66,35 @@ namespace ClubManagement.Ultilities
                     })
                 .Create();
         }
+
+        public static AlertDialog ShowConfirmDialog(this Context context, string title,
+            string message, Action actionAllow, Action actionDeny = null)
+        {
+            return new AlertDialog.Builder(context)
+                .SetTitle(title)
+                .SetMessage(message)
+                .SetCancelable(false)
+                .SetPositiveButton(Resource.String.dialog_positive_button,
+                    (s, e) =>
+                    {
+                        if (s is Dialog dialog)
+                        {
+                            actionAllow();
+
+                            dialog.Dismiss();
+                        }
+                    })
+                .SetNegativeButton(Resource.String.dialog_negative_button,
+                    (s, e) =>
+                    {
+                        if (s is Dialog dialog)
+                        {
+                            actionDeny?.Invoke();
+
+                            dialog.Dismiss();
+                        }
+                    })
+                .Create();
+        }
     }
 }

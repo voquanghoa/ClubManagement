@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
@@ -8,7 +9,16 @@ namespace ClubManagement.CustomAdapters
 {
     public class MoneyAdminListAdapter : RecyclerView.Adapter
     {
+        public MoneyAdminListAdapter(string moneyId)
+        {
+            MoneyId = moneyId;
+        }
+
         private List<MoneyAdminState> moneyAdminStates = new List<MoneyAdminState>();
+
+        public event EventHandler ItemPayClick;
+
+        public string MoneyId { get; set; }
 
         public List<MoneyAdminState> MoneyAdminStates
         {
@@ -29,6 +39,8 @@ namespace ClubManagement.CustomAdapters
             if (holder is MoneyAdminViewHolder viewHolder)
             {
                 viewHolder.MoneyAdminState = moneyAdminStates[position];
+                viewHolder.MoneyId = MoneyId;
+                viewHolder.PayClick += ItemPayClick;
             }
         }
 

@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Linq;
+using Android.App;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
+using ClubManagement.Controllers;
 using ClubManagement.Models;
+using ClubManagement.Ultilities;
 using Com.Bumptech.Glide;
 using Refractored.Controls;
 
@@ -10,6 +14,8 @@ namespace ClubManagement.CustomAdapters
 {
     public class MoneyAdminViewHolder : RecyclerView.ViewHolder
     {
+        public string MoneyId { get; set; }
+
         [InjectView(Resource.Id.civAvatar)] private CircleImageView civAvatar;
 
         [InjectView(Resource.Id.tvUserName)] private TextView tvUserName;
@@ -21,10 +27,48 @@ namespace ClubManagement.CustomAdapters
         [InjectOnClick(Resource.Id.btnPay)]
         private void Pay(object s, EventArgs e)
         {
-
+            var userMoney = new UserMoneyModel
+            {
+                MoneyId = MoneyId,
+                UserId = moneyAdminState.User.Id,
+                PaidTime = DateTime.Now
+            };
+            if (!moneyAdminState.IsPaid)
+            {
+                var dialog =
+                    ItemView.Context.CreateDialog("Paying", ItemView.Resources.GetString(Resource.String.wait));
+                dialog.Show();
+                ((Activity) ItemView.Context).DoRequest(
+                    async () =>
+                    {
+                        await UserMoneysController.Instance.Add(userMoney);
+                        dialog.Dismiss();
+                        moneyAdminState.IsPaid = true;
+                        PayClick?.Invoke(moneyAdminState, e);
+                    });
+            }
+            else
+            {
+                ItemView.Context.ShowConfirmDialog("Confirm",
+                    $"Do you want to repay for {moneyAdminState.User.Name}",
+                    () =>
+                    {
+                        var dialog = ItemView.Context.CreateDialog("Repaying",
+                            ItemView.Resources.GetString(Resource.String.wait));
+                        dialog.Show();
+                        ((Activity) ItemView.Context).DoRequest(async () =>
+                        {
+                            await UserMoneysController.Instance.Delete(UserMoneysController.Instance.Values.First(x =>
+                                x.UserId == moneyAdminState.User.Id && x.MoneyId == MoneyId));
+                            dialog.Dismiss();
+                            moneyAdminState.IsPaid = false;
+                            PayClick?.Invoke(moneyAdminState, e);
+                        });
+                    }, () => { }).Show();
+            }
         }
 
-        public string MoneyId { get; set; }
+        public event EventHandler PayClick;
 
         private MoneyAdminState moneyAdminState;
 
@@ -33,6 +77,7 @@ namespace ClubManagement.CustomAdapters
             get => moneyAdminState;
             set
             {
+                moneyAdminState = value;
                 if (!string.IsNullOrEmpty(value.User.Avatar))
                 {
                     Glide.With(ItemView.Context).Load(value.User.Avatar).Into(civAvatar);
@@ -42,7 +87,7 @@ namespace ClubManagement.CustomAdapters
                 if (value.IsPaid)
                 {
                     tvPaidTime.Visibility = ViewStates.Visible;
-                    tvPaidTime.Text = "";
+                    tvPaidTime.Text = $"Paid on {value.PaidTime:MMM dd, yyyy}";
                     btnPay.SetTextColor(ItemView.Resources.GetColor(Resource.Color.text_color_black, null));
                     btnPay.SetBackgroundResource(Resource.Drawable.button_repay_background);
                     btnPay.Text = "Repay";

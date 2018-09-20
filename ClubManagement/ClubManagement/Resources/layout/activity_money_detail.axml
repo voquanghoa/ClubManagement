@@ -115,7 +115,6 @@
                         android:id="@+id/tvMembersUnpaid"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="3/15 members unpaid"
                         android:textSize="@dimen/tabbar_text_size"
                         android:textColor="@color/color_blue"
                         android:textStyle="bold"

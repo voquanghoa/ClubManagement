@@ -39,6 +39,12 @@ namespace ClubManagement.Activities
 
         [InjectView(Resource.Id.refresher)] private SwipeRefreshLayout refreshLayout;
 
+        [InjectOnClick(Resource.Id.btnBack)]
+        private void Back(object s, EventArgs e)
+        {
+            Finish();
+        }
+
         private MoneyAdminListAdapter paidAdapter;
 
         private MoneyAdminListAdapter unpaidAdapter;
@@ -71,22 +77,54 @@ namespace ClubManagement.Activities
                 moneyAdminStates = AppDataController.Instance.GetMoneyAdminStates(moneyId);
             }, () =>
             {
-                paidAdapter = new MoneyAdminListAdapter
+                paidAdapter = new MoneyAdminListAdapter(moneyId)
                 {
                     MoneyAdminStates = moneyAdminStates.Where(x => x.IsPaid).ToList()
                 };
 
-                unpaidAdapter = new MoneyAdminListAdapter
+                unpaidAdapter = new MoneyAdminListAdapter(moneyId)
                 {
                     MoneyAdminStates = moneyAdminStates.Where(x => !x.IsPaid).ToList()
                 };
 
-                tvMembersPaid.Text = $"{moneyAdminStates.Count - unpaidAdapter.MoneyAdminStates.Count} / {moneyAdminStates.Count} members paid";
-                tvMembersUnpaid.Text = $"{moneyAdminStates.Count - paidAdapter.MoneyAdminStates.Count} / {moneyAdminStates.Count} members unpaid";
 
+                unpaidAdapter.ItemPayClick += (s, e) => PayEvent(s);
+
+                paidAdapter.ItemPayClick += (s, e) => PayEvent(s);
+
+                SetText();
                 rvUnpaid.SetAdapter(unpaidAdapter);
                 rvPaid.SetAdapter(paidAdapter);
                 refreshLayout.Refreshing = false;
+                refreshLayout.Enabled = false;
+            });      
+        }
+
+        private void SetText()
+        {
+            tvMembersPaid.Text = $"{moneyAdminStates.Count - unpaidAdapter.MoneyAdminStates.Count} / {moneyAdminStates.Count} members paid";
+            tvMembersUnpaid.Text = $"{moneyAdminStates.Count - paidAdapter.MoneyAdminStates.Count} / {moneyAdminStates.Count} members unpaid";
+        }
+
+        private void PayEvent(object s)
+        {
+            if (!(s is MoneyAdminState moneyAdminState)) return;
+            if (moneyAdminState.IsPaid)
+            {
+                unpaidAdapter.MoneyAdminStates.Remove(moneyAdminState);
+                paidAdapter.MoneyAdminStates.Insert(0, moneyAdminState);
+            }
+            else
+            {
+                paidAdapter.MoneyAdminStates.Remove(moneyAdminState);
+                unpaidAdapter.MoneyAdminStates.Insert(0, moneyAdminState);
+            }
+
+            RunOnUiThread(() =>
+            {
+                unpaidAdapter.NotifyDataSetChanged();
+                paidAdapter.NotifyDataSetChanged();
+                SetText();
             });
         }
     }
