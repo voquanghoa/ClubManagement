@@ -28,7 +28,6 @@
   <color name="text_color_retry">#009e91</color>
   <color name="text_color_gray">#666666</color>
   <color name="item_background_color">#c3cfdb</color>
-
   <color name="item_event_background_color">#eeeeee</color>
   <color name="state_not_going_color">#1976d2</color>
   <color name="state_going_color">#00c853</color>
