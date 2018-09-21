@@ -43,31 +43,31 @@ namespace ClubManagement.Activities
             if (string.IsNullOrEmpty(edtEmail.Text) || string.IsNullOrEmpty(edtName.Text) ||
                 string.IsNullOrEmpty(edtPassword.Text) || string.IsNullOrEmpty(edtConfirmPassword.Text))
             {
-                Toast.MakeText(this, Resources.GetString(Resource.String.fill_all_fields), ToastLength.Short).Show();
+				this.ShowMessage(Resource.String.fill_all_fields);
                 return;
             }
 
             if (edtPassword.Text.Length < 6)
             {
-                Toast.MakeText(this, Resources.GetString(Resource.String.password_too_short), ToastLength.Short).Show();
+				this.ShowMessage(Resource.String.password_too_short);
                 return;
             }
 
             if (!edtEmail.Text.IsValidEmailFormat())
             {
-                Toast.MakeText(this, Resources.GetString(Resource.String.invalid_email_format), ToastLength.Short).Show();
+				this.ShowMessage(Resource.String.invalid_email_format);
                 return;
             }
 
             if (!edtName.Text.IsValidNameFormat())
             {
-                Toast.MakeText(this, Resources.GetString(Resource.String.invalid_name_format), ToastLength.Short).Show();
+				this.ShowMessage(Resource.String.invalid_name_format);
                 return;
             }
 
             if (edtConfirmPassword.Text != edtPassword.Text)
             {
-                Toast.MakeText(this, Resources.GetString(Resource.String.not_match_pass), ToastLength.Short).Show();
+				this.ShowMessage(Resource.String.not_match_pass);
                 return;
             }
 
@@ -79,8 +79,7 @@ namespace ClubManagement.Activities
             {
                 if (userEmails.Contains(edtEmail.Text))
                 {
-                    Toast.MakeText(this, Resources.GetString(Resource.String.exist_email), ToastLength.Short)
-                        .Show();
+					this.ShowMessage(Resource.String.exist_email);
                     dialog.Dismiss();
                     return;
                 }
@@ -96,8 +95,7 @@ namespace ClubManagement.Activities
                     });
                 }, () =>
                 {
-                    Toast.MakeText(this, Resources.GetString(Resource.String.signup_success), ToastLength.Short)
-                        .Show();
+					this.ShowMessage(Resource.String.signup_success);
                     dialog.Dismiss();
                     Finish();
                 });

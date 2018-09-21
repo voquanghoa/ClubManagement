@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Widget;
+using ClubManagement.Ultilities;
 using Plugin.Connectivity;
 
 namespace ClubManagement.CustomAdapters
@@ -21,7 +22,7 @@ namespace ClubManagement.CustomAdapters
         {
             if (!CrossConnectivity.Current.IsConnected)
             {
-                Toast.MakeText(Context, Context.Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
+				this.Context.ShowMessage(Resource.String.no_internet_connection);
                 return;
             }
             Dismiss();

@@ -86,7 +86,7 @@ namespace ClubManagement.Fragments
             }
             catch (Exception)
             {
-                Toast.MakeText(Context, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
+				this.ShowMessage(Resource.String.no_internet_connection);
             }
 
             return null;

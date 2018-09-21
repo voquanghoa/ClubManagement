@@ -11,6 +11,7 @@ using ClubManagement.Fragments.Bases;
 using ClubManagement.Models;
 using Android.Widget;
 using PagerAdapter = ClubManagement.CustomAdapters.PagerAdapter;
+using ClubManagement.Ultilities;
 
 namespace ClubManagement.Fragments
 {
@@ -97,7 +98,7 @@ namespace ClubManagement.Fragments
             }
             catch (Exception)
             {
-                Toast.MakeText(Context, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
+				this.ShowMessage(Resource.String.no_internet_connection);
                 return data;
             }
         }

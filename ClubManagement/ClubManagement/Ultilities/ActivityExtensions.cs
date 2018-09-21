@@ -58,9 +58,8 @@ namespace ClubManagement.Ultilities
                 catch (Exception ex)
                 {
                     activity.RunOnUiThread(exceptionAction);
-                    activity.RunOnUiThread(() => Toast.MakeText(activity,
-                            ex.Message, ToastLength.Short)
-                        .Show());
+
+					activity.ShowMessage(ex.Message);
                 }
 
             }).Start();

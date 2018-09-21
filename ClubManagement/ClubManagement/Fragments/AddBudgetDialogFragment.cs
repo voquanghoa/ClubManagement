@@ -59,7 +59,7 @@ namespace ClubManagement.Fragments
             }
             else
             {
-                Toast.MakeText(Context, Resources.GetString(Resource.String.fill_all_fields), ToastLength.Short).Show();
+				this.ShowMessage(Resource.String.fill_all_fields);
             }
         }
 

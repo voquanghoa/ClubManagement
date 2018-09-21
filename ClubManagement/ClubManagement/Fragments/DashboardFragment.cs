@@ -260,7 +260,7 @@ namespace ClubManagement.Fragments
             }
             catch (Exception)
             {
-                Toast.MakeText(Context, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
+				this.ShowMessage(Resource.String.no_internet_connection);
             }
             return null;
         }
@@ -296,7 +296,7 @@ namespace ClubManagement.Fragments
             }
             catch (PackageManager.NameNotFoundException e)
             {
-                Toast.MakeText(Context, e.Message, ToastLength.Short).Show();
+				this.ShowMessage(e.Message);
             }
         }
 

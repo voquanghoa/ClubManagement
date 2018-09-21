@@ -78,8 +78,7 @@ namespace ClubManagement.CustomAdapters
         {
             if (!CrossConnectivity.Current.IsConnected)
             {
-                Toast.MakeText(view.Context, view.Context.Resources.GetString(Resource.String.no_internet_connection),
-                    ToastLength.Short).Show();
+				view.Context.ShowMessage(Resource.String.no_internet_connection);
                 return;
             }
 
