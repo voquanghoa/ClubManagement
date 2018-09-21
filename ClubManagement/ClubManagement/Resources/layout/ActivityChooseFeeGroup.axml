@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tabbar_height"
+        android:background="@color/color_blue">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/choose_fee_group_title"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_large"
+            android:id="@+id/tvTitle"
+            android:textStyle="bold" />
+    </android.support.v7.widget.Toolbar>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white_color"
+        android:layout_marginTop="@dimen/choose_group_fee_margin"
+        android:paddingLeft="@dimen/choose_group_fee_padding_large"
+        android:id="@+id/recyclerView1" />
+</LinearLayout>

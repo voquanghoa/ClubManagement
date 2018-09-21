@@ -65,4 +65,8 @@
   <dimen name="create_fee_padding_top">36dp</dimen>
   <dimen name="create_fee_padding_bottom">72dp</dimen>
   <dimen name="padding_small">4dp</dimen>
+  <dimen name="choose_group_fee_padding">10dp</dimen>
+  <dimen name="choose_group_fee_padding_large">15dp</dimen>
+  <dimen name="choose_group_fee_margin">15dp</dimen>
+  <dimen name="choose_group_fee_margin_small">5dp</dimen>
 </resources>
