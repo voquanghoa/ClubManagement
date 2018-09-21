@@ -2,6 +2,7 @@
 <resources>
   <integer name="max_length">256</integer>
   <integer name="max_length_medium">50</integer>
+  <integer name="max_length_small">10</integer>
   <integer name="edit_text_amount_max_length">10</integer>
   <integer name="max_line">2</integer>
 </resources>

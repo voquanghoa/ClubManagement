@@ -76,8 +76,9 @@
                 android:layout_marginLeft="@dimen/fee_icon_width"
                 android:textSize="@dimen/text_description_size" />
             <TextView
-                android:text="Large Text"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/amount"
+                android:textColor="@color/color_gray"
+                android:textSize="@dimen/text_size_large"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/fee_icon_width"
@@ -87,13 +88,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/linearLayout2">
-                <ImageView
-                    android:src="@android:drawable/ic_menu_gallery"
-                    android:layout_width="@dimen/fee_icon_width"
-                    android:layout_height="match_parent"
-                    android:id="@+id/imageView1" />
+                <FrameLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/fee_icon_width">
+                    <TextView
+                        android:text="@string/unit"
+                        android:background="@drawable/edit_text_border_focus"
+                        android:padding="@dimen/padding_small"
+                        android:textColor="@color/text_color_black"
+                        android:textSize="@dimen/text_size_large"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content" />
+                </FrameLayout>
                 <EditText
                     android:ellipsize="end"
+                    android:hint="0"
+                    android:textColorHint="@color/color_gray"
+                    android:textColor="@color/color_gray"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:maxLength="@integer/max_length_small"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_description_size" />

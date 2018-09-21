@@ -63,4 +63,5 @@
   <dimen name="create_fee_margin">36dp</dimen>
   <dimen name="create_fee_padding_top">36dp</dimen>
   <dimen name="create_fee_padding_bottom">72dp</dimen>
+  <dimen name="padding_small">4dp</dimen>
 </resources>
