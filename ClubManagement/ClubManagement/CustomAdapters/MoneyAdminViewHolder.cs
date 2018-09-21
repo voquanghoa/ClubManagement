@@ -43,6 +43,7 @@ namespace ClubManagement.CustomAdapters
                     {
                         await UserMoneysController.Instance.Add(userMoney);
                         dialog.Dismiss();
+                        moneyAdminState.PaidTime = DateTime.Now;
                         moneyAdminState.IsPaid = true;
                         PayClick?.Invoke(moneyAdminState, e);
                     });
