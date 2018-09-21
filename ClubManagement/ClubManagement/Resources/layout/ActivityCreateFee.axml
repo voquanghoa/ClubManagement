@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tabbar_height"
+        android:background="@color/color_blue">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:textAllCaps="false"
+            android:gravity="center_vertical|left"
+            android:layout_gravity="left"
+            android:text="@string/cancel"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_large"
+            android:textStyle="bold"
+            android:id="@+id/btnCancel" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="@string/create_fee"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_title_size"
+            android:id="@+id/tvTitle"
+            android:textStyle="bold" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:background="@null"
+            android:textAllCaps="false"
+            android:id="@+id/btnDone"
+            android:text="@string/done"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_large"
+            android:textStyle="bold" />
+    </android.support.v7.widget.Toolbar>
+    <FrameLayout
+        android:layout_marginTop="@dimen/create_fee_margin"
+        android:paddingTop="@dimen/create_fee_padding_top"
+        android:paddingBottom="@dimen/create_fee_padding_bottom"
+        android:background="@color/white_color"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout1">
+            <TextView
+                android:text="@string/create_fee_title"
+                android:textAllCaps="true"
+                android:textColor="@color/color_gray"
+                android:textSize="@dimen/text_size_large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/fee_icon_width"
+                android:id="@+id/textView1" />
+            <EditText
+                android:ellipsize="end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_here"
+                android:textColorHint="@color/color_gray_hint"
+                android:singleLine="true"
+                android:maxLength="@integer/max_length_medium"
+                android:layout_marginLeft="@dimen/fee_icon_width"
+                android:textSize="@dimen/text_description_size" />
+            <TextView
+                android:text="@string/amount"
+                android:textColor="@color/color_gray"
+                android:textSize="@dimen/text_size_large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/fee_icon_width"
+                android:id="@+id/textView2" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout2">
+                <FrameLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/fee_icon_width">
+                    <TextView
+                        android:text="@string/unit"
+                        android:background="@drawable/edit_text_border_focus"
+                        android:padding="@dimen/padding_small"
+                        android:textColor="@color/text_color_black"
+                        android:textSize="@dimen/text_size_large"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content" />
+                </FrameLayout>
+                <EditText
+                    android:ellipsize="end"
+                    android:hint="0"
+                    android:textColorHint="@color/color_gray"
+                    android:textColor="@color/color_gray"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:maxLength="@integer/max_length_small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_description_size" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout2">
+                <ImageView
+                    android:src="@drawable/icon_circle"
+                    android:layout_width="@dimen/fee_icon_width"
+                    android:layout_height="@dimen/create_fee_icon_height"
+                    android:scaleType="fitCenter"
+                    android:id="@+id/imageView1"
+                    android:layout_gravity="center_vertical" />
+                <EditText
+                    android:ellipsize="end"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_description_size" />
+            </LinearLayout>
+          <TextView
+                android:text="@string/deadline"
+                android:textColor="@color/color_gray"
+                android:textSize="@dimen/text_size_large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/fee_icon_width" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout2">
+                <ImageView
+                    android:src="@drawable/icon_calendar"
+                    android:layout_width="@dimen/fee_icon_width"
+                    android:layout_height="@dimen/create_fee_icon_height"
+                    android:scaleType="fitCenter"
+                    android:id="@+id/imageView1"
+                    android:layout_gravity="center_vertical" />
+                <EditText
+                    android:id="@+id/edtDeadline"
+                    android:ellipsize="end"
+                    android:textColor="@color/color_gray"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_description_size"
+                    android:drawableRight="@drawable/icon_arrow_right"
+                    android:focusable="false"
+                    android:editable="false" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>
