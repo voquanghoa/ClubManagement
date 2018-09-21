@@ -128,4 +128,5 @@
   <string name="create_fee_title">Fee title</string>
   <string name="unit">VND</string>
   <string name="deadline">Deadline</string>
+  <string name="choose_fee_group">Choose fee group</string>
 </resources>

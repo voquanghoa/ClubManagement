@@ -127,11 +127,17 @@
                     android:layout_gravity="center_vertical" />
                 <EditText
                     android:ellipsize="end"
+                    android:hint="@string/choose_fee_group"
+                    android:textColor="@color/color_gray"
+                    android:textColorHint="@color/color_gray_hint"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_description_size" />
+                    android:textSize="@dimen/text_description_size"
+                    android:drawableRight="@drawable/icon_arrow_right"
+                    android:focusable="false"
+                    android:editable="false" />
             </LinearLayout>
-          <TextView
+            <TextView
                 android:text="@string/deadline"
                 android:textColor="@color/color_gray"
                 android:textSize="@dimen/text_size_large"
