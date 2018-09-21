@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace ClubManagement.Models
 {
@@ -9,5 +10,8 @@ namespace ClubManagement.Models
 
         [JsonProperty("moneyId")]
         public string MoneyId { get; set; }
+
+        [JsonProperty("paidTime")]
+        public DateTime PaidTime { get; set; }
     }
 }
