@@ -206,8 +206,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\Base\CreateOrEditEventActivity.cs" />
+    <Compile Include="Activities\Base\CreateOrEditFeeActivity.cs" />
     <Compile Include="Activities\Base\MapAbstractActivity.cs" />
     <Compile Include="Activities\CreateEventActivity.cs" />
+    <Compile Include="Activities\CreateFeeActivity.cs" />
     <Compile Include="Activities\EditEventActivity.cs" />
     <Compile Include="Activities\EventDetailActivity.cs" />
     <Compile Include="Activities\GuestActivity.cs" />
@@ -360,6 +362,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\FragmentMoneySummary.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ActivityCreateFee.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

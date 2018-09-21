@@ -59,4 +59,5 @@
   <dimen name="text_size_normal">16sp</dimen>
   <dimen name="text_size_small">14sp</dimen>
   <dimen name="event_icon_height">120dp</dimen>
+  <dimen name="fee_icon_width">72dp</dimen>
 </resources>
