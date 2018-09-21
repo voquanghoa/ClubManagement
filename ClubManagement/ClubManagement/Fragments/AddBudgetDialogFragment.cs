@@ -5,6 +5,7 @@ using Android.Views;
 using Android.Widget;
 using ClubManagement.Controllers;
 using ClubManagement.Models;
+using ClubManagement.Ultilities;
 
 namespace ClubManagement.Fragments
 {
@@ -44,12 +45,12 @@ namespace ClubManagement.Fragments
                     }
                     catch (Exception)
                     {
-                        Toast.MakeText(Context, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
+						this.ShowMessage(Resource.String.no_internet_connection);
                     }
                 }
                 else
                 {
-                    Toast.MakeText(Context, Resources.GetString(Resource.String.amount_parse_error_message), ToastLength.Short).Show();
+					this.ShowMessage(Resource.String.amount_parse_error_message);
                 }
 
                 edtTime.Text = string.Empty;
