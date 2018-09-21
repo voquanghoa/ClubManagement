@@ -38,7 +38,7 @@ namespace ClubManagement.Ultilities
 		
 		public static void ShowMessage(this Context context, String message)
 		{
-			((Activity)context).RunOnUiThread(() => Toast.MakeText(context, message, ToastLength.Long).Show());	
+ 			((Activity)context).RunOnUiThread(() => Toast.MakeText(context, message, ToastLength.Long).Show());	
 		}
 
 		public static void ShowMessage(this Context context, int textId)

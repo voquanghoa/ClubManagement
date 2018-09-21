@@ -258,9 +258,9 @@ namespace ClubManagement.Fragments
                 numberOfUpComingEvent = appDataController.NumberOfUpComingEvents;
                 nextEvent = goingEvents.Any() ? goingEvents.OrderBy(x => x.TimeStart).First() : null;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-				this.ShowMessage(Resource.String.no_internet_connection);
+				this.ShowMessage(ex.Message);
             }
             return null;
         }

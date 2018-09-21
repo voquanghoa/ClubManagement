@@ -56,9 +56,9 @@ namespace ClubManagement.Fragments
                         SaveClick?.Invoke(outcomeModel, e);
                         Dismiss();
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-						this.ShowMessage(Resource.String.no_internet_connection);
+						this.ShowMessage(ex.Message);
                     }
                 }
                 else

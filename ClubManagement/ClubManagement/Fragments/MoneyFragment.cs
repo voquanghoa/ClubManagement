@@ -96,9 +96,9 @@ namespace ClubManagement.Fragments
             {
                 return appDataController.GetListMoneyState().OrderByDescending(x => x.MoneyModel.Time).ToList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-				this.ShowMessage(Resource.String.no_internet_connection);
+				this.ShowMessage(ex.Message);
                 return data;
             }
         }
