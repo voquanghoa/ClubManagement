@@ -102,8 +102,8 @@ namespace ClubManagement.Activities
 
         private void SetText()
         {
-            tvMembersPaid.Text = $"{moneyAdminStates.Count - unpaidAdapter.MoneyAdminStates.Count} / {moneyAdminStates.Count} members paid";
-            tvMembersUnpaid.Text = $"{moneyAdminStates.Count - paidAdapter.MoneyAdminStates.Count} / {moneyAdminStates.Count} members unpaid";
+            tvMembersPaid.Text = $"{paidAdapter.MoneyAdminStates.Count} / {moneyAdminStates.Count} members paid";
+            tvMembersUnpaid.Text = $"{unpaidAdapter.MoneyAdminStates.Count} / {moneyAdminStates.Count} members unpaid";
         }
 
         private void PayEvent(object s)
@@ -111,21 +111,30 @@ namespace ClubManagement.Activities
             if (!(s is MoneyAdminState moneyAdminState)) return;
             if (moneyAdminState.IsPaid)
             {
-                unpaidAdapter.MoneyAdminStates.Remove(moneyAdminState);
-                paidAdapter.MoneyAdminStates.Insert(0, moneyAdminState);
+                if (unpaidAdapter.MoneyAdminStates.Remove(moneyAdminState))
+                {
+                    paidAdapter.MoneyAdminStates.Insert(0, moneyAdminState);
+                    RunOnUiThread(() =>
+                    {
+                        unpaidAdapter.NotifyDataSetChanged();
+                        paidAdapter.NotifyDataSetChanged();
+                        SetText();
+                    });
+                }
             }
             else
             {
-                paidAdapter.MoneyAdminStates.Remove(moneyAdminState);
-                unpaidAdapter.MoneyAdminStates.Insert(0, moneyAdminState);
+                if (paidAdapter.MoneyAdminStates.Remove(moneyAdminState))
+                {
+                    unpaidAdapter.MoneyAdminStates.Insert(0, moneyAdminState);
+                    RunOnUiThread(() =>
+                    {
+                        unpaidAdapter.NotifyDataSetChanged();
+                        paidAdapter.NotifyDataSetChanged();
+                        SetText();
+                    });
+                }
             }
-
-            RunOnUiThread(() =>
-            {
-                unpaidAdapter.NotifyDataSetChanged();
-                paidAdapter.NotifyDataSetChanged();
-                SetText();
-            });
         }
     }
 }
