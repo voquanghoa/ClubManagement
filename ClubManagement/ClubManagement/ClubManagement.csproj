@@ -208,6 +208,7 @@
     <Compile Include="Activities\Base\CreateOrEditEventActivity.cs" />
     <Compile Include="Activities\Base\CreateOrEditFeeActivity.cs" />
     <Compile Include="Activities\Base\MapAbstractActivity.cs" />
+    <Compile Include="Activities\ChooseFeeGroupActivity.cs" />
     <Compile Include="Activities\CreateEventActivity.cs" />
     <Compile Include="Activities\CreateFeeActivity.cs" />
     <Compile Include="Activities\EditEventActivity.cs" />
@@ -220,6 +221,8 @@
     <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Adapters\BalanceAdapter.cs" />
     <Compile Include="Adapters\BalanceAdapterViewHolder.cs" />
+    <Compile Include="Adapters\FeeGroupAdapter.cs" />
+    <Compile Include="Adapters\FeeGroupAdapterViewHolder.cs" />
     <Compile Include="Adapters\GuestAdapterViewHolder.cs" />
     <Compile Include="Adapters\GuestsAdapter.cs" />
     <Compile Include="Adapters\ItemEventHeaderViewHolder.cs" />
@@ -266,6 +269,7 @@
     <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\FeeDeadlineTimeItem.cs" />
     <Compile Include="Models\FeeDetailItem.cs" />
+    <Compile Include="Models\FeeGroupModel.cs" />
     <Compile Include="Models\FeeItem.cs" />
     <Compile Include="Models\FirebaseModel.cs" />
     <Compile Include="Models\GuestModel.cs" />
@@ -365,6 +369,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ActivityCreateFee.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ItemFeeGroup.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ActivityChooseFeeGroup.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
