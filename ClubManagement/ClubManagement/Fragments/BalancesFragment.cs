@@ -26,8 +26,6 @@ namespace ClubManagement.Fragments
 
         private Type type;
 
-        private OutcomeDialogFragment outcomeDialogFragment = new OutcomeDialogFragment();
-
         private ItemTouchHelper itemTouchHelper;
 
         public BalancesFragment(Type type)
@@ -35,13 +33,6 @@ namespace ClubManagement.Fragments
             this.type = type;
 
             adapter = new BalancesAdapter(type);
-
-            outcomeDialogFragment.SaveClick += (s, e) =>
-            {
-                Outcomes.Insert(0, (OutcomeModel)s);
-
-                adapter.Balances = Outcomes;
-            };
 
             var swipeToDeleteCallback = new SwipeLeftToDeleteCallback(ItemTouchHelper.ActionStateIdle, ItemTouchHelper.Left);
             swipeToDeleteCallback.SwipeLeft += SwipeToDeleteCallback_SwipeLeft;
@@ -89,7 +80,6 @@ namespace ClubManagement.Fragments
             {
                 Context.DoWithAdmin(() =>
                 {
-                    view.FindViewById<ImageButton>(Resource.Id.imgbtnAdd).Click += AddOutcome_Click;
                     itemTouchHelper.AttachToRecyclerView(rvBalance);
                 }, () =>
                 {
@@ -98,11 +88,6 @@ namespace ClubManagement.Fragments
 
                 adapter.Balances = Outcomes;
             }
-        }
-
-        private void AddOutcome_Click(object sender, System.EventArgs e)
-        {
-            outcomeDialogFragment.Show(FragmentManager, null);
         }
     }
 }

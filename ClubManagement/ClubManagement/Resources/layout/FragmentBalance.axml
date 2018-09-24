@@ -4,28 +4,17 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/tabbar_height"
-        android:background="@color/tabbar_background_color">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Balance"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="@dimen/textview_margin_left_right"
-            android:textColor="@color/text_color_white"
-            android:textSize="@dimen/tabbar_text_size"
-            android:textStyle="bold" />
-    </android.support.v7.widget.Toolbar>
     <android.support.design.widget.TabLayout
         style="@style/TabLayoutThemes"
         android:layout_width="match_parent"
         android:layout_height="@dimen/tabbar_height"
-        android:background="@color/tabbar_background_color"
+        android:background="@color/color_blue"
+        app:tabSelectedTextColor="@color/tablayout_selected_color"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        app:tabTextColor="@color/text_tabbar_unchoose_color"
+        app:tabIndicatorColor="@color/colorAccent"
+        app:tabTextColor="@color/tablayout_unselected_color"
+        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
         android:id="@+id/tlBalance" />
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/refresher"
