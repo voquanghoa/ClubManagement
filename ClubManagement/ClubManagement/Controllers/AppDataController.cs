@@ -84,15 +84,15 @@ namespace ClubManagement.Controllers
         {
             var moneyAdminStates = new List<MoneyAdminState>();
             var userList = UsersController.Instance.Values ?? new List<UserModel>();
-            var paidUserIds = (UserMoneysController.Instance.Values ?? new List<UserMoneyModel>())
+            var paidUsers = (UserMoneysController.Instance.Values ?? new List<UserMoneyModel>())
                 .Where(x => x.MoneyId == moneyId)
-                .Select(x => x.UserId)
                 .ToList();
 
             userList.ForEach(x => moneyAdminStates.Add(new MoneyAdminState
             {
                 User = x,
-                IsPaid = paidUserIds.Contains(x.Id)
+                IsPaid = paidUsers.Select(userMoney => userMoney.UserId).Contains(x.Id),
+                PaidTime = paidUsers.Any(u => u.UserId == x.Id) ? paidUsers.First(u => u.UserId == x.Id).PaidTime : new DateTime()
             }));
             return moneyAdminStates;
         }

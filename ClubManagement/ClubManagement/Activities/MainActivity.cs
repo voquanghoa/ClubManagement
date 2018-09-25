@@ -146,7 +146,7 @@ namespace ClubManagement.Activities
             }
 
             doubleBackpress = true;
-            Toast.MakeText(this, Resources.GetString(Resource.String.back_to_exit), ToastLength.Short).Show();
+			this.ShowMessage(Resource.String.back_to_exit);
             new Handler().PostDelayed(() => { doubleBackpress = false; }, 2000);
         }
 

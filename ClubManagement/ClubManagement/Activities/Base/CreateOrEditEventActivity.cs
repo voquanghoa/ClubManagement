@@ -156,7 +156,7 @@ namespace ClubManagement.Activities.Base
                 string.IsNullOrEmpty(edtChooseLocation.Text) ||
                 string.IsNullOrEmpty(tvStartTime.Text))
             {
-                Toast.MakeText(this, GetString(Resource.String.fill_all_fields), ToastLength.Short).Show();
+				this.ShowMessage(Resource.String.fill_all_fields);
                 return;
             }
 
@@ -314,7 +314,7 @@ namespace ClubManagement.Activities.Base
                 {
                     if (dateTime <= DateTime.Now)
                     {
-                        Toast.MakeText(this, GetString(Resource.String.pick_time_in_future), ToastLength.Short).Show();
+						this.ShowMessage(Resource.String.pick_time_in_future);
                         return;
                     }
                     startTime = dateTime;
@@ -324,7 +324,7 @@ namespace ClubManagement.Activities.Base
                 {
                     if (dateTime <= startTime)
                     {
-                        Toast.MakeText(this, GetString(Resource.String.pick_time_before_start_time), ToastLength.Short).Show();
+						this.ShowMessage(Resource.String.pick_time_before_start_time);
                         return;
                     }
 

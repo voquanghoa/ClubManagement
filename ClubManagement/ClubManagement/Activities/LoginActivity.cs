@@ -28,7 +28,7 @@ namespace ClubManagement.Activities
 
             if (string.IsNullOrEmpty(edtEmail.Text) || string.IsNullOrEmpty(edtPassword.Text))
             {
-                Toast.MakeText(this, Resources.GetString(Resource.String.fill_all_fields), ToastLength.Short).Show();
+				this.ShowMessage(Resource.String.fill_all_fields);
                 return;
             }
 
@@ -44,8 +44,7 @@ namespace ClubManagement.Activities
 
                 if (loginUser == null)
                 {
-                    Toast.MakeText(activity, Resources.GetString(Resource.String.not_exist_email),
-                        ToastLength.Short).Show();
+					this.ShowMessage(Resource.String.not_exist_email);
                     dialog.Dismiss();
                     return;
                 }
@@ -63,15 +62,13 @@ namespace ClubManagement.Activities
                     AppDataController.Instance.UpdateUser();
 
                     StartActivity(typeof(MainActivity));
-                    Toast.MakeText(this, Resources.GetString(Resource.String.login_success), ToastLength.Short)
-                        .Show();
+					this.ShowMessage(Resource.String.login_success);
                     dialog.Dismiss();
                     this.DoRequest(() => usersController.UpdateUserLocation(loginUser));
                     return;
                 }
 
-                Toast.MakeText(activity, Resources.GetString(Resource.String.wrong_email), ToastLength.Short)
-                    .Show();
+				this.ShowMessage(Resource.String.wrong_email);
                 dialog.Dismiss();
             }, () => dialog.Dismiss());
         }

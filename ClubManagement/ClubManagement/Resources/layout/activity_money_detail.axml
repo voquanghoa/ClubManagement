@@ -7,7 +7,7 @@
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="@dimen/tabbar_height"
-        android:background="@color/tabbar_background_color"
+        android:background="@color/color_blue"
         android:contentInsetLeft="0dp"
         android:contentInsetStart="0dp"
         app:contentInsetLeft="0dp"
@@ -16,54 +16,140 @@
         android:contentInsetEnd="0dp"
         app:contentInsetRight="0dp"
         app:contentInsetEnd="0dp">
-        <ImageButton
-            android:layout_width="wrap_content"
+        <LinearLayout
             android:layout_height="match_parent"
-            android:src="@drawable/icon_back"
-            android:background="@null"
-            android:paddingLeft="@dimen/textview_padding_left_right"
-            android:paddingRight="@dimen/textview_padding_left_right"
-            android:id="@+id/btnBack" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Money"
-            android:gravity="center_vertical"
-            android:textColor="@color/text_color_white"
-            android:textSize="@dimen/tabbar_text_size"
-            android:textStyle="bold" />
+            android:layout_width="match_parent"
+            android:orientation="horizontal">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon_back_fee_detail"
+                android:padding="@dimen/dimen_10dp"
+                android:background="@null"
+                android:id="@+id/btnBack" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|left"
+                android:text="Fee detail"
+                android:textColor="@color/text_color_white"
+                android:textSize="@dimen/text_size_large"
+                android:id="@+id/tvTitle"
+                android:textStyle="bold" />
+        </LinearLayout>
     </android.support.v7.widget.Toolbar>
-    <TextView
-        android:id="@+id/tvDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="aslkal saifnlkasflkasf"
-        android:textColor="@color/text_color_blue"
-        android:layout_marginBottom="@dimen/textview_margin_top_bottom"
-        android:layout_marginTop="@dimen/textview_margin_top_bottom"
-        android:layout_marginRight="@dimen/textview_margin_left_right"
-        android:layout_marginLeft="@dimen/textview_margin_left_right"
-        android:textSize="@dimen/text_description_size"
-        android:gravity="center_vertical" />
-    <TextView
-        android:id="@+id/tvPayState"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textColor="@color/text_color_blue"
-        android:layout_marginBottom="@dimen/textview_margin_top_bottom"
-        android:layout_marginRight="@dimen/textview_margin_left_right"
-        android:layout_marginLeft="@dimen/textview_margin_left_right"
-        android:textSize="@dimen/text_description_size"
-        android:gravity="center_vertical"
-        android:drawablePadding="@dimen/textview_padding_left_right" />
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/refresher"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <android.support.v7.widget.RecyclerView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/rvUser" />
+            android:orientation="vertical"
+            android:weightSum="4">
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_10dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="7">
+                    <ImageView
+                        android:id="@+id/imgGroup"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_10dp"
+                        android:adjustViewBounds="true"
+                        android:layout_weight="1"
+                        android:src="@drawable/money_group" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="6">
+                        <TextView
+                            android:id="@+id/tvDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Le Le Birthday Party"
+                            android:textColor="@color/color_gray"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/tabbar_text_size"
+                            android:layout_marginTop="@dimen/dimen_10dp"
+                            android:layout_marginBottom="@dimen/dimen_5dp" />
+                        <TextView
+                            android:id="@+id/tvDeadlineTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Deadline: Sep 10, 2018"
+                            android:textColor="@color/color_gray"
+                            android:textSize="@dimen/text_description_size"
+                            android:layout_marginBottom="@dimen/dimen_5dp"
+                            android:drawableLeft="@drawable/icon_clock"
+                            android:drawablePadding="@dimen/dimen_10dp" />
+                        <TextView
+                            android:id="@+id/tvFee"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Fee: 500,000VND"
+                            android:textColor="@color/color_gray"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/tabbar_text_size"
+                            android:layout_marginBottom="@dimen/dimen_10dp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tvMembersUnpaid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/tabbar_text_size"
+                        android:textColor="@color/color_blue"
+                        android:textStyle="bold"
+                        android:layout_margin="@dimen/dimen_5dp" />
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvUnpaid"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dimen_5dp" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_margin="@dimen/dimen_10dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tvMembersPaid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/tabbar_text_size"
+                        android:textColor="@color/color_blue"
+                        android:textStyle="bold"
+                        android:layout_margin="@dimen/dimen_5dp" />
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvPaid"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dimen_5dp" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

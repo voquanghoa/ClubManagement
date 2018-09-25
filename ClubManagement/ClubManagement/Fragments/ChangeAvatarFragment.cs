@@ -107,9 +107,7 @@ namespace ClubManagement.Fragments
         {
             progressDialog.Dismiss();
 
-            var message = Resources.GetString(Resource.String.change_avatar_failure);
-            Activity.RunOnUiThread(() => 
-                Toast.MakeText(Context, message, ToastLength.Short).Show());
+			this.ShowMessage(Resource.String.change_avatar_failure);
 
             Dismiss();
         }
@@ -120,10 +118,8 @@ namespace ClubManagement.Fragments
             ChangeAvatar.Invoke(snapShot.DownloadUrl.ToString(), new EventArgs());
 
             progressDialog.Dismiss();
-
-            var message = Resources.GetString(Resource.String.change_avatar_success);
-            Activity.RunOnUiThread(() =>
-                Toast.MakeText(Context, message, ToastLength.Short).Show());
+                     
+			this.ShowMessage(Resource.String.change_avatar_success);
 
             Dismiss();
         }

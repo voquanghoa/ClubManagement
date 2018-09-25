@@ -1,25 +1,75 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Android.App;
-using Android.Content.Res;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 using ClubManagement.Controllers;
 using ClubManagement.Models;
+using ClubManagement.Ultilities;
+using Com.Bumptech.Glide;
+using Refractored.Controls;
 
 namespace ClubManagement.CustomAdapters
 {
     public class MoneyAdminViewHolder : RecyclerView.ViewHolder
     {
-        [InjectView(Resource.Id.tvUser)] private TextView tvUser;
-
-        [InjectView(Resource.Id.imgState)] private ImageView imgState;
-        
-        public TextView TvState { get; set; }
-
         public string MoneyId { get; set; }
+
+        [InjectView(Resource.Id.civAvatar)] private CircleImageView civAvatar;
+
+        [InjectView(Resource.Id.tvUserName)] private TextView tvUserName;
+
+        [InjectView(Resource.Id.btnPay)] private Button btnPay;
+
+        [InjectView(Resource.Id.tvPaidTime)] private TextView tvPaidTime;
+
+        [InjectOnClick(Resource.Id.btnPay)]
+        private void Pay(object s, EventArgs e)
+        {
+            var userMoney = new UserMoneyModel
+            {
+                MoneyId = MoneyId,
+                UserId = moneyAdminState.User.Id,
+                PaidTime = DateTime.Now
+            };
+            if (!moneyAdminState.IsPaid)
+            {
+                var dialog =
+                    ItemView.Context.CreateDialog("Paying", ItemView.Resources.GetString(Resource.String.wait));
+                dialog.Show();
+                ((Activity) ItemView.Context).DoRequest(
+                    async () =>
+                    {
+                        await UserMoneysController.Instance.Add(userMoney);
+                        dialog.Dismiss();
+                        moneyAdminState.PaidTime = DateTime.Now;
+                        moneyAdminState.IsPaid = true;
+                        PayClick?.Invoke(moneyAdminState, e);
+                    });
+            }
+            else
+            {
+                ItemView.Context.ShowConfirmDialog("Confirm",
+                    $"Do you want to repay for {moneyAdminState.User.Name}",
+                    () =>
+                    {
+                        var dialog = ItemView.Context.CreateDialog("Repaying",
+                            ItemView.Resources.GetString(Resource.String.wait));
+                        dialog.Show();
+                        ((Activity) ItemView.Context).DoRequest(async () =>
+                        {
+                            await UserMoneysController.Instance.Delete(UserMoneysController.Instance.Values.First(x =>
+                                x.UserId == moneyAdminState.User.Id && x.MoneyId == MoneyId));
+                            dialog.Dismiss();
+                            moneyAdminState.IsPaid = false;
+                            PayClick?.Invoke(moneyAdminState, e);
+                        });
+                    }, () => { }).Show();
+            }
+        }
+
+        public event EventHandler PayClick;
 
         private MoneyAdminState moneyAdminState;
 
@@ -28,71 +78,28 @@ namespace ClubManagement.CustomAdapters
             get => moneyAdminState;
             set
             {
-                tvUser.Text = value.User.Name;
-                imgState.SetImageResource(value.IsPaid ? Resource.Drawable.icon_paid : Resource.Drawable.icon_unpaid);
                 moneyAdminState = value;
-            }
-        }
+                if (!string.IsNullOrEmpty(value.User.Avatar))
+                {
+                    Glide.With(ItemView.Context).Load(value.User.Avatar).Into(civAvatar);
+                }
 
-        [InjectOnClick(Resource.Id.imgState)]
-        private void Pay(object sender, EventArgs e)
-        {
-            if (!AppDataController.Instance.IsAdmin) return;
-
-            var moneyUserController = UserMoneysController.Instance;
-            var builder = new AlertDialog.Builder(ItemView.Context)
-                .SetCancelable(false)
-                .SetNegativeButton("No", (s, dce) => { });
-            if (!MoneyAdminState.IsPaid)
-            {
-                builder
-                    .SetTitle("Do you want to pay this budget?")
-                    .SetPositiveButton("Yes", (s, dce) =>
-                    {
-                        try
-                        {
-                            moneyUserController.Add(new UserMoneyModel
-                            {
-                                UserId = MoneyAdminState.User.Id,
-                                MoneyId = MoneyId
-                            });
-                            MoneyAdminState.IsPaid = !MoneyAdminState.IsPaid;
-                            TvState.Text = "You have just paid this budget!";
-                            imgState.SetImageResource(Resource.Drawable.icon_paid);
-                            Toast.MakeText(ItemView.Context, "Pay successfully!", ToastLength.Short).Show();
-                        }
-                        catch (Exception)
-                        {
-                            Toast.MakeText(ItemView.Context, ItemView.Context.Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
-                        }
-                    })
-                    .Show();
-            }
-            else
-            {
-                builder.SetTitle("Do you want to unpay this budget?")
-                    .SetPositiveButton("Yes", (s, dce) =>
-                    {
-                        try
-                        {
-                            var moneyUserList = moneyUserController.Values ?? new List<UserMoneyModel>();
-                            var moneyUser = moneyUserList.First(x =>
-                                x.MoneyId == MoneyId && x.UserId == MoneyAdminState.User.Id);
-                            if (moneyUser == null) return;
-                            moneyUserController.Delete(moneyUser);
-                            MoneyAdminState.IsPaid = !MoneyAdminState.IsPaid;
-                            Toast.MakeText(ItemView.Context, "Unpay successfully!", ToastLength.Short).Show();
-                            TvState.Text = "You have just unpaid this budget!";
-                            imgState.SetImageResource(Resource.Drawable.icon_unpaid);
-                        }
-                        catch (Exception)
-                        {
-                            Toast.MakeText(ItemView.Context,
-                                ItemView.Context.Resources.GetString(Resource.String.no_internet_connection),
-                                ToastLength.Short).Show();
-                        }
-                    })
-                    .Show();
+                tvUserName.Text = value.User.Name;
+                if (value.IsPaid)
+                {
+                    tvPaidTime.Visibility = ViewStates.Visible;
+                    tvPaidTime.Text = $"Paid on {value.PaidTime:MMM dd, yyyy}";
+                    btnPay.SetTextColor(ItemView.Resources.GetColor(Resource.Color.text_color_black, null));
+                    btnPay.SetBackgroundResource(Resource.Drawable.button_repay_background);
+                    btnPay.Text = "Repay";
+                }
+                else
+                {
+                    tvPaidTime.Visibility = ViewStates.Gone;
+                    btnPay.SetTextColor(ItemView.Resources.GetColor(Resource.Color.text_color_white, null));
+                    btnPay.SetBackgroundResource(Resource.Drawable.button_pay_background);
+                    btnPay.Text = "Pay";
+                }
             }
         }
 

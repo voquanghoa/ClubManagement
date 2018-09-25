@@ -262,9 +262,9 @@ namespace ClubManagement.Fragments
                 numberOfUpComingEvent = appDataController.NumberOfUpComingEvents;
                 nextEvent = goingEvents.Any() ? goingEvents.OrderBy(x => x.TimeStart).First() : null;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Toast.MakeText(Context, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
+				this.ShowMessage(ex.Message);
             }
             return null;
         }
@@ -300,7 +300,7 @@ namespace ClubManagement.Fragments
             }
             catch (PackageManager.NameNotFoundException e)
             {
-                Toast.MakeText(Context, e.Message, ToastLength.Short).Show();
+				this.ShowMessage(e.Message);
             }
         }
 

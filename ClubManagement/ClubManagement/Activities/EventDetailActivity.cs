@@ -120,8 +120,7 @@ namespace ClubManagement.Activities
                             }, () =>
                             {
                                 processDialog.Dismiss();
-
-                                Toast.MakeText(this, Resource.String.delete_event_success, ToastLength.Short).Show();
+								this.ShowMessage(Resource.String.delete_event_success);
 
                                 Finish();
                             });

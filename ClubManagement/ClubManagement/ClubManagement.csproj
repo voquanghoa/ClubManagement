@@ -24,7 +24,6 @@
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -36,17 +35,13 @@
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
-    <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
     <AndroidKeyStore>True</AndroidKeyStore>
     <AndroidSigningKeyStore>../ClubManagement.keystore</AndroidSigningKeyStore>
     <AndroidSigningStorePass>nova090815</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>clubmanagement</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>nova090815</AndroidSigningKeyPass>
-    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
-    <AotAssemblies>false</AotAssemblies>
-    <EnableLLVM>false</EnableLLVM>
-    <BundleAssemblies>false</BundleAssemblies>
-    <AndroidSupportedAbis>armeabi-v7a;x86_64</AndroidSupportedAbis>
+    <AndroidSupportedAbis>armeabi-v7a;x86;x86_64</AndroidSupportedAbis>
+    <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -64,7 +59,6 @@
     <AndroidSigningStorePass>nova090815</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>clubmanagement</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>nova090815</AndroidSigningKeyPass>
-    <AndroidUseSharedRuntime>true</AndroidUseSharedRuntime>
     <AndroidSupportedAbis>arm64-v8a;armeabi;armeabi-v7a;x86;x86_64</AndroidSupportedAbis>
   </PropertyGroup>
   <ItemGroup>
@@ -306,6 +300,7 @@
     <Compile Include="Fragments\Bases\SwipeToRefreshDataFragment.cs" />
     <Compile Include="Ultilities\FilePathUtilities.cs" />
     <Compile Include="Ultilities\StringExtensions.cs" />
+    <Compile Include="MainApplication.cs" />
   </ItemGroup>
   <ItemGroup>
     <GoogleServicesJson Include="google-services.json" />
@@ -682,6 +677,18 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\label_box.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_back_fee_detail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_clock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\button_pay_background.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\button_repay_background.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon_circle.png" />

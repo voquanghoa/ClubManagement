@@ -1,36 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="@dimen/textview_padding_top_bottom">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/item_background_color"
-        android:layout_weight="1">
+        android:layout_height="wrap_content">
+        <Refractored.Controls.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/money_group"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="@dimen/dimen_20dp"
+            app:civ_fill_color="@color/text_color_white"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/civAvatar" />
         <TextView
-            android:id="@+id/tvUser"
+            android:id="@+id/tvUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:textSize="@dimen/tabbar_text_size"
             android:layout_gravity="center_vertical"
-            android:text="July 2018 - Budget : 60$"
-            android:layout_marginLeft="@dimen/textview_margin_left_right"
-            android:layout_marginRight="@dimen/textview_margin_left_right"
-            android:layout_marginTop="@dimen/textview_margin_top_bottom"
-            android:layout_marginBottom="@dimen/textview_margin_top_bottom"
-            android:textColor="@color/text_color_blue"
-            android:layout_weight="1"
-            android:textStyle="bold" />
+            android:textColor="@color/text_color_gray"
+            android:text="Bao Anh" />
+        <Button
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:paddingBottom="@dimen/dimen_5dp"
+            android:paddingTop="@dimen/dimen_5dp"
+            android:paddingLeft="@dimen/dimen_20dp"
+            android:paddingRight="@dimen/dimen_20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pay"
+            android:id="@+id/btnPay"
+            android:textColor="@color/white_color"
+            android:background="@drawable/button_background"
+            android:layout_margin="@dimen/dimen_10dp" />
     </LinearLayout>
-    <ImageView
-        android:id="@+id/imgState"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
-        android:src="@drawable/icon_unpaid"
-        android:background="@color/item_background_color"
-        android:padding="@dimen/imageview_margin" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Paid on Sep 18, 2018"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:textColor="@color/color_gray"
+        android:textSize="@dimen/text_description_size"
+        android:id="@+id/tvPaidTime" />
 </LinearLayout>

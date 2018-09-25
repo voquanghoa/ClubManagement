@@ -18,7 +18,7 @@ namespace ClubManagement.Activities
         {
             if (!CrossConnectivity.Current.IsConnected)
             {
-                Toast.MakeText(this, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
+				this.ShowMessage(Resource.String.no_internet_connection);
                 return;
             }
             StartApp();

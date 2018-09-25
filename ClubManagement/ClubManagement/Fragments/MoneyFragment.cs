@@ -11,6 +11,7 @@ using ClubManagement.Fragments.Bases;
 using ClubManagement.Models;
 using Android.Widget;
 using PagerAdapter = ClubManagement.CustomAdapters.PagerAdapter;
+using ClubManagement.Ultilities;
 
 namespace ClubManagement.Fragments
 {
@@ -98,9 +99,9 @@ namespace ClubManagement.Fragments
             {
                 return appDataController.GetListMoneyState().OrderByDescending(x => x.MoneyModel.Time).ToList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Toast.MakeText(Context, Resources.GetString(Resource.String.no_internet_connection), ToastLength.Short).Show();
+				this.ShowMessage(ex.Message);
                 return data;
             }
         }
