@@ -61,11 +61,7 @@ namespace ClubManagement.Fragments
 
                 years.Add(Total);
 
-                adapter = new ArrayAdapter(Context, Android.Resource.Layout.SimpleSpinnerItem, years);
-                adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
-                spinner.Adapter = adapter;
-
-                InitMoneyView();
+                if (Context != null) InitMoneyView();
             }
         }
 
@@ -87,6 +83,8 @@ namespace ClubManagement.Fragments
 
         private void InitMoneyView()
         {
+            adapter = new ArrayAdapter(Context, Android.Resource.Layout.SimpleSpinnerItem, years);
+            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             spinner.Adapter = adapter;
 
             var sumMoneyNeedPay = moneyStates.Sum(x => !x.IsPaid ? x.MoneyModel.Amount : 0);

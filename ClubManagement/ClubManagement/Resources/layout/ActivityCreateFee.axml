@@ -67,6 +67,7 @@
                 android:id="@+id/textView1" />
             <EditText
                 android:ellipsize="end"
+                android:id="@+id/edtDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/enter_here"
@@ -105,7 +106,7 @@
                 </FrameLayout>
                 <EditText
                     android:ellipsize="end"
-                    android:hint="0"
+                    android:id="@+id/edtAmount"
                     android:textColorHint="@color/color_gray"
                     android:textColor="@color/color_gray"
                     android:inputType="number"
@@ -113,7 +114,8 @@
                     android:maxLength="@integer/max_length_small"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_title_size" />
+                    android:textSize="@dimen/text_title_size"
+                    android:hint="0" />
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"

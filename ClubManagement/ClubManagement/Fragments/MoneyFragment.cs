@@ -29,6 +29,8 @@ namespace ClubManagement.Fragments
 
         private PagerAdapter pagerAdapter;
 
+        public int SelectedTabIndex { set; get; }
+
         public MoneyFragment()
         {
             data = new List<MoneyState>();
@@ -88,6 +90,7 @@ namespace ClubManagement.Fragments
         {
             base.OnResume();
             UpdateViewData();
+            tlMoney.GetTabAt(SelectedTabIndex).Select();
         }
 
         protected override List<MoneyState> QueryData()

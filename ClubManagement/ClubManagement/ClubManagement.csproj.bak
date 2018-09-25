@@ -24,7 +24,6 @@
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -36,7 +35,13 @@
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
-    <AndroidSupportedAbis>armeabi-v7a;arm64-v8a;armeabi</AndroidSupportedAbis>
+    <AndroidKeyStore>True</AndroidKeyStore>
+    <AndroidSigningKeyStore>../ClubManagement.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>nova090815</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>clubmanagement</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>nova090815</AndroidSigningKeyPass>
+    <AndroidSupportedAbis>armeabi-v7a;x86;x86_64</AndroidSupportedAbis>
+    <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -49,21 +54,65 @@
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <AndroidKeyStore>True</AndroidKeyStore>
+    <AndroidSigningKeyStore>../ClubManagement.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>nova090815</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>clubmanagement</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>nova090815</AndroidSigningKeyPass>
+    <AndroidSupportedAbis>arm64-v8a;armeabi;armeabi-v7a;x86;x86_64</AndroidSupportedAbis>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Cloudinary.Core, Version=1.31.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cloudinary.Core.1.31.0\lib\netstandard1.6\Cloudinary.Core.dll</HintPath>
+    </Reference>
     <Reference Include="crypto, Version=1.8.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
       <HintPath>..\packages\Firebase.Xamarin.0.3.6\lib\crypto.dll</HintPath>
     </Reference>
     <Reference Include="Firebase.Xamarin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Firebase.Xamarin.0.3.6\lib\Firebase.Xamarin.dll</HintPath>
     </Reference>
+    <Reference Include="Glide, Version=4.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Glide.Xamarin.4.1.1\lib\MonoAndroid10\Glide.dll</HintPath>
+    </Reference>
+    <Reference Include="Java.Interop" />
     <Reference Include="JWT, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Firebase.Xamarin.0.3.6\lib\JWT.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="MPAndroidChart, Version=3.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MPAndroidChart.3.0.3\lib\MonoAndroid\MPAndroidChart.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Connectivity, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xam.Plugin.Connectivity.3.2.0\lib\MonoAndroid10\Plugin.Connectivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Connectivity.Abstractions, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xam.Plugin.Connectivity.3.2.0\lib\MonoAndroid10\Plugin.Connectivity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.CurrentActivity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Plugin.CurrentActivity.2.1.0.2\lib\monoandroid44\Plugin.CurrentActivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Geolocator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xam.Plugin.Geolocator.4.5.0.6\lib\monoandroid71\Plugin.Geolocator.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Permissions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Plugin.Permissions.3.0.0.12\lib\monoandroid71\Plugin.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="Refractored.Controls.CircleImageView, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Refractored.Controls.CircleImageView.1.0.1\lib\MonoAndroid10\Refractored.Controls.CircleImageView.dll</HintPath>
+    </Reference>
+    <Reference Include="Square.OkHttp, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Square.OkHttp.2.4.0.0\lib\MonoAndroid\Square.OkHttp.dll</HintPath>
+    </Reference>
+    <Reference Include="Square.OkIO, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Square.OkIO.1.5.0.0\lib\MonoAndroid\Square.OkIO.dll</HintPath>
+    </Reference>
+    <Reference Include="Square.Picasso, Version=2.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Square.Picasso.2.5.2.1\lib\MonoAndroid\Square.Picasso.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Firebase.Xamarin.0.3.6\lib\System.Reactive.Core.dll</HintPath>
     </Reference>
@@ -121,33 +170,63 @@
     <Reference Include="Xamarin.Android.Support.Vector.Drawable, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Android.Support.Vector.Drawable.25.4.0.2\lib\MonoAndroid70\Xamarin.Android.Support.Vector.Drawable.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Firebase.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Firebase.Common.32.961.0\lib\MonoAndroid70\Xamarin.Firebase.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Firebase.Storage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Firebase.Storage.32.961.0\lib\MonoAndroid41\Xamarin.Firebase.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Firebase.Storage.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Firebase.Storage.Common.32.961.0\lib\MonoAndroid70\Xamarin.Firebase.Storage.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Xamarin.GooglePlayServices.Base, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.GooglePlayServices.Base.32.961.0\lib\MonoAndroid70\Xamarin.GooglePlayServices.Base.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.GooglePlayServices.Basement, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.GooglePlayServices.Basement.32.961.0\lib\MonoAndroid70\Xamarin.GooglePlayServices.Basement.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.GooglePlayServices.Location, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.GooglePlayServices.Location.32.961.0\lib\MonoAndroid70\Xamarin.GooglePlayServices.Location.dll</HintPath>
+    </Reference>
     <Reference Include="Xamarin.GooglePlayServices.Maps, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.GooglePlayServices.Maps.32.961.0\lib\MonoAndroid70\Xamarin.GooglePlayServices.Maps.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.GooglePlayServices.Places, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.GooglePlayServices.Places.32.961.0\lib\MonoAndroid70\Xamarin.GooglePlayServices.Places.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.GooglePlayServices.Tasks, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.GooglePlayServices.Tasks.32.961.0\lib\MonoAndroid70\Xamarin.GooglePlayServices.Tasks.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\Base\CreateOrEditEventActivity.cs" />
+    <Compile Include="Activities\Base\CreateOrEditFeeActivity.cs" />
+    <Compile Include="Activities\Base\MapAbstractActivity.cs" />
+    <Compile Include="Activities\ChooseFeeGroupActivity.cs" />
+    <Compile Include="Activities\CreateEventActivity.cs" />
+    <Compile Include="Activities\CreateFeeActivity.cs" />
+    <Compile Include="Activities\EditEventActivity.cs" />
     <Compile Include="Activities\EventDetailActivity.cs" />
+    <Compile Include="Activities\GuestActivity.cs" />
     <Compile Include="Activities\LoginActivity.cs" />
+    <Compile Include="Activities\MemberLocationActivity.cs" />
     <Compile Include="Activities\MoneyDetailActivity.cs" />
     <Compile Include="Activities\RegisterActivity.cs" />
     <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Adapters\BalanceAdapter.cs" />
     <Compile Include="Adapters\BalanceAdapterViewHolder.cs" />
+    <Compile Include="Adapters\FeeGroupAdapter.cs" />
+    <Compile Include="Adapters\FeeGroupAdapterViewHolder.cs" />
+    <Compile Include="Adapters\GuestAdapterViewHolder.cs" />
+    <Compile Include="Adapters\GuestsAdapter.cs" />
+    <Compile Include="Adapters\ItemEventHeaderViewHolder.cs" />
+    <Compile Include="Adapters\ItemEventViewHolder.cs" />
     <Compile Include="Adapters\PersonGoTimeClickEventArgs.cs" />
     <Compile Include="Adapters\ClickEventArgs.cs" />
+    <Compile Include="Adapters\SwipeToDeleteCallback.cs" />
     <Compile Include="Controllers\AppDataController.cs" />
     <Compile Include="Adapters\EventsAdapter.cs" />
-    <Compile Include="Adapters\PersonGoTimesAdapter.cs" />
-    <Compile Include="Adapters\PersonsGoTimeAdapterViewHolder.cs" />
+    <Compile Include="Controllers\CloudinaryController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\FirebaseController.cs" />
     <Compile Include="Controllers\MapsController.cs" />
@@ -156,11 +235,22 @@
     <Compile Include="Controllers\UserEventsController.cs" />
     <Compile Include="Controllers\UserMoneysController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="CustomAdapters\MoneyDeadlineTimeViewHolder.cs" />
+    <Compile Include="CustomAdapters\NoInternetBottomDialog.cs" />
+    <Compile Include="Fragments\AddBudgetDialogFragment.cs" />
     <Compile Include="Fragments\BalancesFragment.cs" />
     <Compile Include="Fragments\BalanceSummaryFragment.cs" />
+    <Compile Include="Fragments\ChangeAvatarFragment.cs" />
+    <Compile Include="Fragments\CustomDatePickerDialog.cs" />
+    <Compile Include="Fragments\CustomTimePickerDialog.cs" />
+    <Compile Include="Fragments\DatePickerFragment.cs" />
+    <Compile Include="Fragments\MoneyListFragment.cs" />
+    <Compile Include="Fragments\MoneySummaryFragment.cs" />
+    <Compile Include="Fragments\NotificationFragment.cs" />
     <Compile Include="Fragments\OutcomeDialogFragment.cs" />
-    <Compile Include="Fragments\PersonGoTimesFragment.cs" />
+    <Compile Include="Fragments\UnjoinEventFragment.cs" />
     <Compile Include="Models\AddressGeocodeAPIModel.cs" />
+    <Compile Include="Models\DescriptionItem.cs" />
     <Compile Include="Models\DistanceMatrixDistanceAPIModel.cs" />
     <Compile Include="Models\ElementMatrixDistanceAPIModel.cs" />
     <Compile Include="CustomAdapters\MoneyListAdapter.cs" />
@@ -168,8 +258,15 @@
     <Compile Include="CustomAdapters\MoneyAdminListAdapter.cs" />
     <Compile Include="CustomAdapters\MoneyAdminViewHolder.cs" />
     <Compile Include="Interfaces\IItemClickListener.cs" />
+    <Compile Include="Models\EventHeaderItem.cs" />
+    <Compile Include="Models\EventItem.cs" />
     <Compile Include="Models\EventModel.cs" />
+    <Compile Include="Models\FeeDeadlineTimeItem.cs" />
+    <Compile Include="Models\FeeDetailItem.cs" />
+    <Compile Include="Models\FeeGroupModel.cs" />
+    <Compile Include="Models\FeeItem.cs" />
     <Compile Include="Models\FirebaseModel.cs" />
+    <Compile Include="Models\GuestModel.cs" />
     <Compile Include="Models\IncomeModel.cs" />
     <Compile Include="Models\MoneyAdminState.cs" />
     <Compile Include="Models\MoneyModel.cs" />
@@ -179,11 +276,11 @@
     <Compile Include="Models\ResultsMatrixDistanceAPIModel.cs" />
     <Compile Include="Models\ResultsGeocodeAPIModel.cs" />
     <Compile Include="Models\RowMatrixDistanceAPIModel.cs" />
+    <Compile Include="Models\Target.cs" />
     <Compile Include="Models\UserLoginEventModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserEventModel.cs" />
     <Compile Include="Models\UserMoneyModel.cs" />
-    <Compile Include="Adapters\EventViewHolder.cs" />
     <Compile Include="Cheeseknife.cs" />
     <Compile Include="Fragments\BalanceFragment.cs" />
     <Compile Include="Fragments\DashboardFragment.cs" />
@@ -191,18 +288,27 @@
     <Compile Include="Fragments\MoneyFragment.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="CustomAdapters\PagerAdapter.cs" />
+    <Compile Include="Models\ValueFormatter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ultilities\ActivityExtensions.cs" />
     <Compile Include="Ultilities\AppConstantValues.cs" />
     <Compile Include="Ultilities\AppUltilities.cs" />
     <Compile Include="Ultilities\BottomNavigationHelper.cs" />
+    <Compile Include="Ultilities\DateTimeExtensions.cs" />
     <Compile Include="Ultilities\DialogExtensions.cs" />
     <Compile Include="Fragments\Bases\SwipeToRefreshDataFragment.cs" />
+    <Compile Include="Ultilities\FilePathUtilities.cs" />
+    <Compile Include="Ultilities\StringExtensions.cs" />
+    <Compile Include="MainApplication.cs" />
   </ItemGroup>
   <ItemGroup>
     <GoogleServicesJson Include="google-services.json" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidAsset Include="Assets\fonts\MarketSaturday.ttf" />
+    <AndroidAsset Include="Assets\fonts\IckyTicketMono.ttf" />
+    <None Include="app.config" />
     <None Include="GettingStarted.Xamarin" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
@@ -215,16 +321,13 @@
     <AndroidResource Include="Resources\layout\FragmentEvent.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\ItemEvent.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\layout\EventDetail.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\FragmentPersonGoTimes.axml">
+    <AndroidResource Include="Resources\layout\ActivityGuests.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\ItemPersonGoTime.axml">
+    <AndroidResource Include="Resources\layout\ItemGuest.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\FragmentBalance.axml">
@@ -242,26 +345,60 @@
     <AndroidResource Include="Resources\layout\DialogFragmentOutcome.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\ActivityMemberLocation.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\DialogFragmentEvent.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\DialogFragmentChangeAvatar.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\DialogFragmentUnjoinEvent.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\InfoMarker.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\FragmentMoneySummary.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ActivityCreateFee.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ItemFeeGroup.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ActivityChooseFeeGroup.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\values\Strings.xml" />
+    <AndroidResource Include="Resources\values\Strings.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\mipmap-hdpi\" />
-    <Folder Include="Resources\mipmap-mdpi\" />
-    <Folder Include="Resources\mipmap-xhdpi\" />
-    <Folder Include="Resources\mipmap-xxhdpi\" />
-    <Folder Include="Resources\mipmap-xxxhdpi\" />
-    <Folder Include="Fragments\Bases\" />
+    <AndroidResource Include="Resources\drawable\icon_tab_notification.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values\colors.xml" />
+    <AndroidResource Include="Resources\drawable\info_marker_border.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values\dimens.xml" />
+    <AndroidResource Include="Resources\menu\User.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\colors.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\dimens.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\button_background.xml" />
@@ -324,7 +461,6 @@
     <AndroidResource Include="Resources\drawable\icon_arrow_right.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\icon_person.png" />
     <AndroidResource Include="Resources\layout\fragment_dashboard.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -374,6 +510,191 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon_back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_google_maps.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_no_internet.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\no_internet_bottom_dialog_fragment_layout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\anim\item_animation_fall_down.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\anim\layout_animation_fall_down.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_trash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\integers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\dialog_fragment_add_budget.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-hdpi\ic_launcher.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-mdpi\ic_launcher.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-xhdpi\ic_launcher.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_launcher.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_change.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\item_recyclerview_events.axml" />
+    <AndroidResource Include="Resources\drawable\button_change_avatar.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\appbar_layout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_going.png" />
+    <AndroidResource Include="Resources\drawable\toolbar_shadow.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\bottom_tabbar_shadow.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\item_header_recyclerview_events.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\icon_time.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_users.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_like.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_black_back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_option.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\DetailEventOption.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_add_event.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_cross.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_image_event.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_marker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\DetailEventOptionForPastEvent.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\image_event_default.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\edit_text_border.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\AddPhoto.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_upload_a_photo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\recyclerview_money.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\money_group.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_admin_menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_add_event.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_credit_card.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\recyclerview_money_list_deadline_time_item.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\admin_menu.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_edit_fee.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_delete_fee.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\label_box.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_back_fee_detail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_clock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\button_pay_background.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\button_repay_background.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_calendar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.v7.CardView.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.v7.CardView.targets" Condition="Exists('..\packages\Xamarin.Android.Support.v7.CardView.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.v7.CardView.targets')" />

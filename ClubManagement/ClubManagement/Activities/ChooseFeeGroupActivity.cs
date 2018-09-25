@@ -33,7 +33,7 @@ namespace ClubManagement.Activities
 
         private void Adapter_ItemClick(object sender, ClickEventArgs e)
         {
-            if (sender is int id)
+            if (sender is string id)
             {
                 SetResult(Result.Ok, new Intent().PutExtra("Id", id));
                 Finish();

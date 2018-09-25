@@ -42,37 +42,37 @@ namespace ClubManagement.Ultilities
             {
                 new FeeGroupModel()
                 {
-                    Id = 1,
+                    Id = "1",
                     ImageId =Resource.Drawable.money_group,
                     TitleId = Resource.String.party
                 },
                 new FeeGroupModel()
                 {
-                    Id = 2,
+                    Id = "2",
                     ImageId =Resource.Drawable.money_group,
                     TitleId = Resource.String.sport
                 },
                 new FeeGroupModel()
                 {
-                    Id = 3,
+                    Id = "3",
                     ImageId =Resource.Drawable.money_group,
                     TitleId = Resource.String.travalling
                 },
                 new FeeGroupModel()
                 {
-                    Id = 4,
+                    Id = "4",
                     ImageId =Resource.Drawable.money_group,
                     TitleId = Resource.String.food_and_drinks
                 },
                 new FeeGroupModel()
                 {
-                    Id = 5,
+                    Id = "5",
                     ImageId =Resource.Drawable.money_group,
                     TitleId = Resource.String.gift
                 },
                 new FeeGroupModel()
                 {
-                    Id = 6,
+                    Id = "6",
                     ImageId =Resource.Drawable.money_group,
                     TitleId = Resource.String.others
                 }

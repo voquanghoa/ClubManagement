@@ -22,7 +22,7 @@ namespace ClubManagement.Adapters
         [InjectView(Resource.Id.tvTitle)]
         private TextView tvTitle;
 
-        private int id;
+        private string id;
 
         public event EventHandler<ClickEventArgs> ClickHander;
 
