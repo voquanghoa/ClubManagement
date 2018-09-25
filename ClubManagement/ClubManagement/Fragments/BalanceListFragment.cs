@@ -43,7 +43,6 @@ namespace ClubManagement.Fragments
                 };
                 outcomeListAdapter.DeleteClick += (s, e) =>
                 {
-                    Log.Debug("asdsad", "asdsadasd");
                     if (s is OutcomeModel outcomeModel)
                     {
                         if (outcomeListAdapter.OutcomeModels.Remove(outcomeModel))
