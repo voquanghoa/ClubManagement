@@ -236,6 +236,8 @@
     <Compile Include="CustomAdapters\IncomeViewHolder.cs" />
     <Compile Include="CustomAdapters\MoneyDeadlineTimeViewHolder.cs" />
     <Compile Include="CustomAdapters\NoInternetBottomDialog.cs" />
+    <Compile Include="CustomAdapters\OutcomeListAdapter.cs" />
+    <Compile Include="CustomAdapters\OutcomeViewHolder.cs" />
     <Compile Include="Fragments\AddBudgetDialogFragment.cs" />
     <Compile Include="Fragments\BalanceListFragment.cs" />
     <Compile Include="Fragments\BalanceSummaryFragment.cs" />
@@ -700,6 +702,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\fragment_balance_recyclerview.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\outcome_item.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

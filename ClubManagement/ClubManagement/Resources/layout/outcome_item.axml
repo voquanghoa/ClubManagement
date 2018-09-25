@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/textview_padding_top_bottom">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:layout_marginRight="@dimen/dimen_20dp"
+        android:layout_marginLeft="@dimen/dimen_20dp"
+        android:layout_marginBottom="@dimen/dimen_5dp">
+        <ImageView
+            android:id="@+id/imgGroup"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:padding="@dimen/dimen_10dp"
+            android:src="@drawable/money_group" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+			android:layout_marginLeft="@dimen/dimen_10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+					android:lines="2"
+					android:maxLines="2"
+                    android:textColor="@color/color_gray"
+                    android:text="Play soccer with Team"
+                    android:textStyle="bold"
+                    android:paddingTop="@dimen/dimen_5dp"
+                    android:paddingBottom="@dimen/dimen_5dp"
+                    android:textSize="@dimen/text_description_size" />
+                <ImageButton
+                    android:id="@+id/btnAdmin"
+                    android:padding="@dimen/dimen_5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/dimen_5dp"
+                    android:src="@drawable/icon_admin_menu"
+                    android:background="@null" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tvAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="500.000VND"
+                android:layout_marginRight="@dimen/dimen_20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/color_red" />
+        </RelativeLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/color_hint"
+        android:layout_marginRight="@dimen/dimen_20dp"
+        android:layout_marginLeft="@dimen/dimen_20dp" />
+</LinearLayout>

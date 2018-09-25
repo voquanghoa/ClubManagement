@@ -26,15 +26,15 @@ namespace ClubManagement.Fragments
 
         protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
 
-        private BalanceSummaryFragment balanceSummaryFragment = new BalanceSummaryFragment();
+        private readonly BalanceSummaryFragment balanceSummaryFragment = new BalanceSummaryFragment();
 
         private List<IncomeModel> incomes = new List<IncomeModel>();
 
         private List<OutcomeModel> outcomes = new List<OutcomeModel>();
 
-        private BalanceListFragment incomeFragment = new BalanceListFragment();
+        private readonly BalanceListFragment incomeFragment = new BalanceListFragment(BalanceListFragment.IncomeType);
 
-        private BalanceListFragment outcomeFragment = new BalanceListFragment();
+        private readonly BalanceListFragment outcomeFragment = new BalanceListFragment(BalanceListFragment.OutcomeType);
 
         private long sumIncomes;
 
@@ -69,6 +69,7 @@ namespace ClubManagement.Fragments
             balanceSummaryFragment.SumIncomes = sumIncomes;
             balanceSummaryFragment.SumOutcomes = sumOutcomes;
             incomeFragment.IncomeModels = incomes;
+            outcomeFragment.OutcomeModels = outcomes;
             adapter.NotifyDataSetChanged();
         }
 
@@ -78,7 +79,7 @@ namespace ClubManagement.Fragments
             {
                 incomes = AppDataController.Instance.Incomes.OrderByDescending(x => x.Time).ToList();
                 outcomes = OutComesController.Instance.Values.OrderByDescending(x => x.Date).ToList();
-                sumIncomes = 0; //AppDataController.Instance.Incomes.Sum(x => x.Amount);
+                AppDataController.Instance.Incomes.Sum(x => x.Amount);
                 sumOutcomes = OutComesController.Instance.Values.Sum(x => x.Amount);
             }
             catch (Exception)

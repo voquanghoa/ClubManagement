@@ -11,16 +11,36 @@ namespace ClubManagement.Fragments
 {
     public class BalanceListFragment : Fragment
     {
+        public const int IncomeType = 1;
+
+        public const int OutcomeType = 2;
+
         [InjectView(Resource.Id.rvBalance)] private RecyclerView rvBalance;
 
         private IncomeListAdapter incomeListAdapter;
 
-        public BalanceListFragment()
+        private OutcomeListAdapter outcomeListAdapter;
+
+        private readonly int type;
+
+        public BalanceListFragment(int type)
         {
-            incomeListAdapter = new IncomeListAdapter
+            this.type = type;
+            if (this.type == IncomeType)
             {
-                IncomeModels = new List<IncomeModel>()
-            };
+                incomeListAdapter = new IncomeListAdapter
+                {
+                    IncomeModels = new List<IncomeModel>()
+                };
+            }
+
+            if (this.type == OutcomeType)
+            {
+                outcomeListAdapter = new OutcomeListAdapter
+                {
+                    OutcomeModels = new List<OutcomeModel>()
+                };
+            }
         }
 
         public List<IncomeModel> IncomeModels
@@ -36,6 +56,19 @@ namespace ClubManagement.Fragments
             }
         }
 
+        public List<OutcomeModel> OutcomeModels
+        {
+            set
+            {
+                if (outcomeListAdapter == null)
+                {
+                    outcomeListAdapter = new OutcomeListAdapter();
+                }
+
+                outcomeListAdapter.OutcomeModels = value;
+            }
+        }
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.fragment_balance_recyclerview, container, false);
@@ -47,7 +80,15 @@ namespace ClubManagement.Fragments
         private void Init()
         {
             rvBalance.SetLayoutManager(new LinearLayoutManager(Context));
-            rvBalance.SetAdapter(incomeListAdapter);
+            if (type == IncomeType)
+            {
+                rvBalance.SetAdapter(incomeListAdapter);
+            }
+
+            if (type == OutcomeType)
+            {
+                rvBalance.SetAdapter(outcomeListAdapter);
+            }
         }
     }
 }
