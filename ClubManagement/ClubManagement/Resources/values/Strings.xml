@@ -139,5 +139,9 @@
   <string name="gift">Gift</string>
   <string name="others">Others</string>
   <string name="adding_fee">Adding fee</string>
+  <string name="editing_fee">Editing fee</string>
   <string name="editing_event">Editing event</string>
+  <string name="edit_event_success">Edit event successfully!</string>
+  <string name="edit_fee_success">Edit fee successfully!</string>
+  <string name="edit_fee">Edit fee</string>
 </resources>

@@ -223,6 +223,7 @@ namespace ClubManagement.Activities.Base
                 else
                 {
                     var eventDetail = JsonConvert.SerializeObject(eventModel);
+                    this.ShowMessage(Resource.String.edit_event_success);
                     SetResult(Result.Ok, new Intent().PutExtra("EventDetail", eventDetail));
                 }
 

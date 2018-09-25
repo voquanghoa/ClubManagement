@@ -60,22 +60,6 @@ namespace ClubManagement.CustomAdapters
                 }
 
                 tvAmount.Text = $"{value.MoneyModel.Amount.ToCurrency()}";
-
-                ItemView.Context.DoWithAdmin(() =>
-                {
-                    btnAdmin.Visibility = ViewStates.Visible;
-                    btnAdmin.Click += (s, e) =>
-                    {
-                        popupMenu = ((View) s).CreatepopupMenu(Resource.Menu.admin_menu);
-                        popupMenu.MenuItemClick += PopupMenu_MenuItemClick;
-                        var menu = popupMenu.Menu;
-                        var item = menu.GetItem(1);
-                        var spanString = new SpannableString(item.TitleFormatted.ToString());
-                        spanString.SetSpan(new ForegroundColorSpan(ItemView.Resources.GetColor(Resource.Color.color_red, null)), 0, spanString.Length(), 0); //fix the color to white
-                        item.SetTitle(spanString);
-                        popupMenu.Show();
-                    };
-                });
             }
         }
 
@@ -85,7 +69,11 @@ namespace ClubManagement.CustomAdapters
             switch (e.Item.ItemId)
             {
                 case Resource.Id.edit:
-                    // Edit fee
+                    var intent = new Intent(ItemView.Context, typeof(EditFeeActivity));
+                    var content = JsonConvert.SerializeObject(moneyState.MoneyModel);
+                    intent.PutExtra("EventDetail", content);
+
+                    ItemView.Context.StartActivity(intent);
                     break;
                 case Resource.Id.delete:
                     ((Activity) ItemView.Context).RunOnUiThread(() =>
@@ -123,6 +111,22 @@ namespace ClubManagement.CustomAdapters
         {
             Cheeseknife.Inject(this, itemView);
             itemView.SetOnClickListener(this);
+
+            ItemView.Context.DoWithAdmin(() =>
+            {
+                btnAdmin.Visibility = ViewStates.Visible;
+                btnAdmin.Click += (s, e) =>
+                {
+                    popupMenu = ((View)s).CreatepopupMenu(Resource.Menu.admin_menu);
+                    popupMenu.MenuItemClick += PopupMenu_MenuItemClick;
+                    var menu = popupMenu.Menu;
+                    var item = menu.GetItem(1);
+                    var spanString = new SpannableString(item.TitleFormatted.ToString());
+                    spanString.SetSpan(new ForegroundColorSpan(ItemView.Resources.GetColor(Resource.Color.color_red, null)), 0, spanString.Length(), 0); //fix the color to white
+                    item.SetTitle(spanString);
+                    popupMenu.Show();
+                };
+            });
         }
 
         public void OnClick(View v)
