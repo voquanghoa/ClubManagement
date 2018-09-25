@@ -86,11 +86,16 @@ namespace ClubManagement.Fragments
             tlMoney.SetupWithViewPager(vpMoney);
         }
 
+        public override void OnViewCreated(View view, Bundle savedInstanceState)
+        {
+            base.OnViewCreated(view, savedInstanceState);
+            tlMoney.GetTabAt(SelectedTabIndex).Select();
+        }
+
         public override void OnResume()
         {
             base.OnResume();
             UpdateViewData();
-            tlMoney.GetTabAt(SelectedTabIndex).Select();
         }
 
         protected override List<MoneyState> QueryData()

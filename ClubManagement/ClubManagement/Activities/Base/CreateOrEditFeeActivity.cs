@@ -55,6 +55,9 @@ namespace ClubManagement.Activities.Base
         [InjectView(Resource.Id.edtChooseFeeGroup)]
         protected EditText edtChooseFeeGroup;
 
+        [InjectView(Resource.Id.tvTitle)]
+        protected TextView tvTitle;
+
         [InjectOnClick(Resource.Id.edtChooseFeeGroup)]
         protected void ChooseFeeGroup(object sender, EventArgs eventArgs)
         {
@@ -64,6 +67,12 @@ namespace ClubManagement.Activities.Base
         protected DateTime deadLine;
 
         protected FeeGroupModel feeGroup;
+
+        protected bool IsFieldsEmpty() =>
+            (string.IsNullOrEmpty(edtDescription.Text) ||
+            string.IsNullOrEmpty(edtChooseFeeGroup.Text) ||
+            string.IsNullOrEmpty(edtDeadline.Text) ||
+            !long.TryParse(edtAmount.Text, out long amount) || amount == 0);
 
         protected override void OnCreate(Bundle savedInstanceState)
         {

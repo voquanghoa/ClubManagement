@@ -206,6 +206,7 @@
     <Compile Include="Activities\CreateEventActivity.cs" />
     <Compile Include="Activities\CreateFeeActivity.cs" />
     <Compile Include="Activities\EditEventActivity.cs" />
+    <Compile Include="Activities\EditFeeActivity.cs" />
     <Compile Include="Activities\EventDetailActivity.cs" />
     <Compile Include="Activities\GuestActivity.cs" />
     <Compile Include="Activities\LoginActivity.cs" />

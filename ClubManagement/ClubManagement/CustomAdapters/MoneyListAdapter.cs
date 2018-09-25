@@ -4,7 +4,6 @@ using System.Linq;
 using Android.Content;
 using Android.Support.V7.Widget;
 using Android.Views;
-using Android.Widget;
 using ClubManagement.Activities;
 using ClubManagement.Interfaces;
 using ClubManagement.Models;
@@ -44,14 +43,11 @@ namespace ClubManagement.CustomAdapters
             if (holder is MoneyViewHolder moneyViewHolder)
             {
                 moneyViewHolder.MoneyState = ((FeeDetailItem) feeItems[position]).MoneyState;
-                moneyViewHolder.DeleteClick += ItemDeleteClick;
-                moneyViewHolder.ItemClickListener = this;
             }
             else if (holder is MoneyDeadlineTimeViewHolder moneyDeadlineTimeViewHolder)
             {
                 moneyDeadlineTimeViewHolder.DeadlineTime = ((FeeDeadlineTimeItem) feeItems[position]).DeadlineTime;
             }
-            
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -60,7 +56,12 @@ namespace ClubManagement.CustomAdapters
             {
                 var itemView = LayoutInflater.From(parent.Context)
                     .Inflate(Resource.Layout.recyclerview_money_list_item, parent, false);
-                return new MoneyViewHolder(itemView);
+
+                var moneyViewHolder = new MoneyViewHolder(itemView);
+                moneyViewHolder.DeleteClick += ItemDeleteClick;
+                moneyViewHolder.ItemClickListener = this;
+
+                return moneyViewHolder;
             }
             else if (viewType == FeeItem.TypeTimeHeader)
             {

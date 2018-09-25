@@ -15,10 +15,7 @@ namespace ClubManagement.Activities
         [InjectOnClick(Resource.Id.btnDone)]
         private void Done(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(edtDescription.Text) ||
-                string.IsNullOrEmpty(edtChooseFeeGroup.Text) ||
-                string.IsNullOrEmpty(edtDeadline.Text) ||
-                !long.TryParse(edtAmount.Text, out long amount) || amount == 0)
+            if (IsFieldsEmpty())
             {
                 Toast.MakeText(this, GetString(Resource.String.please_fill_all_fields), ToastLength.Short).Show();
                 return;
@@ -53,7 +50,8 @@ namespace ClubManagement.Activities
         {
             base.OnCreate(savedInstanceState);
 
-            edtDeadline.Text = DateTime.Now.ToDateString();
+            deadLine = DateTime.Now;
+            edtDeadline.Text = deadLine.ToDateString();
         }
     }
 }
