@@ -101,23 +101,21 @@ namespace ClubManagement.Controllers
         {
             get
             {
-                return userMoneysController.Values.Join(moneysController.Values,
-                x => x.MoneyId,
-                y => y.Id,
-                (x, y) => new
+                var moneyList = MoneysController.Instance.Values ?? new List<MoneyModel>();
+                var userMoneyList = UserMoneysController.Instance.Values ?? new List<UserMoneyModel>();
+                var numberOfUsers = (UsersController.Instance.Values ?? new List<UserModel>()).Count;
+
+                var incomes = new List<IncomeModel>();
+                moneyList.ForEach(x =>
                 {
-                    x,
-                    y
-                }).Join(usersController.Values,
-                    x => x.x.UserId,
-                    y => y.Id,
-                    (x, y) => new IncomeModel()
+                    incomes.Add(new IncomeModel(x)
                     {
-                        Title = y.Name,
-                        Description = x.y.Description,
-                        Amount = x.y.Amount,
-                        Date = x.y.Time
-                    }).ToList();
+                        NumberOfPaidUsers = userMoneyList.Count(u => u.MoneyId == x.Id),
+                        NumberOfUsers = numberOfUsers
+                    });
+                });
+
+                return incomes;
             }
         }
     }
