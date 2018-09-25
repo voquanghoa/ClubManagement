@@ -217,7 +217,7 @@ namespace ClubManagement.Activities.Base
 
                 if (!isEdit)
                 {
-                    Toast.MakeText(this, Resource.String.create_event_success, ToastLength.Short).Show();
+                    this.ShowMessage(Resource.String.create_event_success);
                     SetResult(Result.Ok);
                 }
                 else

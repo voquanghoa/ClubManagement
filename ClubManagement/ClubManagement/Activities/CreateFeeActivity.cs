@@ -17,7 +17,7 @@ namespace ClubManagement.Activities
         {
             if (IsFieldsEmpty())
             {
-                Toast.MakeText(this, GetString(Resource.String.please_fill_all_fields), ToastLength.Short).Show();
+                this.ShowMessage(Resource.String.please_fill_all_fields);
                 return;
             }
 
@@ -39,7 +39,7 @@ namespace ClubManagement.Activities
             }, () =>
             {
                 progressDialog.Dismiss();
-                Toast.MakeText(this, Resource.String.create_fee_success, ToastLength.Short).Show();
+                this.ShowMessage(Resource.String.create_fee_success);
 
                 SetResult(Result.Ok);
                 Finish();
