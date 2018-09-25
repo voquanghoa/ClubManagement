@@ -237,6 +237,9 @@
     <Compile Include="CustomAdapters\IncomeViewHolder.cs" />
     <Compile Include="CustomAdapters\MoneyDeadlineTimeViewHolder.cs" />
     <Compile Include="CustomAdapters\NoInternetBottomDialog.cs" />
+    <Compile Include="CustomAdapters\OutcomeListAdapter.cs" />
+    <Compile Include="CustomAdapters\OutcomeTimeViewHolder.cs" />
+    <Compile Include="CustomAdapters\OutcomeViewHolder.cs" />
     <Compile Include="Fragments\AddBudgetDialogFragment.cs" />
     <Compile Include="Fragments\BalanceListFragment.cs" />
     <Compile Include="Fragments\BalanceSummaryFragment.cs" />
@@ -271,7 +274,10 @@
     <Compile Include="Models\MoneyAdminState.cs" />
     <Compile Include="Models\MoneyModel.cs" />
     <Compile Include="Models\MoneyState.cs" />
+    <Compile Include="Models\OutcomeDetailItem.cs" />
+    <Compile Include="Models\OutcomeItem.cs" />
     <Compile Include="Models\OutcomeModel.cs" />
+    <Compile Include="Models\OutcomeTimeItem.cs" />
     <Compile Include="Models\PersonGoTimeModel.cs" />
     <Compile Include="Models\ResultsMatrixDistanceAPIModel.cs" />
     <Compile Include="Models\ResultsGeocodeAPIModel.cs" />
@@ -701,6 +707,16 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\fragment_balance_recyclerview.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\outcome_item.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\outcome_time_item.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
