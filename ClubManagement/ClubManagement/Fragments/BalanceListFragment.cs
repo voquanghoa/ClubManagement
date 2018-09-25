@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Android.Support.V4.App;
 using Android.OS;
 using Android.Support.V7.Widget;
+using Android.Util;
 using Android.Views;
 using ClubManagement.CustomAdapters;
 using ClubManagement.Models;
@@ -39,6 +40,16 @@ namespace ClubManagement.Fragments
                 outcomeListAdapter = new OutcomeListAdapter
                 {
                     OutcomeModels = new List<OutcomeModel>()
+                };
+                outcomeListAdapter.DeleteClick += (s, e) =>
+                {
+                    if (s is OutcomeModel outcomeModel)
+                    {
+                        if (outcomeListAdapter.OutcomeModels.Remove(outcomeModel))
+                        {
+                            OutcomeModels = outcomeListAdapter.OutcomeModels;
+                        }
+                    }
                 };
             }
         }
