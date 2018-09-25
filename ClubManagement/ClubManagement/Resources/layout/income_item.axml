@@ -67,10 +67,10 @@
 					style="@style/ProgressBar"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:progress="20">
+					android:progress="20"/>
 				
 				</LinearLayout>
-		</RelativeLayout>
+		</LinearLayout>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
