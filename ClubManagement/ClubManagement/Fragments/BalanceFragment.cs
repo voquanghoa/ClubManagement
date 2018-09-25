@@ -11,6 +11,7 @@ using ClubManagement.Fragments.Bases;
 using Android.Support.V4.Widget;
 using ClubManagement.Controllers;
 using System.Linq;
+using Android.Support.V4.App;
 using Android.Widget;
 
 namespace ClubManagement.Fragments
@@ -21,21 +22,19 @@ namespace ClubManagement.Fragments
 
         [InjectView(Resource.Id.vpBalance)] private ViewPager vpBalance;
 
-        private List<IncomeModel> balances;
-
         private PagerAdapter adapter;
 
         protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
 
         private BalanceSummaryFragment balanceSummaryFragment = new BalanceSummaryFragment();
 
-        private BalancesFragment IncomesFragment = new BalancesFragment(BalancesFragment.Type.Income);
-
-        private BalancesFragment OutcomesFragment = new BalancesFragment(BalancesFragment.Type.Outcome);
-
-        private List<OutcomeModel> incomes = new List<OutcomeModel>();
+        private List<IncomeModel> incomes = new List<IncomeModel>();
 
         private List<OutcomeModel> outcomes = new List<OutcomeModel>();
+
+        private BalanceListFragment incomeFragment = new BalanceListFragment();
+
+        private BalanceListFragment outcomeFragment = new BalanceListFragment();
 
         private long sumIncomes;
 
@@ -47,8 +46,8 @@ namespace ClubManagement.Fragments
 
             adapter = new PagerAdapter(ChildFragmentManager);
             adapter.AddFramgent(balanceSummaryFragment, AppConstantValues.BalanceFragmentSummaryTab);
-            adapter.AddFramgent(IncomesFragment, AppConstantValues.BalanceFragmentIncomeTab);
-            adapter.AddFramgent(OutcomesFragment, AppConstantValues.BalanceFragmentOutcomeTab);
+            adapter.AddFramgent(incomeFragment, AppConstantValues.BalanceFragmentIncomeTab);
+            adapter.AddFramgent(outcomeFragment, AppConstantValues.BalanceFragmentOutcomeTab);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -67,11 +66,9 @@ namespace ClubManagement.Fragments
 
         protected override void DisplayData(List<OutcomeModel> data)
         {
-            IncomesFragment.Incomes = incomes;
-            OutcomesFragment.Outcomes = outcomes;
             balanceSummaryFragment.SumIncomes = sumIncomes;
             balanceSummaryFragment.SumOutcomes = sumOutcomes;
-
+            incomeFragment.IncomeModels = incomes;
             adapter.NotifyDataSetChanged();
         }
 
@@ -79,9 +76,9 @@ namespace ClubManagement.Fragments
         {
             try
             {
-                incomes = AppDataController.Instance.Incomes.Select(x => (OutcomeModel)x).OrderByDescending(x => x.Date).ToList();
+                incomes = AppDataController.Instance.Incomes.OrderByDescending(x => x.Time).ToList();
                 outcomes = OutComesController.Instance.Values.OrderByDescending(x => x.Date).ToList();
-                sumIncomes = AppDataController.Instance.Incomes.Sum(x => x.Amount);
+                sumIncomes = 0; //AppDataController.Instance.Incomes.Sum(x => x.Amount);
                 sumOutcomes = OutComesController.Instance.Values.Sum(x => x.Amount);
             }
             catch (Exception)
