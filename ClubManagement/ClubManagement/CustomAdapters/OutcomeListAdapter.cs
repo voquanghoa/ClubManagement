@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Android.Support.V7.Widget;
 using Android.Views;
@@ -11,6 +12,8 @@ namespace ClubManagement.CustomAdapters
         private List<OutcomeModel> outcomeModels = new List<OutcomeModel>();
 
         private List<OutcomeItem> outcomeItems = new List<OutcomeItem>();
+
+        public event EventHandler DeleteClick;
 
         public List<OutcomeModel> OutcomeModels
         {
@@ -33,6 +36,7 @@ namespace ClubManagement.CustomAdapters
             if (holder is OutcomeViewHolder viewHolder)
             {
                 viewHolder.OutcomeModel = ((OutcomeDetailItem) outcomeItems[position]).OutcomeModel;
+                viewHolder.DeleteClick += DeleteClick;
             }
             else if (holder is OutcomeTimeViewHolder outcomeTimeViewHolder)
             {
