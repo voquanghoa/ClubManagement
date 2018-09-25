@@ -14,7 +14,7 @@ namespace ClubManagement.Models
 {
     public class FeeGroupModel
     {
-        public int Id { set; get; }
+        public string Id { set; get; }
 
         public int ImageId { set; get; }
 

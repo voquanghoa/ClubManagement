@@ -37,6 +37,7 @@
   <string name="dialog_negative_button">No</string>
   <string name="confirm_logout">Are you sure to log out?</string>
   <string name="fill_all_fields">Please fill all the fields</string>
+  <string name="please_fill_all_fields">Please fill out all fields.</string>  
   <string name="sign_in">Sign in</string>
   <string name="wait">Please wait...</string>
   <string name="not_exist_email">Email not exist!</string>
@@ -98,6 +99,7 @@
   <string name="cross_create_event_title">Cancel</string>
   <string name="cross_create_event_message">Are you sure to cancel?</string>
   <string name="create_event_success">Create event successfully!</string>
+  <string name="create_fee_success">Create fee successfully!</string>
   <string name="can_not_load_marker">Can not load marker</string>
   <string name="event_title">EVENT TITLE</string>
   <string name="enter_here_uppercase">ENTER HERE</string>
@@ -136,4 +138,6 @@
   <string name="food_and_drinks">Food and Drinks</string>
   <string name="gift">Gift</string>
   <string name="others">Others</string>
+  <string name="adding_fee">Adding fee</string>
+  <string name="editing_event">Editing event</string>
 </resources>

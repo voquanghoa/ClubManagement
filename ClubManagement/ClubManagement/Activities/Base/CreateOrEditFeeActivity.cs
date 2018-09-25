@@ -7,6 +7,7 @@ using ClubManagement.Ultilities;
 using ClubManagement.Fragments;
 using Android.Content;
 using Android.Runtime;
+using ClubManagement.Models;
 
 namespace ClubManagement.Activities.Base
 {
@@ -21,6 +22,12 @@ namespace ClubManagement.Activities.Base
                 Finish,
                 () => { }).Show();
         }
+
+        [InjectView(Resource.Id.edtDescription)]
+        protected EditText edtDescription;
+
+        [InjectView(Resource.Id.edtAmount)]
+        protected EditText edtAmount;
 
         [InjectView(Resource.Id.edtDeadline)]
         protected EditText edtDeadline; 
@@ -54,7 +61,9 @@ namespace ClubManagement.Activities.Base
             StartActivityForResult(typeof(ChooseFeeGroupActivity), 0);
         }
 
-        private DateTime deadLine;
+        protected DateTime deadLine;
+
+        protected FeeGroupModel feeGroup;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -69,7 +78,7 @@ namespace ClubManagement.Activities.Base
 
             if (resultCode == Result.Ok)
             {
-                var feeGroup = AppConstantValues.FeeGrooups.Find(x => x.Id == data.GetIntExtra("Id", 1));
+                feeGroup = AppConstantValues.FeeGrooups.Find(x => x.Id.Equals(data.GetStringExtra("Id")));
                 imgViewChooseFeeGroup.SetImageResource(feeGroup.ImageId);
                 edtChooseFeeGroup.Text = GetString(feeGroup.TitleId);
             }

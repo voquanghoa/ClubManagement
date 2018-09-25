@@ -194,8 +194,11 @@ namespace ClubManagement.Activities.Base
                 };
             }
 
-            var progressDialog = this.CreateDialog(GetString(Resource.String.adding_event),
+            var progressDialog = this.CreateDialog(GetString(isEdit
+                    ? Resource.String.editing_event
+                    : Resource.String.adding_event),
                 GetString(Resource.String.wait));
+
             progressDialog.Show();
 
             this.DoRequest(async () =>
@@ -212,20 +215,14 @@ namespace ClubManagement.Activities.Base
             {
                 progressDialog.Dismiss();
 
-                var eventDetail = JsonConvert.SerializeObject(eventModel);
-
                 if (!isEdit)
                 {
                     Toast.MakeText(this, Resource.String.create_event_success, ToastLength.Short).Show();
-
-                    var intent = new Intent(this, typeof(EventDetailActivity));
-                    intent.PutExtra("EventDetail", eventDetail);
-
-                    StartActivity(intent);
                     SetResult(Result.Ok);
                 }
                 else
                 {
+                    var eventDetail = JsonConvert.SerializeObject(eventModel);
                     SetResult(Result.Ok, new Intent().PutExtra("EventDetail", eventDetail));
                 }
 

@@ -47,6 +47,7 @@ namespace ClubManagement.CustomAdapters
             {
                 moneyState = value;
                 tvDescription.Text = value.MoneyModel.Description;
+                if (value.MoneyModel.Group != null) imgGroup.SetImageResource(AppConstantValues.FeeGrooups.Find(x => x.Id.Equals(value.MoneyModel.Group)).ImageId);
                 if (value.IsPaid)
                 {
                     tvIsPaid.SetTextColor(ContextCompat.GetColorStateList(ItemView.Context, Resource.Color.state_going_color));

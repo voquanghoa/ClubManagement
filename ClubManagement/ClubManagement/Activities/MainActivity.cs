@@ -8,6 +8,8 @@ using Android.Widget;
 using ClubManagement.Fragments;
 using ClubManagement.Ultilities;
 using Fragment = Android.Support.V4.App.Fragment;
+using Android.Content;
+using Android.Runtime;
 
 namespace ClubManagement.Activities
 {
@@ -55,6 +57,26 @@ namespace ClubManagement.Activities
 
         public MainActivity()
         {
+            DashboardFragment.AddClick += (s, e) =>
+            {
+                if (s is int requestCode)
+                {
+                    switch (requestCode)
+                    {
+                        case DashboardFragment.RequestAddFeeCode:
+                            MoneyFragment.SelectedTabIndex = 2;
+                            DisplayFragment(Resource.Id.moneyTab);
+                            bottomNavigationView.SelectedItemId = Resource.Id.moneyTab;
+                            break;
+                        case DashboardFragment.RequestAddEventCode:
+                            MoneyFragment.SelectedTabIndex = 0;
+                            DisplayFragment(Resource.Id.eventTab);
+                            bottomNavigationView.SelectedItemId = Resource.Id.eventTab;
+                            break;
+                    }
+                }
+            };
+
             DashboardFragment.ItemClick += (s, e) =>
             {
                 if (!(s is string tag)) return;

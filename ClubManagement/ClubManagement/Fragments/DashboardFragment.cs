@@ -77,9 +77,13 @@ namespace ClubManagement.Fragments
 
         public event EventHandler ItemClick;
 
+        public event EventHandler AddClick;
+
         private bool isFabsMenuOpenning;
 
-        private const int RequestAddEventCode = 1;
+        public const int RequestAddEventCode = 1;
+
+        public const int RequestAddFeeCode = 2;
 
         [InjectOnClick(Resource.Id.itemGoingParentView)]
         private void ShowGoingEventsTab(object s, EventArgs e)
@@ -338,7 +342,7 @@ namespace ClubManagement.Fragments
                 fabAddFee.Click += (s, e) =>
                 {
                     var intent = new Intent(Context, typeof(CreateFeeActivity));
-                    StartActivity(intent);
+                    StartActivityForResult(intent,RequestAddFeeCode);
                     CloseFabsMenu();
                 };
 
@@ -371,6 +375,16 @@ namespace ClubManagement.Fragments
             bgFabsMenu.Visibility = ViewStates.Gone;
             fabAddEvent.SetImageResource(Resource.Drawable.icon_add);
             bgFabsMenu.Animate().Alpha(0f);
+        }
+
+        public override void OnActivityResult(int requestCode, int resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+
+            if (resultCode == Result.Ok.GetHashCode())
+            {
+                AddClick.Invoke(requestCode, null);
+            }
         }
     }
 }
