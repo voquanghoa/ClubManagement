@@ -13,7 +13,7 @@ namespace ClubManagement.CustomAdapters
 
         [InjectView(Resource.Id.tvAmount)] private TextView tvAmount;
 
-        [InjectView(Resource.Id.itemView)] private View itemView;
+        [InjectView(Resource.Id.itemView)] private LinearLayout itemView;
 
         public OutcomeAmountItem OutcomeAmountItem
         {
@@ -36,23 +36,10 @@ namespace ClubManagement.CustomAdapters
 
         private void InitTheme(int pos)
         {
-            if (pos % 2 == 1)
-            {
-                itemView.SetBackgroundColor(GetColorResource(Resource.Color.odd_line_color));
-                tvAmount.SetTextColor(GetColorResource(Resource.Color.text_color_black));
-                tvItemName.SetTextColor(GetColorResource(Resource.Color.text_color_black));
-            }
-            else
-            {
-                itemView.SetBackgroundColor(GetColorResource(Resource.Color.even_line_color));
-                tvAmount.SetTextColor(GetColorResource(Resource.Color.text_color_white));
-                tvItemName.SetTextColor(GetColorResource(Resource.Color.text_color_white));
-            }
-        }
-
-        private Color GetColorResource(int colorId)
-        {
-            return ItemView.Context.Resources.GetColor(colorId, null);
+            var isActivited = pos % 2 == 0;
+            itemView.Activated = isActivited;
+            tvAmount.Activated = isActivited;
+            tvItemName.Activated = isActivited;
         }
     }
 }

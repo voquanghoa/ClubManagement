@@ -11,13 +11,14 @@
 				android:paddingTop="@dimen/dimen_5dp"
 				android:paddingBottom="@dimen/dimen_5dp"
 				android:weightSum="3"
-				android:background="@color/odd_line_color">
+				android:background="@drawable/background_color_state_list">
 				<TextView
 					android:id="@+id/tvItemName"
 					android:layout_width="0dp"
 					android:layout_weight="2"
 					android:paddingLeft="@dimen/dimen_5dp"
 					android:layout_height="wrap_content"
+					android:textColor="@drawable/text_color_state_list"
 					android:text="Item Name"/>
 				<TextView
 					android:id="@+id/tvAmount"
@@ -25,6 +26,7 @@
 					android:layout_weight="1"
 					android:paddingRight="@dimen/dimen_5dp"
 					android:gravity="right"
+					android:textColor="@drawable/text_color_state_list"
 					android:layout_height="wrap_content"
 					android:text="Amount (VNĐ)"/>
 			</LinearLayout>
