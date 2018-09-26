@@ -14,7 +14,7 @@ namespace ClubManagement.Ultilities
 
         public static string ToDateString(this DateTime time) => time.ToString("MMM dd, yyyy");
 
-        public static string ToTimeString(this DateTime time) => time.ToString("h:mm");
+        public static string ToTimeString(this DateTime time) => time.ToString("h:mmtt");
 
         public static string ToDateTimeString(this DateTime startTime, DateTime endTime)
         {
