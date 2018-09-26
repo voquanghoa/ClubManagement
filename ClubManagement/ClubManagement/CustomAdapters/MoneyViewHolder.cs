@@ -71,7 +71,7 @@ namespace ClubManagement.CustomAdapters
                 case Resource.Id.edit:
                     var intent = new Intent(ItemView.Context, typeof(EditFeeActivity));
                     var content = JsonConvert.SerializeObject(moneyState.MoneyModel);
-                    intent.PutExtra("EventDetail", content);
+                    intent.PutExtra("MoneyDetail", content);
 
                     ItemView.Context.StartActivity(intent);
                     break;

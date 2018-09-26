@@ -10,6 +10,9 @@ using ClubManagement.Controllers;
 using ClubManagement.Models;
 using ClubManagement.Ultilities;
 using PopupMenu = Android.Widget.PopupMenu;
+using Android.Content;
+using ClubManagement.Activities;
+using Newtonsoft.Json;
 
 namespace ClubManagement.CustomAdapters
 {
@@ -47,7 +50,11 @@ namespace ClubManagement.CustomAdapters
             switch (e.Item.ItemId)
             {
                 case Resource.Id.edit:
-                    // Edit outcome
+                    var intent = new Intent(ItemView.Context, typeof(EditOutcomeActivity));
+                    var content = JsonConvert.SerializeObject(outcomeModel);
+                    intent.PutExtra("OutcomeDetail", content);
+
+                    ItemView.Context.StartActivity(intent);
                     break;
                 case Resource.Id.delete:
                     ((Activity)ItemView.Context).RunOnUiThread(() =>
@@ -82,7 +89,7 @@ namespace ClubManagement.CustomAdapters
             get => outcomeModel;
             set
             {
-                //set imgGroup
+                if (value.Group != null) imgGroup.SetImageResource(AppConstantValues.FeeGrooups.Find(x => x.Id.Equals(value.Group)).ImageId);
                 outcomeModel = value;
                 btnAdmin.Visibility = ViewStates.Gone;
                 tvDescription.Text = value.Title;

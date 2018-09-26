@@ -12,14 +12,14 @@ using ClubManagement.Controllers;
 namespace ClubManagement.Activities
 {
     [Activity(Label = "EditFeeActivity")]
-    public class EditFeeActivity : CreateOrEditFeeActivity
+    public class EditOutcomeActivity : CreateOrEditOutcomeActivity
     {
         [InjectOnClick(Resource.Id.btnCancel)]
         private void Cancel(object sender, EventArgs e)
         {
             this.ShowConfirmDialog(
-                Resource.String.edit_fee_cancel_title,
-                Resource.String.edit_fee_cancel_message,
+                Resource.String.edit_outcome_cancel_title,
+                Resource.String.edit_outcome_cancel_message,
                 Finish,
                 () => { }).Show();
         }
@@ -33,27 +33,27 @@ namespace ClubManagement.Activities
                 return;
             };
 
-            moneyModel.Description = edtDescription.Text;
-            moneyModel.Amount = long.Parse(edtAmount.Text);
-            moneyModel.Group = feeGroup.Id;
-            moneyModel.Time = deadLine;
+            outcomeModel.Title = edtTitle.Text;
+            outcomeModel.Amount = long.Parse(edtAmount.Text);
+            outcomeModel.Group = outcomeGroup.Id;
+            outcomeModel.Date = deadLine;
 
-            var progressDialog = this.CreateDialog(GetString(Resource.String.editing_fee),
+            var progressDialog = this.CreateDialog(GetString(Resource.String.editing_outcome),
                 GetString(Resource.String.wait));
             progressDialog.Show();
 
             this.DoRequest(async () =>
             {
-                await MoneysController.Instance.Edit(moneyModel);
+                await OutComesController.Instance.Edit(outcomeModel);
             }, () =>
             {
                 progressDialog.Dismiss();
-                this.ShowMessage(Resource.String.edit_fee_success);
+                this.ShowMessage(Resource.String.edit_outcome_success);
                 Finish();
             });
         }
 
-        private MoneyModel moneyModel;
+        private OutcomeModel outcomeModel;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -64,16 +64,16 @@ namespace ClubManagement.Activities
 
         private void Init()
         {
-            var content = Intent.GetStringExtra("MoneyDetail");
-            moneyModel = JsonConvert.DeserializeObject<MoneyModel>(content);
-            feeGroup = AppConstantValues.FeeGrooups.Find(x => x.Id.Equals(moneyModel.Group));
-            deadLine = moneyModel.Time;
+            var content = Intent.GetStringExtra("OutcomeDetail");
+            outcomeModel = JsonConvert.DeserializeObject<OutcomeModel>(content);
+            outcomeGroup = AppConstantValues.FeeGrooups.Find(x => x.Id.Equals(outcomeModel.Group));
+            deadLine = outcomeModel.Date;
 
-            tvTitle.Text = GetString(Resource.String.edit_fee);
-            edtDescription.Text = moneyModel.Description;
-            edtAmount.Text = moneyModel.Amount.ToString();
-            edtChooseFeeGroup.Text = GetString(feeGroup.TitleId);
-            imgViewChooseFeeGroup.SetImageResource(feeGroup.ImageId);
+            tvTitle.Text = GetString(Resource.String.edit_outcome);
+            edtTitle.Text = outcomeModel.Title;
+            edtAmount.Text = outcomeModel.Amount.ToString();
+            edtChooseOutcomeGroup.Text = GetString(outcomeGroup.TitleId);
+            imgViewChooseOutcomeGroup.SetImageResource(outcomeGroup.ImageId);
             edtDeadline.Text = deadLine.ToDateString();
         }
     }
