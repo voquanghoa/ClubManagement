@@ -7,13 +7,14 @@ using Android.Text.Style;
 using Android.Views;
 using Android.Widget;
 using ClubManagement.Controllers;
+using ClubManagement.Interfaces;
 using ClubManagement.Models;
 using ClubManagement.Ultilities;
 using PopupMenu = Android.Widget.PopupMenu;
 
 namespace ClubManagement.CustomAdapters
 {
-    public class OutcomeViewHolder : RecyclerView.ViewHolder
+    public class OutcomeViewHolder : RecyclerView.ViewHolder, View.IOnClickListener
     {
         [InjectView(Resource.Id.tvDescription)]
         private TextView tvDescription;
@@ -25,6 +26,8 @@ namespace ClubManagement.CustomAdapters
         [InjectView(Resource.Id.tvAmount)] private TextView tvAmount;
 
         private PopupMenu popupMenu;
+
+        public IItemClickListener ItemClick { get; set; }
 
         public event EventHandler DeleteClick;
 
@@ -93,6 +96,12 @@ namespace ClubManagement.CustomAdapters
         public OutcomeViewHolder(View itemView) : base(itemView)
         {
             Cheeseknife.Inject(this, itemView);
+            itemView.SetOnClickListener(this);
+        }
+
+        public void OnClick(View v)
+        {
+            ItemClick.OnClick(v, AdapterPosition);
         }
     }
 }
