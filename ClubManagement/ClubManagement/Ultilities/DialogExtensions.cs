@@ -22,62 +22,25 @@ namespace ClubManagement.Ultilities
 
         public static ProgressDialog CreateDialog(this Context context, int titleId, int messageId)
         {
-            var progressDialog = new ProgressDialog(context);
-            var resources = context.Resources;
-            progressDialog.SetTitle(resources.GetString(titleId));
-            progressDialog.SetMessage(resources.GetString(messageId));
-            progressDialog.SetCancelable(false);
-            progressDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
-            return progressDialog;
+			Func<int, string> getString = context.Resources.GetString;
+            
+			return context.CreateDialog(getString(titleId), getString(messageId));
         }
-
+        
         public static void ShowLogoutDialog(this Context context)
         {
             var preferencesEditor = PreferenceManager.GetDefaultSharedPreferences(Application.Context).Edit();
-            new AlertDialog.Builder(context)
-                .SetCancelable(false)
-                .SetTitle(context.Resources.GetString(Resource.String.confirm_logout))
-                .SetPositiveButton(context.Resources.GetString(Resource.String.dialog_positive_button), (dce, e) =>
-                {
-                    preferencesEditor.PutString(AppConstantValues.UserIdPreferenceKey, string.Empty);
-                    preferencesEditor.PutBoolean(AppConstantValues.LogStatusPreferenceKey, false);
-                    preferencesEditor.Commit();
-                    ((Activity)context).Finish();
-                    context.StartActivity(typeof(LoginActivity));
-                })
-                .SetNegativeButton(context.Resources.GetString(Resource.String.dialog_negative_button), (dce, e) => { }).Show();
+			context.ShowConfirmDialog(Resource.String.confirm, Resource.String.confirm_logout, () =>
+			{
+				preferencesEditor.PutString(AppConstantValues.UserIdPreferenceKey, string.Empty);
+                preferencesEditor.PutBoolean(AppConstantValues.LogStatusPreferenceKey, false);
+                preferencesEditor.Commit();
+                ((Activity)context).Finish();
+                context.StartActivity(typeof(LoginActivity));
+			});
         }
 
-        public static AlertDialog ShowConfirmDialog(this Context context, int title, 
-            int message, Action actionAllow, Action actionDeny = null)
-        {
-            return new AlertDialog.Builder(context)
-                .SetTitle(title)
-                .SetMessage(message)
-                .SetCancelable(false)
-                .SetPositiveButton(Resource.String.dialog_positive_button,
-                    (s, e) =>
-                    {
-                        if (s is Dialog dialog)
-                        {
-                            actionAllow();
-
-                            dialog.Dismiss();
-                        }
-                    })
-                .SetNegativeButton(Resource.String.dialog_negative_button,
-                    (s, e) =>
-                    {
-                        if (s is Dialog dialog)
-                        {
-                            actionDeny?.Invoke();
-
-                            dialog.Dismiss();
-                        }
-                    })
-                .Create();
-        }
-
+        
         public static AlertDialog ShowConfirmDialog(this Context context, string title,
             string message, Action actionAllow, Action actionDeny = null)
         {
@@ -88,24 +51,25 @@ namespace ClubManagement.Ultilities
                 .SetPositiveButton(Resource.String.dialog_positive_button,
                     (s, e) =>
                     {
-                        if (s is Dialog dialog)
-                        {
-                            actionAllow();
-
-                            dialog.Dismiss();
-                        }
+				        actionAllow();
+				        (s as Dialog)?.Dismiss();
                     })
                 .SetNegativeButton(Resource.String.dialog_negative_button,
                     (s, e) =>
                     {
-                        if (s is Dialog dialog)
-                        {
-                            actionDeny?.Invoke();
-
-                            dialog.Dismiss();
-                        }
+				        actionDeny?.Invoke();
+				        (s as Dialog)?.Dismiss();
                     })
                 .Create();
         }
+
+		public static AlertDialog ShowConfirmDialog(this Context context, int title,
+            int message, Action actionAllow, Action actionDeny = null)
+        {
+            Func<int, string> getString = context.Resources.GetString;
+
+            return context.ShowConfirmDialog(getString(title), getString(message), actionAllow, actionDeny);
+        }
+
     }
 }
