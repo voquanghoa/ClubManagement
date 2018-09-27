@@ -162,4 +162,8 @@
   <string name="edit_outcome_cancel_title">Confirm</string>
   <string name="edit_outcome_cancel_message">Do you want to cancel?</string>
   <string name="outcome_detail_title">Outcome Detail</string>
+  <string name="income">Income</string>
+  <string name="outcome">Outcome</string>
+  <string name="we_still_have_money">We still have money</string>
+  <string name="We_are_broke_now">We are broke now</string>
 </resources>
