@@ -56,7 +56,7 @@ namespace ClubManagement.Ultilities
                 {
                     Id = "3",
                     ImageId =Resource.Drawable.money_group,
-                    TitleId = Resource.String.travalling
+                    TitleId = Resource.String.travelling
                 },
                 new FeeOrOutcomeGroupModel()
                 {

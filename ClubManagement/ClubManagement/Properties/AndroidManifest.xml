@@ -1,15 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="ClubManagement.ClubManagement" android:installLocation="preferExternal" android:versionCode="3" android:versionName="1.1">
-	<uses-sdk android:minSdkVersion="19" android:targetSdkVersion="25" />
-	<!-- Google Maps for Android v2 requires OpenGL ES v2 -->
-	<uses-feature android:glEsVersion="0x00020000" android:required="true" />
-	<!-- We need to be able to download map tiles and access Google Play Services-->
-	<!-- Allow the application to access Google web-based services. -->
-	<!-- Google Maps for Android v2 will cache map tiles on external storage -->
-	<!-- These are optional, but recommended. They will allow Maps to use the My Location provider. -->
-	<application android:allowBackup="true" android:label="ClubManagement" android:icon="@mipmap/ic_launcher" android:theme="@style/AppTheme">
-		<!-- Put your Google Maps V2 API Key here. -->
-		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
-		<meta-data android:name="com.google.android.geo.API_KEY" android:value="@string/ApiKey" />
-	</application>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="ClubManagement.ClubManagement" android:versionCode="3" android:versionName="1.1" android:installLocation="preferExternal">
+  <uses-sdk android:minSdkVersion="19" android:targetSdkVersion="25" />
+  <!-- Google Maps for Android v2 requires OpenGL ES v2 -->
+  <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+  <!-- We need to be able to download map tiles and access Google Play Services-->
+  <uses-permission android:name="android.permission.INTERNET" />
+  <!-- Allow the application to access Google web-based services. -->
+  <!-- Google Maps for Android v2 will cache map tiles on external storage -->
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <!-- These are optional, but recommended. They will allow Maps to use the My Location provider. -->
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  <application android:allowBackup="true" android:label="ClubManagement" android:icon="@mipmap/ic_launcher" android:theme="@style/AppTheme">
+    <!-- Put your Google Maps V2 API Key here. -->
+    <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+    <meta-data android:name="com.google.android.geo.API_KEY" android:value="@string/ApiKey" />
+  </application>
 </manifest>
