@@ -35,8 +35,7 @@ namespace ClubManagement.CustomAdapters
             };
             if (!moneyAdminState.IsPaid)
             {
-                var dialog =
-                    ItemView.Context.CreateDialog("Paying", ItemView.Resources.GetString(Resource.String.wait));
+                var dialog = ItemView.Context.CreateDialog(Resource.String.paying_fee, Resource.String.wait);
                 dialog.Show();
                 ((Activity) ItemView.Context).DoRequest(
                     async () =>
@@ -50,12 +49,11 @@ namespace ClubManagement.CustomAdapters
             }
             else
             {
-                ItemView.Context.ShowConfirmDialog("Confirm",
-                    $"Do you want to repay for {moneyAdminState.User.Name}",
+                ItemView.Context.ShowConfirmDialog(ItemView.Resources.GetString(Resource.String.confirm_repay),
+                    $"Do you want to repay for {moneyAdminState.User.Name}?",
                     () =>
                     {
-                        var dialog = ItemView.Context.CreateDialog("Repaying",
-                            ItemView.Resources.GetString(Resource.String.wait));
+                        var dialog = ItemView.Context.CreateDialog(Resource.String.repaying_fee, Resource.String.wait);
                         dialog.Show();
                         ((Activity) ItemView.Context).DoRequest(async () =>
                         {

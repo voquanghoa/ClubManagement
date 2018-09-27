@@ -20,6 +20,17 @@ namespace ClubManagement.Ultilities
             return progressDialog;
         }
 
+        public static ProgressDialog CreateDialog(this Context context, int titleId, int messageId)
+        {
+            var progressDialog = new ProgressDialog(context);
+            var resources = context.Resources;
+            progressDialog.SetTitle(resources.GetString(titleId));
+            progressDialog.SetMessage(resources.GetString(messageId));
+            progressDialog.SetCancelable(false);
+            progressDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
+            return progressDialog;
+        }
+
         public static void ShowLogoutDialog(this Context context)
         {
             var preferencesEditor = PreferenceManager.GetDefaultSharedPreferences(Application.Context).Edit();
