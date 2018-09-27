@@ -62,10 +62,10 @@ namespace ClubManagement.CustomAdapters
                 case Resource.Id.delete:
                     ((Activity)ItemView.Context).RunOnUiThread(() =>
                     {
-                        ItemView.Context.ShowConfirmDialog(Resource.String.delete_fee, Resource.String.confirm_delete,
+                        ItemView.Context.ShowConfirmDialog(Resource.String.confirm_delete, Resource.String.delete_outcome,
                             () =>
                             {
-                                var dialog = ItemView.Context.CreateDialog("Deleting outcome", "Please wait");
+                                var dialog = ItemView.Context.CreateDialog(Resource.String.deleting_outcome, Resource.String.wait);
                                 dialog.Show();
                                 ((Activity)ItemView.Context).DoRequest(async () =>
                                     {
@@ -74,6 +74,7 @@ namespace ClubManagement.CustomAdapters
                                         {
                                             dialog.Dismiss();
                                             DeleteClick?.Invoke(OutcomeModel, e);
+                                            ItemView.Context.ShowMessage(Resource.String.delete_outcome_success);
                                         });
                                     },
                                     () => { },
