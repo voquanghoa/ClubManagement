@@ -69,4 +69,9 @@
   <dimen name="choose_group_fee_padding_large">15dp</dimen>
   <dimen name="choose_group_fee_margin">15dp</dimen>
   <dimen name="choose_group_fee_margin_small">5dp</dimen>
+  <dimen name="balance_summary_text_size_status">24sp</dimen>
+  <dimen name="balance_summary_text_size_balance">28sp</dimen>
+  <dimen name="balance_summary_margin">20dp</dimen>
+  <dimen name="balance_summary_margin_small">5dp</dimen>
+  <dimen name="balance_summary_min_width_text_view">200dp</dimen>
 </resources>

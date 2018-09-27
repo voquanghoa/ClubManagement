@@ -1,28 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:padding="@dimen/item_balance_padding"
+    android:padding="@dimen/balance_summary_margin"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_weight="2"
+        android:layout_marginBottom="@dimen/balance_summary_margin"
+        android:background="@color/white_color"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/text_color_blue"
-        android:id="@+id/tvFinalBalance" />
-    <TextView
-        android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/text_color_blue"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:padding="@dimen/balance_summary_margin_small"
+            android:gravity="right"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <View
+                android:layout_width="@dimen/balance_summary_margin"
+                android:layout_height="@dimen/balance_summary_margin"
+                android:layout_marginRight="@dimen/balance_summary_margin_small"
+                android:layout_gravity="center_vertical"
+                android:background="@color/income_color" />
+            <TextView
+                android:text="Large Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/balance_summary_min_width_text_view"
+                android:textColor="@color/text_color_blue"
+                android:textSize="@dimen/text_size_normal"
+                android:id="@+id/tvIncome" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:padding="@dimen/balance_summary_margin_small"
+            android:gravity="right"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <View
+                android:layout_width="@dimen/balance_summary_margin"
+                android:layout_height="@dimen/balance_summary_margin"
+                android:layout_marginRight="@dimen/balance_summary_margin_small"
+                android:layout_gravity="center_vertical"
+                android:background="@color/outcome_color" />
+            <TextView
+                android:text="Large Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/balance_summary_min_width_text_view"
+                android:textSize="@dimen/text_size_normal"
+                android:textColor="@color/text_color_blue"
+                android:id="@+id/tvOutcome" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_weight="1">
+            <com.github.mikephil.charting.charts.BarChart
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/barChart" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:background="@color/white_color"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvIncome" />
-    <TextView
-        android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/text_color_blue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvOutcome" />
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="Large Text"
+            android:textSize="@dimen/balance_summary_text_size_status"
+            android:textStyle="bold"
+            android:textColor="@color/text_color_black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:id="@+id/tvStatus" />
+        <TextView
+            android:text="Large Text"
+            android:textSize="@dimen/balance_summary_text_size_balance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:id="@+id/tvFinalBalance" />
+    </LinearLayout>
 </LinearLayout>
