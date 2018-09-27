@@ -144,4 +144,5 @@
   <string name="edit_event_success">Edit event successfully!</string>
   <string name="edit_fee_success">Edit fee successfully!</string>
   <string name="edit_fee">Edit fee</string>
+  <string name="outcome_detail_title">Outcome Detail</string>
 </resources>

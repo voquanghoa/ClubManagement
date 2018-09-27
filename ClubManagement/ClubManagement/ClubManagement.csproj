@@ -212,6 +212,7 @@
     <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Activities\MemberLocationActivity.cs" />
     <Compile Include="Activities\MoneyDetailActivity.cs" />
+    <Compile Include="Activities\OutcomeDetailActivity.cs" />
     <Compile Include="Activities\RegisterActivity.cs" />
     <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Adapters\FeeGroupAdapter.cs" />
@@ -238,6 +239,8 @@
     <Compile Include="CustomAdapters\IncomeViewHolder.cs" />
     <Compile Include="CustomAdapters\MoneyDeadlineTimeViewHolder.cs" />
     <Compile Include="CustomAdapters\NoInternetBottomDialog.cs" />
+    <Compile Include="CustomAdapters\OutcomeAmountItemViewHolder.cs" />
+    <Compile Include="CustomAdapters\OutcomeAmountListAdapter.cs" />
     <Compile Include="CustomAdapters\OutcomeListAdapter.cs" />
     <Compile Include="CustomAdapters\OutcomeTimeViewHolder.cs" />
     <Compile Include="CustomAdapters\OutcomeViewHolder.cs" />
@@ -275,6 +278,7 @@
     <Compile Include="Models\MoneyAdminState.cs" />
     <Compile Include="Models\MoneyModel.cs" />
     <Compile Include="Models\MoneyState.cs" />
+    <Compile Include="Models\OutcomeAmountItem.cs" />
     <Compile Include="Models\OutcomeDetailItem.cs" />
     <Compile Include="Models\OutcomeItem.cs" />
     <Compile Include="Models\OutcomeModel.cs" />
@@ -720,6 +724,22 @@
     <AndroidResource Include="Resources\layout\outcome_time_item.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_outcome_detail.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\outcome_fee_item.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\text_color_state_list.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\background_color_state_list.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.v7.CardView.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.v7.CardView.targets" Condition="Exists('..\packages\Xamarin.Android.Support.v7.CardView.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.v7.CardView.targets')" />
