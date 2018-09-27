@@ -245,7 +245,7 @@ namespace ClubManagement.Activities.Base
         protected void Cancel(object sender, EventArgs e)
         {
             this.ShowConfirmDialog(
-                Resource.String.edit_event_cancel_title,
+                Resource.String.confirm,
                 Resource.String.edit_event_cancel_message,
                 Finish,
                 () => { }).Show();

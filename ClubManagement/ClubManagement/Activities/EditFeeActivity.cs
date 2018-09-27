@@ -18,7 +18,7 @@ namespace ClubManagement.Activities
         private void Cancel(object sender, EventArgs e)
         {
             this.ShowConfirmDialog(
-                Resource.String.edit_fee_cancel_title,
+				Resource.String.confirm,
                 Resource.String.edit_fee_cancel_message,
                 Finish,
                 () => { }).Show();
