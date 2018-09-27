@@ -161,4 +161,5 @@
   <string name="edit_outcome_success">Edit outcome successfully!</string>
   <string name="edit_outcome_cancel_title">Confirm</string>
   <string name="edit_outcome_cancel_message">Do you want to cancel?</string>
+  <string name="outcome_detail_title">Outcome Detail</string>
 </resources>

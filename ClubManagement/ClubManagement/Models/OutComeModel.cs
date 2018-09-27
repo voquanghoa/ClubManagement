@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace ClubManagement.Models
@@ -16,5 +17,8 @@ namespace ClubManagement.Models
 
         [JsonProperty("group")]
         public string Group { get; set; }
+
+        [JsonProperty("items")]
+        public List<OutcomeAmountItem> Items { get; set; } = new List<OutcomeAmountItem>();
     }
 }
