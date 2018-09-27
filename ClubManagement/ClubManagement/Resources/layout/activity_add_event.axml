@@ -242,6 +242,7 @@
                         android:paddingBottom="@dimen/dimen_5dp"
                         android:paddingTop="@dimen/dimen_5dp"
                         android:hint="@string/choose_location"
+                        android:drawableRight="@drawable/icon_arrow_right"
                         android:focusable="false"
                         android:textColorHint="@color/color_hint"
                         android:background="@drawable/edit_text_border" />

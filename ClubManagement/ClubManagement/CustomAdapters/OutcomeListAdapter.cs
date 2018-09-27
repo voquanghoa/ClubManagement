@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Android.App;
+using Android.Content;
 using Android.Support.V7.Widget;
 using Android.Views;
+using ClubManagement.Activities;
+using ClubManagement.Interfaces;
 using ClubManagement.Models;
+using Newtonsoft.Json;
 
 namespace ClubManagement.CustomAdapters
 {
-    public class OutcomeListAdapter : RecyclerView.Adapter
+    public class OutcomeListAdapter : RecyclerView.Adapter, IItemClickListener
     {
         private List<OutcomeModel> outcomeModels = new List<OutcomeModel>();
 
@@ -37,6 +42,7 @@ namespace ClubManagement.CustomAdapters
             {
                 viewHolder.OutcomeModel = ((OutcomeDetailItem) outcomeItems[position]).OutcomeModel;
                 viewHolder.DeleteClick += DeleteClick;
+                viewHolder.ItemClick = this;
             }
             else if (holder is OutcomeTimeViewHolder outcomeTimeViewHolder)
             {
@@ -98,6 +104,14 @@ namespace ClubManagement.CustomAdapters
             }
 
             return result;
+        }
+
+        public void OnClick(View view, int position)
+        {
+            var outcome = ((OutcomeDetailItem) outcomeItems[position]).OutcomeModel;
+            var intent = new Intent(view.Context, typeof(OutcomeDetailActivity));
+            intent.PutExtra("outcome", JsonConvert.SerializeObject(outcome));
+            view.Context.StartActivity(intent);
         }
     }
 }

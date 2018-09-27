@@ -49,4 +49,6 @@
   <color name="money_summary_background_color">#fafafa</color>
   <color name="member_location_toolbar_color">#525252</color>
   <color name="color_hint">#e0e0e0</color>
+  <color name="odd_line_color">#e0e0e0</color>
+  <color name="even_line_color">#2196f3</color>
 </resources>
