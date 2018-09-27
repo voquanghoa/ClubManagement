@@ -9,6 +9,7 @@ using Android.Widget;
 using ClubManagement.Controllers;
 using ClubManagement.Models;
 using ClubManagement.Ultilities;
+using Plugin.CurrentActivity;
 
 namespace ClubManagement.Activities
 {
@@ -81,9 +82,18 @@ namespace ClubManagement.Activities
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            CrossCurrentActivity.Current.Init(this, savedInstanceState);
+
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_login);
             Cheeseknife.Inject(this);
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
+        {
+            Plugin.Permissions.PermissionsImplementation.Current
+                .OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }

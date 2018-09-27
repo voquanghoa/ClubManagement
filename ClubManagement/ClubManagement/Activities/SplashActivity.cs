@@ -7,6 +7,7 @@ using Android.Widget;
 using ClubManagement.Controllers;
 using ClubManagement.Ultilities;
 using Plugin.Connectivity;
+using Plugin.CurrentActivity;
 
 namespace ClubManagement.Activities
 {
@@ -45,6 +46,8 @@ namespace ClubManagement.Activities
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            CrossCurrentActivity.Current.Init(this, savedInstanceState);
+
             base.OnCreate(savedInstanceState);
             if (!CrossConnectivity.Current.IsConnected)
             {
@@ -54,6 +57,13 @@ namespace ClubManagement.Activities
             }
 
             StartApp();
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
+        {
+            Plugin.Permissions.PermissionsImplementation.Current
+                .OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }
