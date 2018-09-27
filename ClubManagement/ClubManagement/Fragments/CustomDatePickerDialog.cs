@@ -11,9 +11,13 @@ namespace ClubManagement.Fragments
 
         public DateTime MinTime { get; }
 
-        public CustomDatePickerDialog(DateTime minTime)
+		public CustomDatePickerDialog(DateTime minTime)
         {
             MinTime = minTime;
+        }
+
+		public CustomDatePickerDialog():this(DateTime.MinValue)
+        {
         }
 
         public event EventHandler PickDate;

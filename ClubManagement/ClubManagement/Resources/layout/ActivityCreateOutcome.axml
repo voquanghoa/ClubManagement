@@ -51,128 +51,121 @@
         android:background="@color/white_color"
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/linearLayout1">
-            <TextView
-                android:text="@string/create_outcome_title"
-                android:textAllCaps="true"
-                android:textColor="@color/color_gray"
-                android:textSize="@dimen/text_size_large"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/fee_icon_width"
-                android:id="@+id/textView1" />
-            <EditText
-                android:ellipsize="end"
-                android:id="@+id/edtTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/enter_here"
-                android:textColorHint="@color/color_gray_hint"
-                android:singleLine="true"
-                android:maxLength="@integer/max_length_medium"
-                android:layout_marginLeft="@dimen/fee_icon_width"
-                android:textSize="@dimen/text_description_size" />
-            <TextView
-                android:text="@string/amount"
-                android:textColor="@color/color_gray"
-                android:textSize="@dimen/text_size_large"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/fee_icon_width"
-                android:id="@+id/textView2" />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/linearLayout2">
-                <FrameLayout
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"
-                    android:layout_width="@dimen/fee_icon_width">
-                    <TextView
-                        android:text="@string/unit"
-                        android:background="@drawable/edit_text_border_focus"
-                        android:paddingLeft="@dimen/padding_small"
-                        android:paddingRight="@dimen/padding_small"
-                        android:textColor="@color/text_color_black"
-                        android:textSize="@dimen/text_size_large"
-                        android:layout_gravity="center"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" />
-                </FrameLayout>
-                <EditText
-                    android:ellipsize="end"
-                    android:id="@+id/edtAmount"
-                    android:textColorHint="@color/color_gray"
-                    android:textColor="@color/color_gray"
-                    android:inputType="number"
-                    android:singleLine="true"
-                    android:maxLength="@integer/max_length_small"
-                    android:drawableRight="@drawable/icon_arrow_right"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_title_size"
-                    android:hint="0" />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/linearLayout2">
-                <ImageView
-                    android:src="@drawable/icon_circle"
-                    android:layout_width="@dimen/fee_icon_width"
-                    android:layout_height="@dimen/create_fee_icon_height"
-                    android:scaleType="fitCenter"
-                    android:id="@+id/imgViewChooseOutcomeGroup"
-                    android:layout_gravity="center_vertical" />
-                <EditText
-                    android:id="@+id/edtChooseOutcomeGroup"
-                    android:ellipsize="end"
-                    android:hint="@string/choose_outcome_group"
-                    android:textColor="@color/color_gray"
-                    android:textColorHint="@color/color_gray_hint"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_description_size"
-                    android:drawableRight="@drawable/icon_arrow_right"
-                    android:focusable="false"
-                    android:editable="false" />
-            </LinearLayout>
-            <TextView
-                android:text="@string/deadline"
-                android:textColor="@color/color_gray"
-                android:textSize="@dimen/text_size_large"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/fee_icon_width" />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/linearLayout2">
-                <ImageView
-                    android:src="@drawable/icon_calendar"
-                    android:layout_width="@dimen/fee_icon_width"
-                    android:layout_height="@dimen/create_fee_icon_height"
-                    android:scaleType="fitCenter"
-                    android:id="@+id/imageView1"
-                    android:layout_gravity="center_vertical" />
-                <EditText
-                    android:id="@+id/edtDeadline"
-                    android:ellipsize="end"
-                    android:textColor="@color/color_gray"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_description_size"
-                    android:drawableRight="@drawable/icon_arrow_right"
-                    android:focusable="false"
-                    android:editable="false" />
-            </LinearLayout>
-        </LinearLayout>
+		<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/linearLayout1">
+			<TextView
+				android:text="@string/create_outcome_title"
+				android:textAllCaps="true"
+				android:textColor="@color/color_gray"
+				android:textSize="@dimen/text_size_large"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="@dimen/fee_icon_width"
+				android:id="@+id/textView1" />
+			<EditText
+				android:ellipsize="end"
+				android:id="@+id/edtTitle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:hint="@string/enter_here"
+				android:textColorHint="@color/color_gray_hint"
+				android:singleLine="true"
+				android:maxLength="@integer/max_length_medium"
+				android:layout_marginLeft="@dimen/fee_icon_width"
+				android:textSize="@dimen/text_description_size" />
+			<TextView
+				android:text="@string/amount"
+				android:textColor="@color/color_gray"
+				android:textSize="@dimen/text_size_large"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="@dimen/fee_icon_width"
+				android:id="@+id/textView2" />
+			<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/linearLayout2">
+				<FrameLayout
+					android:layout_gravity="center"
+					android:layout_height="wrap_content"
+					android:layout_width="@dimen/fee_icon_width">
+					<TextView
+						android:text="@string/unit"
+						android:background="@drawable/edit_text_border_focus"
+						android:paddingLeft="@dimen/padding_small"
+						android:paddingRight="@dimen/padding_small"
+						android:textColor="@color/text_color_black"
+						android:textSize="@dimen/text_size_large"
+						android:layout_gravity="center"
+						android:layout_height="wrap_content"
+						android:layout_width="wrap_content" />
+				</FrameLayout>
+				<EditText
+					android:ellipsize="end"
+					android:id="@+id/edtAmount"
+					android:textColorHint="@color/color_gray"
+					android:textColor="@color/color_gray"
+					android:inputType="number"
+					android:singleLine="true"
+					android:maxLength="@integer/max_length_small"
+					android:drawableRight="@drawable/icon_arrow_right"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:textSize="@dimen/text_title_size"
+					android:hint="0" />
+			</LinearLayout>
+			<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/linearLayout2">
+				<ImageView
+					android:src="@drawable/icon_circle"
+					android:layout_width="@dimen/fee_icon_width"
+					android:layout_height="@dimen/create_fee_icon_height"
+					android:scaleType="fitCenter"
+					android:id="@+id/imgViewChooseOutcomeGroup"
+					android:layout_gravity="center_vertical" />
+				<EditText
+					android:id="@+id/edtChooseOutcomeGroup"
+					android:ellipsize="end"
+					android:hint="@string/choose_outcome_group"
+					android:textColor="@color/color_gray"
+					android:textColorHint="@color/color_gray_hint"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:textSize="@dimen/text_description_size"
+					android:drawableRight="@drawable/icon_arrow_right"
+					android:focusable="false"
+					android:editable="false" />
+			</LinearLayout>
+			<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/linearLayout2">
+				<ImageView
+					android:src="@drawable/icon_calendar"
+					android:layout_width="@dimen/fee_icon_width"
+					android:layout_height="@dimen/create_fee_icon_height"
+					android:scaleType="fitCenter"
+					android:id="@+id/imageView1"
+					android:layout_gravity="center_vertical" />
+				<EditText
+					android:id="@+id/edtDeadline"
+					android:ellipsize="end"
+					android:textColor="@color/color_gray"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:textSize="@dimen/text_description_size"
+					android:drawableRight="@drawable/icon_arrow_right"
+					android:focusable="false"
+					android:editable="false" />
+			</LinearLayout>
+		</LinearLayout>
     </FrameLayout>
 </LinearLayout>
