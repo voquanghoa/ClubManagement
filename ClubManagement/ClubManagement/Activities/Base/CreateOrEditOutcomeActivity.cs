@@ -28,7 +28,7 @@ namespace ClubManagement.Activities.Base
         [InjectOnClick(Resource.Id.edtDeadline)]
         protected void PickDeadline(object sender, EventArgs eventArgs)
         {
-            var datePickerDialog = new CustomDatePickerDialog(new DateTime());
+            var datePickerDialog = new CustomDatePickerDialog();
 
             datePickerDialog.PickDate += (s, e) =>
             {
