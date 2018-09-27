@@ -234,20 +234,19 @@ namespace ClubManagement.Activities.Base
         [InjectOnClick(Resource.Id.btnCross)]
         protected void Cross(object sender, EventArgs e)
         {
-            Cancel();
+            this.ShowConfirmDialog(
+                Resource.String.cross_create_event_title,
+                Resource.String.cross_create_event_message,
+                Finish,
+                () => { }).Show();
         }
 
         [InjectOnClick(Resource.Id.btnCancel)]
         protected void Cancel(object sender, EventArgs e)
         {
-            Cancel();
-        }
-
-        private void Cancel()
-        {
             this.ShowConfirmDialog(
-                Resource.String.cross_create_event_title,
-                Resource.String.cross_create_event_message,
+                Resource.String.edit_event_cancel_title,
+                Resource.String.edit_event_cancel_message,
                 Finish,
                 () => { }).Show();
         }

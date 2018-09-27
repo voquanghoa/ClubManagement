@@ -1,12 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Support.V7.Widget;
@@ -14,7 +6,7 @@ using ClubManagement.Models;
 
 namespace ClubManagement.Adapters
 {
-    public class FeeGroupAdapterViewHolder : RecyclerView.ViewHolder
+    public class FeeOrOutcomeGroupAdapterViewHolder : RecyclerView.ViewHolder
     {
         [InjectView(Resource.Id.imgView)]
         private ImageView imageView;
@@ -26,7 +18,7 @@ namespace ClubManagement.Adapters
 
         public event EventHandler<ClickEventArgs> ClickHander;
 
-        public FeeGroupModel FeeGroup
+        public FeeOrOutcomeGroupModel FeeGroup
         {
             set
             {
@@ -36,7 +28,7 @@ namespace ClubManagement.Adapters
             }
         }
 
-        public FeeGroupAdapterViewHolder(View itemView) : base(itemView)
+        public FeeOrOutcomeGroupAdapterViewHolder(View itemView) : base(itemView)
         {
             Cheeseknife.Inject(this, itemView);
 

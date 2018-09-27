@@ -46,7 +46,6 @@ namespace ClubManagement.Fragments
                     var outcomeModel = new OutcomeModel()
                     {
                         Title = edtTitle.Text,
-                        Description = edtDescription.Text,
                         Amount = amount,
                         Date = date
                     };

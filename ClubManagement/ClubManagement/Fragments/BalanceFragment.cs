@@ -40,6 +40,8 @@ namespace ClubManagement.Fragments
 
         private long sumOutcomes;
 
+        public int SelectedTabIndex { set; get; }
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -56,6 +58,12 @@ namespace ClubManagement.Fragments
             Cheeseknife.Inject(this, view);
             Init();
             return view;
+        }
+
+        public override void OnViewCreated(View view, Bundle savedInstanceState)
+        {
+            base.OnViewCreated(view, savedInstanceState);
+            tlBalance.GetTabAt(SelectedTabIndex).Select();
         }
 
         public override void OnResume()

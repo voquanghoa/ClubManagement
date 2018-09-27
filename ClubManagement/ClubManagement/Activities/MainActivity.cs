@@ -69,9 +69,14 @@ namespace ClubManagement.Activities
                             bottomNavigationView.SelectedItemId = Resource.Id.moneyTab;
                             break;
                         case DashboardFragment.RequestAddEventCode:
-                            MoneyFragment.SelectedTabIndex = 0;
+                            EventFragment.SelectedTabIndex = 0;
                             DisplayFragment(Resource.Id.eventTab);
                             bottomNavigationView.SelectedItemId = Resource.Id.eventTab;
+                            break;
+                        case DashboardFragment.RequestAddOutcomeCode:
+                            BalanceFragment.SelectedTabIndex = 2;
+                            DisplayFragment(Resource.Id.balanceTab);
+                            bottomNavigationView.SelectedItemId = Resource.Id.balanceTab;
                             break;
                     }
                 }

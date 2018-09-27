@@ -10,14 +10,14 @@ using System;
 namespace ClubManagement.Activities
 {
     [Activity(Label = "CreateFeeActivity")]
-    public class CreateFeeActivity : CreateOrEditFeeActivity
+    public class CreateOutcomeActivity : CreateOrEditOutcomeActivity
     {
         [InjectOnClick(Resource.Id.btnCancel)]
         private void Cancel(object sender, EventArgs e)
         {
             this.ShowConfirmDialog(
-                Resource.String.create_fee_cancel_title,
-                Resource.String.create_fee_cancel_message,
+                Resource.String.create_outcome_cancel_title,
+                Resource.String.create_outcome_cancel_message,
                 Finish,
                 () => { }).Show();
         }
@@ -31,25 +31,25 @@ namespace ClubManagement.Activities
                 return;
             }
 
-            var userMoneyModel = new MoneyModel()
+            var outcomeModel = new OutcomeModel()
             {
-                Description = edtDescription.Text,
+                Title = edtTitle.Text,
                 Amount = long.Parse(edtAmount.Text),
-                Group = feeGroup.Id,
-                Time = deadLine
+                Group = outcomeGroup.Id,
+                Date = deadLine
             };
 
-            var progressDialog = this.CreateDialog(GetString(Resource.String.adding_fee),
+            var progressDialog = this.CreateDialog(GetString(Resource.String.adding_outcome),
                 GetString(Resource.String.wait));
             progressDialog.Show();
 
             this.DoRequest(async () =>
             {
-                await MoneysController.Instance.Add(userMoneyModel);
+                await OutComesController.Instance.Add(outcomeModel);
             }, () =>
             {
                 progressDialog.Dismiss();
-                this.ShowMessage(Resource.String.create_fee_success);
+                this.ShowMessage(Resource.String.create_outcome_success);
 
                 SetResult(Result.Ok);
                 Finish();

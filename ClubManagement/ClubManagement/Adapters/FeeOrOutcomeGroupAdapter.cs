@@ -1,22 +1,21 @@
 ﻿using System;
 
 using Android.Views;
-using Android.Widget;
 using Android.Support.V7.Widget;
 using System.Collections.Generic;
 using ClubManagement.Models;
 
 namespace ClubManagement.Adapters
 {
-    public class FeeGroupAdapter : RecyclerView.Adapter
+    public class FeeOrOutcomeGroupAdapter : RecyclerView.Adapter
     {
-        private List<FeeGroupModel> feeGroups;
+        private List<FeeOrOutcomeGroupModel> feeOrOutcomeGroups;
 
         public event EventHandler<ClickEventArgs> ItemClick;
 
-        public FeeGroupAdapter(List<FeeGroupModel> feeGroups)
+        public FeeOrOutcomeGroupAdapter(List<FeeOrOutcomeGroupModel> feeOrOutcomeGroups)
         {
-            this.feeGroups = feeGroups;
+            this.feeOrOutcomeGroups = feeOrOutcomeGroups;
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -25,7 +24,7 @@ namespace ClubManagement.Adapters
             var itemView = LayoutInflater.From(parent.Context).
                 Inflate(id, parent, false);
 
-            var vh = new FeeGroupAdapterViewHolder(itemView);
+            var vh = new FeeOrOutcomeGroupAdapterViewHolder(itemView);
             vh.ClickHander += ItemClick;
 
             return vh;
@@ -33,12 +32,12 @@ namespace ClubManagement.Adapters
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder viewHolder, int position)
         {
-            if (viewHolder is FeeGroupAdapterViewHolder vh)
+            if (viewHolder is FeeOrOutcomeGroupAdapterViewHolder vh)
             {
-                vh.FeeGroup = feeGroups[position];
+                vh.FeeGroup = feeOrOutcomeGroups[position];
             }
         }
 
-        public override int ItemCount => feeGroups.Count;
+        public override int ItemCount => feeOrOutcomeGroups.Count;
     }
 }

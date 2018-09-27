@@ -11,10 +11,10 @@ using ClubManagement.Models;
 
 namespace ClubManagement.Activities.Base
 {
-    public class CreateOrEditFeeActivity : Activity
+    public class CreateOrEditOutcomeActivity : Activity
     {
-        [InjectView(Resource.Id.edtDescription)]
-        protected EditText edtDescription;
+        [InjectView(Resource.Id.edtTitle)]
+        protected EditText edtTitle;
 
         [InjectView(Resource.Id.edtAmount)]
         protected EditText edtAmount;
@@ -22,8 +22,8 @@ namespace ClubManagement.Activities.Base
         [InjectView(Resource.Id.edtDeadline)]
         protected EditText edtDeadline; 
 
-        [InjectView(Resource.Id.imgViewChooseFeeGroup)]
-        protected ImageView imgViewChooseFeeGroup;
+        [InjectView(Resource.Id.imgViewChooseOutcomeGroup)]
+        protected ImageView imgViewChooseOutcomeGroup;
 
         [InjectOnClick(Resource.Id.edtDeadline)]
         protected void PickDeadline(object sender, EventArgs eventArgs)
@@ -42,32 +42,35 @@ namespace ClubManagement.Activities.Base
             datePickerDialog.Show(FragmentManager, "");
         }
 
-        [InjectView(Resource.Id.edtChooseFeeGroup)]
-        protected EditText edtChooseFeeGroup;
+        [InjectView(Resource.Id.edtChooseOutcomeGroup)]
+        protected EditText edtChooseOutcomeGroup;
 
         [InjectView(Resource.Id.tvTitle)]
         protected TextView tvTitle;
 
-        [InjectOnClick(Resource.Id.edtChooseFeeGroup)]
-        protected void ChooseFeeGroup(object sender, EventArgs eventArgs)
+        [InjectOnClick(Resource.Id.edtChooseOutcomeGroup)]
+        protected void ChooseOutcomeGroup(object sender, EventArgs eventArgs)
         {
-            StartActivityForResult(typeof(ChooseFeeOrOutcomeGroupActivity), 0);
+            var intent = new Intent(this, typeof(ChooseFeeOrOutcomeGroupActivity));
+            intent.PutExtra("Title", GetString(Resource.String.choose_outcome_group_title));
+
+            StartActivityForResult(intent, 0);
         }
 
         protected DateTime deadLine;
 
-        protected FeeOrOutcomeGroupModel feeGroup;
+        protected FeeOrOutcomeGroupModel outcomeGroup;
 
         protected bool IsFieldsEmpty() =>
-            (string.IsNullOrEmpty(edtDescription.Text) ||
-            string.IsNullOrEmpty(edtChooseFeeGroup.Text) ||
+            (string.IsNullOrEmpty(edtTitle.Text) ||
+            string.IsNullOrEmpty(edtChooseOutcomeGroup.Text) ||
             string.IsNullOrEmpty(edtDeadline.Text) ||
             !long.TryParse(edtAmount.Text, out long amount) || amount == 0);
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.ActivityCreateFee);
+            SetContentView(Resource.Layout.ActivityCreateOutcome);
             Cheeseknife.Inject(this);
         }
 
@@ -77,9 +80,9 @@ namespace ClubManagement.Activities.Base
 
             if (resultCode == Result.Ok)
             {
-                feeGroup = AppConstantValues.FeeGrooups.Find(x => x.Id.Equals(data.GetStringExtra("Id")));
-                imgViewChooseFeeGroup.SetImageResource(feeGroup.ImageId);
-                edtChooseFeeGroup.Text = GetString(feeGroup.TitleId);
+                outcomeGroup = AppConstantValues.FeeGrooups.Find(x => x.Id.Equals(data.GetStringExtra("Id")));
+                imgViewChooseOutcomeGroup.SetImageResource(outcomeGroup.ImageId);
+                edtChooseOutcomeGroup.Text = GetString(outcomeGroup.TitleId);
             }
         }
     }

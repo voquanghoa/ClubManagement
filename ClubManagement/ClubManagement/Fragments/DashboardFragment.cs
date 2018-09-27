@@ -85,6 +85,8 @@ namespace ClubManagement.Fragments
 
         public const int RequestAddFeeCode = 2;
 
+        public const int RequestAddOutcomeCode = 3;
+
         [InjectOnClick(Resource.Id.itemGoingParentView)]
         private void ShowGoingEventsTab(object s, EventArgs e)
         {
@@ -348,8 +350,9 @@ namespace ClubManagement.Fragments
 
                 fabAddOutCome.Click += (s, e) =>
                 {
+                    var intent = new Intent(Context, typeof(CreateOutcomeActivity));
+                    StartActivityForResult(intent, RequestAddOutcomeCode);
                     CloseFabsMenu();
-                    //add outcome
                 };
             });
 

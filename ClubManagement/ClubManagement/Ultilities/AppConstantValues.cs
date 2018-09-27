@@ -36,41 +36,41 @@ namespace ClubManagement.Ultilities
 
         public const string EventListHeaderThisWeek = "This week";
 
-        public static List<FeeGroupModel> FeeGrooups
+        public static List<FeeOrOutcomeGroupModel> FeeGrooups
         {
-            get => new List<FeeGroupModel>()
+            get => new List<FeeOrOutcomeGroupModel>()
             {
-                new FeeGroupModel()
+                new FeeOrOutcomeGroupModel()
                 {
                     Id = "1",
                     ImageId =Resource.Drawable.money_group,
                     TitleId = Resource.String.party
                 },
-                new FeeGroupModel()
+                new FeeOrOutcomeGroupModel()
                 {
                     Id = "2",
                     ImageId =Resource.Drawable.money_group,
                     TitleId = Resource.String.sport
                 },
-                new FeeGroupModel()
+                new FeeOrOutcomeGroupModel()
                 {
                     Id = "3",
                     ImageId =Resource.Drawable.money_group,
-                    TitleId = Resource.String.travalling
+                    TitleId = Resource.String.travelling
                 },
-                new FeeGroupModel()
+                new FeeOrOutcomeGroupModel()
                 {
                     Id = "4",
                     ImageId =Resource.Drawable.money_group,
                     TitleId = Resource.String.food_and_drinks
                 },
-                new FeeGroupModel()
+                new FeeOrOutcomeGroupModel()
                 {
                     Id = "5",
                     ImageId =Resource.Drawable.money_group,
                     TitleId = Resource.String.gift
                 },
-                new FeeGroupModel()
+                new FeeOrOutcomeGroupModel()
                 {
                     Id = "6",
                     ImageId =Resource.Drawable.money_group,
