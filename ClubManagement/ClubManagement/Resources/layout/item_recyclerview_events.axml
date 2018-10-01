@@ -5,16 +5,16 @@
     android:layout_height="wrap_content">
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/dimen_10dp">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:background="@color/event_ticket_background_color">
             <ImageView
                 android:layout_width="@dimen/event_icon_height"
-                android:layout_height="@dimen/event_icon_height"
+                android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
                 android:src="@drawable/icon_add"
@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:text="Friday 8PM - 9:30PM"
                     android:textColor="@color/event_ticket_text_color"
-                    android:textSize="@dimen/text_description_size"
+                    android:textSize="@dimen/date_time_text_size"
                     android:id="@+id/tvTime" />
                 <TextView
                     android:layout_width="match_parent"

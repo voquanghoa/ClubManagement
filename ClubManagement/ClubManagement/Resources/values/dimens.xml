@@ -74,4 +74,5 @@
   <dimen name="balance_summary_margin">20dp</dimen>
   <dimen name="balance_summary_margin_small">5dp</dimen>
   <dimen name="balance_summary_min_width_text_view">200dp</dimen>
+  <dimen name="date_time_text_size">12sp</dimen>
 </resources>
