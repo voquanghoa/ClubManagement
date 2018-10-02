@@ -13,7 +13,6 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using Android.Support.V4.Widget;
 using ClubManagement.Fragments.Bases;
-using ClubManagement.Ultilities;
 using Android.Support.V7.Widget.Helper;
 
 namespace ClubManagement.Fragments

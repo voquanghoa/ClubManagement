@@ -37,7 +37,7 @@ namespace ClubManagement.Ultilities
                 preferencesEditor.Commit();
                 ((Activity)context).Finish();
                 context.StartActivity(typeof(LoginActivity));
-			});
+			}).Show();
         }
 
         
@@ -70,6 +70,5 @@ namespace ClubManagement.Ultilities
 
             return context.ShowConfirmDialog(getString(title), getString(message), actionAllow, actionDeny);
         }
-
     }
 }
