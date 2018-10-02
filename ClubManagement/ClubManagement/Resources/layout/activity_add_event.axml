@@ -63,26 +63,23 @@
     <FrameLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent">
-        <LinearLayout
-            android:layout_height="match_parent"
+        <ScrollView
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:weightSum="3">
-            <ImageView
+            android:layout_height="match_parent"
+            android:fadeScrollbars="false">
+            <LinearLayout
+                android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:scaleType="centerCrop"
-                android:src="@drawable/image_event_default"
-                android:id="@+id/imgEvent" />
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:fadeScrollbars="false"
-                android:layout_weight="2">
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/image_view_event_detail_height"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/image_event_default"
+                    android:id="@+id/imgEvent" />
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -270,8 +267,8 @@
                         android:textColorHint="@color/color_hint"
                         android:background="@drawable/edit_text_border" />
                 </LinearLayout>
-            </ScrollView>
-        </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/view_shadow_height"

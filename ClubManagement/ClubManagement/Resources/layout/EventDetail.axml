@@ -41,8 +41,9 @@
                 android:textSize="@dimen/text_title_size"
                 android:textStyle="bold" />
             <ImageButton
-                android:layout_width="@dimen/event_detail_icon"
-                android:layout_height="match_parent"
+                android:layout_width="@dimen/event_detail_icon_small"
+                android:layout_height="@dimen/event_detail_icon_small"
+                android:layout_gravity="center"
                 android:src="@drawable/icon_option"
                 android:layout_marginTop="@dimen/event_detail_title_margin_small"
                 android:layout_marginBottom="@dimen/event_detail_title_margin_small"

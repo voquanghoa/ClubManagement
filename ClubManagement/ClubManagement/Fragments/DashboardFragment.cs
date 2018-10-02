@@ -73,6 +73,24 @@ namespace ClubManagement.Fragments
 
         [InjectView(Resource.Id.tvAddEvent)] private View tvAddEvent;
 
+        [InjectOnClick(Resource.Id.tvAddEvent)]
+        private void AddEventClick(object s, EventArgs e)
+        {
+            FabStartActivityForResult(typeof(CreateEventActivity), RequestAddEventCode);
+        }
+
+        [InjectOnClick(Resource.Id.tvAddFee)]
+        private void AddFeeClick(object s, EventArgs e)
+        {
+            FabStartActivityForResult(typeof(CreateFeeActivity), RequestAddFeeCode);
+        }
+
+        [InjectOnClick(Resource.Id.tvAddOutcome)]
+        private void AddOutcomeClick(object s, EventArgs e)
+        {
+            FabStartActivityForResult(typeof(CreateOutcomeActivity), RequestAddOutcomeCode);
+        }
+
         [InjectView(Resource.Id.bg_fab_menu)] private View bgFabsMenu;
 
         public event EventHandler ItemClick;
@@ -314,6 +332,13 @@ namespace ClubManagement.Fragments
             tvUnit.Text = unit + (count > 1 ? "s" : string.Empty);
         }
 
+        private void FabStartActivityForResult(Type type, int requestCode)
+        {
+            var intent = new Intent(Context, type);
+            StartActivityForResult(intent, requestCode);
+            CloseFabsMenu();
+        }
+
         private void InitFabsMenu()
         {
             parentViewFabAddFee.Visibility = ViewStates.Gone;
@@ -329,9 +354,7 @@ namespace ClubManagement.Fragments
                 {
                     if (isFabsMenuOpenning)
                     {
-                        var intent = new Intent(Context, typeof(CreateEventActivity));
-                        StartActivityForResult(intent, RequestAddEventCode);
-                        CloseFabsMenu();
+                        FabStartActivityForResult(typeof(CreateEventActivity), RequestAddEventCode);
                     }
                     else
                     {
@@ -341,19 +364,8 @@ namespace ClubManagement.Fragments
 
                 bgFabsMenu.Click += (s, e) => CloseFabsMenu();
 
-                fabAddFee.Click += (s, e) =>
-                {
-                    var intent = new Intent(Context, typeof(CreateFeeActivity));
-                    StartActivityForResult(intent,RequestAddFeeCode);
-                    CloseFabsMenu();
-                };
-
-                fabAddOutCome.Click += (s, e) =>
-                {
-                    var intent = new Intent(Context, typeof(CreateOutcomeActivity));
-                    StartActivityForResult(intent, RequestAddOutcomeCode);
-                    CloseFabsMenu();
-                };
+                fabAddFee.Click += AddFeeClick;
+                fabAddOutCome.Click += AddOutcomeClick;
             });
 
         }
