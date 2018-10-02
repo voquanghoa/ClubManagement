@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+	 <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tabbar_height"
+        android:background="@color/color_blue"
+        android:contentInsetLeft="0dp"
+        android:contentInsetStart="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        android:contentInsetRight="0dp"
+        android:contentInsetEnd="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp">
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="horizontal">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon_back_fee_detail"
+                android:padding="@dimen/dimen_10dp"
+                android:background="@null"
+                android:id="@+id/btnBack" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|left"
+				android:layout_weight="1"
+                android:text="Add Amount"
+                android:textColor="@color/text_color_white"
+                android:textSize="@dimen/text_size_large"
+                android:id="@+id/tvTitle"
+                android:textStyle="bold" />
+			<Button 
+				android:id="@+id/btnDelete"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Delete" 
+				android:textAllCaps="false"
+				android:textSize="@dimen/text_description_size"
+				android:background="@drawable/button_repay_background"
+				android:paddingRight="@dimen/dimen_10dp"
+				android:paddingLeft="@dimen/dimen_10dp"
+				android:paddingBottom="@dimen/dimen_5dp"
+				android:paddingTop="@dimen/dimen_5dp"
+				android:layout_marginRight="@dimen/dimen_20dp"
+				android:minHeight="0dp"
+				android:minWidth="0dp"
+				android:layout_gravity="right|center_vertical"/>
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
+</LinearLayout>

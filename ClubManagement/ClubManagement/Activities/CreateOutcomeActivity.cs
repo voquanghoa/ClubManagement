@@ -62,6 +62,8 @@ namespace ClubManagement.Activities
 
             deadLine = DateTime.Now;
             edtDeadline.Text = deadLine.ToDateString();
+            edtAmount.Focusable = false;
+            edtAmount.Click += (s, e) => StartActivityForResult(typeof(AddAmountActivity), 1);
         }
     }
 }
