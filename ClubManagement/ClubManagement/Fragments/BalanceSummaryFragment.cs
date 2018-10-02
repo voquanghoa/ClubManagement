@@ -59,12 +59,6 @@ namespace ClubManagement.Fragments
                 tvFinalBalance.SetTextColor(Context.GetColorStateList(Resource.Color.text_color_blue));
                 tvFinalBalance.Text = $"+{finalBalance.ToCurrency()}";
             }
-            else if (finalBalance < 0)
-            {
-                tvStatus.Text = GetString(Resource.String.We_are_broke_now);
-                tvFinalBalance.SetTextColor(Context.GetColorStateList(Resource.Color.text_color_red));
-                tvFinalBalance.Text = $"-{finalBalance.ToCurrency()}";
-            }
             else
             {
                 tvStatus.Text = GetString(Resource.String.We_are_broke_now);
@@ -76,13 +70,15 @@ namespace ClubManagement.Fragments
             tvOutcome.Text = $"-{SumOutcomes.ToCurrency()}";
 
             barChart.Description.Enabled = false;
+            barChart.Legend.Enabled = false;
             barChart.AxisRight.Enabled = false;
             barChart.AxisLeft.Enabled = false;
-            barChart.Legend.Enabled = false;
+            barChart.AxisLeft.AxisMinimum = 0;
             barChart.XAxis.Position = XAxis.XAxisPosition.Bottom;
             barChart.XAxis.SetDrawGridLines(false);
             barChart.XAxis.Granularity = 1;
             barChart.SetExtraOffsets(0, 0, 0, 10);
+            barChart.SetScaleEnabled(false);
 
             var labels = new List<string>()
             {

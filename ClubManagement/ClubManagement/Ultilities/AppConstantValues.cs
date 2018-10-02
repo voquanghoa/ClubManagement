@@ -12,7 +12,7 @@ namespace ClubManagement.Ultilities
 
         public const string UserAvatarUrl = "UserAvatarUrl";
 
-        public const string BalanceFragmentSummaryTab = "Summary";
+        public const string BalanceFragmentSummaryTab = "Total";
 
         public const string BalanceFragmentOutcomeTab = "Outcome";
 
@@ -43,37 +43,37 @@ namespace ClubManagement.Ultilities
                 new FeeOrOutcomeGroupModel()
                 {
                     Id = "1",
-                    ImageId =Resource.Drawable.money_group,
+                    ImageId =Resource.Drawable.choose_group_party,
                     TitleId = Resource.String.party
                 },
                 new FeeOrOutcomeGroupModel()
                 {
                     Id = "2",
-                    ImageId =Resource.Drawable.money_group,
+                    ImageId =Resource.Drawable.choose_group_sport,
                     TitleId = Resource.String.sport
                 },
                 new FeeOrOutcomeGroupModel()
                 {
                     Id = "3",
-                    ImageId =Resource.Drawable.money_group,
+                    ImageId =Resource.Drawable.choose_group_travel,
                     TitleId = Resource.String.travelling
                 },
                 new FeeOrOutcomeGroupModel()
                 {
                     Id = "4",
-                    ImageId =Resource.Drawable.money_group,
+                    ImageId =Resource.Drawable.choose_group_food_and_drink,
                     TitleId = Resource.String.food_and_drinks
                 },
                 new FeeOrOutcomeGroupModel()
                 {
                     Id = "5",
-                    ImageId =Resource.Drawable.money_group,
+                    ImageId =Resource.Drawable.choose_group_gift,
                     TitleId = Resource.String.gift
                 },
                 new FeeOrOutcomeGroupModel()
                 {
                     Id = "6",
-                    ImageId =Resource.Drawable.money_group,
+                    ImageId =Resource.Drawable.choose_group_others,
                     TitleId = Resource.String.others
                 }
             };

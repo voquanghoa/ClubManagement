@@ -12,8 +12,6 @@ using ClubManagement.Fragments;
 using FragmentActivity = Android.Support.V4.App.FragmentActivity;
 using Android.App;
 using System.Globalization;
-using Android.Text;
-using Android.Text.Style;
 using Android.Graphics;
 using Square.Picasso;
 using Android.Runtime;
@@ -45,7 +43,7 @@ namespace ClubManagement.Activities
         private void UsersClick(object s, EventArgs e)
         {
             var intent = new Intent(this, typeof(GuestsActivity));
-            intent.PutExtra("NumberPeople", tvUsers.Text);
+            intent.PutExtra("EventDetail", content);
             intent.PutExtra("NumberPeople", tvUsers.Text.Split(' ').FirstOrDefault());
 
             StartActivity(intent);

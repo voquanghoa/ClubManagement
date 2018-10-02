@@ -255,6 +255,7 @@
         android:layout_alignParentRight="true">
         <TextView
             android:text="@string/outcome"
+            android:id="@+id/tvAddOutcome"
             android:textColor="@color/text_color_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -293,6 +294,7 @@
         android:layout_alignParentRight="true">
         <TextView
             android:text="@string/fee"
+            android:id="@+id/tvAddFee"
             android:textColor="@color/text_color_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

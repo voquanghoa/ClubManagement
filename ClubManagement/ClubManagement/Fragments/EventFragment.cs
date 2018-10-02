@@ -13,7 +13,6 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using Android.Support.V4.Widget;
 using ClubManagement.Fragments.Bases;
-using ClubManagement.Ultilities;
 using Android.Support.V7.Widget.Helper;
 
 namespace ClubManagement.Fragments
@@ -39,11 +38,6 @@ namespace ClubManagement.Fragments
         public EventFragment()
         {
             data = new List<UserLoginEventModel>();
-
-            var swipeToDeleteCallback = new SwipeLeftToDeleteCallback(ItemTouchHelper.ActionStateIdle, ItemTouchHelper.Left);
-            swipeToDeleteCallback.SwipeLeft += SwipeToDeleteCallback_SwipeLeft;
-
-            itemTouchHelper = new ItemTouchHelper(swipeToDeleteCallback);
 
             adapter.ItemClick += (s, e) =>
             {
@@ -77,30 +71,6 @@ namespace ClubManagement.Fragments
             tabLayout = view.FindViewById<TabLayout>(Resource.Id.tabView1);
             tabLayout.TabSelected += (s, e) => DisplayData(data);
             tabLayout.GetTabAt(SelectedTabIndex).Select();
-
-            Context.DoWithAdmin(() =>
-            {
-                itemTouchHelper.AttachToRecyclerView(recyclerView);
-            });
-        }
-
-        private void SwipeToDeleteCallback_SwipeLeft(object sender, ClickEventArgs e)
-        {
-            if (sender is ItemEventViewHolder eventViewHolder)
-            {
-                var id = eventViewHolder.Id;
-
-                Context.ShowConfirmDialog(Resource.String.delete_event, Resource.String.confirm_delete,
-                    () =>
-                    {
-                        data.RemoveAll(x => x.Id.Equals(id));
-                        eventsController.Delete(new EventModel() { Id = id });
-                        DisplayData(data);
-                    }, () =>
-                    {
-                        DisplayData(data);
-                    }).Show();
-            }
         }
 
         public override void OnResume()

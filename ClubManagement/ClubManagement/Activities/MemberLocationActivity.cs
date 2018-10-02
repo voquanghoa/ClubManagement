@@ -125,7 +125,7 @@ namespace ClubManagement.Activities
             eventDetail = JsonConvert.DeserializeObject<UserLoginEventModel>(content);
 
             tvNameAddress.Text = eventDetail.Place;
-            tvAddress.Text = eventDetail.Place;
+            tvAddress.Text = eventDetail.Address;
             tvNumberPeople.Text = $"{Intent.GetStringExtra("NumberPeople")} Going";
 
             FragmentManager.FindFragmentById<MapFragment>(Resource.Id.mapFragment).GetMapAsync(this);
