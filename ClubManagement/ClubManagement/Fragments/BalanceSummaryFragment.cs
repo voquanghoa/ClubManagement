@@ -78,6 +78,7 @@ namespace ClubManagement.Fragments
             barChart.XAxis.SetDrawGridLines(false);
             barChart.XAxis.Granularity = 1;
             barChart.SetExtraOffsets(0, 0, 0, 10);
+            barChart.SetScaleEnabled(false);
 
             var labels = new List<string>()
             {
