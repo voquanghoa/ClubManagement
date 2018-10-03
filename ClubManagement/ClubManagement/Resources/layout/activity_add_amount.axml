@@ -55,4 +55,140 @@
 				android:layout_gravity="right|center_vertical"/>
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/dimen_20dp"
+		android:orientation="horizontal"
+		android:weightSum="8">
+		<View
+			android:layout_width="0dp"
+			android:layout_weight="1"
+			android:layout_height="match_parent" />
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_weight="6"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:weightSum="2"
+					android:layout_marginBottom="@dimen/dimen_5dp"
+					android:orientation="horizontal">
+					<TextView
+						android:layout_width="0dp"
+						android:layout_weight="1"
+						android:layout_height="wrap_content"
+						android:textColor="@color/color_gray"
+						android:textStyle="bold"
+						android:textSize="@dimen/text_description_size"
+						android:text="Item Name"/>
+					<TextView
+						android:layout_width="0dp"
+						android:layout_weight="1"
+						android:gravity="right"
+						android:layout_height="wrap_content"
+						android:textColor="@color/color_gray"
+						android:textSize="@dimen/text_description_size"
+						android:textStyle="bold"
+						android:text="Amount (VND)"/>
+				</LinearLayout>
+				<View
+					android:layout_width="match_parent"
+					android:layout_height="2dp"
+					android:background="#666666" />
+			</LinearLayout>
+		</LinearLayout>
+		<View
+			android:layout_width="0dp"
+			android:layout_weight="1"
+			android:layout_height="match_parent" />
+	</LinearLayout>
+	<android.support.v4.widget.NestedScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical">
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:layout_marginTop="@dimen/dimen_5dp"
+				android:weightSum="8">
+				<View
+					android:layout_width="0dp"
+					android:layout_weight="1"
+					android:layout_height="0dp" />
+				<android.support.v7.widget.RecyclerView
+					android:id="@+id/rvAmountItems"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="7" />
+			</LinearLayout>
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:layout_marginTop="@dimen/dimen_10dp"
+				android:layout_marginBottom="@dimen/dimen_10dp"
+				android:weightSum="8">
+				<View
+					android:layout_width="0dp"
+					android:layout_weight="1"
+					android:layout_height="match_parent" />
+				<TextView
+					android:id="@+id/tvAddItem"
+					android:text="ADD ITEM"
+					android:layout_width="0dp"
+					android:layout_weight="7"
+					android:textSize="@dimen/text_description_size"
+					android:textColor="@color/color_gray"
+					android:layout_height="wrap_content"
+					android:drawableLeft="@drawable/icon_add_amount"
+					android:drawablePadding="@dimen/dimen_10dp"/>
+			</LinearLayout>
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:layout_marginTop="@dimen/dimen_10dp"
+				android:layout_marginBottom="@dimen/dimen_10dp"
+				android:weightSum="8">
+				<LinearLayout
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="7"
+					android:orientation="vertical">
+						<View
+							android:layout_width="120dp"
+							android:layout_height="2dp"
+							android:layout_gravity="right"
+							android:background="#666666"/>
+						<TextView
+							android:id="@+id/tvTotal"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:text="Total: 400,000VND"
+							android:gravity="right"
+							android:textColor="@color/color_red"
+							android:textStyle="bold"
+							android:textSize="@dimen/text_description_size"
+							android:layout_marginTop="@dimen/dimen_5dp"
+							android:layout_marginBottom="@dimen/dimen_20dp"/>
+				</LinearLayout>
+				<View
+					android:layout_width="0dp"
+					android:layout_weight="1"
+					android:layout_height="match_parent" />
+			</LinearLayout>
+			
+		</LinearLayout>
+	</android.support.v4.widget.NestedScrollView>
 </LinearLayout>
