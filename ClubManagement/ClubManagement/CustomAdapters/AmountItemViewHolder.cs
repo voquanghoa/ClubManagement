@@ -34,9 +34,16 @@ namespace ClubManagement.CustomAdapters
             set
             {
                 isDeleting = value;
-                btnEdit.SetImageResource(value
-                    ? Resource.Drawable.icon_delete_amount_uncheck
-                    : Resource.Drawable.icon_edit_amount);
+                if (isDeleting)
+                {
+                    btnEdit.SetImageResource(item.IsChooseToDelete
+                        ? Resource.Drawable.icon_delete_amount_check
+                        : Resource.Drawable.icon_delete_amount_uncheck);
+                }
+                else
+                {
+                    btnEdit.SetImageResource(Resource.Drawable.icon_edit_amount);
+                }
             }
         }
 

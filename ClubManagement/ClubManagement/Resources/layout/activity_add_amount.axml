@@ -111,7 +111,8 @@
 	</LinearLayout>
 	<android.support.v4.widget.NestedScrollView
 		android:layout_width="match_parent"
-		android:layout_height="match_parent">
+		android:layout_height="match_parent"
+		android:layout_weight="1">
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
@@ -191,4 +192,34 @@
 			
 		</LinearLayout>
 	</android.support.v4.widget.NestedScrollView>
+<LinearLayout
+		android:id="@+id/confirm_delete_view"
+	android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+	android:weightSum="2">
+	<Button
+		android:id="@+id/btnYes"
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:text="Yes"
+		android:textAllCaps="false"
+		android:textColor="@color/color_red"
+		android:drawableLeft="@drawable/icon_confirm_delete_amount"
+		android:layout_margin="@dimen/dimen_5dp"
+		android:background="@drawable/snackbar_button_background"
+		android:paddingLeft="@dimen/dimen_20dp"
+		android:drawablePadding="-20dp"
+		android:layout_weight="1"/>
+	<Button
+		android:id="@+id/btnNo"
+		android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:text="No"
+		android:textAllCaps="false"
+		android:background="@drawable/snackbar_button_background"
+		android:layout_margin="@dimen/dimen_5dp"
+		android:layout_weight="1"/>
+</LinearLayout>
+
 </LinearLayout>
