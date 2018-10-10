@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Android.App;
 using Android.Preferences;
-using Android.Util;
 using ClubManagement.Models;
 
 namespace ClubManagement.Controllers

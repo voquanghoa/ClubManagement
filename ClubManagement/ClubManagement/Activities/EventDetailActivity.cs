@@ -15,6 +15,7 @@ using System.Globalization;
 using Android.Graphics;
 using Square.Picasso;
 using Android.Runtime;
+using System.Threading.Tasks;
 
 namespace ClubManagement.Activities
 {
@@ -112,10 +113,7 @@ namespace ClubManagement.Activities
 
                             processDialog.Show();
 
-                            this.DoRequest(async () =>
-                            {
-                                await EventsController.Instance.Delete(eventDetail);
-                            }, () =>
+                            this.DoRequest(EventsController.Instance.Delete(eventDetail), () =>
                             {
                                 processDialog.Dismiss();
 								this.ShowMessage(Resource.String.delete_event_success);
@@ -214,8 +212,8 @@ namespace ClubManagement.Activities
 
             var count = 0;
 
-            this.DoRequest(() => count = userEventsController.Values
-                    .Where(x => x.EventId == eventDetail.Id).Count()
+            this.DoRequest(Task.Run(() => count = userEventsController.Values
+                    .Where(x => x.EventId == eventDetail.Id).Count())
                 , () => tvUsers.Text = $"{count} Going");
 
             currentIsJoined = eventDetail.IsJoined;
@@ -248,7 +246,7 @@ namespace ClubManagement.Activities
             currentIsJoined = isJoined;
             tvStatus.ChangeTextViewStatus(isJoined);
 
-            this.DoRequest(() =>
+            this.DoRequest(Task.Run(() =>
             {
                 if (isJoined)
                 {
@@ -265,7 +263,7 @@ namespace ClubManagement.Activities
 
                     userEventsController.Delete(userEvent);
                 }
-            }, () => { });
+            }));
         }
     }
 }

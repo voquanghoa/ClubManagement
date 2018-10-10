@@ -13,6 +13,7 @@ using ClubManagement.Models;
 using Android.Views.Animations;
 using ClubManagement.Ultilities;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace ClubManagement.Activities
 {
@@ -72,7 +73,7 @@ namespace ClubManagement.Activities
 
         private void UpdateData()
         {
-            this.DoRequest(() =>
+            this.DoRequest(Task.Run(() =>
             {
                 var letters = new List<string>();
 
@@ -100,7 +101,7 @@ namespace ClubManagement.Activities
                         return guestModel;
                     })
                     .ToList();
-            }, () =>
+            }), () =>
             {
                 adapter.Guests = guests;
                 recyclerView.ScheduleLayoutAnimation();

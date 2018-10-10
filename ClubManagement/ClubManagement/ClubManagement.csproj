@@ -176,6 +176,12 @@
     <Reference Include="Xamarin.Firebase.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Firebase.Common.32.961.0\lib\MonoAndroid70\Xamarin.Firebase.Common.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Firebase.Iid, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Firebase.Iid.32.961.0\lib\MonoAndroid70\Xamarin.Firebase.Iid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Firebase.Messaging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Firebase.Messaging.32.961.0\lib\MonoAndroid70\Xamarin.Firebase.Messaging.dll</HintPath>
+    </Reference>
     <Reference Include="Xamarin.Firebase.Storage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Firebase.Storage.32.961.0\lib\MonoAndroid41\Xamarin.Firebase.Storage.dll</HintPath>
     </Reference>
@@ -227,6 +233,8 @@
     <Compile Include="Adapters\GuestsAdapter.cs" />
     <Compile Include="Adapters\ItemEventHeaderViewHolder.cs" />
     <Compile Include="Adapters\ItemEventViewHolder.cs" />
+    <Compile Include="Adapters\NotificationsAdapter.cs" />
+    <Compile Include="Adapters\NotificationsAdapterViewHolder.cs" />
     <Compile Include="Adapters\PersonGoTimeClickEventArgs.cs" />
     <Compile Include="Adapters\ClickEventArgs.cs" />
     <Compile Include="Adapters\SwipeToDeleteCallback.cs" />
@@ -237,6 +245,7 @@
     <Compile Include="Controllers\FirebaseController.cs" />
     <Compile Include="Controllers\MapsController.cs" />
     <Compile Include="Controllers\MoneysController.cs" />
+    <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\OutComesController.cs" />
     <Compile Include="Controllers\UserEventsController.cs" />
     <Compile Include="Controllers\UserMoneysController.cs" />
@@ -250,6 +259,8 @@
     <Compile Include="CustomAdapters\OutcomeListAdapter.cs" />
     <Compile Include="CustomAdapters\OutcomeTimeViewHolder.cs" />
     <Compile Include="CustomAdapters\OutcomeViewHolder.cs" />
+    <Compile Include="FCMClient\MyFirebaseIIDService.cs" />
+    <Compile Include="FCMClient\MyFirebaseMessagingService.cs" />
     <Compile Include="Fragments\AddBudgetDialogFragment.cs" />
     <Compile Include="Fragments\BalanceListFragment.cs" />
     <Compile Include="Fragments\BalanceSummaryFragment.cs" />
@@ -284,6 +295,7 @@
     <Compile Include="Models\MoneyAdminState.cs" />
     <Compile Include="Models\MoneyModel.cs" />
     <Compile Include="Models\MoneyState.cs" />
+    <Compile Include="Models\NotificationModel.cs" />
     <Compile Include="Models\OutcomeAmountItem.cs" />
     <Compile Include="Models\OutcomeDetailItem.cs" />
     <Compile Include="Models\OutcomeItem.cs" />
@@ -390,6 +402,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ActivityCreateOutcome.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\FragmentNotification.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ItemRecycleViewNotification.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -771,6 +789,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon_calendar.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_notification.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.v7.CardView.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.v7.CardView.targets" Condition="Exists('..\packages\Xamarin.Android.Support.v7.CardView.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.v7.CardView.targets')" />

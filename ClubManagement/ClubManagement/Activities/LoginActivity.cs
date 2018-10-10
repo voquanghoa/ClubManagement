@@ -10,6 +10,8 @@ using ClubManagement.Controllers;
 using ClubManagement.Models;
 using ClubManagement.Ultilities;
 using Plugin.CurrentActivity;
+using Firebase.Iid;
+using System.Threading.Tasks;
 
 namespace ClubManagement.Activities
 {
@@ -38,7 +40,7 @@ namespace ClubManagement.Activities
 			var activity = this;
 
             var users = new List<UserModel>();
-            this.DoRequest(() => users = usersController.Values, () =>
+            this.DoRequest(Task.Run(() => users = usersController.Values), () =>
             {
                 var loginUser = users.FirstOrDefault(x =>
                     string.Equals(x.Email, edtEmail.Text, StringComparison.CurrentCultureIgnoreCase));
@@ -65,7 +67,10 @@ namespace ClubManagement.Activities
                     StartActivity(typeof(MainActivity));
 					this.ShowMessage(Resource.String.login_success);
                     dialog.Dismiss();
-                    this.DoRequest(() => usersController.UpdateUserLocation(loginUser));
+
+                    UsersController.Instance.UpdateUserLocation(loginUser);
+                    UsersController.Instance.UpdateUserNotificationToken(loginUser);
+
                     return;
                 }
 

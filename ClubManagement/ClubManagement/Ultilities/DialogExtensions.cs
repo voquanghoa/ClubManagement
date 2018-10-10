@@ -2,6 +2,7 @@
 using Android.Content;
 using Android.Preferences;
 using ClubManagement.Activities;
+using ClubManagement.Controllers;
 using System;
 
 #pragma warning disable 618
@@ -35,6 +36,10 @@ namespace ClubManagement.Ultilities
 				preferencesEditor.PutString(AppConstantValues.UserIdPreferenceKey, string.Empty);
                 preferencesEditor.PutBoolean(AppConstantValues.LogStatusPreferenceKey, false);
                 preferencesEditor.Commit();
+
+                var user = AppDataController.Instance.User;
+                UsersController.Instance.UpdateUserNotificationToken(user, "");
+
                 ((Activity)context).Finish();
                 context.StartActivity(typeof(LoginActivity));
 			}).Show();

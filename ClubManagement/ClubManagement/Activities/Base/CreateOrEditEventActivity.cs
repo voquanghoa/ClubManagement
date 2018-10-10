@@ -19,41 +19,13 @@ namespace ClubManagement.Activities.Base
 {
     public class CreateOrEditEventActivity : Activity
     {
-        private IPlace place;
+        protected IPlace place;
 
         protected DateTime startTime;
 
         protected DateTime endTime;
 
-        private string imageUrl = "";
-
-        private EventModel eventModel;
-
-        private bool isEdit;
-
-        protected UserLoginEventModel Event
-        {
-            set
-            {
-                eventModel = value as EventModel;
-                isEdit = true;
-
-                startTime = value.TimeStart;
-                endTime = value.TimeEnd;
-                edtEventTitle.Text = value.Title;
-                edtEventDescription.Text = value.Description;
-                edtEventLocation.Text = value.Place;
-                edtChooseLocation.Text = value.Address;
-                imageUrl = value.ImageUrl;
-
-                if (!string.IsNullOrEmpty(value.ImageUrl))
-                {
-                    Picasso.With(this).Load(value.ImageUrl).Into(imgEvent);
-                }
-
-                UpdateView();
-            }
-        }
+        protected string imageUrl = "";
 
         [InjectView(Resource.Id.edtEventTitle)]
         protected EditText edtEventTitle;
@@ -147,110 +119,6 @@ namespace ClubManagement.Activities.Base
             StartActivityForResult(builder.Build(this), PlacePickerRequset);
         }
 
-        [InjectOnClick(Resource.Id.btnDone)]
-        protected void Done(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(edtEventTitle.Text) ||
-                string.IsNullOrEmpty(edtEventDescription.Text) ||
-                string.IsNullOrEmpty(tvStartDate.Text) ||
-                string.IsNullOrEmpty(edtChooseLocation.Text) ||
-                string.IsNullOrEmpty(tvStartTime.Text))
-            {
-				this.ShowMessage(Resource.String.fill_all_fields);
-                return;
-            }
-
-            if (isEdit)
-            {
-                eventModel.Description = edtEventDescription.Text;
-                eventModel.Place = edtEventLocation.Text;
-                eventModel.Title = edtEventTitle.Text;
-                eventModel.TimeStart = startTime;
-                eventModel.TimeEnd = endTime;
-                eventModel.ImageUrl = imageUrl;
-
-                if (!eventModel.Address.Equals(edtChooseLocation.Text))
-                {
-                    eventModel.Address = edtChooseLocation.Text;
-                    eventModel.Longitude = place.LatLng.Longitude;
-                    eventModel.Latitude = place.LatLng.Latitude;
-                }
-            }
-            else
-            {
-                eventModel = new EventModel
-                {
-                    Description = edtEventDescription.Text,
-                    Place = edtEventLocation.Text,
-                    Title = edtEventTitle.Text,
-                    CreatedBy = AppDataController.Instance.UserName,
-                    CreatedTime = DateTime.Now,
-                    TimeStart = startTime,
-                    TimeEnd = endTime,
-                    Address = edtChooseLocation.Text,
-                    Longitude = place.LatLng.Longitude,
-                    Latitude = place.LatLng.Latitude,
-                    ImageUrl = imageUrl
-                };
-            }
-
-            var progressDialog = this.CreateDialog(GetString(isEdit
-                    ? Resource.String.editing_event
-                    : Resource.String.adding_event),
-                GetString(Resource.String.wait));
-
-            progressDialog.Show();
-
-            this.DoRequest(async () =>
-            {
-                if (isEdit)
-                {
-                    await EventsController.Instance.Edit(eventModel);
-                }
-                else
-                {
-                    await EventsController.Instance.Add(eventModel);
-                }
-            }, () =>
-            {
-                progressDialog.Dismiss();
-
-                if (!isEdit)
-                {
-                    this.ShowMessage(Resource.String.create_event_success);
-                    SetResult(Result.Ok);
-                }
-                else
-                {
-                    var eventDetail = JsonConvert.SerializeObject(eventModel);
-                    this.ShowMessage(Resource.String.edit_event_success);
-                    SetResult(Result.Ok, new Intent().PutExtra("EventDetail", eventDetail));
-                }
-
-                Finish();
-            });
-        }
-
-        [InjectOnClick(Resource.Id.btnCross)]
-        protected void Cross(object sender, EventArgs e)
-        {
-            this.ShowConfirmDialog(
-                Resource.String.cross_create_event_title,
-                Resource.String.cross_create_event_message,
-                Finish,
-                () => { }).Show();
-        }
-
-        [InjectOnClick(Resource.Id.btnCancel)]
-        protected void Cancel(object sender, EventArgs e)
-        {
-            this.ShowConfirmDialog(
-                Resource.String.confirm,
-                Resource.String.edit_event_cancel_message,
-                Finish,
-                () => { }).Show();
-        }
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -269,10 +137,8 @@ namespace ClubManagement.Activities.Base
                 GetString(Resource.String.wait));
                 progressDialog.Show();
 
-                this.DoRequest(async () =>
-                {
-                    imageUrl = await CloudinaryController.UploadImage(this, data.Data, $"Images/{Guid.NewGuid()}", 256);
-                }, () => progressDialog.Dismiss());
+                this.DoRequest(CloudinaryController.UploadImage(this, data.Data, $"Images/{Guid.NewGuid()}", 256),
+                    () => progressDialog.Dismiss());
 
                 imgEvent.SetImageURI(data.Data);
             }

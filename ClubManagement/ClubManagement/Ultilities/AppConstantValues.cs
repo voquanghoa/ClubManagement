@@ -36,6 +36,8 @@ namespace ClubManagement.Ultilities
 
         public const string EventListHeaderThisWeek = "This week";
 
+        public const string NotificationEditEvent = "Edit event";
+
         public static List<FeeOrOutcomeGroupModel> FeeGrooups
         {
             get => new List<FeeOrOutcomeGroupModel>()

@@ -9,6 +9,7 @@ using Android.Widget;
 using ClubManagement.Controllers;
 using ClubManagement.Models;
 using ClubManagement.Ultilities;
+using System.Threading.Tasks;
 
 namespace ClubManagement.Activities
 {
@@ -75,7 +76,7 @@ namespace ClubManagement.Activities
             dialog.Show();
 
             var userEmails = new List<string>();
-            this.DoRequest(() => userEmails = usersController.Values.Select(x => x.Email).ToList(), () =>
+            this.DoRequest(Task.Run(() => userEmails = usersController.Values.Select(x => x.Email).ToList()), () =>
             {
                 if (userEmails.Contains(edtEmail.Text))
                 {
@@ -84,16 +85,13 @@ namespace ClubManagement.Activities
                     return;
                 }
 
-                this.DoRequest(() =>
+                this.DoRequest(usersController.Add(new UserModel
                 {
-                    usersController.Add(new UserModel
-                    {
-                        Email = edtEmail.Text,
-                        Name = edtName.Text,
-                        Password = edtPassword.Text,
-                        CreatedTime = DateTime.Now
-                    });
-                }, () =>
+                    Email = edtEmail.Text,
+                    Name = edtName.Text,
+                    Password = edtPassword.Text,
+                    CreatedTime = DateTime.Now
+                }), () =>
                 {
 					this.ShowMessage(Resource.String.signup_success);
                     dialog.Dismiss();

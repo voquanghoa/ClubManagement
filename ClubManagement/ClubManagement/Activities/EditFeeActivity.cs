@@ -42,10 +42,7 @@ namespace ClubManagement.Activities
                 GetString(Resource.String.wait));
             progressDialog.Show();
 
-            this.DoRequest(async () =>
-            {
-                await MoneysController.Instance.Edit(moneyModel);
-            }, () =>
+            this.DoRequest(MoneysController.Instance.Edit(moneyModel), () =>
             {
                 progressDialog.Dismiss();
                 this.ShowMessage(Resource.String.edit_fee_success);

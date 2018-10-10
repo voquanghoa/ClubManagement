@@ -168,7 +168,6 @@ namespace ClubManagement.Fragments
         public DashboardFragment()
         {
             changeAvatarFragment.ChangeAvatar += ChangeAvatarFragment_ChangeAvatar;
-            
         }
 
         private void ChangeAvatarFragment_ChangeAvatar(object sender, EventArgs e)
@@ -180,12 +179,8 @@ namespace ClubManagement.Fragments
                 preferencesEditor.Commit();
                 LoadAvatar();
 
-                Activity.DoRequest(async () =>
-                {
-                    appDataController.User.Avatar = imageUrl;
-
-                    await UsersController.Instance.Edit(appDataController.User);
-                });
+                appDataController.User.Avatar = imageUrl;
+                Activity.DoRequest(UsersController.Instance.Edit(appDataController.User));
             }
         }
 

@@ -168,4 +168,5 @@
   <string name="outcome">Outcome</string>
   <string name="we_still_have_money">We still have money</string>
   <string name="We_are_broke_now">We are broke now</string>
+  <string name="notifications">Notifications</string>
 </resources>
