@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Android.App;
 using Android.Support.V7.Widget;
 using Android.Views;
 using ClubManagement.Models;
@@ -24,6 +25,8 @@ namespace ClubManagement.CustomAdapters
             }
         }
 
+        private AddAmountDialog dialog;
+
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             if (holder is AmountItemViewHolder viewHolder)
@@ -37,6 +40,22 @@ namespace ClubManagement.CustomAdapters
                         Items[position].IsChooseToDelete = isChoose;
                         viewHolder.Item = Items[position];
                     }
+                };
+                var isEditting = false;
+                viewHolder.EditClick += (s, e) =>
+                {
+                    if (dialog != null && dialog.IsShowing) return;
+                    dialog =
+                        new AddAmountDialog(holder.ItemView.Context, AddAmountDialog.TypeEdit, Items[position].Item);
+                    dialog.DoneClick += (sss, eeee) =>
+                    {
+                        if (sss is OutcomeAmountItem item)
+                        {
+                            Items[position].Item = item;
+                            viewHolder.Item = Items[position];
+                        }
+                    };
+                    dialog.Show();
                 };
             }
         }

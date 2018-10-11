@@ -10,6 +10,10 @@ namespace ClubManagement.CustomAdapters
 {
     public class AddAmountDialog : Dialog
     {
+        public const int TypeAdd = 1;
+
+        public const int TypeEdit = 2;
+
         public AmountItem AmountItem { get; set; }
 
         public event EventHandler DoneClick;
@@ -17,6 +21,8 @@ namespace ClubManagement.CustomAdapters
         [InjectView(Resource.Id.edtItemName)] private EditText edtItemName;
 
         [InjectView(Resource.Id.edtAmount)] private EditText edtAmount;
+
+        private OutcomeAmountItem item = new OutcomeAmountItem();
 
         [InjectOnClick(Resource.Id.btnCancel)]
         private void Cancel(object s, EventArgs e)
@@ -29,24 +35,39 @@ namespace ClubManagement.CustomAdapters
         {
             if (string.IsNullOrEmpty(edtAmount.Text) || string.IsNullOrEmpty(edtItemName.Text))
             {
+                Toast.MakeText(Context, Resource.String.please_fill_all_fields, ToastLength.Short).Show();
                 return;
             }
-            AmountItem = new AmountItem
-            {
-                Item = new OutcomeAmountItem
-                {
-                    Name = edtItemName.Text,
-                    Amount = long.TryParse(edtAmount.Text, out var amount) ? amount : 0
-                }
-            };
 
-            DoneClick?.Invoke(s, e);
+            if (type == TypeAdd)
+            {
+                AmountItem = new AmountItem
+                {
+                    Item = new OutcomeAmountItem
+                    {
+                        Name = edtItemName.Text,
+                        Amount = long.Parse(edtAmount.Text)
+                    }
+                };
+
+                DoneClick?.Invoke(s, e);
+            }
+            else
+            {
+                item.Amount = long.Parse(edtAmount.Text);
+                item.Name = edtItemName.Text;
+                DoneClick?.Invoke(item, e);
+            }
+
             Dismiss();
         }
 
-        public AddAmountDialog(Context context) : base(context)
-        {
+        private int type;
 
+        public AddAmountDialog(Context context, int type, OutcomeAmountItem item) : base(context)
+        {
+            this.type = type;
+            this.item = item;
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -55,6 +76,13 @@ namespace ClubManagement.CustomAdapters
             var view = LayoutInflater.Inflate(Resource.Layout.add_item_dialog, null, false);
             SetContentView(view);
             Cheeseknife.Inject(this, view);
+            Init();
+        }
+
+        private void Init()
+        {
+            edtAmount.Text = item.Amount.ToString();
+            edtItemName.Text = item.Name ?? "";
         }
     }
 }

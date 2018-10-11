@@ -14,6 +14,10 @@ namespace ClubManagement.CustomAdapters
 
         [InjectView(Resource.Id.btnEdit)] private ImageButton btnEdit;
 
+        public event EventHandler EditClick;
+
+        public bool IsEditting { get; set; }
+
         [InjectOnClick(Resource.Id.btnEdit)]
         private void Edit(object s, EventArgs e)
         {
@@ -24,6 +28,10 @@ namespace ClubManagement.CustomAdapters
                     ? Resource.Drawable.icon_delete_amount_check
                     : Resource.Drawable.icon_delete_amount_uncheck);
                 Click?.Invoke(item.IsChooseToDelete, e);
+            }
+            else
+            {
+                EditClick?.Invoke(s, e);
             }
         }
 

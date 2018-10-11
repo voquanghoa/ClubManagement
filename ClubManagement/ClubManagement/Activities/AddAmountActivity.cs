@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Views;
@@ -8,6 +10,8 @@ using Android.Widget;
 using ClubManagement.CustomAdapters;
 using ClubManagement.Fragments;
 using ClubManagement.Models;
+using ClubManagement.Ultilities;
+using Newtonsoft.Json;
 
 namespace ClubManagement.Activities
 {
@@ -15,6 +19,8 @@ namespace ClubManagement.Activities
     public class AddAmountActivity : Activity
     {
         private AmountItemListAdapter adapter;
+
+        private List<AmountItem> items = new List<AmountItem>();
 
         [InjectView(Resource.Id.tvTotal)] private TextView tvTotal;
 
@@ -28,6 +34,7 @@ namespace ClubManagement.Activities
         private void ConfirmDelete(object s, EventArgs e)
         {
             adapter.DeleteChoosedItem();
+            UpdateTotalView();
             linearLayout.Visibility = ViewStates.Gone;
             adapter.IsDeleting = false;
         }
@@ -42,9 +49,13 @@ namespace ClubManagement.Activities
         [InjectOnClick(Resource.Id.tvAddItem)]
         private void AddItem(object s, EventArgs e)
         {
-            var dialog = new AddAmountDialog(this);
+            var dialog = new AddAmountDialog(this, AddAmountDialog.TypeAdd, new OutcomeAmountItem());
             adapter.IsDeleting = false;
-            dialog.DoneClick += (ss, ee) => { adapter.AddItem(dialog.AmountItem); };
+            dialog.DoneClick += (ss, ee) =>
+            {
+                adapter.AddItem(dialog.AmountItem); 
+                UpdateTotalView();
+            };
             dialog.Show();
         }
 
@@ -52,6 +63,10 @@ namespace ClubManagement.Activities
         [InjectOnClick(Resource.Id.btnBack)]
         private void Back(object s, EventArgs e)
         {
+            var resultIntent = new Intent();
+            resultIntent.PutExtra("items", JsonConvert.SerializeObject(adapter.Items.Select(x => x.Item).ToList()));
+            SetResult(Result.Ok, resultIntent);
+            Finish();
         }
 
         [InjectOnClick(Resource.Id.btnDelete)]
@@ -71,57 +86,31 @@ namespace ClubManagement.Activities
 
         private void Init()
         {
+            if (Intent.HasExtra("items"))
+            {
+                items = JsonConvert.DeserializeObject<List<OutcomeAmountItem>>(Intent.GetStringExtra("items"))
+                    .Select(
+                        x => new AmountItem
+                        {
+                            Item = x
+                        })
+                    .ToList();
+            }
+
             linearLayout.Visibility = ViewStates.Gone;
             adapter = new AmountItemListAdapter
             {
-                Items = new List<AmountItem>
-                {
-                    new AmountItem
-                    {
-                        Item = new OutcomeAmountItem
-                        {
-                            Name = "1",
-                            Amount = 1000
-                        }
-                    },
-                    new AmountItem
-                    {
-                        Item = new OutcomeAmountItem
-                        {
-                            Name = "2",
-                            Amount = 1000
-                        }
-                    },
-                    new AmountItem
-                    {
-                        Item = new OutcomeAmountItem
-                        {
-                            Name = "3",
-                            Amount = 1000
-                        }
-                    },
-                    new AmountItem
-                    {
-                        Item = new OutcomeAmountItem
-                        {
-                            Name = "4",
-                            Amount = 1000
-                        },
-                        IsChooseToDelete = false
-                    },
-                    new AmountItem
-                    {
-                        Item = new OutcomeAmountItem
-                        {
-                            Name = "5",
-                            Amount = 1000
-                        }
-                    }
-                }
+                Items = items
             };
 
             rvItems.SetLayoutManager(new LinearLayoutManager(this));
             rvItems.SetAdapter(adapter);
+            UpdateTotalView();
+        }
+
+        private void UpdateTotalView()
+        {
+            tvTotal.Text = $"Total: {adapter.Items.Sum(x => x.Item.Amount).ToCurrency()}";
         }
     }
 }
