@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+	android:minWidth="300dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+	<TextView
+		android:layout_height="@dimen/tabbar_height"
+		android:layout_width="match_parent"
+		android:text="ADD ITEM"
+		android:gravity="center_vertical"
+		android:textSize="@dimen/text_size_large"
+		android:textColor="@color/white_color"
+		android:background="@color/color_blue"
+		android:paddingLeft="@dimen/dimen_20dp" />
+	<EditText
+		android:id="@+id/edtItemName"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@drawable/edit_text_border"
+		android:layout_marginRight="@dimen/dimen_20dp"
+		android:layout_marginLeft="@dimen/dimen_20dp"
+		android:paddingTop="@dimen/dimen_10dp"
+		android:paddingBottom="@dimen/dimen_10dp"
+		android:hint="NAME ITEM" />
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginRight="@dimen/dimen_20dp"
+		android:layout_marginLeft="@dimen/dimen_20dp"
+		android:layout_marginTop="@dimen/dimen_10dp"
+		android:textColor="@color/color_gray"
+		android:text="Amount (VND)"
+		android:textSize="@dimen/text_description_size" />
+	<EditText
+		android:id="@+id/edtAmount"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@drawable/edit_text_border"
+		android:layout_marginRight="@dimen/dimen_20dp"
+		android:layout_marginLeft="@dimen/dimen_20dp"
+		android:paddingBottom="@dimen/dimen_10dp"
+		android:paddingTop="@dimen/dimen_5dp"
+		android:inputType="numberDecimal"
+		android:hint="0" />
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/dimen_20dp"
+		android:weightSum="2">
+		<Button
+			android:id="@+id/btnCancel"
+			android:layout_width="0dp"
+			android:textAllCaps="false"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="Cancel"
+			android:textColor="@color/color_gray"
+			android:background="@color/white_color" />
+		<View
+			android:layout_width="1dp"
+			android:layout_height="match_parent"
+			android:background="@color/color_gray" />
+		<Button
+			android:id="@+id/btnDone"
+			android:textAllCaps="false"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="Done"
+			android:textColor="@color/color_blue"
+			android:background="@color/white_color" />
+	</LinearLayout>
+</LinearLayout>
