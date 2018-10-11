@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using ClubManagement.Controllers;
 using Android.Support.V4.App;
 using Activity = Android.App.Activity;
-             
+using System.Threading.Tasks;
+
 namespace ClubManagement.Ultilities
 {
     public static class ActivityExtensions
@@ -45,24 +40,19 @@ namespace ClubManagement.Ultilities
         {
 			context.ShowMessage(context.GetString(textId));
         }
-		
-        public static void DoRequest(this Activity activity, Action action, Action postAction = null, Action exceptionAction = null)
+
+        public static async void DoRequest(this Activity activity, Task action, Action postAction = null, Action exceptionAction = null)
         {
-            new Thread(() =>
+            try
             {
-                try
-                {
-                    action.Invoke();
-                    activity.RunOnUiThread(postAction);
-                }
-                catch (Exception ex)
-                {
-                    activity.RunOnUiThread(exceptionAction);
-
-					activity.ShowMessage(ex.Message);
-                }
-
-            }).Start();
+                await action;
+                activity.RunOnUiThread(postAction);
+            }
+            catch (Exception ex)
+            {
+                activity.RunOnUiThread(exceptionAction);
+                activity.ShowMessage(ex.Message);
+            }
         }
 
         public static void DoWithAdmin(this Context context, Action action)

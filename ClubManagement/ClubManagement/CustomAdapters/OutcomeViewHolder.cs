@@ -67,18 +67,13 @@ namespace ClubManagement.CustomAdapters
                             {
                                 var dialog = ItemView.Context.CreateDialog(Resource.String.deleting_outcome, Resource.String.wait);
                                 dialog.Show();
-                                ((Activity)ItemView.Context).DoRequest(async () =>
+                                ((Activity)ItemView.Context).DoRequest(OutComesController.Instance.Delete(OutcomeModel),
+                                    () => 
                                     {
-                                        await OutComesController.Instance.Delete(OutcomeModel);
-                                        ((Activity)ItemView.Context).RunOnUiThread(() =>
-                                        {
-                                            dialog.Dismiss();
-                                            DeleteClick?.Invoke(OutcomeModel, e);
-                                            ItemView.Context.ShowMessage(Resource.String.delete_outcome_success);
-                                        });
-                                    },
-                                    () => { },
-                                    () => { });
+                                        dialog.Dismiss();
+                                        DeleteClick?.Invoke(OutcomeModel, e);
+                                        ItemView.Context.ShowMessage(Resource.String.delete_outcome_success);
+                                    });
                             },
                             () => { }).Show();
                     });

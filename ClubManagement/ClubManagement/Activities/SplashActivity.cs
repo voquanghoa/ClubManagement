@@ -3,7 +3,6 @@ using System.Linq;
 using Android.App;
 using Android.OS;
 using Android.Preferences;
-using Android.Widget;
 using ClubManagement.Controllers;
 using ClubManagement.Ultilities;
 using Plugin.Connectivity;
@@ -37,6 +36,7 @@ namespace ClubManagement.Activities
                 var currentUser = UsersController.Instance.Values.First(u => u.Id == userId);
                 AppDataController.Instance.UpdateUser();
                 UsersController.Instance.UpdateUserLocation(currentUser);
+                UsersController.Instance.UpdateUserNotificationToken(currentUser);
             }
             else
             {

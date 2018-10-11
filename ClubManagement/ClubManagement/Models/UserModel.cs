@@ -23,6 +23,9 @@ namespace ClubManagement.Models
         [JsonProperty("avatar")]
         public string Avatar { get; set; } = "";
 
+        [JsonProperty("notificationToken")]
+        public string NotificationToken { get; set; }
+
         [JsonProperty("isAdmin")]
         public bool IsAdmin { get; set; }
 

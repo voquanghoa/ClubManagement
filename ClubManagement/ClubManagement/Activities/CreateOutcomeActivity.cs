@@ -50,10 +50,7 @@ namespace ClubManagement.Activities
                 GetString(Resource.String.wait));
             progressDialog.Show();
 
-            this.DoRequest(async () =>
-            {
-                await OutComesController.Instance.Add(outcomeModel);
-            }, () =>
+            this.DoRequest(OutComesController.Instance.Add(outcomeModel), () =>
             {
                 progressDialog.Dismiss();
                 this.ShowMessage(Resource.String.create_outcome_success);

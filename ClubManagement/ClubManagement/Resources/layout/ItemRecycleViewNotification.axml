@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dimen_10dp"
+    android:orientation="horizontal"
+    android:background="@color/notification_background_seen">
+    <ImageView
+        android:layout_width="@dimen/notification_icon_height"
+        android:layout_height="@dimen/notification_icon_height"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/icon_notification"
+        android:id="@+id/imgNotification"
+        android:layout_marginRight="@dimen/dimen_10dp" />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dimen_20dp"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:padding="@dimen/dimen_10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Adam birthday party"
+            android:textSize="@dimen/tabbar_text_size"
+            android:textColor="@color/text_color_black"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:id="@+id/tvNotificationTitle" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_height="match_parent"
+                android:layout_width="@dimen/icon_status_event_width"
+                android:src="@drawable/icon_calendar"
+                android:id="@+id/imgNotificationTime" />
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:text="Going"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:layout_marginLeft="@dimen/dimen_5dp"
+                android:id="@+id/tvNotificationTime"
+                android:textSize="@dimen/text_description_size" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

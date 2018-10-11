@@ -53,4 +53,6 @@
   <color name="even_line_color">#2196f3</color>
   <color name="income_color">#1bf028</color>
   <color name="outcome_color">#a00060</color>
+  <color name="notification_background_seen">#eeeeee</color>
+  <color name="notification_background_new">#ffffff</color>
 </resources>

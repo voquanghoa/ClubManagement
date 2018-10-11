@@ -3,6 +3,7 @@ using ClubManagement.Models;
 using Firebase.Xamarin.Database;
 using Plugin.Geolocator;
 using System;
+using Firebase.Iid;
 
 namespace ClubManagement.Controllers
 {
@@ -25,6 +26,13 @@ namespace ClubManagement.Controllers
             user.Latitude = currentLocation.Latitude;
             user.Longitude = currentLocation.Longitude;
             user.LastLogin = DateTime.Now;
+
+            await Edit(user);
+        }
+
+        public async void UpdateUserNotificationToken(UserModel user, string token = null)
+        {
+            user.NotificationToken = token ?? FirebaseInstanceId.Instance.Token;
 
             await Edit(user);
         }

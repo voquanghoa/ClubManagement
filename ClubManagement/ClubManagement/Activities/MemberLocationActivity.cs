@@ -8,15 +8,13 @@ using Android.Gms.Maps;
 using ClubManagement.Controllers;
 using ClubManagement.Models;
 using Newtonsoft.Json;
-using System.Threading.Tasks;
 using ClubManagement.Activities.Base;
 using System.Collections.Generic;
 using Android.Gms.Maps.Model;
 using ClubManagement.Ultilities;
 using Android.Widget;
 using Square.Picasso;
-using Android.Graphics;
-using Android.Graphics.Drawables;
+using System.Threading.Tasks;
 
 namespace ClubManagement.Activities
 {
@@ -50,7 +48,7 @@ namespace ClubManagement.Activities
         {
             var users = new List<PersonGoTimeModel>();
 
-            this.DoRequest(() =>
+            this.DoRequest(Task.Run(() =>
             {
                 users = userEventsController.Values.Where(x => x.EventId == eventDetail.Id)
                     .Join(usersController.Values,
@@ -75,7 +73,7 @@ namespace ClubManagement.Activities
 
                         return personGoTimeModel;
                     }).ToList();
-            }, () =>
+            }), () =>
             {
                 users.ForEach(x =>
                 {

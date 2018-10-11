@@ -11,6 +11,7 @@ using ClubManagement.CustomAdapters;
 using ClubManagement.Models;
 using ClubManagement.Ultilities;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace ClubManagement.Activities
 {
@@ -71,11 +72,11 @@ namespace ClubManagement.Activities
             rvPaid.SetLayoutManager(new LinearLayoutManager(this));
 
             
-            this.DoRequest(() =>
+            this.DoRequest(Task.Run(() =>
             {
                 refreshLayout.Refreshing = true;
                 moneyAdminStates = AppDataController.Instance.GetMoneyAdminStates(moneyId);
-            }, () =>
+            }), () =>
             {
                 paidAdapter = new MoneyAdminListAdapter(moneyId)
                 {

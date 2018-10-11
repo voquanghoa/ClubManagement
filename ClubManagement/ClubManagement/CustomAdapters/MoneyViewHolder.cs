@@ -17,6 +17,7 @@ using ClubManagement.Models;
 using ClubManagement.Ultilities;
 using Newtonsoft.Json;
 using PopupMenu = Android.Widget.PopupMenu;
+using System.Threading.Tasks;
 
 namespace ClubManagement.CustomAdapters
 {
@@ -84,22 +85,19 @@ namespace ClubManagement.CustomAdapters
                                 var dialog = ItemView.Context.CreateDialog("Deleting fee", "Please wait");
                                 dialog.Show();
                                 // delete
-                                ((Activity) ItemView.Context).DoRequest(async () =>
+                                ((Activity)ItemView.Context).DoRequest(Task.Run(async () =>
+                                {
+                                    await MoneysController.Instance.Delete(moneyState.MoneyModel);
+                                    foreach (var userMoneyModel in UserMoneysController.Instance.Values.Where(x =>
+                                        x.MoneyId == moneyState.MoneyModel.Id))
                                     {
-                                        await MoneysController.Instance.Delete(moneyState.MoneyModel);
-                                        foreach (var userMoneyModel in UserMoneysController.Instance.Values.Where(x =>
-                                            x.MoneyId == moneyState.MoneyModel.Id))
-                                        {
-                                            await UserMoneysController.Instance.Delete(userMoneyModel);
-                                        }
-                                        ((Activity) ItemView.Context).RunOnUiThread(() =>
-                                        {
-                                            DeleteClick?.Invoke("Success", null);
-                                            dialog.Dismiss();
-                                        });
-                                    },
-                                    () => { },
-                                    () => { });
+                                        await UserMoneysController.Instance.Delete(userMoneyModel);
+                                    }
+                                }), () =>
+                                {
+                                    DeleteClick?.Invoke("Success", null);
+                                    dialog.Dismiss();
+                                });
                             },
                             () => { }).Show();
                     });

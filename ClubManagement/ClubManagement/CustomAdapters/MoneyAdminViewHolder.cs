@@ -37,15 +37,13 @@ namespace ClubManagement.CustomAdapters
             {
                 var dialog = ItemView.Context.CreateDialog(Resource.String.paying_fee, Resource.String.wait);
                 dialog.Show();
-                ((Activity) ItemView.Context).DoRequest(
-                    async () =>
-                    {
-                        await UserMoneysController.Instance.Add(userMoney);
-                        dialog.Dismiss();
-                        moneyAdminState.PaidTime = DateTime.Now;
-                        moneyAdminState.IsPaid = true;
-                        PayClick?.Invoke(moneyAdminState, e);
-                    });
+                ((Activity)ItemView.Context).DoRequest(UserMoneysController.Instance.Add(userMoney), () =>
+                {
+                    dialog.Dismiss();
+                    moneyAdminState.PaidTime = DateTime.Now;
+                    moneyAdminState.IsPaid = true;
+                    PayClick?.Invoke(moneyAdminState, e);
+                });
             }
             else
             {
@@ -55,10 +53,11 @@ namespace ClubManagement.CustomAdapters
                     {
                         var dialog = ItemView.Context.CreateDialog(Resource.String.repaying_fee, Resource.String.wait);
                         dialog.Show();
-                        ((Activity) ItemView.Context).DoRequest(async () =>
+                    ((Activity)ItemView.Context).DoRequest(UserMoneysController.Instance
+                        .Delete(UserMoneysController.Instance.Values
+                            .First(x => x.UserId == moneyAdminState.User.Id && x.MoneyId == MoneyId)),
+                        () =>
                         {
-                            await UserMoneysController.Instance.Delete(UserMoneysController.Instance.Values.First(x =>
-                                x.UserId == moneyAdminState.User.Id && x.MoneyId == MoneyId));
                             dialog.Dismiss();
                             moneyAdminState.IsPaid = false;
                             PayClick?.Invoke(moneyAdminState, e);
