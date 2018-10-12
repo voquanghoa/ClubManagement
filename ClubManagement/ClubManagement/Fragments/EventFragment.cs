@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using Android.Support.V4.Widget;
 using ClubManagement.Fragments.Bases;
 using Android.Support.V7.Widget.Helper;
+using ClubManagement.Ultilities;
 
 namespace ClubManagement.Fragments
 {
@@ -69,8 +70,13 @@ namespace ClubManagement.Fragments
             recyclerView.SetAdapter(adapter);
 
             tabLayout = view.FindViewById<TabLayout>(Resource.Id.tabView1);
-            tabLayout.TabSelected += (s, e) => DisplayData(data);
-            tabLayout.GetTabAt(SelectedTabIndex).Select();
+            tabLayout.TabSelected += (s, e) =>
+            {
+                DisplayData(data);
+                SelectedTabIndex = e.Tab.Position;
+            };
+
+            tabLayout.SwitchTab(SelectedTabIndex);
         }
 
         public override void OnResume()

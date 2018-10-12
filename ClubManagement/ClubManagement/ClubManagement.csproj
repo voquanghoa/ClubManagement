@@ -799,6 +799,9 @@
     <AndroidResource Include="Resources\drawable\icon_notification.xml" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_credit_card_blue.xml" />
+  </ItemGroup>
+  <ItemGroup>  
     <AndroidResource Include="Resources\layout\activity_add_amount.axml">
       <SubType>Designer</SubType>
     </AndroidResource>

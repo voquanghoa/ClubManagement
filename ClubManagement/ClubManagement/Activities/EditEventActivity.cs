@@ -119,7 +119,6 @@ namespace ClubManagement.Activities
                         Message = $"{message} {eventModel.Title}",
                         Type = AppConstantValues.NotificationEditEvent,
                         TypeId = eventModel.Id,
-                        IsNew = true,
                         LastUpdate = DateTime.Now
                     });
 

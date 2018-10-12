@@ -1,11 +1,13 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.Graphics;
+using Android.Support.Design.Widget;
 using Android.Text;
 using Android.Text.Style;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
+using Java.Lang;
 using Java.Util;
 
 namespace ClubManagement.Ultilities
@@ -67,6 +69,11 @@ namespace ClubManagement.Ultilities
             popupMenu.Menu.FindItem(Resource.Id.delete)?.SetTitle(spannableString);
 
             return popupMenu;
+        }
+
+        public static void SwitchTab(this TabLayout tabLayout, int tabIndex)
+        {
+            tabLayout.PostOnAnimation(new Thread(tabLayout.GetTabAt(tabIndex).Select));
         }
     }
 }
