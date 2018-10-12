@@ -78,7 +78,7 @@ namespace ClubManagement.Activities.Base
         {
             base.OnActivityResult(requestCode, resultCode, data);
 
-            if (resultCode == Result.Ok)
+            if (resultCode == Result.Ok && requestCode == 0)
             {
                 outcomeGroup = AppConstantValues.FeeGrooups.Find(x => x.Id.Equals(data.GetStringExtra("Id")));
                 imgViewChooseOutcomeGroup.SetImageResource(outcomeGroup.ImageId);
