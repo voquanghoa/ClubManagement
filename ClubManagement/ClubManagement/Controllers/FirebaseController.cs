@@ -32,8 +32,16 @@ namespace ClubManagement.Controllers
 
                     return x.Object;
                 }).ToList();
+
                 return users;
             }
+        }
+
+        public List<T> ValuesJustUpdate { get; private set; }
+
+        public void UpdateValues()
+        {
+            ValuesJustUpdate = Values;
         }
 
         public async Task Edit(T t)

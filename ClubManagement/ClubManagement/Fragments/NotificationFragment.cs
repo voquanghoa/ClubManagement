@@ -8,7 +8,9 @@ using ClubManagement.Adapters;
 using ClubManagement.Controllers;
 using ClubManagement.Fragments.Bases;
 using ClubManagement.Models;
+using ClubManagement.Ultilities;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,26 +23,39 @@ namespace ClubManagement.Fragments
 
         protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
 
+        public event EventHandler ItemClick;
+
         public NotificationFragment()
         {
             adapter.ItemClick += (s, e) =>
             {
                 if (s is NotificationModel notification)
                 {
-                    Task.Run(() =>
+                    notification.IsNew = false;
+                    NotificationsController.Instance.Edit(notification);
+
+                    switch (notification.Type)
                     {
-                        notification.IsNew = false;
-                        NotificationsController.Instance.Edit(notification);
+                        case AppConstantValues.NotificationEditEvent:
+                            var intent = new Intent(Context, typeof(EventDetailActivity));
 
-                        var intent = new Intent(Context, typeof(EventDetailActivity));
+                            var eventDetail = JsonConvert.SerializeObject(EventsController.Instance
+                                .ValuesJustUpdate.Find(x => x.Id == notification.TypeId));
 
-                        var eventDetail = JsonConvert.SerializeObject(EventsController.Instance
-                            .Values.Find(x => x.Id == notification.TypeId));
+                            intent.PutExtra("EventDetail", eventDetail);
 
-                        intent.PutExtra("EventDetail", eventDetail);
+                            StartActivity(intent);
 
-                        StartActivity(intent);
-                    });
+                            break;
+                        case AppConstantValues.NotificationEditFee:
+                            var isPaid = AppDataController.Instance.GetListMoneyState()
+                                .Find(x => x.MoneyModel.Id.Equals(notification.TypeId))
+                                .IsPaid;
+
+                            ItemClick?.Invoke(isPaid, null);
+
+                            break;
+                    }
                 }
             };
         }
@@ -69,7 +84,10 @@ namespace ClubManagement.Fragments
 
         protected override List<NotificationModel> QueryData()
         {
-            return NotificationsController.Instance.Values.ToList();
+            EventsController.Instance.UpdateValues();
+            MoneysController.Instance.UpdateValues();
+
+            return NotificationsController.Instance.Values.OrderByDescending(x=>x.LastUpdate).ToList();
         }
     }
 }

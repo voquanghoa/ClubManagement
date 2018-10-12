@@ -9,7 +9,6 @@ using Square.Picasso;
 using Android.Text;
 using Android.Text.Style;
 using Android.Graphics;
-using System.Linq;
 using Android.App;
 using System.Threading.Tasks;
 
@@ -42,25 +41,29 @@ namespace ClubManagement.Adapters
                 ItemView.SetBackgroundResource(value.IsNew
                     ? Resource.Color.notification_background_new
                     : Resource.Color.notification_background_seen);
+                imgNotification.SetImageResource(Resource.Drawable.icon_notification);
 
-                var spannableString = new SpannableString(value.Message);
-                spannableString.SetSpan(new StyleSpan(TypefaceStyle.Bold), value.Message.IndexOf("event") + "event".Length, value.Message.Length, 0);
-
-                tvNotificationTitle.SetText(spannableString, TextView.BufferType.Normal);
                 tvNotificationTime.Text = value.LastUpdate.ToString();
 
-                switch (value.Type)
-                {
-                    case AppConstantValues.NotificationEditEvent:
-                        imgNotificationTime.SetImageResource(Resource.Drawable.icon_calendar);
+                var type = AppConstantValues.NotificationTypes[value.Type];
+                var spannableString = new SpannableString(value.Message);
+                spannableString.SetSpan(new StyleSpan(TypefaceStyle.Bold)
+                    , value.Message.IndexOf(type) + type.Length
+                    , value.Message.Length, 0);
+                tvNotificationTitle.SetText(spannableString, TextView.BufferType.Normal);
 
-                        if (ItemView.Context is Activity activity)
-                        {
+                if (ItemView.Context is Activity activity)
+                {
+                    switch (value.Type)
+                    {
+                        case AppConstantValues.NotificationEditEvent:
+                            imgNotificationTime.SetImageResource(Resource.Drawable.icon_calendar);
+
                             var imageUrl = "";
 
                             activity.DoRequest(Task.Run(() =>
                             {
-                                imageUrl = EventsController.Instance.Values
+                                imageUrl = EventsController.Instance.ValuesJustUpdate
                                     .Find(x => x.Id == value.TypeId).ImageUrl;
                             }), () =>
                             {
@@ -69,9 +72,27 @@ namespace ClubManagement.Adapters
                                     Picasso.With(ItemView.Context).Load(imageUrl).Fit().Into(imgNotification);
                                 }
                             });
-                        }
 
-                        break;
+                            break;
+                        case AppConstantValues.NotificationEditFee:
+                            imgNotificationTime.SetImageResource(Resource.Drawable.icon_credit_card_blue);
+
+                            var imageId = 0;
+
+                            activity.DoRequest(Task.Run(() =>
+                            {
+                                var group = MoneysController.Instance.ValuesJustUpdate
+                                    .Find(x => x.Id == value.TypeId).Group;
+
+                                imageId = AppConstantValues.FeeGrooups
+                                .Find(x => x.Id.Equals(group)).ImageId;
+                            }), () =>
+                            {
+                                imgNotification.SetImageResource(imageId);
+                            });
+
+                            break;
+                    }
                 }
             }
         }
