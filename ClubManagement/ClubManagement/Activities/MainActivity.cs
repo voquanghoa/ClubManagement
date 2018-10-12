@@ -65,17 +65,14 @@ namespace ClubManagement.Activities
                     {
                         case DashboardFragment.RequestAddFeeCode:
                             MoneyFragment.SelectedTabIndex = 2;
-                            DisplayFragment(Resource.Id.moneyTab);
                             bottomNavigationView.SelectedItemId = Resource.Id.moneyTab;
                             break;
                         case DashboardFragment.RequestAddEventCode:
                             EventFragment.SelectedTabIndex = 0;
-                            DisplayFragment(Resource.Id.eventTab);
                             bottomNavigationView.SelectedItemId = Resource.Id.eventTab;
                             break;
                         case DashboardFragment.RequestAddOutcomeCode:
                             BalanceFragment.SelectedTabIndex = 2;
-                            DisplayFragment(Resource.Id.balanceTab);
                             bottomNavigationView.SelectedItemId = Resource.Id.balanceTab;
                             break;
                     }
@@ -88,19 +85,26 @@ namespace ClubManagement.Activities
                 switch (tag)
                 {
                     case AppConstantValues.EventClickShowGoingEventsTabTag:
-                        DisplayFragment(Resource.Id.eventTab);
                         EventFragment.SelectedTabIndex = 1;
                         bottomNavigationView.SelectedItemId = Resource.Id.eventTab;
                         return;
                     case AppConstantValues.EventClickShowNewEventsTabTag:
-                        DisplayFragment(Resource.Id.eventTab);
                         EventFragment.SelectedTabIndex = 0;
                         bottomNavigationView.SelectedItemId = Resource.Id.eventTab;
                         return;
                     case AppConstantValues.EventClickShowMoneyScreenTag:
-                        DisplayFragment(Resource.Id.moneyTab);
+                        MoneyFragment.SelectedTabIndex = 2;
                         bottomNavigationView.SelectedItemId = Resource.Id.moneyTab;
                         return;
+                }
+            };
+
+            NotificationFragment.ItemClick += (s, e) =>
+            {
+                if (s is bool isPaid)
+                {
+                    MoneyFragment.SelectedTabIndex = isPaid ? 1 : 2;
+                    bottomNavigationView.SelectedItemId = Resource.Id.moneyTab;
                 }
             };
         }
@@ -113,7 +117,7 @@ namespace ClubManagement.Activities
             ChangeStatusBarColor();
             BottomNavigationHelper.RemoveShiftMode(bottomNavigationView);
             bottomNavigationView.NavigationItemSelected += BottomNavigation_NavigationItemSelected;
-            DisplayFragment(Resource.Id.dashboardTab);
+            bottomNavigationView.SelectedItemId = Intent.GetIntExtra("Id", Resource.Id.dashboardTab);
         }
         
 
@@ -126,14 +130,13 @@ namespace ClubManagement.Activities
             {
                 fragment = fragmentMapIds[tag];
 				fragmentTransaction.Replace(Resource.Id.content_frame, fragment, tag.ToString());
-				fragmentTransaction.AddToBackStack(null);
             }
             else
             {
 				fragmentTransaction.Replace(Resource.Id.content_frame, fragment, tag.ToString());
             }
 
-            fragmentTransaction.Commit();
+            fragmentTransaction.CommitAllowingStateLoss();
         }
 
         private void BottomNavigation_NavigationItemSelected(object sender,

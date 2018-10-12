@@ -9,7 +9,6 @@ using Android.Views;
 using ClubManagement.Controllers;
 using ClubManagement.Fragments.Bases;
 using ClubManagement.Models;
-using Android.Widget;
 using PagerAdapter = ClubManagement.CustomAdapters.PagerAdapter;
 using ClubManagement.Ultilities;
 
@@ -84,12 +83,13 @@ namespace ClubManagement.Fragments
         {
             vpMoney.Adapter = pagerAdapter;
             tlMoney.SetupWithViewPager(vpMoney);
+            tlMoney.TabSelected += (s, e) => SelectedTabIndex = e.Tab.Position;
         }
 
         public override void OnViewCreated(View view, Bundle savedInstanceState)
         {
             base.OnViewCreated(view, savedInstanceState);
-            tlMoney.GetTabAt(SelectedTabIndex).Select();
+            tlMoney.SwitchTab(SelectedTabIndex);
         }
 
         public override void OnResume()
@@ -116,6 +116,7 @@ namespace ClubManagement.Fragments
             moneySummaryFragment.MoneyStates = data;
             moneyPaidListFragment.MoneyStates = data.Where(x => x.IsPaid).OrderByDescending(x => x.MoneyModel.Time).ToList();
             moneyUnpaidListFragment.MoneyStates = data.Where(x => !x.IsPaid).OrderByDescending(x => x.MoneyModel.Time).ToList();
+            pagerAdapter.NotifyDataSetChanged();
         }
     }
 }

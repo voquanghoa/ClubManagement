@@ -1,6 +1,7 @@
 ﻿using Android;
 using ClubManagement.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ClubManagement.Ultilities
 {
@@ -37,6 +38,8 @@ namespace ClubManagement.Ultilities
         public const string EventListHeaderThisWeek = "This week";
 
         public const string NotificationEditEvent = "Edit event";
+
+        public const string NotificationEditFee = "Edit fee";
 
         public static List<FeeOrOutcomeGroupModel> FeeGrooups
         {
@@ -78,6 +81,15 @@ namespace ClubManagement.Ultilities
                     ImageId =Resource.Drawable.choose_group_others,
                     TitleId = Resource.String.others
                 }
+            };
+        }
+
+        public static Dictionary<string,string> NotificationTypes
+        {
+            get => new Dictionary<string, string>()
+            {
+                { NotificationEditEvent, "event" },
+                { NotificationEditFee, "fee" }
             };
         }
     }

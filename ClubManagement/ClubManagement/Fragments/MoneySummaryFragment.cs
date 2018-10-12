@@ -60,8 +60,6 @@ namespace ClubManagement.Fragments
                     .ToList();
 
                 years.Add(Total);
-
-                if (Context != null) InitMoneyView();
             }
         }
 
