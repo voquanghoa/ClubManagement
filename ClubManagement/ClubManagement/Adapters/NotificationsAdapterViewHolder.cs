@@ -11,6 +11,7 @@ using Android.Text.Style;
 using Android.Graphics;
 using Android.App;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace ClubManagement.Adapters
 {
@@ -38,22 +39,55 @@ namespace ClubManagement.Adapters
             {
                 notificationModel = value;
 
-                ItemView.SetBackgroundResource(value.IsNew
-                    ? Resource.Color.notification_background_new
-                    : Resource.Color.notification_background_seen);
+                imgNotificationTime.Visibility = ViewStates.Visible;
                 imgNotification.SetImageResource(Resource.Drawable.icon_notification);
 
-                tvNotificationTime.Text = value.LastUpdate.ToString();
+                var time = (DateTime.Now - value.LastUpdate);
+                var timeString = "";
+                
+                if (time.TotalMinutes < 1)
+                {
+                    timeString = "Just now";
+                }
+                else if (time.TotalHours < 1)
+                {
+                    if (time.Minutes == 1) timeString = $"{time.Minutes} minute ago";
+                    else timeString = $"{time.Minutes} minutes ago";
+                }
+                else if (time.TotalDays <= 1)
+                {
+                    if (time.Hours == 1) timeString = $"{time.Hours} hour ago";
+                    timeString = $"{time.Hours} hours ago";
+                }
+                else
+                {
+                    timeString = $"{value.LastUpdate.ToDateString()} at {value.LastUpdate.ToTimeString()}";
+                }
+
+                tvNotificationTime.Text = timeString;
 
                 var type = AppConstantValues.NotificationTypes[value.Type];
                 var spannableString = new SpannableString(value.Message);
                 spannableString.SetSpan(new StyleSpan(TypefaceStyle.Bold)
-                    , value.Message.IndexOf(type) + type.Length
+                    , value.Message.ToLower().IndexOf(type) + type.Length
                     , value.Message.Length, 0);
                 tvNotificationTitle.SetText(spannableString, TextView.BufferType.Normal);
 
                 if (ItemView.Context is Activity activity)
                 {
+                    var backgroundId = 0;
+
+                    activity.DoRequest(Task.Run(() =>
+                    {
+                        backgroundId = !value.UserIdsSeen.Any()
+                                || !value.UserIdsSeen.Contains(AppDataController.Instance.UserId)
+                            ? Resource.Color.notification_background_new
+                            : Resource.Color.notification_background_seen;
+                    }), () =>
+                    {
+                        ItemView.SetBackgroundResource(backgroundId);
+                    });
+
                     switch (value.Type)
                     {
                         case AppConstantValues.NotificationEditEvent:
@@ -92,6 +126,14 @@ namespace ClubManagement.Adapters
                             });
 
                             break;
+                        case AppConstantValues.NotificationDeleteEvent:
+                            imgNotificationTime.Visibility = ViewStates.Gone;
+
+                            break;
+                        case AppConstantValues.NotificationDeleteFee:
+                            imgNotificationTime.Visibility = ViewStates.Gone;
+
+                            break;
                     }
                 }
             }
@@ -103,6 +145,7 @@ namespace ClubManagement.Adapters
 
             itemView.Click += (s, e) =>
             {
+                itemView.SetBackgroundResource(Resource.Color.notification_background_seen);
                 ClickHander?.Invoke(notificationModel, e);
             };
         }

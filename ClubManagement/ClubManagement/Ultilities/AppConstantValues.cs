@@ -41,6 +41,10 @@ namespace ClubManagement.Ultilities
 
         public const string NotificationEditFee = "Edit fee";
 
+        public const string NotificationDeleteEvent = "Delete event";
+
+        public const string NotificationDeleteFee = "Delete fee";
+
         public static List<FeeOrOutcomeGroupModel> FeeGrooups
         {
             get => new List<FeeOrOutcomeGroupModel>()
@@ -89,7 +93,9 @@ namespace ClubManagement.Ultilities
             get => new Dictionary<string, string>()
             {
                 { NotificationEditEvent, "event" },
-                { NotificationEditFee, "fee" }
+                { NotificationEditFee, "fee" },
+                { NotificationDeleteEvent, "event" },
+                { NotificationDeleteFee, "fee" },
             };
         }
     }

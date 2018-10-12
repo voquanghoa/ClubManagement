@@ -103,7 +103,6 @@ namespace ClubManagement.Activities
                         Message = $"{message} {moneyModel.Description}",
                         Type = AppConstantValues.NotificationEditFee,
                         TypeId = moneyModel.Id,
-                        IsNew = true,
                         LastUpdate = DateTime.Now
                     });
 

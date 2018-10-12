@@ -23,6 +23,8 @@ namespace ClubManagement.Fragments
 
         protected override SwipeRefreshLayout SwipeRefreshLayout => View.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
 
+        private string userId = AppDataController.Instance.UserId;
+
         public event EventHandler ItemClick;
 
         public NotificationFragment()
@@ -31,8 +33,15 @@ namespace ClubManagement.Fragments
             {
                 if (s is NotificationModel notification)
                 {
-                    notification.IsNew = false;
-                    NotificationsController.Instance.Edit(notification);
+                    Task.Run(() =>
+                    {
+                        if (!notification.UserIdsSeen.Any() 
+                            || !notification.UserIdsSeen.Contains(userId))
+                        {
+                            notification.UserIdsSeen.Add(userId);
+                            NotificationsController.Instance.Edit(notification);
+                        }
+                    });
 
                     switch (notification.Type)
                     {
@@ -87,7 +96,9 @@ namespace ClubManagement.Fragments
             EventsController.Instance.UpdateValues();
             MoneysController.Instance.UpdateValues();
 
-            return NotificationsController.Instance.Values.OrderByDescending(x=>x.LastUpdate).ToList();
+            return NotificationsController.Instance.Values
+                .Where(x => !x.ToUserIds.Any() || x.ToUserIds.Contains(userId))
+                .OrderByDescending(x => x.LastUpdate).ToList();
         }
     }
 }
