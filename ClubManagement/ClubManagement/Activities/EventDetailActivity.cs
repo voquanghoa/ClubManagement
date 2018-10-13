@@ -118,6 +118,22 @@ namespace ClubManagement.Activities
                                 processDialog.Dismiss();
 								this.ShowMessage(Resource.String.delete_event_success);
 
+                                if (eventDetail.TimeEnd > DateTime.Now.Date)
+                                {
+                                    var notificationsController = NotificationsController.Instance;
+
+                                    notificationsController.UpdateNotificationAsync(new NotificationModel()
+                                    {
+                                        Message = $"Event {eventDetail.Title} was deleted",
+                                        Type = AppConstantValues.NotificationDeleteEvent,
+                                        TypeId = eventDetail.Id,
+                                        LastUpdate = DateTime.Now
+                                    });
+
+                                    notificationsController
+                                        .PushNotifyAsync(AppConstantValues.NotificationDeleteEvent, eventDetail.Title);
+                                }
+
                                 Finish();
                             });
                         }).Show();

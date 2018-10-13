@@ -84,7 +84,7 @@ namespace ClubManagement.CustomAdapters
                             {
                                 var dialog = ItemView.Context.CreateDialog("Deleting fee", "Please wait");
                                 dialog.Show();
-                                // delete
+                                
                                 ((Activity)ItemView.Context).DoRequest(Task.Run(async () =>
                                 {
                                     await MoneysController.Instance.Delete(moneyState.MoneyModel);
@@ -93,6 +93,20 @@ namespace ClubManagement.CustomAdapters
                                     {
                                         await UserMoneysController.Instance.Delete(userMoneyModel);
                                     }
+
+                                    var notificationsController = NotificationsController.Instance;
+
+                                    notificationsController.UpdateNotificationAsync(new NotificationModel()
+                                    {
+                                        Message = $"Fee {moneyState.MoneyModel.Description} was deleted",
+                                        Type = AppConstantValues.NotificationDeleteFee,
+                                        TypeId = moneyState.MoneyModel.Id,
+                                        LastUpdate = DateTime.Now
+                                    });
+
+                                    notificationsController
+                                        .PushNotifyAsync(AppConstantValues.NotificationDeleteFee
+                                            , moneyState.MoneyModel.Description);
                                 }), () =>
                                 {
                                     DeleteClick?.Invoke("Success", null);

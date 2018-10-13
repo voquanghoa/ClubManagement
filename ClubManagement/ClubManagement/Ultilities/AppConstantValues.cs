@@ -1,5 +1,4 @@
-﻿using Android;
-using ClubManagement.Models;
+﻿using ClubManagement.Models;
 using System.Collections.Generic;
 
 namespace ClubManagement.Ultilities
@@ -37,6 +36,16 @@ namespace ClubManagement.Ultilities
         public const string EventListHeaderThisWeek = "This week";
 
         public const string NotificationEditEvent = "Edit event";
+
+        public const string NotificationEditFee = "Edit fee";
+
+        public const string NotificationDeleteEvent = "Delete event";
+
+        public const string NotificationDeleteFee = "Delete fee";
+
+        public const string NotificationPaid = "Paid";
+
+        public const string NotificationRepaid = "Repaid";
 
         public static List<FeeOrOutcomeGroupModel> FeeGrooups
         {
@@ -78,6 +87,30 @@ namespace ClubManagement.Ultilities
                     ImageId =Resource.Drawable.choose_group_others,
                     TitleId = Resource.String.others
                 }
+            };
+        }
+
+        public static Dictionary<string,string> NotificationStartBold
+        {
+            get => new Dictionary<string, string>()
+            {
+                { NotificationEditEvent, "event" },
+                { NotificationEditFee, "fee" },
+                { NotificationDeleteEvent, "event" },
+                { NotificationDeleteFee, "fee" },
+                { NotificationPaid, "fee" },
+                { NotificationRepaid, "fee" }
+            };
+        }
+
+        public static Dictionary<string, string> NotificationEndBold
+        {
+            get => new Dictionary<string, string>()
+            {
+                { NotificationDeleteEvent, "was" },
+                { NotificationDeleteFee, "was" },
+                { NotificationPaid, "for" },
+                { NotificationRepaid, "for" }
             };
         }
     }

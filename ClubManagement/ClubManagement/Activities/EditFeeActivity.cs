@@ -33,6 +33,10 @@ namespace ClubManagement.Activities
                 return;
             };
 
+            var nameChanged = !moneyModel.Description.Equals(edtDescription.Text);
+            var amountChanged = moneyModel.Amount != long.Parse(edtAmount.Text);
+            var deadlineChanged = moneyModel.Time != deadLine;
+
             moneyModel.Description = edtDescription.Text;
             moneyModel.Amount = long.Parse(edtAmount.Text);
             moneyModel.Group = feeGroup.Id;
@@ -42,10 +46,70 @@ namespace ClubManagement.Activities
                 GetString(Resource.String.wait));
             progressDialog.Show();
 
+            //Admin changed the name, amount and deadline of the fee Spring roll
+
+            var message = "";
+
+            if (nameChanged && amountChanged && deadlineChanged)
+            {
+                message = "Admin changed the name, amount and deadline of the fee";
+            }
+            else if (nameChanged && amountChanged || amountChanged && deadlineChanged || deadlineChanged && nameChanged)
+            {
+                if (nameChanged && amountChanged)
+                {
+                    message = "Admin changed the name and amount of the fee";
+                }
+
+                if (amountChanged && deadlineChanged)
+                {
+                    message = "Admin changed the amount and deadline of the fee";
+                }
+
+                if (deadlineChanged && nameChanged)
+                {
+                    message = "Admin changed the name and deadline of the fee";
+                }
+            }
+            else
+            {
+                if (nameChanged)
+                {
+                    message = "Admin changed the name of the fee";
+                }
+
+                if (amountChanged)
+                {
+                    message = "Admin changed the amount of the fee";
+                }
+
+                if (deadlineChanged)
+                {
+                    message = "Admin changed the location of the fee";
+                }
+            }
+
             this.DoRequest(MoneysController.Instance.Edit(moneyModel), () =>
             {
                 progressDialog.Dismiss();
                 this.ShowMessage(Resource.String.edit_fee_success);
+
+                if (nameChanged || amountChanged || deadlineChanged)
+                {
+                    var notificationsController = NotificationsController.Instance;
+
+                    notificationsController.UpdateNotificationAsync(new NotificationModel()
+                    {
+                        Message = $"{message} {moneyModel.Description}",
+                        Type = AppConstantValues.NotificationEditFee,
+                        TypeId = moneyModel.Id,
+                        LastUpdate = DateTime.Now
+                    });
+
+                    notificationsController
+                        .PushNotifyAsync(AppConstantValues.NotificationEditFee, moneyModel.Description);
+                }
+
                 Finish();
             });
         }

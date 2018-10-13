@@ -1,9 +1,9 @@
 ﻿using Android.Content;
 using Firebase.Messaging;
 using Android.Media;
-using Android.Support.V4.App;
 using ClubManagement.Activities;
 using Android.App;
+using Android.Support.V4.App;
 
 namespace ClubManagement
 {
@@ -25,8 +25,11 @@ namespace ClubManagement
         private void SendNotification(string title, string body)
         {
             var intent = new Intent(this, typeof(MainActivity));
-            intent.AddFlags(ActivityFlags.ClearTop);
-            var pendingIntent = PendingIntent.GetActivity(this, 0, intent, PendingIntentFlags.OneShot);
+            intent.PutExtra("Id", Resource.Id.notificationTab);
+
+            var stackBuilder = Android.App.TaskStackBuilder.Create(this);
+            stackBuilder.AddNextIntentWithParentStack(intent);
+            var pendingIntent = stackBuilder.GetPendingIntent(0, PendingIntentFlags.UpdateCurrent);
 
             var defaultSoundUri = RingtoneManager.GetDefaultUri(RingtoneType.Notification);
             var notificationBuilder = new NotificationCompat.Builder(this)

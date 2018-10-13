@@ -11,8 +11,6 @@ using ClubManagement.Fragments.Bases;
 using Android.Support.V4.Widget;
 using ClubManagement.Controllers;
 using System.Linq;
-using Android.Support.V4.App;
-using Android.Widget;
 
 namespace ClubManagement.Fragments
 {
@@ -60,10 +58,17 @@ namespace ClubManagement.Fragments
             return view;
         }
 
+        private void Init()
+        {
+            vpBalance.Adapter = adapter;
+            tlBalance.SetupWithViewPager(vpBalance);
+            tlBalance.TabSelected += (s, e) => SelectedTabIndex = e.Tab.Position;
+        }
+
         public override void OnViewCreated(View view, Bundle savedInstanceState)
         {
             base.OnViewCreated(view, savedInstanceState);
-            tlBalance.GetTabAt(SelectedTabIndex).Select();
+            tlBalance.SwitchTab(SelectedTabIndex);
         }
 
         public override void OnResume()
@@ -96,12 +101,6 @@ namespace ClubManagement.Fragments
             }
 
             return null;
-        }
-
-        private void Init()
-        {
-            vpBalance.Adapter = adapter;
-            tlBalance.SetupWithViewPager(vpBalance);
         }
     }
 }

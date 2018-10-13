@@ -52,6 +52,12 @@ namespace ClubManagement.Activities
 
         private List<MoneyAdminState> moneyAdminStates = new List<MoneyAdminState>();
 
+        private AppDataController appDataController = AppDataController.Instance;
+
+        private NotificationsController notificationsController = NotificationsController.Instance;
+
+        private MoneyModel moneyModel;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -62,7 +68,7 @@ namespace ClubManagement.Activities
 
         private void Init()
         {
-            var moneyModel = JsonConvert.DeserializeObject<MoneyModel>(Intent.GetStringExtra("MoneyModel"));
+            moneyModel = JsonConvert.DeserializeObject<MoneyModel>(Intent.GetStringExtra("MoneyModel"));
             moneyId = moneyModel.Id;
 
             tvDescription.Text = moneyModel.Description;
@@ -75,7 +81,7 @@ namespace ClubManagement.Activities
             this.DoRequest(Task.Run(() =>
             {
                 refreshLayout.Refreshing = true;
-                moneyAdminStates = AppDataController.Instance.GetMoneyAdminStates(moneyId);
+                moneyAdminStates = appDataController.GetMoneyAdminStates(moneyId);
             }), () =>
             {
                 paidAdapter = new MoneyAdminListAdapter(moneyId)
@@ -122,6 +128,18 @@ namespace ClubManagement.Activities
                         SetText();
                     });
                 }
+
+                notificationsController.UpdateNotificationAsync(new NotificationModel()
+                {
+                    Message = $"Admin paid fee {moneyModel.Description} for you",
+                    Type = AppConstantValues.NotificationPaid,
+                    TypeId = moneyModel.Id + moneyAdminState.User.Id,
+                    ToUserIds = new List<string>() { moneyAdminState.User.Id },
+                    LastUpdate = DateTime.Now
+                });
+
+                notificationsController
+                    .PushNotifyAsync(moneyAdminState.User.NotificationToken, AppConstantValues.NotificationPaid, moneyModel.Description);
             }
             else
             {
@@ -135,6 +153,18 @@ namespace ClubManagement.Activities
                         SetText();
                     });
                 }
+
+                notificationsController.UpdateNotificationAsync(new NotificationModel()
+                {
+                    Message = $"Admin repaid fee {moneyModel.Description} to you",
+                    Type = AppConstantValues.NotificationRepaid,
+                    TypeId = moneyModel.Id + moneyAdminState.User.Id,
+                    ToUserIds = new List<string>() { moneyAdminState.User.Id },
+                    LastUpdate = DateTime.Now
+                });
+
+                notificationsController
+                    .PushNotifyAsync(moneyAdminState.User.NotificationToken, AppConstantValues.NotificationRepaid, moneyModel.Description);
             }
         }
     }
