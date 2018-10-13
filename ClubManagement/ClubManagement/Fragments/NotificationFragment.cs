@@ -35,8 +35,7 @@ namespace ClubManagement.Fragments
                 {
                     Task.Run(() =>
                     {
-                        if (!notification.UserIdsSeen.Any() 
-                            || !notification.UserIdsSeen.Contains(userId))
+                        if (!notification.UserIdsSeen.Contains(userId))
                         {
                             notification.UserIdsSeen.Add(userId);
                             NotificationsController.Instance.Edit(notification);
@@ -62,6 +61,16 @@ namespace ClubManagement.Fragments
                                 .IsPaid;
 
                             ItemClick?.Invoke(isPaid, null);
+
+                            break;
+
+                        case AppConstantValues.NotificationPaid:
+                            ItemClick?.Invoke(true, null);
+
+                            break;
+
+                        case AppConstantValues.NotificationRepaid:
+                            ItemClick?.Invoke(false, null);
 
                             break;
                     }

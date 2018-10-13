@@ -1,7 +1,5 @@
-﻿using Android;
-using ClubManagement.Models;
+﻿using ClubManagement.Models;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace ClubManagement.Ultilities
 {
@@ -44,6 +42,10 @@ namespace ClubManagement.Ultilities
         public const string NotificationDeleteEvent = "Delete event";
 
         public const string NotificationDeleteFee = "Delete fee";
+
+        public const string NotificationPaid = "Paid";
+
+        public const string NotificationRepaid = "Repaid";
 
         public static List<FeeOrOutcomeGroupModel> FeeGrooups
         {
@@ -88,7 +90,7 @@ namespace ClubManagement.Ultilities
             };
         }
 
-        public static Dictionary<string,string> NotificationTypes
+        public static Dictionary<string,string> NotificationStartBold
         {
             get => new Dictionary<string, string>()
             {
@@ -96,6 +98,19 @@ namespace ClubManagement.Ultilities
                 { NotificationEditFee, "fee" },
                 { NotificationDeleteEvent, "event" },
                 { NotificationDeleteFee, "fee" },
+                { NotificationPaid, "fee" },
+                { NotificationRepaid, "fee" }
+            };
+        }
+
+        public static Dictionary<string, string> NotificationEndBold
+        {
+            get => new Dictionary<string, string>()
+            {
+                { NotificationDeleteEvent, "was" },
+                { NotificationDeleteFee, "was" },
+                { NotificationPaid, "for" },
+                { NotificationRepaid, "for" }
             };
         }
     }

@@ -11,7 +11,6 @@ using Android.Text.Style;
 using Android.Graphics;
 using Android.App;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace ClubManagement.Adapters
 {
@@ -66,11 +65,16 @@ namespace ClubManagement.Adapters
 
                 tvNotificationTime.Text = timeString;
 
-                var type = AppConstantValues.NotificationTypes[value.Type];
+                var startBold = AppConstantValues.NotificationStartBold[value.Type];
+                var endBold = AppConstantValues.NotificationEndBold.GetValueOrDefault(value.Type, "");
+
                 var spannableString = new SpannableString(value.Message);
                 spannableString.SetSpan(new StyleSpan(TypefaceStyle.Bold)
-                    , value.Message.ToLower().IndexOf(type) + type.Length
-                    , value.Message.Length, 0);
+                    , value.Message.ToLower().IndexOf(startBold) + startBold.Length
+                    , string.IsNullOrEmpty(endBold)
+                        ? value.Message.Length
+                        : value.Message.LastIndexOf(endBold)
+                    , 0);
                 tvNotificationTitle.SetText(spannableString, TextView.BufferType.Normal);
 
                 if (ItemView.Context is Activity activity)
@@ -79,8 +83,7 @@ namespace ClubManagement.Adapters
 
                     activity.DoRequest(Task.Run(() =>
                     {
-                        backgroundId = !value.UserIdsSeen.Any()
-                                || !value.UserIdsSeen.Contains(AppDataController.Instance.UserId)
+                        backgroundId = !value.UserIdsSeen.Contains(AppDataController.Instance.UserId)
                             ? Resource.Color.notification_background_new
                             : Resource.Color.notification_background_seen;
                     }), () =>

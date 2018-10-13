@@ -24,11 +24,12 @@ namespace ClubManagement.Controllers
 
         public async void UpdateNotificationAsync(NotificationModel notificationModel)
         {
-            var id = Values?.Where(x => x.TypeId == notificationModel.TypeId)?.FirstOrDefault()?.Id;
+            var notificationCurrent = Values?.Where(x => x.TypeId == notificationModel.TypeId)?.FirstOrDefault();
 
-            if (!string.IsNullOrEmpty(id))
+            if (!string.IsNullOrEmpty(notificationCurrent?.Id))
             {
-                notificationModel.Id = id;
+                notificationModel.Id = notificationCurrent.Id;
+
                 await Edit(notificationModel);
             }
             else
@@ -52,6 +53,37 @@ namespace ClubManagement.Controllers
                             .Select(x => x.NotificationToken)
                             .Where(x => !string.IsNullOrEmpty(x))
                             .ToArray(),
+                        notification = new
+                        {
+                            title = Title,
+                            body = Message
+                        }
+                    };
+
+                    string json = JsonConvert.SerializeObject(obj);
+
+                    return await client.UploadStringTaskAsync(Api, "POST", json); ;
+                }
+
+            }
+            catch (WebException e)
+            {
+                return e.Message;
+            }
+        }
+
+        public async Task<string> PushNotifyAsync(string id, string Title, string Message)
+        {
+            try
+            {
+                using (var client = new WebClient())
+                {
+                    client.Headers.Add("Content-Type", "application/json;charset=UTF-8");
+                    client.Headers.Add("Authorization", $"key={ServerKey}");
+
+                    var obj = new
+                    {
+                        to = id,
                         notification = new
                         {
                             title = Title,
